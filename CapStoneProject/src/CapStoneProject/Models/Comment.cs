@@ -8,6 +8,8 @@ namespace CapStoneProject.Models
 {
     public class Comment
     {
+        //Admin will leave a comment after they 
+        //approve it 
         public int CommentID { get; set; }
 
         public string Subject { get; set; }

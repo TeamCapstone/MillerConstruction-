@@ -8,6 +8,9 @@ namespace CapStoneProject.Models
 {
     public class Review
     {
+        //Users will be able to leave a review that
+        //the admin will approve then it will post 
+        //and may leave a comment 
         public int ReviewID { get; set; }
 
         public string Subject { get; set; }
