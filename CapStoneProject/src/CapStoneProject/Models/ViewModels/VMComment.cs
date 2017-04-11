@@ -7,7 +7,7 @@ namespace CapStoneProject.Models.ViewModels
 {
     public class VMComment
     {
-        public int ReviewID { get; set; }
+        public Review ReviewID { get; set; }
 
         public string Subject { get; set; }
 
@@ -15,8 +15,5 @@ namespace CapStoneProject.Models.ViewModels
 
         public DateTime Date { get; set; }
 
-        private List<Comment> comments = new List<Comment>();
-
-        public List<Comment> commentVM {get {return comments;} }
     }
 }

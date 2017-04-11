@@ -11,12 +11,12 @@ namespace CapStoneProject.Models
         public int BidID { get; set; }
 
         [Required]
-        public int BidRequestID { get; set; }
+        public BidRequest BidRequestID { get; set; }
 
         //I am not sure we need a userid here since its in the bidrequest model but just incase
-        public int UserID { get; set; }
+        public User User { get; set; }
 
-        public string Supplies { get; set; } //List?
+        public string MaterialsDescription { get; set; } //Possible future add on, supply table, with edit, add, delete
 
         public decimal SupplyCost { get; set; }
 

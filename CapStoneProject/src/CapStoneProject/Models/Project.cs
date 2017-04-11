@@ -10,23 +10,22 @@ namespace CapStoneProject.Models
     {
         public int ProjectID { get; set; }
 
-        //Figure we'll need this to be required but not setting it [Required] yet just in case
-        public int ClientID { get; set; }
+        [Required]
+        public Client Client { get; set; }
 
         [Required]
-        public int QuoteID { get; set; }
-
-        //Company name (if applicable)
-        public string CompanyName { get; set; }
+        public Bid Bid { get; set; } // Bid is a Quote and a Quote is a Bid
 
         [Required]
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
 
-        public decimal StartFee { get; set; }
+        public decimal OriginalEstimate { get; set; }
 
-        public decimal OtherFees { get; set; }
+        public decimal AdditionalCosts { get; set; }
+
+        public decimal TotalCost { get; set; }
 
         [Required]
         public string ProjectName { get; set; }
