@@ -19,13 +19,13 @@ namespace CapStoneProject.Models
 
         public DateTime Date { get; set;}
 
-        //public User from { get; set; }
+        public User From { get; set; }
 
         public bool Approved { get; set; }
 
         private List<Comment> comments = new List<Comment>();
 
-        public List<Comment> comment  { get {return comments;} }
+        public List<Comment> Comments { get {return comments;} }
 
     }
 }
