@@ -11,7 +11,7 @@ namespace CapStoneProject.Models
         public int BidRequestID { get; set; }
 
         [Required]
-        public int UserID { get; set; }
+        public User User { get; set; }
 
         public string ProjectDescription { get; set; }
 
@@ -27,6 +27,6 @@ namespace CapStoneProject.Models
 
         public bool? Concrete { get; set; }
 
-        public bool? WoodWork { get; set; }
+        public bool? FrameWork { get; set; }
     }
 }

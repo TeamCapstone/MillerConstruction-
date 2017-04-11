@@ -8,16 +8,16 @@ namespace CapStoneProject.Models
 {
     public class Invoice
     {
-        public int InvoiceID { get; set; }
+        public int InvoiceID { get; set; }// form will require a view model
 
         [Required]
-        public int ClientID { get; set; }
+        public Client Client { get; set; }
 
         [Required]
-        public int ProjectID { get; set; }
+        public Project Project { get; set; }
 
         [Required]
-        [Range(typeof(Decimal), "5", "1,000,000,000")]
+        [Range(typeof(Decimal), "1", "1,000,000,000")]
         public decimal TotalPrice { get; set; }
 
 
