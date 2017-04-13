@@ -10,10 +10,10 @@ namespace CapStoneProject.Models
     {
         public int InvoiceID { get; set; }// form will require a view model
 
-        [Required]
+        
         public Client Client { get; set; }
 
-        [Required]
+        
         public Project Project { get; set; }
 
         [Required]
