@@ -46,7 +46,15 @@ namespace CapStoneProject.Repositories
             }
             else
             {
-              
+                if (review.Approved != true && review.Approved != false)
+                {
+                    throw new System.ArgumentNullException();
+                  
+                }
+                else
+                {
+                    throw new System.ArgumentOutOfRangeException();
+                }
             }
         }
 
