@@ -8,7 +8,7 @@ namespace CapStoneProject.Repositories.Interfaces
 {
     public interface IReviewRepo
     {
-        IQueryable<Review> GetAllReview();
+        IQueryable<Review> GetAllReviews();
 
         List<Review> GetReviewBySubject(string subject);
 
@@ -20,6 +20,8 @@ namespace CapStoneProject.Repositories.Interfaces
 
         Review DeleteReview(int reviewID);
 
-        void ReviewApporved(Review review);
+        IQueryable<Review> GetAllApproved();
+
+        IQueryable<Review> GetAllDisapproved();
     }
 }

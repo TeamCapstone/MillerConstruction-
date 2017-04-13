@@ -16,10 +16,19 @@ namespace CapStoneProject.Repositories
             context = ctx;
         }
 
-        public IQueryable<Review> GetAllReview()
+        public IQueryable<Review> GetAllReviews()
         {
             return context.Reviews.Include(m => m.From).Include(m => m.Comments);
+        }
 
+        public IQueryable<Review> GetAllApproved()
+        {
+            return context.Reviews.Include(m => m.Approved == true);
+        }
+
+        public IQueryable<Review> GetAllDisapproved()
+        {
+            return context.Reviews.Include(m => m.Approved == false);
         }
 
         public List<Review> GetReviewBySubject(string subject)
@@ -32,44 +41,27 @@ namespace CapStoneProject.Repositories
             return context.Reviews.Where(m => m.From.UserID == user.UserID).ToList();
         }
 
-        public void ReviewApporved(Review review)//What do you guys think
-        {
-            if (review.Approved == true)
-            {
-                Update(review);
-                
-            }
-            else if (review.Approved == false)
-            {
-                DeleteReview(review.ReviewID);
-                
-            }
-            else
-            {
-                if (review.Approved != true && review.Approved != false)
-                {
-                    throw new System.ArgumentNullException();
-                  
-                }
-                else
-                {
-                    throw new System.ArgumentOutOfRangeException();
-                }
-            }
-        }
 
         public int Update(Review review)
         {
-            if (review.ReviewID == 0)
-                context.Reviews.Add(review);
-            else
-                context.Reviews.Update(review);
+            if (review.Approved == true)
+            {
+                if (review.ReviewID == 0)
+                    context.Reviews.Add(review);
+                else
+                    context.Reviews.Update(review);
 
-            return context.SaveChanges();
+                return context.SaveChanges();
+            }
+            else
+            {
+                return review.ReviewID;
+            }
         }
 
         public Review DeleteReview(int reviewID)
         {
+            
             Review dbEntry = context.Reviews
                 .FirstOrDefault(m => m.ReviewID == reviewID);
             if (dbEntry != null)
