@@ -9,16 +9,18 @@ namespace CapStoneProject.Repositories.Interfaces
 {
     public interface IReviewRepo
     {
-        IQueryable<Review> GetAllMessages();
+        IQueryable<Review> GetAllReview();
 
-        List<Review> GetMessageBySubject(string subject);
+        List<Review> GetReviewBySubject(string subject);
 
-        List<Review> GetMessageByMember(User user);
+        List<Review> GetReviewByUser(User user);
 
-        IEnumerable<Review> Messages { get; }
+        IEnumerable<Review> Reviews { get; }
 
-        int Update(Review message);
+        int Update(Review review);
 
-        Review DeleteMessage(int messageID);
+        Review DeleteReview(int reviewID);
+
+        bool ReviewApporved();
     }
 }
