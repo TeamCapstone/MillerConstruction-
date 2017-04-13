@@ -7,30 +7,45 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CapStoneProject.Models;
+using CapStoneProject.Repositories;
+using CapStoneProject.Repositories.Interfaces;
 
 namespace CapStoneProject
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
+        IConfigurationRoot Configuration;
+
+        public Startup(IHostingEnvironment env)
+        {
+            Configuration = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json").Build();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                Configuration["Data:CapstoneAppItems:ConnectionString"]));
+
             services.AddMvc();
+            //services.AddTransient<IBidRequest, BidRequest>();
+            //services.AddTransient<IBid, Bid>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
+            app.UseDeveloperExceptionPage();
+            loggerFactory.AddConsole();
             app.UseStaticFiles();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseIdentity();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
