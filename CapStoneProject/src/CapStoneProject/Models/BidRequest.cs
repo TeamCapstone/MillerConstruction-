@@ -10,14 +10,9 @@ namespace CapStoneProject.Models
     {
         public int BidRequestID { get; set; }
 
-        [Required]
-        public User User { get; set; }
+        public int UserID { get; set; }
 
         public string ProjectDescription { get; set; }
-
-        public string IdealTimeFrame { get; set; }
-
-        public DateTime RequestedStartDate { get; set; }
 
         public string ProjectLocation { get; set; }
 

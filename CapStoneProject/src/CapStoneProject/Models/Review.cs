@@ -19,7 +19,7 @@ namespace CapStoneProject.Models
 
         public DateTime Date { get; set;}
 
-        public User From { get; set; }
+        public UserIdentity From { get; set; }
 
         public bool Approved { get; set; }
 
