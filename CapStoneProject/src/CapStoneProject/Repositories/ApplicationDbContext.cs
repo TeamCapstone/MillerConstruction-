@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CapStoneProject.Repositories
 {
-    public class ApplicationDbContext : DbContext , IdentityDbContext<User> //multiple base classes?
+    public class ApplicationDbContext : IdentityDbContext<User> 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -19,7 +19,7 @@ namespace CapStoneProject.Repositories
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         
 
     }
