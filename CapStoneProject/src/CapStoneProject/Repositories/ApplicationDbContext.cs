@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CapStoneProject.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CapStoneProject.Repositories
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext , IdentityDbContext<User> //multiple base classes?
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -18,6 +19,7 @@ namespace CapStoneProject.Repositories
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<User> Users { get; set; }
         
 
     }
