@@ -10,7 +10,7 @@ namespace CapStoneProject.Repositories
     public class ReviewRepo : IReviewRepo
     {
         private ApplicationDbContext context;
-        private User user;
+        private UserIdentity user;
         public ReviewRepo(ApplicationDbContext ctx)//going to take a instants of context
         {
             context = ctx;
@@ -36,7 +36,7 @@ namespace CapStoneProject.Repositories
             return context.Reviews.Where(m => m.Subject == subject).Include(m => m.From).ToList();
         }
 
-        public List<Review> GetReviewByUser(User user)
+        public List<Review> GetReviewByUser(UserIdentity user)
         {
             return context.Reviews.Where(m => m.From.UserID == user.UserID).ToList();
         }

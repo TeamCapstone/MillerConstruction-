@@ -12,7 +12,7 @@ namespace CapStoneProject.Repositories.Interfaces
 
         List<Review> GetReviewBySubject(string subject);
 
-        List<Review> GetReviewByUser(User user);
+        List<Review> GetReviewByUser(UserIdentity user);
 
         IEnumerable<Review> Reviews { get; }
 

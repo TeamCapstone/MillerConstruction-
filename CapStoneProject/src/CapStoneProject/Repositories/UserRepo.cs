@@ -16,7 +16,7 @@ namespace CapStoneProject.Repositories
             context = ctx;
         }
 
-        public IEnumerable<User> Users
+        public IEnumerable<UserIdentity> Users
         {
             get
             {
@@ -24,7 +24,7 @@ namespace CapStoneProject.Repositories
             }
         }
 
-        public int Create(User user)
+        public int Create(UserIdentity user)
         {
             context.Users.Add(user);
             return context.SaveChanges();
@@ -33,24 +33,24 @@ namespace CapStoneProject.Repositories
         public List<string> GetAllEmails()
         {
             List<string> email = new List<string>();
-            foreach (User u in Users)
+            foreach (UserIdentity u in Users)
             {            
                 email.Add(u.Email);
             }
             return email;
         }
 
-        public List<User> GetAllUsers()
+        public List<UserIdentity> GetAllUsers()
         {
             return Users.ToList(); 
         }
 
-        public User GetUser(string username)
+        public UserIdentity GetUser(string username)
         {
             return Users.First(u => u.Email == username);
         }
 
-        public User GetUser(int id)
+        public UserIdentity GetUser(int id)
         {
             return Users.First(u => u.UserID == id);
         }

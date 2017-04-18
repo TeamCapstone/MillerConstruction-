@@ -30,7 +30,7 @@ namespace CapStoneProject
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration["Data:CapstoneAppItems:ConnectionString"]));
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<UserIdentity, IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc();
             //services.AddTransient<IBidRequest, BidRequest>();

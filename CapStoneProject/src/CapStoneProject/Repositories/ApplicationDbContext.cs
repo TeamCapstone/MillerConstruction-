@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CapStoneProject.Repositories
 {
-    public class ApplicationDbContext : IdentityDbContext<User> 
+    public class ApplicationDbContext : IdentityDbContext<UserIdentity> 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

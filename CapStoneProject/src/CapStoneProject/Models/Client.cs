@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,9 +10,7 @@ namespace CapStoneProject.Models
     {
         public int ClientID { get; set; }
 
-        public User User { get; set; }
-
-        public Bid Bid { get; set; }
+        public int UserID { get; set; }
 
         public string CompanyName { get; set; }
 
@@ -27,6 +26,7 @@ namespace CapStoneProject.Models
 
         public string PhoneNumber { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
     }
