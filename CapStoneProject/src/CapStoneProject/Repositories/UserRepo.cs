@@ -20,33 +20,39 @@ namespace CapStoneProject.Repositories
         {
             get
             {
-                return 
+                return context.Users.ToList();
             }
         }
 
         public int Create(User user)
         {
-            throw new NotImplementedException();
+            context.Users.Add(user);
+            return context.SaveChanges();
         }
 
         public List<string> GetAllEmails()
         {
-            throw new NotImplementedException();
+            List<string> email = new List<string>();
+            foreach (User u in Users)
+            {            
+                email.Add(u.Email);
+            }
+            return email;
         }
 
         public List<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return Users.ToList(); 
         }
 
         public User GetUser(string username)
         {
-            throw new NotImplementedException();
+            return Users.First(u => u.Email == username);
         }
 
         public User GetUser(int id)
         {
-            throw new NotImplementedException();
+            return Users.First(u => u.UserID == id);
         }
     }
 }
