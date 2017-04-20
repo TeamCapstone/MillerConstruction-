@@ -28,7 +28,7 @@ namespace CapStoneProject.Repositories
 
         public Bid GetBidByClientName(string name)
         {
-            return context.Bids.First(n => n.User.Client.LastName == name);
+            return context.Bids.First(n => n.User. == name);
         }
 
         public Bid DeleteBR(int id)
