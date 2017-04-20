@@ -8,7 +8,7 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170418232023_Initial")]
+    [Migration("20170420231944_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,8 +56,6 @@ namespace CapStoneProject.Migrations
 
                     b.Property<bool?>("FrameWork");
 
-                    b.Property<string>("IdealTimeFrame");
-
                     b.Property<bool?>("NewBuild");
 
                     b.Property<string>("ProjectDescription");
@@ -66,10 +64,7 @@ namespace CapStoneProject.Migrations
 
                     b.Property<bool?>("Remodel");
 
-                    b.Property<DateTime>("RequestedStartDate");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId");
 
                     b.HasKey("BidRequestID");
 
@@ -83,13 +78,12 @@ namespace CapStoneProject.Migrations
                     b.Property<int>("ClientID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BidID");
-
                     b.Property<string>("City");
 
                     b.Property<string>("CompanyName");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.Property<string>("FirstName");
 
@@ -99,11 +93,11 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("Street");
 
+                    b.Property<int>("UserID");
+
                     b.Property<string>("Zipcode");
 
                     b.HasKey("ClientID");
-
-                    b.HasIndex("BidID");
 
                     b.ToTable("Clients");
                 });
@@ -207,13 +201,11 @@ namespace CapStoneProject.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("CapStoneProject.Models.User", b =>
+            modelBuilder.Entity("CapStoneProject.Models.UserIdentity", b =>
                 {
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
-
-                    b.Property<int?>("ClientID");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -222,10 +214,6 @@ namespace CapStoneProject.Migrations
                         .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -243,21 +231,16 @@ namespace CapStoneProject.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<int?>("ProjectID");
-
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<int>("UserID");
+                    b.Property<int>("UserIndentityID");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientID")
-                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -265,8 +248,6 @@ namespace CapStoneProject.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex");
-
-                    b.HasIndex("ProjectID");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -384,24 +365,16 @@ namespace CapStoneProject.Migrations
                         .WithMany()
                         .HasForeignKey("BidRequestID");
 
-                    b.HasOne("CapStoneProject.Models.User", "User")
+                    b.HasOne("CapStoneProject.Models.UserIdentity", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CapStoneProject.Models.BidRequest", b =>
                 {
-                    b.HasOne("CapStoneProject.Models.User", "User")
+                    b.HasOne("CapStoneProject.Models.UserIdentity", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CapStoneProject.Models.Client", b =>
-                {
-                    b.HasOne("CapStoneProject.Models.Bid", "Bid")
-                        .WithMany()
-                        .HasForeignKey("BidID");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CapStoneProject.Models.Comment", b =>
@@ -437,20 +410,9 @@ namespace CapStoneProject.Migrations
 
             modelBuilder.Entity("CapStoneProject.Models.Review", b =>
                 {
-                    b.HasOne("CapStoneProject.Models.User", "From")
+                    b.HasOne("CapStoneProject.Models.UserIdentity", "From")
                         .WithMany()
                         .HasForeignKey("FromId");
-                });
-
-            modelBuilder.Entity("CapStoneProject.Models.User", b =>
-                {
-                    b.HasOne("CapStoneProject.Models.Client", "Client")
-                        .WithOne("User")
-                        .HasForeignKey("CapStoneProject.Models.User", "ClientID");
-
-                    b.HasOne("CapStoneProject.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -463,7 +425,7 @@ namespace CapStoneProject.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CapStoneProject.Models.User")
+                    b.HasOne("CapStoneProject.Models.UserIdentity")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -471,7 +433,7 @@ namespace CapStoneProject.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CapStoneProject.Models.User")
+                    b.HasOne("CapStoneProject.Models.UserIdentity")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -484,7 +446,7 @@ namespace CapStoneProject.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CapStoneProject.Models.User")
+                    b.HasOne("CapStoneProject.Models.UserIdentity")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
