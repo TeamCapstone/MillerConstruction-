@@ -1,13 +1,13 @@
-﻿@{
-    ViewData["Title"] = "Home";
-    Layout = "_Layout";
+﻿@model Dictionary<string, object>
+<div class="bg-primary panel-body"><h4>User Details</h4></div>
+<table class="table table-condensed table-bordered">
+    @foreach (var kvp in Model)
+    {
+        <tr><th>@kvp.Key</th><td>@kvp.Value</td></tr>
+    }
+</table>
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+    <a asp-controller="Account" asp-action="Logout"
+       class="btn btn-danger">Logout</a>
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-</head>
-<body>
-    <p>Hello World</p>
-</body>
-</html>
