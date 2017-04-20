@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Models;
 using CapStoneProject.Repositories;
-using CapStoneProject.Repositories.Interfaces;
 
 namespace CapStoneProject
 {
@@ -54,6 +53,9 @@ namespace CapStoneProject
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
+
+            ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
+            Configuration).Wait();
         }
     }
 }
