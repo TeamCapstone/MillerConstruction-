@@ -38,7 +38,7 @@ namespace CapStoneProject.Repositories
 
         public List<Review> GetReviewByUser(UserIdentity user)
         {
-            return context.Reviews.Where(m => m.From.UserID == user.UserID).ToList();
+            return context.Reviews.Where(m => m.From.UserIndentityID == user.UserIndentityID).ToList();
         }
 
 
