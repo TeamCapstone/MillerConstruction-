@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Models;
 using CapStoneProject.Repositories;
-using CapStoneProject.Repositories.Interfaces;
 
 namespace CapStoneProject
 {
@@ -30,8 +29,15 @@ namespace CapStoneProject
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration["Data:CapstoneAppItems:ConnectionString"]));
-            services.AddIdentity<UserIdentity, IdentityRole>()
-               .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<UserIdentity, IdentityRole>(opts => {
+
+                opts.User.RequireUniqueEmail = true;
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc();
             //services.AddTransient<IBidRequest, BidRequest>();
             //services.AddTransient<IBid, Bid>();
@@ -47,6 +53,9 @@ namespace CapStoneProject
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
+
+            ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
+            Configuration).Wait();
         }
     }
 }
