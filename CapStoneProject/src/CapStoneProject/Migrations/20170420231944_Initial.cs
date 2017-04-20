@@ -10,6 +10,53 @@ namespace CapStoneProject.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    City = table.Column<string>(nullable: true),
+                    CompanyName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    UserID = table.Column<int>(nullable: false),
+                    Zipcode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserIndentityID = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -38,145 +85,6 @@ namespace CapStoneProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BidID = table.Column<int>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    CompanyName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    Zipcode = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.ClientID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    ProjectID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AdditionalCosts = table.Column<decimal>(nullable: false),
-                    BidID = table.Column<int>(nullable: false),
-                    ClientID = table.Column<int>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    OriginalEstimate = table.Column<decimal>(nullable: false),
-                    ProjectName = table.Column<string>(nullable: false),
-                    ProjectStatus = table.Column<string>(nullable: true),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    StatusDate = table.Column<DateTime>(nullable: false),
-                    TotalCost = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.ProjectID);
-                    table.ForeignKey(
-                        name: "FK_Projects_Clients_ClientID",
-                        column: x => x.ClientID,
-                        principalTable: "Clients",
-                        principalColumn: "ClientID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Invoices",
-                columns: table => new
-                {
-                    InvoiceID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClientID = table.Column<int>(nullable: true),
-                    ProjectID = table.Column<int>(nullable: true),
-                    TotalPrice = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Invoices", x => x.InvoiceID);
-                    table.ForeignKey(
-                        name: "FK_Invoices_Clients_ClientID",
-                        column: x => x.ClientID,
-                        principalTable: "Clients",
-                        principalColumn: "ClientID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Invoices_Projects_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "Projects",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ClientID = table.Column<int>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    ProjectID = table.Column<int>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Clients_ClientID",
-                        column: x => x.ClientID,
-                        principalTable: "Clients",
-                        principalColumn: "ClientID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Projects_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "Projects",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "BidRequests",
                 columns: table => new
                 {
@@ -184,13 +92,11 @@ namespace CapStoneProject.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Concrete = table.Column<bool>(nullable: true),
                     FrameWork = table.Column<bool>(nullable: true),
-                    IdealTimeFrame = table.Column<string>(nullable: true),
                     NewBuild = table.Column<bool>(nullable: true),
                     ProjectDescription = table.Column<string>(nullable: true),
                     ProjectLocation = table.Column<string>(nullable: true),
                     Remodel = table.Column<bool>(nullable: true),
-                    RequestedStartDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,7 +106,7 @@ namespace CapStoneProject.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,6 +169,27 @@ namespace CapStoneProject.Migrations
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -345,6 +272,67 @@ namespace CapStoneProject.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    ProjectID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AdditionalCosts = table.Column<decimal>(nullable: false),
+                    BidID = table.Column<int>(nullable: false),
+                    ClientID = table.Column<int>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    OriginalEstimate = table.Column<decimal>(nullable: false),
+                    ProjectName = table.Column<string>(nullable: false),
+                    ProjectStatus = table.Column<string>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    StatusDate = table.Column<DateTime>(nullable: false),
+                    TotalCost = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.ProjectID);
+                    table.ForeignKey(
+                        name: "FK_Projects_Bids_BidID",
+                        column: x => x.BidID,
+                        principalTable: "Bids",
+                        principalColumn: "BidID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Projects_Clients_ClientID",
+                        column: x => x.ClientID,
+                        principalTable: "Clients",
+                        principalColumn: "ClientID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invoices",
+                columns: table => new
+                {
+                    InvoiceID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClientID = table.Column<int>(nullable: true),
+                    ProjectID = table.Column<int>(nullable: true),
+                    TotalPrice = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invoices", x => x.InvoiceID);
+                    table.ForeignKey(
+                        name: "FK_Invoices_Clients_ClientID",
+                        column: x => x.ClientID,
+                        principalTable: "Clients",
+                        principalColumn: "ClientID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Invoices_Projects_ProjectID",
+                        column: x => x.ProjectID,
+                        principalTable: "Projects",
+                        principalColumn: "ProjectID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bids_BidRequestID",
                 table: "Bids",
@@ -359,11 +347,6 @@ namespace CapStoneProject.Migrations
                 name: "IX_BidRequests_UserId",
                 table: "BidRequests",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_BidID",
-                table: "Clients",
-                column: "BidID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ReviewID",
@@ -396,12 +379,6 @@ namespace CapStoneProject.Migrations
                 column: "FromId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_ClientID",
-                table: "AspNetUsers",
-                column: "ClientID",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -411,11 +388,6 @@ namespace CapStoneProject.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_ProjectID",
-                table: "AspNetUsers",
-                column: "ProjectID");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -446,34 +418,10 @@ namespace CapStoneProject.Migrations
                 name: "IX_AspNetUserRoles_UserId",
                 table: "AspNetUserRoles",
                 column: "UserId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Clients_Bids_BidID",
-                table: "Clients",
-                column: "BidID",
-                principalTable: "Bids",
-                principalColumn: "BidID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Projects_Bids_BidID",
-                table: "Projects",
-                column: "BidID",
-                principalTable: "Bids",
-                principalColumn: "BidID",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Bids_BidRequests_BidRequestID",
-                table: "Bids");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Bids_AspNetUsers_UserId",
-                table: "Bids");
-
             migrationBuilder.DropTable(
                 name: "Comments");
 
@@ -499,22 +447,22 @@ namespace CapStoneProject.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
+                name: "Projects");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Bids");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "BidRequests");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Projects");
-
-            migrationBuilder.DropTable(
-                name: "Clients");
-
-            migrationBuilder.DropTable(
-                name: "Bids");
         }
     }
 }
