@@ -10,5 +10,9 @@ namespace CapStoneProject.Models
     public class UserIdentity : IdentityUser
     {
         public int UserIndentityID { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
     }
 }

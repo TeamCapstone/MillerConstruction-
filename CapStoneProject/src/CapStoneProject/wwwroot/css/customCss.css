@@ -1,0 +1,32 @@
+﻿body {
+    font-family:'Bauhaus 93';
+}
+
+#navDiv{
+    font-family: 'Bauhaus 93';
+    background-color: black;
+    color: orangered;
+}
+
+#logoImg{
+    max-width: 100px;
+}
+
+
+.navbar a {
+    font-size: 150%;
+    color: red;
+    background-color: black; 
+}
+
+
+#footDiv{
+    font-family: 'Bauhaus 93';
+    font-size: 160%;
+    background-color: black;
+    color: red;
+}
+
+#footBelow{
+    font-size: 50%;
+}
