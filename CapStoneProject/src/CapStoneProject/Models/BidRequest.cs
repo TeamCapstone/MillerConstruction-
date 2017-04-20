@@ -10,7 +10,7 @@ namespace CapStoneProject.Models
     {
         public int BidRequestID { get; set; }
 
-        public int UserID { get; set; }
+        public UserIdentity User { get; set; }
 
         public string ProjectDescription { get; set; }
 
