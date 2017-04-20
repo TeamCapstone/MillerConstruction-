@@ -52,7 +52,7 @@ namespace CapStoneProject.Repositories
 
         public UserIdentity GetUser(int id)
         {
-            return Users.First(u => u.UserID == id);
+            return Users.First(u => u.UserIndentityID == id);
         }
     }
 }
