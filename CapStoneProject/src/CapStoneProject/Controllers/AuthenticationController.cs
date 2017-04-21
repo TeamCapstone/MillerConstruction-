@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Models.ViewModels;
 using CapStoneProject.Repositories;
+using CapStoneProject.Repositories.Interfaces;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,11 +21,11 @@ namespace CapStoneProject.Controllers
         private RoleManager<IdentityRole> roleManager;
         private UserRepo userRepo;
 
-        public AuthenticationController(RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IUserRepository repo)
+        public AuthenticationController(RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IUserRepo repo)
         {
             userManager = usrMgr;
             signInManager = sim;
-            userRepo = repo;
+            //userRepo = repo;
             roleManager = roleMgr;
         }
 
