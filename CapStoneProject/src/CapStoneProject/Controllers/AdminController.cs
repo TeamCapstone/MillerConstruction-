@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using CapStoneProject.Models.ViewModels;
 using CapStoneProject.Models;
+using CapStoneProject.Repositories;
+using CapStoneProject.Repositories.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
@@ -18,12 +20,10 @@ namespace CapStoneProject.Controllers
         private IPasswordHasher<UserIdentity> passwordHasher;*/
 
 
-        public AdminController(UserManager<UserIdentity> usrMgr/*,
-                IUserValidator<UserIdentity> userValid,
-                IPasswordValidator<UserIdentity> passValid,
-                IPasswordHasher<UserIdentity> passwordHash*/)
+        public AdminController(UserManager<UserIdentity> usrMgr)
         {
             userManager = usrMgr;
+
             /*userValidator = userValid;
             passwordValidator = passValid;
             passwordHasher = passwordHash;*/

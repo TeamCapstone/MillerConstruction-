@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Review>
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Reviews</title>
+</head>
+<body>
+
+    <h2>Reviews</h2>
+    <br />
+    <span class="">
+        @Html.ActionLink("Add a Review", "MakeReview", "Review", null, new { @style = "color:aliceblue;" })
+    </span>
+    <br />
+    @foreach (var a in Model)
+    {
+        <h4>From: @a.From.FirstName @a.From.LastName </h4>
+            <h6>
+                <span class="glyphicon glyphicon-time">@a.Date</span>
+
+            </h6>
+                <h5><span class="label label-primary"> @a.Subject </span></h5>
+                <p>Body: @a.Body </p>
+
+
+                <p><span class="badge">@a.Comments.Count()</span> Comments:</p><br>
+
+        foreach (var n in a.Comments)
+        {
+
+            <h5><span class="label label-primary"> @n.Subject </span></h5>
+                <p> @n.Body <br /> </p>
+
+
+        }
+
+        <span class="label label-danger">
+            @Html.ActionLink("Add a comment", "Comment", "Review",
+                     new { subject = a.Subject, Id = a.ReviewID, body = a.Body }, new { @style = "color:aliceblue;" })
+        </span>
+
+                    <hr id="hr1">
+    }
+
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,33 @@
+﻿@model Review
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> Make A Review</title>
+</head>
+<body>
+    <h1>Make a Review</h1>
+    <form role="form" asp-controller="Message" asp-action="MakeNewMessage" method="post">
+        <div class="form-group center-block" id="message_form">
+            <input asp-for="ReviewID" type="hidden" />
+
+            <label asp-for="Subject">Subject:</label>
+            <div class="form-group">
+                <input asp-for="Subject" class="form-control" rows="3" /><br />
+                <span id="Error" asp-validation-for="Subject"></span>@*add this*@
+            </div>
+            <label asp-for="Body">Body:</label>
+            <div class="form-group">
+                <textarea asp-for="Body" class="form-control" rows="3"></textarea><br />
+                <span id="Error" asp-validation-for="Body"></span>@*add this*@
+            </div>
+            <button type="submit" class="btn btn-success">Post</button>
+        </div>
+    </form>
+
+</body>
+</html>

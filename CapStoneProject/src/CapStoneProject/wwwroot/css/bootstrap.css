@@ -240,6 +240,7 @@ th {
   }
   .navbar {
     display: none;
+    width: 100%;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -1607,6 +1608,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+ 
 }
 .row {
   margin-right: -15px;
@@ -3547,6 +3549,7 @@ tbody.collapse.in {
   height: 1px;
   margin: 9px 0;
   overflow: hidden;
+  color: red; 
   background-color: #e5e5e5;
 }
 .dropdown-menu > li > a {
@@ -3555,12 +3558,12 @@ tbody.collapse.in {
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #333;
+  color: red/*#333*/;
   white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-  color: #262626;
+  color: red; /*#262626*/
   text-decoration: none;
   background-color: #f5f5f5;
 }
@@ -4169,6 +4172,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   height: 100px;
   margin-bottom: 20px;
   border: 1px solid transparent;
+ 
 }
 @media (min-width: 768px) {
   .navbar {
@@ -4178,6 +4182,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar-header {
     float: left;
+    padding-top: 20px;
   }
 }
 .navbar-collapse {
@@ -4217,12 +4222,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-top .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
-  max-height: 340px;
+  max-height: 1000px;
 }
 @media (max-device-width: 480px) and (orientation: landscape) {
   .navbar-fixed-top .navbar-collapse,
   .navbar-fixed-bottom .navbar-collapse {
-    max-height: 200px;
+    max-height: 1000px;
   }
 }
 .container > .navbar-header,
@@ -4231,6 +4236,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .container-fluid > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px;
+  padding-top: 20px;
 }
 @media (min-width: 768px) {
   .container > .navbar-header,
@@ -4239,6 +4245,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .container-fluid > .navbar-collapse {
     margin-right: 0;
     margin-left: 0;
+    padding-top: 20px;
   }
 }
 .navbar-static-top {
@@ -6032,7 +6039,7 @@ button.close {
   margin-left: -3px;
 }
 .tooltip-inner {
-  max-width: 200px;
+  max-width: 1000px;
   padding: 3px 8px;
   color: #fff;
   text-align: center;
