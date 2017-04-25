@@ -27,16 +27,62 @@
                 </p>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" asp-for="Client.Email" value="Email:" id="clientEmailBR">
-                        <span asp-validation-for="Client.Email" class="text-danger"></span>
+                        <input class="form-control" type="text" asp-for="User.Email" value="Email:" id="clientEmailBR">
+                        <span asp-validation-for="User.Email" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" asp-for="Client.PasswordHash" value="Email:" id="clientEmailBR">
-                        <span asp-validation-for="Client.PasswordHash" class="text-danger"></span>
+                        <input class="form-control" type="text" asp-for="User.PasswordHash" value="Password:" id="clientEmailBR">
+                        <span asp-validation-for="User.PasswordHash" class="text-danger"></span>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" asp-for="User.PasswordHash" value="Please enter password again:" id="clientEmailBR">
+                        <span asp-validation-for="User.PasswordHash" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group ">
+                        <label asp-for="ProjectDescription">Please describe your project:</label><br />
+                        <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" asp-for="Client.City" value="City:" id="clientcityBR">
+                        <span asp-validation-for="Client.City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <input class="form-control" type="checkbox" asp-for="NewBuild" value="NewBuild:" id="newbuildBR">
+                        <span asp-validation-for="NewBuild" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <input class="form-control" type="checkbox" asp-for="Remodel" value="Remodel:" id="newbuildBR">
+                        <span asp-validation-for="Remodel" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <input class="form-control" type="checkbox" asp-for="FrameWork" value="Frame Work:" id="newbuildBR">
+                        <span asp-validation-for="FrameWork" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <input class="form-control" type="checkbox" asp-for="Concrete" value="Concrete:" id="newbuildBR">
+                        <span asp-validation-for="Concrete" class="text-danger"></span>
+                    </div>
+                </div>
+
             </div>
 
 

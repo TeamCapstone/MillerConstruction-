@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapStoneProject.Models
 {
-    public class Client : UserIdentity
+    public class Client 
     {
         public int ClientID { get; set; }
 
