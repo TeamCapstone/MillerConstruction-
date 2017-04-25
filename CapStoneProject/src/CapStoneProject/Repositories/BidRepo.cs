@@ -26,14 +26,10 @@ namespace CapStoneProject.Repositories
             return context.Bids.First(r => r.BidID == id);
         }
 
-
-        //public Bid GetBidByClientName(string name)
-        //{
-        //    return context.Bids.First(n => n.User.Client.LastName == name);
-        //}
-
-
-
+        public Bid GetBidByClientName(string name)
+        {
+            return context.Bids.First(n => n.Client.LastName == name);
+        }
 
         public Bid DeleteBR(int id)
         {

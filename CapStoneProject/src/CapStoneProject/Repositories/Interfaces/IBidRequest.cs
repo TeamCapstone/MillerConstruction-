@@ -12,7 +12,7 @@ namespace CapStoneProject.Repositories.Interfaces
 
         BidRequest GetBidRequestByUserID(int id);
         
-        //BidRequest GetBidRequestByClientName(string lastName);
+        BidRequest GetBidRequestByClientName(string lastName);
 
         BidRequest DeleteBR(int id);
     }
