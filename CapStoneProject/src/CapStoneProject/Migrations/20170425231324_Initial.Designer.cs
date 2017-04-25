@@ -8,7 +8,7 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170425172132_Initial")]
+    [Migration("20170425231324_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<int?>("BidRequestID");
 
+                    b.Property<string>("ClientId");
+
                     b.Property<decimal>("LaborCost");
 
                     b.Property<string>("MaterialsDescription");
@@ -36,13 +38,11 @@ namespace CapStoneProject.Migrations
 
                     b.Property<decimal>("TotalEstimate");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("BidID");
 
                     b.HasIndex("BidRequestID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Bids");
                 });
@@ -51,6 +51,8 @@ namespace CapStoneProject.Migrations
                 {
                     b.Property<int>("BidRequestID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClientId");
 
                     b.Property<bool?>("Concrete");
 
@@ -68,38 +70,11 @@ namespace CapStoneProject.Migrations
 
                     b.HasKey("BidRequestID");
 
+                    b.HasIndex("ClientId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("BidRequests");
-                });
-
-            modelBuilder.Entity("CapStoneProject.Models.Client", b =>
-                {
-                    b.Property<int>("ClientID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("CompanyName");
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("Street");
-
-                    b.Property<int>("UserID");
-
-                    b.Property<string>("Zipcode");
-
-                    b.HasKey("ClientID");
-
-                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("CapStoneProject.Models.Comment", b =>
@@ -127,7 +102,7 @@ namespace CapStoneProject.Migrations
                     b.Property<int>("InvoiceID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClientID");
+                    b.Property<string>("ClientId");
 
                     b.Property<int?>("ProjectID");
 
@@ -135,7 +110,7 @@ namespace CapStoneProject.Migrations
 
                     b.HasKey("InvoiceID");
 
-                    b.HasIndex("ClientID");
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("ProjectID");
 
@@ -152,7 +127,7 @@ namespace CapStoneProject.Migrations
                     b.Property<int?>("BidID")
                         .IsRequired();
 
-                    b.Property<int?>("ClientID")
+                    b.Property<string>("ClientId")
                         .IsRequired();
 
                     b.Property<DateTime>("EndDate");
@@ -174,7 +149,7 @@ namespace CapStoneProject.Migrations
 
                     b.HasIndex("BidID");
 
-                    b.HasIndex("ClientID");
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Projects");
                 });
@@ -210,6 +185,9 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasAnnotation("MaxLength", 256);
 
@@ -229,6 +207,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasAnnotation("MaxLength", 256);
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -238,8 +218,6 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<int>("UserIndentityID");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
@@ -254,6 +232,8 @@ namespace CapStoneProject.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("UserIdentity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -363,19 +343,46 @@ namespace CapStoneProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CapStoneProject.Models.Client", b =>
+                {
+                    b.HasBaseType("CapStoneProject.Models.UserIdentity");
+
+                    b.Property<string>("City");
+
+                    b.Property<int>("ClientID");
+
+                    b.Property<string>("CompanyName");
+
+                    b.Property<string>("State");
+
+                    b.Property<string>("Street");
+
+                    b.Property<string>("UserIdentityID");
+
+                    b.Property<string>("Zipcode");
+
+                    b.ToTable("Client");
+
+                    b.HasDiscriminator().HasValue("Client");
+                });
+
             modelBuilder.Entity("CapStoneProject.Models.Bid", b =>
                 {
                     b.HasOne("CapStoneProject.Models.BidRequest", "BidReq")
                         .WithMany()
                         .HasForeignKey("BidRequestID");
 
-                    b.HasOne("CapStoneProject.Models.UserIdentity", "User")
+                    b.HasOne("CapStoneProject.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("CapStoneProject.Models.BidRequest", b =>
                 {
+                    b.HasOne("CapStoneProject.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("CapStoneProject.Models.UserIdentity", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -392,7 +399,7 @@ namespace CapStoneProject.Migrations
                 {
                     b.HasOne("CapStoneProject.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientID");
+                        .HasForeignKey("ClientId");
 
                     b.HasOne("CapStoneProject.Models.Project", "Project")
                         .WithMany()
@@ -408,7 +415,7 @@ namespace CapStoneProject.Migrations
 
                     b.HasOne("CapStoneProject.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientID")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -8,6 +8,8 @@ namespace CapStoneProject.Repositories.Interfaces
 {
     public interface IProjectRepo
     {
+        IEnumerable<Project> GetAllProjects(); //Gets ALL projects in database
+        IEnumerable<Project> GetAllCurrentProjects(string projStatus); //Gets all ongoing projects in database
         IEnumerable<Project> GetProjectsByClient(int clientID); //Gets client's projects by client id
         Project GetLatestClientProject(int clientID); //Gets latest client project
         IEnumerable<Project> GetCurrentProjects(int clientID); //gets current client projects

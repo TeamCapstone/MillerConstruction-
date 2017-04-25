@@ -10,7 +10,8 @@ namespace CapStoneProject.Models
     {
         public int ClientID { get; set; }
 
-        public string UserID { get; set; } //change to string because of Identity
+        public string UserIdentityID { get; set; }
+
 
         public string CompanyName { get; set; }
 
@@ -28,6 +29,7 @@ namespace CapStoneProject.Models
 
         public string PhoneNumber { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
     }
