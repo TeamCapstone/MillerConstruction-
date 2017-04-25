@@ -28,5 +28,11 @@ namespace CapStoneProject.Repositories
         {
             return Client.ToList();
         }
+
+        public int Create(Client client)
+        {
+            context.Clients.Add(client);
+            return context.SaveChanges();
+        }
     }
 }
