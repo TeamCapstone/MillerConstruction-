@@ -14,6 +14,18 @@ namespace CapStoneProject.Models.ViewModels
         [Required]
         public string LastName { get; set; }
 
+        public string CompanyName { get; set; }
+
+        public string Street { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
+
+        public string Zipcode { get; set; }
+
         [Required]
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Email is not Valid")]
         public string Email { get; set; }
