@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Models;
 using CapStoneProject.Repositories;
+using CapStoneProject.Repositories.Interfaces;
 
 namespace CapStoneProject
 {
@@ -39,6 +40,7 @@ namespace CapStoneProject
                 opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddMvc();
+            services.AddTransient<IClientRepo, ClientRepo>();
             //services.AddTransient<IBidRequest, BidRequest>();
             //services.AddTransient<IBid, Bid>();
 
