@@ -7,13 +7,15 @@ namespace CapStoneProject.Models.ViewModels
 {
     public class VMComment
     {
-        public Review ReviewID { get; set; }
+        public int ReviewID { get; set; }
 
         public string Subject { get; set; }
 
         public string Body { get; set; }
 
         public DateTime Date { get; set; }
+
+        public Comment Cmmt { get; set; }
 
     }
 }

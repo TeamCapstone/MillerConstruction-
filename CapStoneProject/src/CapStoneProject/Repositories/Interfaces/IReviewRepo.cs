@@ -14,7 +14,7 @@ namespace CapStoneProject.Repositories.Interfaces
 
         List<Review> GetReviewByUser(UserIdentity user);
 
-        IEnumerable<Review> Reviews { get; }
+        //IEnumerable<Review> Reviews { get; }
 
         int Update(Review review);
 
@@ -23,5 +23,6 @@ namespace CapStoneProject.Repositories.Interfaces
         IQueryable<Review> GetAllApproved();
 
         IQueryable<Review> GetAllDisapproved();
+
     }
 }

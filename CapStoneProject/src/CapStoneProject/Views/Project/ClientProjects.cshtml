@@ -1,0 +1,14 @@
+﻿@* This page will be for Client to view his/her ongoing projects and info *@
+@model IEnumerable<Project>
+
+<table>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.ProjectName</td>
+            <td>@p.StartDate</td>
+            <td>@p.ProjectStatus</td>
+            <td>@p.StatusDate</td>
+        </tr>
+    }
+</table>
