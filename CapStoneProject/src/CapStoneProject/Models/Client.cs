@@ -10,7 +10,8 @@ namespace CapStoneProject.Models
     {
         public int ClientID { get; set; }
 
-        public int UserID { get; set; }
+        public string UserIdentityID { get; set; }
+
 
         public string CompanyName { get; set; }
 
@@ -21,6 +22,8 @@ namespace CapStoneProject.Models
         public string Street { get; set; }
 
         public string City { get; set; }
+
+        public string State { get; set; }
 
         public string Zipcode { get; set; }
 

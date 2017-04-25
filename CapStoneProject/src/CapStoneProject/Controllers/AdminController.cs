@@ -36,10 +36,10 @@ namespace CapStoneProject.Controllers
 
         public ViewResult Index() => View(userManager.Users);
 
-        public ViewResult Create() => View();
+        public ViewResult Create() => View();// Admin creates user
 
         [HttpPost]
-        public async Task<IActionResult> Create(VMCreateUser model)
+        public async Task<IActionResult> Create(VMCreateUser model)// Admin creates user 
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id)// deletes the user
         {
             UserIdentity user = await userManager.FindByIdAsync(id);
             if (user != null)
@@ -80,6 +80,7 @@ namespace CapStoneProject.Controllers
                 else
                 {
                     AddErrorsFromResult(result);
+              
                 }
             }
             else
@@ -89,7 +90,7 @@ namespace CapStoneProject.Controllers
             return View("Index", userManager.Users);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id)//Edits the user role
         {
             UserIdentity user = await userManager.FindByIdAsync(id);
             if (user != null)
@@ -103,7 +104,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, string email,
+        public async Task<IActionResult> Edit(string id, string email,/*Edits the user role*/
                 string password)
         {
             UserIdentity user = await userManager.FindByIdAsync(id);

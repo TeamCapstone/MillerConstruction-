@@ -11,7 +11,7 @@ namespace CapStoneProject.Repositories.Interfaces
         List<UserIdentity> GetAllUsers();
         List<string> GetAllEmails();
         IEnumerable<UserIdentity> Users { get; }
-        UserIdentity GetUser(int id);
+        UserIdentity GetUserid(string id);
         UserIdentity GetUser(string username);
         int Create(UserIdentity user);
     }
