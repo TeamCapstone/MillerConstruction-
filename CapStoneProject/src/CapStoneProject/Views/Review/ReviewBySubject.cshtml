@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Review>
 @{
+    Layout = "_Layout";
 }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>MessageBySubject</title>
+</head>
+<body>
+    <h1>Messages By Subject</h1>
+    @foreach (var a in Model)
+    {
+        <br />
+        <h3>Subject: @a.Subject </h3>
+        <p>Body: @a.Body </p>
+        <h2>From: @a.From.FirstName</h2>
+
+        <hr id="hr1">
+
+    }
+    <span class="label label-danger">
+        @Html.ActionLink("All Messages", "Messages", "Message", null,
+               new { @style = "color:aliceblue;" })
+    </span>
+</body>
+
+</html>

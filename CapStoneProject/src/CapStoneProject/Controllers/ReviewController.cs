@@ -15,19 +15,23 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CapStoneProject.Controllers
 {
+    [AllowAnonymous]
     public class ReviewController : Controller
     {
         private IReviewRepo reviewRepo;
         protected UserManager<UserIdentity> UserManager;
+       // private readonly ApplicationDbContext context;
 
         public ReviewController(UserManager<UserIdentity> userMgr,
-            IReviewRepo repo)
+            IReviewRepo repo, ApplicationDbContext Context)
         {
             reviewRepo = repo;
             UserManager = userMgr;
+           
         }
         //This controller will be for the admin
         
+        [Route("AllReviews")]
         public ViewResult AllReviews()
         { 
             return View(reviewRepo.GetAllReviews().ToList());
@@ -36,19 +40,19 @@ namespace CapStoneProject.Controllers
         //This controller will be for public
         public ViewResult AllApprovedReviews()
         {  
-            return View(reviewRepo.GetAllApproved().ToList());
+            return View(reviewRepo.GetAllReviews().Where(m => m.Approved == true).ToList());
         }
 
         //only admin
         public ViewResult AllDisapprovedReviews()
         {
-            return View(reviewRepo.GetAllDisapproved().ToList());
+            return View(reviewRepo.GetAllReviews().Where(m => m.Approved == false).ToList());
         }
 
         //admin and maybe public
         public ViewResult ReviewBySubject(string subject)
         {
-            return View(reviewRepo.GetAllApproved().Where(m => m.Subject == subject).ToList());
+            return View(reviewRepo.GetAllReviews().Where(m => m.Subject == subject).ToList());
         }
 
         //only admin
@@ -59,6 +63,7 @@ namespace CapStoneProject.Controllers
 
         //User and admin
         [HttpGet]
+        [Route("MakeReview")]
         public ViewResult MakeReview()
         {
             return View();
@@ -74,12 +79,12 @@ namespace CapStoneProject.Controllers
                 UserIdentity user = await UserManager.FindByNameAsync(User.Identity.Name);
                 review.Subject = subject;
                 review.Body = body;
-                //review.Approved = false;
+                review.Approved = true;
                 review.Date = DateTime.Now;
                 if (user != null)
                     review.From = user;
                 reviewRepo.Update(review);
-                return RedirectToAction("Reviews", "Review");
+                return RedirectToAction("AllReviews", "Review");
             }
             else
             {
@@ -110,5 +115,18 @@ namespace CapStoneProject.Controllers
             reviewRepo.Update(review);
             return RedirectToAction("Reviews", "Review");
         }
+
+        /*[HttpGet]
+public IActionResult Search(string search)
+{
+    var words = from m in context.Reviews
+                select m;
+    if (!string.IsNullOrEmpty(search))
+    {
+        words = words.Where(m => m.Subject.Contains(search)).Include(m => m.Body.Contains(search));
+    }
+    return View(words);
+}*/
+
     }
 }

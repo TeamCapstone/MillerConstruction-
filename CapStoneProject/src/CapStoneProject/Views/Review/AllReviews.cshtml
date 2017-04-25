@@ -13,8 +13,10 @@
 
     <h2>Reviews</h2>
     <br />
-    <span class="">
-        @Html.ActionLink("Add a Review", "MakeReview", "Review", null, new { @style = "color:aliceblue;" })
+    <span  type="span" class="btn btn-danger">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+
+        @Html.ActionLink("Add a Review", "MakeReview", "Review", null, new { @style = "color:black; text-algin: center; padding-left:3px;" })
     </span>
     <br />
     @foreach (var a in Model)
@@ -25,6 +27,7 @@
 
             </h6>
                 <h5><span class="label label-primary"> @a.Subject </span></h5>
+                
                 <p>Body: @a.Body </p>
 
 

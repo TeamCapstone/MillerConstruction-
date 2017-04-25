@@ -6,7 +6,8 @@ using CapStoneProject.Repositories;
 using CapStoneProject.Repositories.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,15 +16,19 @@ namespace CapStoneProject.Controllers
     public class AdminController : Controller
     {
         private UserManager<UserIdentity> userManager;
-       /* private IUserValidator<UserIdentity> userValidator;
-        private IPasswordValidator<UserIdentity> passwordValidator;
-        private IPasswordHasher<UserIdentity> passwordHasher;*/
+        private IReviewRepo reviewRepo;
+        private readonly ApplicationDbContext context;
+
+        /* private IUserValidator<UserIdentity> userValidator;
+         private IPasswordValidator<UserIdentity> passwordValidator;
+         private IPasswordHasher<UserIdentity> passwordHasher;*/
 
 
-        public AdminController(UserManager<UserIdentity> usrMgr)
+        public AdminController(UserManager<UserIdentity> usrMgr, IReviewRepo repo, ApplicationDbContext Context)
         {
             userManager = usrMgr;
-
+            reviewRepo = repo;
+            context = Context;
             /*userValidator = userValid;
             passwordValidator = passValid;
             passwordHasher = passwordHash;*/
@@ -113,8 +118,7 @@ namespace CapStoneProject.Controllers
                     else
                     {
                         AddErrorsFromResult(result);
-                    }
-                
+                    }              
             }
             else
             {
@@ -129,6 +133,61 @@ namespace CapStoneProject.Controllers
             {
                 ModelState.AddModelError("", error.Description);
             }
+        }
+
+        //here----------------------------------------------------------------------------------
+        public ActionResult ReviewPanel()
+        {
+           return View(reviewRepo.GetAllReviews().ToList());
+        }
+
+        public IActionResult EditReview(int ReviewID)
+        {
+            ViewBag.ReviewID = ReviewID;
+            return View(reviewRepo.GetAllReviews().FirstOrDefault(m => m.ReviewID == ReviewID));
+
+        }
+
+        [HttpPost]
+        public IActionResult EditReview(Review review)
+        {
+            if (ModelState.IsValid)
+            {
+                reviewRepo.Update(review);
+                TempData["review"] = $"{review.ReviewID} has been saved";
+                return RedirectToAction("ReviewPanel");
+            }
+            else
+            {
+                return View(review);
+            }
+        }
+
+        public IActionResult Comment() => RedirectToAction("Comment", "Review");
+
+        [HttpPost]
+        public IActionResult DeleteReview(int reviewID)
+        {
+            Review deletedMessage = reviewRepo.DeleteReview(reviewID);
+            if (deletedMessage != null)
+            {
+                TempData["review"] = $"{deletedMessage.ReviewID} was deleted";
+            }
+            return RedirectToAction("ReviewPanel");
+        }
+
+        //here
+
+        [HttpPost]
+        public async Task<IActionResult> ReviewPanel(string searchString)
+        {
+            var words = from m in context.Reviews
+                        select m;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                words = words.Where(m => m.Subject.Contains(searchString));
+            }
+            return View(await words.ToListAsync());
         }
     }
 }
