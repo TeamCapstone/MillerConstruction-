@@ -8,9 +8,10 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170425190416_clientUserIssues")]
+    partial class clientUserIssues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -354,11 +355,9 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("Street");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserID");
 
                     b.Property<string>("Zipcode");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Client");
 
@@ -460,13 +459,6 @@ namespace CapStoneProject.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CapStoneProject.Models.Client", b =>
-                {
-                    b.HasOne("CapStoneProject.Models.UserIdentity", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
         }
     }

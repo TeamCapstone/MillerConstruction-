@@ -13,7 +13,7 @@ namespace CapStoneProject.Models
         public BidRequest BidReq { get; set; }
 
         //I am not sure we need a userid here since its in the bidrequest model but just incase
-        public UserIdentity User { get; set; }
+        public Client Client { get; set; }
 
         public string MaterialsDescription { get; set; } //Possible future add on, supply table, with edit, add, delete
 

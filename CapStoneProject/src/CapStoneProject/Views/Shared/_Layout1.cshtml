@@ -20,8 +20,13 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 
+
+
+    <!-- Custom Fonts from Freelancer-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     
 
@@ -40,24 +45,24 @@
              </div>
 
              <div class="collapse navbar-collapse" id="">
-                 <a class="navbar-brand" href="#">
+                 <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                      <img src="~/images/Logo2.jpg" alt="logo" id="logoImg">
                  </a>
              </div>
             <div class="collapse navbar-collapse" id="myNavbar">
              <ul class="nav navbar-nav navbar-right mr-auto" id="navUL">
-                 <li class="nav-item"><a asp-action="Index" asp-controller="Home">Request a Quote</a></li>
-                 <li class="nav-item"><a asp-action="YourVeg" asp-controller="List">Services</a></li>
-                 <li class="nav-item"><a asp-action="Design" asp-controller="Design">About</a></li>
-                 <li class="nav-item"><a asp-action="Design" asp-controller="Design">FAQ</a></li>
-                 <li class="nav-item"><a asp-action="Design" asp-controller="Design">Reviews</a></li>
-                 <li class="nav-item"><a asp-action="Design" asp-controller="Design">Gallery</a></li>
-                 <li class="nav-item"><a asp-action="Login" asp-controller="Login">Login</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="BidRequest">Request a Quote</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="Services">Services</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="About">About</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="FAQ">FAQ</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="Reviews">Reviews</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>
+                 <li class="nav-item"><a asp-action="Index" asp-controller="Auth">Login</a></li>
              </ul>
             </div>
          </nav>
         </div>
-
+    @* nav that toggles the collape but the styling isnt right *@
     @*<nav class="navbar navbar-inverse" id="navDiv">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -112,7 +117,7 @@
                     </div>
                     <div class="col-md-4 footDiv">
                         <h3>Admin Login</h3>
-
+                        <p>Thank you for visiting.</p>
                     </div>
 
                 </div>
