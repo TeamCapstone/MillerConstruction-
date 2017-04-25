@@ -113,7 +113,7 @@ namespace CapStoneProject.Controllers
 
             review.Comments.Add(vmc.Cmmt);
             reviewRepo.Update(review);
-            return RedirectToAction("Reviews", "Review");
+            return RedirectToAction("AllReviews", "Review");
         }
 
         /*[HttpGet]
