@@ -18,12 +18,8 @@ namespace CapStoneProject.Models.ViewModels
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Email is not Valid")]
         public string Email { get; set; }
 
-        [Required]
-        [RegularExpression("^.*(?=.{10,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be ten characters long upper and lower case, digit and special character")]
-<<<<<<< HEAD
-=======
-
->>>>>>> 66adf4fb08027c6121ba0a77f8f52af9b1f2890b
+        //[Required]
+        //[RegularExpression("^.*(?=.{10,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be ten characters long upper and lower case, digit and special character")]
         public string Password { get; set; }
     }
 }

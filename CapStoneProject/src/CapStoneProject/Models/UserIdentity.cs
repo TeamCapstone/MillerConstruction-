@@ -9,10 +9,6 @@ namespace CapStoneProject.Models
 {
     public class UserIdentity : IdentityUser
     {
-<<<<<<< HEAD
-=======
-        public int UserIndentityID { get; set; }
->>>>>>> 66adf4fb08027c6121ba0a77f8f52af9b1f2890b
 
         public string FirstName { get; set; }
 
