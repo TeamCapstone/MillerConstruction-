@@ -9,6 +9,5 @@ namespace CapStoneProject.Repositories.Interfaces
     public interface IClientRepo
     {
         List<Client> GetAllClients();
-        int Create(Client client);
     }
 }

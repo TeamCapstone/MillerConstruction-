@@ -90,11 +90,9 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<string>("State");
-
                     b.Property<string>("Street");
 
-                    b.Property<string>("UserID");
+                    b.Property<int>("UserID");
 
                     b.Property<string>("Zipcode");
 

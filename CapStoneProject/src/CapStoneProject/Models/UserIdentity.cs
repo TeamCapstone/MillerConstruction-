@@ -9,7 +9,7 @@ namespace CapStoneProject.Models
 {
     public class UserIdentity : IdentityUser
     {
-        public int UserIndentityID { get; set; } // Delete??
+        public int UserIndentityID { get; set; }
 
         public string FirstName { get; set; }
 
