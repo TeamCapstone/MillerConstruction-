@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Review>
+@{
+    ViewBag.Title = "All Messages";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <h2>Edit Review</h2>
+    <br />
+    <form asp-controller="Admin" asp-action="ReviewPanel" >
+        <p>
+            <input type="text" name="SearchString">
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+
+    <br />
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th class="text-center">ReviewID</th>
+            <th class="text-center">Review Name</th>
+            <th class="text-center">Subject</th>
+            <th class="text-center">Body</th> 
+            <th class="text-center">Approved?</th>
+            <th class="text-center">Date</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        @foreach (var review in Model)
+        {
+            <tr>
+                <td class="text-left">@review.ReviewID</td>
+                <td class="text-left">@review.From.FirstName</td>
+                <td class="text-left">@review.Subject</td>
+                <td class="text-left">@review.Body</td>
+                <td class="text-left">@review.Approved</td>
+                <td class="text-left">@review.Date</td>
+                <td class="text-center">
+
+                    <form asp-action="DeleteReview" method="post">
+                        <a asp-action="EditReview" class="btn btn-sm btn-warning"
+                           asp-route-ReviewID="@review.ReviewID">
+                            Edit
+                        </a>
+                        <input type="hidden" name="ReviewID" value="@review.ReviewID" />
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                        <span class="label label-success">
+                            <a asp-action="Comment" asp-controller="Review">Comment</a>
+                        </span>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

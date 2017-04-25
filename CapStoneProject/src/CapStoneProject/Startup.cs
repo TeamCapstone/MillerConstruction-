@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Models;
 using CapStoneProject.Repositories;
+using CapStoneProject.Repositories.SeedData;
+using CapStoneProject.Repositories.Interfaces;
 
 namespace CapStoneProject
 {
@@ -38,7 +40,10 @@ namespace CapStoneProject
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<IReviewRepo, ReviewRepo>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
             //services.AddTransient<IBidRequest, BidRequest>();
             //services.AddTransient<IBid, Bid>();
 
@@ -56,6 +61,8 @@ namespace CapStoneProject
 
             ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
             Configuration).Wait();
+
+            AllSeedData.EnsurePopulated(app);
         }
     }
 }

@@ -71,9 +71,9 @@ namespace CapStoneProject.Repositories
             }
             return dbEntry;
         }
-        public IEnumerable<Review> Reviews => new List<Review>
+        /*public IEnumerable<Review> Reviews => new List<Review>
         {
             //a constructor from what I understood.
-        };
+        };*/
     }
 }

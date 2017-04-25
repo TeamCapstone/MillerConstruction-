@@ -5,6 +5,7 @@
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
+    height: 88px;
     color: orangered;
 }
 
@@ -19,7 +20,6 @@
     background-color: black; 
 }
 
-
 #footDiv{
     font-family: 'Bauhaus 93';
     font-size: 160%;
@@ -29,4 +29,7 @@
 
 #footBelow{
     font-size: 50%;
+}
+.txt {
+    color: red;
 }
