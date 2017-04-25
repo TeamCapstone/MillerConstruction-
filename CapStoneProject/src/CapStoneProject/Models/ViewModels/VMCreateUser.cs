@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CapStoneProject.Models.ViewModels
 {
-    public class VMCreateModel
+    public class VMCreateUser
     {
         [Required]
         public string Name { get; set; }

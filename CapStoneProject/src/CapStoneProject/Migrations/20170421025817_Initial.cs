@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CapStoneProject.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,9 +21,8 @@ namespace CapStoneProject.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    State = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
-                    UserID = table.Column<string>(nullable: true),
+                    UserID = table.Column<int>(nullable: false),
                     Zipcode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -34,7 +34,7 @@ namespace CapStoneProject.Controllers
         public ViewResult Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(VMCreateModel model)
+        public async Task<IActionResult> Create(VMCreateUser model)
         {
             if (ModelState.IsValid)
             {
