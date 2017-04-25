@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using CapStoneProject.Models;
 using CapStoneProject.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CapStoneProject.Repositories;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,12 +16,15 @@ namespace CapStoneProject.Controllers
         // GET: /<controller>/
         private UserManager<UserIdentity> userManager;
         private SignInManager<UserIdentity> signInManager;
+        private RoleManager<IdentityRole> roleManager;
+        private UserRepo userRepo;
 
         public AccountController(UserManager<UserIdentity> userMgr,
-                SignInManager<UserIdentity> signinMgr)
+                SignInManager<UserIdentity> signinMgr, RoleManager<IdentityRole> roleMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
+            roleManager = roleMgr;
         }
 
 
@@ -67,6 +72,57 @@ namespace CapStoneProject.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(VMRegister vm)
+        {
+            if (ModelState.IsValid)
+            {
+                UserIdentity user = new UserIdentity
+                {
+                    FirstName = vm.FirstName,
+                    LastName = vm.LastName,
+                    Email = vm.Email,
+
+                };
+
+                UserIdentity userI = new UserIdentity { UserName = vm.Email };
+                IdentityResult result = await userManager.CreateAsync(userI, vm.Password);
+
+                string role = "User";
+
+                if (await roleManager.FindByNameAsync(role) == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                    if (result.Succeeded)
+                    {
+                        userRepo.Create(user);
+                        await userManager.AddToRoleAsync(userI, role);
+                        return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    if (result.Succeeded)
+                    {
+                        userRepo.Create(user);
+                        await userManager.AddToRoleAsync(userI, role);
+                        return RedirectToAction("Login", "Account");
+                    }
+                }
+
+
+            }
+            // We get here either if the model state is invalid or if xreate user fails
+            return View(vm);
         }
     }
 }
