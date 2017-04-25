@@ -13,7 +13,7 @@ namespace CapStoneProject.Models
         public BidRequest BidReq { get; set; }
 
         //I am not sure we need a userid here since its in the bidrequest model but just incase
-        public Client Client { get; set; }
+        public UserIdentity User { get; set; }
 
         public string MaterialsDescription { get; set; } //Possible future add on, supply table, with edit, add, delete
 
@@ -21,7 +21,7 @@ namespace CapStoneProject.Models
 
         public decimal LaborCost { get; set; }
 
-        public decimal TotalEstimate { get; set; }
+        public decimal TotalEstimate { get; set; }// So this is intial amount a customer will back
 
         public string ProjectedTimeFrame { get; set; }
 

@@ -8,8 +8,8 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170425190416_clientUserIssues")]
-    partial class clientUserIssues
+    [Migration("20170425231324_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<int?>("BidRequestID");
 
+                    b.Property<string>("ClientId");
+
                     b.Property<decimal>("LaborCost");
 
                     b.Property<string>("MaterialsDescription");
@@ -36,13 +38,11 @@ namespace CapStoneProject.Migrations
 
                     b.Property<decimal>("TotalEstimate");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("BidID");
 
                     b.HasIndex("BidRequestID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Bids");
                 });
@@ -193,6 +193,10 @@ namespace CapStoneProject.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -203,6 +207,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasAnnotation("MaxLength", 256);
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -212,8 +218,6 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<int>("UserIndentityID");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
@@ -349,13 +353,11 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("CompanyName");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
+                    b.Property<string>("State");
 
                     b.Property<string>("Street");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserIdentityID");
 
                     b.Property<string>("Zipcode");
 
@@ -370,9 +372,9 @@ namespace CapStoneProject.Migrations
                         .WithMany()
                         .HasForeignKey("BidRequestID");
 
-                    b.HasOne("CapStoneProject.Models.UserIdentity", "User")
+                    b.HasOne("CapStoneProject.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("CapStoneProject.Models.BidRequest", b =>

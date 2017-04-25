@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CapStoneProject.Models
 {
-    public class Client 
+    public class Client
     {
         public int ClientID { get; set; }
 
-        public UserIdentity User { get; set; }
+        public string UserIdentityID { get; set; }
+
 
         public string CompanyName { get; set; }
 
@@ -22,12 +23,14 @@ namespace CapStoneProject.Models
 
         public string City { get; set; }
 
+        public string State { get; set; }
+
         public string Zipcode { get; set; }
 
-        //public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        //[Required]
-        //public string Email { get; set; }
+        [Required]
+        public string Email { get; set; }
 
     }
 }
