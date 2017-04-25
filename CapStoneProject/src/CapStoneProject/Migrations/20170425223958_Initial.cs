@@ -17,12 +17,13 @@ namespace CapStoneProject.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     City = table.Column<string>(nullable: true),
                     CompanyName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
-                    UserID = table.Column<int>(nullable: false),
+                    UserID = table.Column<string>(nullable: true),
                     Zipcode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -45,12 +46,12 @@ namespace CapStoneProject.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Password = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserIndentityID = table.Column<int>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>

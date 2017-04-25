@@ -6,6 +6,7 @@ using CapStoneProject.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Repositories;
+using CapStoneProject.Repositories.Interfaces;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,14 +18,18 @@ namespace CapStoneProject.Controllers
         private UserManager<UserIdentity> userManager;
         private SignInManager<UserIdentity> signInManager;
         private RoleManager<IdentityRole> roleManager;
-        private UserRepo userRepo;
+        private IUserRepo userRepo;
+        private IClientRepo clientRepo;
 
         public AccountController(UserManager<UserIdentity> userMgr,
-                SignInManager<UserIdentity> signinMgr, RoleManager<IdentityRole> roleMgr)
+                SignInManager<UserIdentity> signinMgr, RoleManager<IdentityRole> roleMgr,
+                IClientRepo crepo, IUserRepo urepo)
         {
             userManager = userMgr;
             signInManager = signinMgr;
             roleManager = roleMgr;
+            clientRepo = crepo;
+            userRepo = urepo;
         }
 
 
@@ -73,56 +78,43 @@ namespace CapStoneProject.Controllers
         {
             return View();
         }
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        public IActionResult Register()//Creates a Client not a user links to a user
+        {
+            return View(new VMRegister());
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Register(VMRegister vm)
+        public async Task<IActionResult> Register(VMRegister vm)//Creates a client not a user links to a user
         {
             if (ModelState.IsValid)
             {
-                UserIdentity user = new UserIdentity
+                UserIdentity user = new UserIdentity();
+                string name = HttpContext.User.Identity.Name;
+                user = await userManager.FindByNameAsync(name);
+
+                Client client = new Client
                 {
                     FirstName = vm.FirstName,
                     LastName = vm.LastName,
-                    Email = vm.Email,
-
+                    CompanyName = vm.CompanyName,
+                    Street = vm.Street,
+                    City = vm.City,
+                    State = vm.State,
+                    Zipcode = vm.Zipcode,
+                    PhoneNumber = vm.PhoneNumber,
+                    UserID = user.Id,
+                    Email = user.Email
+                    
                 };
 
-                UserIdentity userI = new UserIdentity { UserName = vm.Email };
-                IdentityResult result = await userManager.CreateAsync(userI, vm.Password);
-
-                string role = "User";
-
-                if (await roleManager.FindByNameAsync(role) == null)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                    if (result.Succeeded)
-                    {
-                        userRepo.Create(user);
-                        await userManager.AddToRoleAsync(userI, role);
-                        return RedirectToAction("Login", "Account");
-                    }
-                    else
-                    {
-                        foreach (IdentityError error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                    }
-                }
-                else
-                {
-                    if (result.Succeeded)
-                    {
-                        userRepo.Create(user);
-                        await userManager.AddToRoleAsync(userI, role);
-                        return RedirectToAction("Login", "Account");
-                    }
-                }
-
-
+                clientRepo.Create(client);
+                return RedirectToAction("Login", "Account");
             }
-            // We get here either if the model state is invalid or if xreate user fails
-            return View(vm);
+            else
+            {
+                return View(vm);
+            }
         }
     }
 }

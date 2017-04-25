@@ -8,7 +8,7 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170425172132_Initial")]
+    [Migration("20170425223958_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,8 +82,7 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("CompanyName");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
@@ -91,9 +90,11 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("PhoneNumber");
 
+                    b.Property<string>("State");
+
                     b.Property<string>("Street");
 
-                    b.Property<int>("UserID");
+                    b.Property<string>("UserID");
 
                     b.Property<string>("Zipcode");
 
@@ -229,6 +230,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasAnnotation("MaxLength", 256);
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -238,8 +241,6 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<int>("UserIndentityID");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);

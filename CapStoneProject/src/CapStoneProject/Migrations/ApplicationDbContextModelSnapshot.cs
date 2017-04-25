@@ -81,8 +81,7 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("CompanyName");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
@@ -230,6 +229,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasAnnotation("MaxLength", 256);
 
+                    b.Property<string>("Password");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
@@ -239,8 +240,6 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<int>("UserIndentityID");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);

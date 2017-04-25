@@ -50,9 +50,9 @@ namespace CapStoneProject.Repositories
             return Users.First(u => u.Email == username);
         }
 
-        public UserIdentity GetUser(int id)
+        public UserIdentity GetUserid(string id)
         {
-            return Users.First(u => u.UserIndentityID == id);
+            return Users.First(u => u.Id == id);
         }
     }
 }
