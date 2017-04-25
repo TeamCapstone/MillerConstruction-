@@ -178,14 +178,13 @@ namespace CapStoneProject.Controllers
 
         //here
 
-        [HttpPost]
+       [HttpPost]
         public async Task<IActionResult> ReviewPanel(string searchString)
         {
-            var words = from m in context.Reviews
-                        select m;
+            var words = reviewRepo.GetAllReviews();
             if (!string.IsNullOrEmpty(searchString))
-            {
-                words = words.Where(m => m.Subject.Contains(searchString));
+            { 
+                words = words.Where(m => m.Subject.Contains(searchString) || m.Body.Contains(searchString) || m.From.FirstName.Contains(searchString));
             }
             return View(await words.ToListAsync());
         }
