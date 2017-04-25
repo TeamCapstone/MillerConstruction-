@@ -29,24 +29,35 @@
 <body>
 
 
-    <nav class="navbar" id="navDiv">
+    <nav class="navbar" id="navDiv" role="navigation">
         <div class="container-fluid">
 
-            <div class="collapse navbar-collapse" id="">
                 <a class="navbar-brand" href="">
                     
                     <img src="~/images/Logo2.jpg"  alt="logo" id="logoImg">
                 </a>
-            </div>
-                <ul class="nav navbar-nav navbar-right" id="navUL">
-                    <li class=""><a asp-action="Index" asp-controller="Home">Request a Quote</a></li>
-                    <li class=""><a asp-action="YourVeg" asp-controller="List">Services</a></li>
-                    <li class=""><a asp-action="Design" asp-controller="Design">About</a></li>
-                    <li class=""><a asp-action="Design" asp-controller="Design">FAQ</a></li>
-                    <li class=""><a asp-action="Design" asp-controller="Design">Reviews</a></li>
-                    <li class=""><a asp-action="Design" asp-controller="Design">Gallery</a></li>
-                    <li><a asp-action="Login" asp-controller="Login">Login</a></li>
-                </ul>
+             <div class="collapse navbar-collapse" id="">
+
+                    <ul class="nav navbar-nav navbar-right" id="navUL">
+                        <li class=""><a asp-action="Index" asp-controller="Home">Request a Quote</a></li>
+                        <li class="dropdown open">
+                            <a asp-action="YourVeg" asp-controller="List" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Services<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a id="txt" href="portfolio-1-col.html">1 Column Portfolio</a>
+                                </li>
+                                <li>
+                                    <a id="txt" href="portfolio-2-col.html">2 Column Portfolio</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=""><a asp-action="Design" asp-controller="Design">About</a></li>
+                        <li class=""><a asp-action="Design" asp-controller="Design">FAQ</a></li>
+                        <li class=""><a asp-action="AllReviews" asp-controller="Review">Reviews</a></li>
+                        <li class=""><a asp-action="Design" asp-controller="Design">Gallery</a></li>
+                        <li><a asp-action="Login" asp-controller="Login">Login</a></li>
+                    </ul>
+                </div>
             </div>
     </nav>
 
