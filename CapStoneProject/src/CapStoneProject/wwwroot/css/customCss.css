@@ -2,11 +2,18 @@
     font-family:'Bauhaus 93';
 }
 
+/** {
+  border-radius: 0 !important;
+}*/
+
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
-    height: 88px;
     color: orangered;
+    margin-bottom: 0px;
+    padding: 0px;
+    border-bottom: 0px;
+    border-radius: 0px;
 }
 
 #logoImg{
@@ -20,6 +27,7 @@
     background-color: black; 
 }
 
+
 #footDiv{
     font-family: 'Bauhaus 93';
     font-size: 160%;
@@ -30,6 +38,48 @@
 #footBelow{
     font-size: 50%;
 }
-.txt {
-    color: red;
+
+#myCarousel{
+    margin-top: 0px;
+    padding-top: 0px;
+    background-color: black;    
+}
+
+.carousel img {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 70%;
+    max-height: 400px;
+}
+
+#missionDiv {
+    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    height: 400px;
+    min-width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+#statementDiv{
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.50);
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+#formDiv{
+    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    margin: 0px;
+    width: 100%;
+    height: 600px;
+}
+
+#BRForm{
+       background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.75);  
+    padding: 20px;
+    border-radius: 5px;
 }
