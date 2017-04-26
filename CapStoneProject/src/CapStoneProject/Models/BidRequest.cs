@@ -10,14 +10,11 @@ namespace CapStoneProject.Models
     {
         public int BidRequestID { get; set; }
 
-        [Required]
-        public User User { get; set; }
+
+        public UserIdentity User { get; set; }//need this because we will have 2 forms one for members and other that will become members 
+
 
         public string ProjectDescription { get; set; }
-
-        public string IdealTimeFrame { get; set; }
-
-        public DateTime RequestedStartDate { get; set; }
 
         public string ProjectLocation { get; set; }
 

@@ -8,11 +8,11 @@ namespace CapStoneProject.Repositories.Interfaces
 {
     public interface IUserRepo
     {
-        List<User> GetAllUsers();
+        List<UserIdentity> GetAllUsers();
         List<string> GetAllEmails();
-        IEnumerable<User> Users { get; }
-        User GetUser(int id);
-        User GetUser(string username);
-        int Create(User user);
+        IEnumerable<UserIdentity> Users { get; }
+        UserIdentity GetUserid(string id);
+        UserIdentity GetUser(string username);
+        int Create(UserIdentity user);
     }
 }

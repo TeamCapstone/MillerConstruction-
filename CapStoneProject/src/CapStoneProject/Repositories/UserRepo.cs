@@ -16,37 +16,43 @@ namespace CapStoneProject.Repositories
             context = ctx;
         }
 
-        public IEnumerable<User> Users
+        public IEnumerable<UserIdentity> Users
         {
             get
             {
-                return 
+                return context.Users.ToList();
             }
         }
 
-        public int Create(User user)
+        public int Create(UserIdentity user)
         {
-            throw new NotImplementedException();
+            context.Users.Add(user);
+            return context.SaveChanges();
         }
 
         public List<string> GetAllEmails()
         {
-            throw new NotImplementedException();
+            List<string> email = new List<string>();
+            foreach (UserIdentity u in Users)
+            {            
+                email.Add(u.Email);
+            }
+            return email;
         }
 
-        public List<User> GetAllUsers()
+        public List<UserIdentity> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return Users.ToList(); 
         }
 
-        public User GetUser(string username)
+        public UserIdentity GetUser(string username)
         {
-            throw new NotImplementedException();
+            return Users.First(u => u.Email == username);
         }
 
-        public User GetUser(int id)
+        public UserIdentity GetUserid(string id)
         {
-            throw new NotImplementedException();
+            return Users.First(u => u.Id == id);
         }
     }
 }

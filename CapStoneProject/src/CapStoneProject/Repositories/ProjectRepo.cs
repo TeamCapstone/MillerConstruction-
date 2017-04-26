@@ -17,6 +17,16 @@ namespace CapStoneProject.Repositories
             context = ctx;
         }
 
+        public IEnumerable<Project> GetAllProjects()
+        {
+            return context.Projects;
+        }
+
+        public IEnumerable<Project> GetAllCurrentProjects(string projStatus)
+        {
+            return context.Projects.Where(p => p.ProjectStatus == projStatus);
+        }
+
         public IEnumerable<Project> GetProjectsByClient(int clientID)
         {
             return context.Projects.Where(p => p.Client.ClientID == clientID);
