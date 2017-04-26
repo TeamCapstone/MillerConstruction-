@@ -6,12 +6,13 @@
   border-radius: 0 !important;
 }*/
 
+
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
     color: orangered;
     margin-bottom: 0;
-    padding: 0;
+    padding-bottom: 0;
     border-bottom: 0;
     border-radius: 0;
 }
@@ -27,10 +28,10 @@
     background-color: black; 
 }
 
-#layoutDiv{
-    margin: 0;
-    padding: 0;
-}
+/*#layoutDiv{
+    padding: 0px;
+    margin-top: 0px;
+}*/
 
 #footDiv{
     font-family: 'Bauhaus 93';
@@ -43,6 +44,9 @@
     font-size: 50%;
 }
 
+.navbar { margin-bottom:0px !important; }
+.carousel-caption { margin-top:0px !important }
+
 #myCarousel{
     margin-top: 0;
     padding-top: 0;
@@ -50,6 +54,7 @@
 }
 
 .carousel img {
+    margin-top: 0px;
     margin-left: auto;
     margin-right: auto;
     min-width: 70%;
