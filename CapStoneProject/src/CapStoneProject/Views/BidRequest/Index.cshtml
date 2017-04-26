@@ -2,7 +2,7 @@
 @model CapStoneProject.Models.BidRequest
 @{
     ViewData["Title"] = "Bid Request";
-    Layout = "_Layout1";
+    Layout = "_Layout";
 }
 
 
@@ -17,8 +17,8 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         
-                        <input class="form-control" type="text" asp-for="Client.FirstName" value="Name:" id="clientNameBR">
-                        <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+                        <input class="form-control" type="text" asp-for="User.LastName" value="Name:" id="clientNameBR">
+                        <span asp-validation-for="User.LastName" class="text-danger"></span>
                     </div>
                 </div>
                 <p>
@@ -54,31 +54,31 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" asp-for="Client.City" value="City:" id="clientcityBR">
-                        <span asp-validation-for="Client.City" class="text-danger"></span>
+                        <input class="form-control" type="text" asp-for="ProjectLocation" value="City:" id="clientcityBR">
+                        <span asp-validation-for="ProjectLocation" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <input class="form-control" type="checkbox" asp-for="NewBuild" value="NewBuild:" id="newbuildBR">
+                        <input class="form-control"  asp-for="NewBuild" value="NewBuild:" id="newbuildBR">
                         <span asp-validation-for="NewBuild" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <input class="form-control" type="checkbox" asp-for="Remodel" value="Remodel:" id="newbuildBR">
+                        <input class="form-control"  asp-for="Remodel" value="Remodel:" id="newbuildBR">
                         <span asp-validation-for="Remodel" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <input class="form-control" type="checkbox" asp-for="FrameWork" value="Frame Work:" id="newbuildBR">
+                        <input class="form-control"  asp-for="FrameWork" value="Frame Work:" id="newbuildBR">
                         <span asp-validation-for="FrameWork" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <input class="form-control" type="checkbox" asp-for="Concrete" value="Concrete:" id="newbuildBR">
+                        <input class="form-control"  asp-for="Concrete" value="Concrete:" id="newbuildBR">
                         <span asp-validation-for="Concrete" class="text-danger"></span>
                     </div>
                 </div>

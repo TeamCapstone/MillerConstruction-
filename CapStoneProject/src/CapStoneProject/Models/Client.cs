@@ -12,7 +12,6 @@ namespace CapStoneProject.Models
 
         public string UserIdentityID { get; set; }
 
-
         public string CompanyName { get; set; }
 
         public string FirstName { get; set; }

@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CapStoneProject.Repositories
 {
-    public class ApplicationDbContext : IdentityDbContext<UserIdentity> 
+    public class ApplicationDbContext : IdentityDbContext<UserIdentity>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
