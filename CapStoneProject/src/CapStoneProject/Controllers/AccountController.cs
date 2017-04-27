@@ -103,7 +103,7 @@ namespace CapStoneProject.Controllers
                     State = vm.State,
                     Zipcode = vm.Zipcode,
                     PhoneNumber = vm.PhoneNumber,
-                    UserIdentityID = user.Id,
+                    UserIdentity = user,
                     Email = user.Email
                     
                 };
