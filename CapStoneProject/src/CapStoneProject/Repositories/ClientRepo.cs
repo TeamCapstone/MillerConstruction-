@@ -34,5 +34,25 @@ namespace CapStoneProject.Repositories
             context.Clients.Add(client);
             return context.SaveChanges();
         }
+
+        public Client GetClientById(int id)
+        {
+            return Client.FirstOrDefault(c => c.ClientID == id);
+        }
+
+        public Client GetClientByFirstName(string firstName)
+        {
+            return Client.FirstOrDefault(c => c.FirstName == firstName);
+        }
+
+        public Client GetClientByLastName(string lastName)
+        {
+            return Client.FirstOrDefault(c => c.LastName == lastName);
+        }
+
+        public Client GetClientByEmail(string email)
+        {
+            return Client.FirstOrDefault(c => c.Email == email);
+        }
     }
 }
