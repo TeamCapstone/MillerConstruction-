@@ -23,11 +23,6 @@ namespace CapStoneProject.Repositories.SeedData
 
             if (!context.Reviews.Any() )
             {
-
-                //////////////////////////////////////////////////////////////////////////////////
-                /////////////////////////////////////////////////////////////////////////////////
-                
-
                 UserIdentity user = new UserIdentity
                 {
                     FirstName = "Henry",
@@ -35,11 +30,18 @@ namespace CapStoneProject.Repositories.SeedData
                     Email = "Hello1@gmail.com",
                     Password = "Capstone1!",
                     UserName = "Hello1@gmail.com"
-
                 };
 
-                context.Users.Add(user);
-                
+                string role = "User";
+                IdentityResult result = await userManager.CreateAsync(user, user.Password);
+                if (await roleManager.FindByNameAsync(role) == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, role);
+                    }
+                }
 
                 Review message = new Review
                 {
@@ -58,11 +60,23 @@ namespace CapStoneProject.Repositories.SeedData
                     FirstName = "Sherlock",
                     LastName = "Homes",
                     Email = "bstreet@gmail.com",
-                    //we need to add a password
+                    Password = "Capstone1!",
+                    UserName = "bstreet@gmail.com"
 
                 };
 
-                context.Users.Add(user);
+                
+                IdentityResult result2 = await userManager.CreateAsync(user, user.Password);
+                if (await roleManager.FindByNameAsync(role) == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, role);
+                    }
+                }
+
+               
 
                 message = new Review
                 {
@@ -76,20 +90,8 @@ namespace CapStoneProject.Repositories.SeedData
 
                 context.Add(message);
 
-                foreach (UserIdentity m in context.Users)
-                {
-                    string password = m.Password;
-                    string role = "User";
-                    IdentityResult result = await userManager.CreateAsync(m, password);
-                    if (await roleManager.FindByNameAsync(role) == null)
-                    {
-                        await roleManager.CreateAsync(new IdentityRole(role));
-                        if (result.Succeeded)
-                        {
-                            await userManager.AddToRoleAsync(m, role);
-                        }
-                    }
-                }
+                
+                
 
                 context.SaveChanges();
             }

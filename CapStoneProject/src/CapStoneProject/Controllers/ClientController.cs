@@ -58,7 +58,7 @@ namespace CapStoneProject.Controllers
                 };
 
                 clientRepo.Create(client);
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
