@@ -31,7 +31,7 @@ namespace CapStoneProject.Controllers
         }
 
         [Authorize]
-        public IActionResult Index(string projStatus) //This one is for admin to view currentprojects
+        public ViewResult Index(string projStatus) //This one is for admin to view currentprojects
         {
             return View(projectRepo.GetAllCurrentProjects(projStatus));
         }
