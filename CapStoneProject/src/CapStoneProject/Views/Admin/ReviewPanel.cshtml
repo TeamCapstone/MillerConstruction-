@@ -38,21 +38,25 @@
                 <td class="text-left">@review.Subject</td>
                 <td class="text-left">@review.Body</td>
                 <td class="text-left">@review.Approved</td>
-                <td class="text-left">@review.Date</td>
+                <td class="text-left">@review.Date.ToString("d")</td>
                 <td class="text-center">
 
                     <form asp-action="DeleteReview" method="post">
-                        <a asp-action="EditReview" class="btn btn-sm btn-warning"
-                           asp-route-ReviewID="@review.ReviewID">
-                            Edit
-                        </a>
-                        <input type="hidden" name="ReviewID" value="@review.ReviewID" />
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            Delete
-                        </button>
-                        <span class="label label-success">
-                            <a asp-action="Comment" asp-controller="Review">Comment</a>
-                        </span>
+                        <div class="btn-toolbar">
+                            <a asp-action="EditReview" class="btn btn-sm btn-warning"
+                               asp-route-ReviewID="@review.ReviewID">
+                                Edit
+                            </a>
+                            <input type="hidden" name="ReviewID" value="@review.ReviewID" />
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                            <span class="btn btn-sm btn-success">
+                                @Html.ActionLink("Comment", "Comment", "Review",
+  new { subject = @review.Subject, Id = @review.ReviewID, body = @review.Body }, new { @style = "color:aliceblue;" })
+                            </span>
+                          </div>
+
                     </form>
                 </td>
             </tr>
