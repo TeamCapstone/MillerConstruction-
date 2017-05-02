@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CapStoneProject.Controllers
 {
-    public class BidRequest : Controller
+    public class GalleryController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()

@@ -1,0 +1,134 @@
+﻿@model CapStoneProject.Models.ViewModels.VMBid
+@{
+    ViewData["Title"] = "Bid";
+    Layout = "_Layout";
+}
+
+<div class="container" id="formDiv">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <h3>Request a Quote</h3>
+        <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="BRForm">
+            <input asp-for="BidID" type="hidden" />
+
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <div class="form-group">
+                        <label asp-for="CustomerFirst">Customer Name:</label><br />
+                        <div class="col-lg-6">
+                            <input class="form-control" type="text" asp-for="CustomerFirst" value="" placeholder="First Name:" id="firstB" required>
+                            <span asp-validation-for="CustomerFirst" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <input class="form-control" type="text" asp-for="CustomerLast" value="" placeholder="Last Name:" id="lastB" required>
+                            <span asp-validation-for="CustomerLast" class="text-danger"></span>
+                        </div>   
+                    </div>
+
+                </div>
+               
+                <br />
+                <div class="col-lg-12">
+                    <br />
+                </div>
+                
+                <div class="col-lg-12">
+                    <div class="form-group ">
+                        <label asp-for="ProjectDescription">Project Description:</label><br />
+                        <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-12"></div>
+                <div class="col-lg-12">
+                    <div class="form-group ">
+                        <label asp-for="MaterialsDescription">Materials List:</label><br />
+                        <textarea asp-for="MaterialsDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span asp-validation-for="MaterialsDescription" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-12">
+                    <br />
+                </div>
+
+
+                <div class="row">    
+                    <div class="col-lg-12"></div>      
+                    <div class="col-lg-2"></div>
+                        <div class="form-group">    
+                            <div class="col-lg-4">
+                                <label asp-for="SupplyCost">Material Cost:</label>
+                                <input class="form-control" type="text" asp-for="SupplyCost" id="supplyVM">
+                            </div>                     
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-4">
+                                <label asp-for="ProjectedTimeFrame">Proprosed Time Frame:</label>
+                                <input class="form-control" type="text" asp-for="ProjectedTimeFrame" id="supplyVM">
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="col-lg-12"></div>
+                    <div class="col-lg-2"></div>
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label asp-for="LaborCost">Labor Cost:</label>
+                            <input class="form-control" type="text" asp-for="LaborCost" id="supplyVM">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label asp-for="ProposedStartDate">Proprosed Start Date:</label>
+                            <input class="form-control" type="text" asp-for="ProposedStartDate" id="supplyVM">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12"></div>
+                    <div class="col-lg-4"></div>
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label asp-for="TotalEstimate">Total Estimate:</label>
+                            <input class="form-control" type="text" asp-for="TotalEstimate" id="supplyVM">
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <br />
+
+                </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+
+                    <div class="text-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

@@ -7,7 +7,7 @@ using CapStoneProject.Repositories.Interfaces;
 
 namespace CapStoneProject.Repositories
 {
-    public class BidRepo : IBid
+    public class BidRepo : IBidRepo
     {
         private ApplicationDbContext context;
 
@@ -27,13 +27,20 @@ namespace CapStoneProject.Repositories
         }
 
 
-        //public Bid GetBidByClientName(string name)
-        //{
-        //    return context.Bids.First(n => n.User.Client.LastName == name);
-        //}
+        public Bid GetBidByClientName(string name)
+        {
+            return context.Bids.First(n => n.User.LastName == name);
+        }
 
+        public int Update(Bid bid)
+        {
+            if (bid.BidID == 0)
+                context.Bids.Add(bid);
+            else
+                context.Bids.Update(bid);
 
-
+            return context.SaveChanges();
+        }
 
         public Bid DeleteBR(int id)
         {
