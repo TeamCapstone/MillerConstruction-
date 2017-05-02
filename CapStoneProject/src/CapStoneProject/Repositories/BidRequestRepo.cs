@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CapStoneProject.Models;
+using Microsoft.EntityFrameworkCore;
 using CapStoneProject.Repositories.Interfaces;
+using System;
 
 namespace CapStoneProject.Repositories
 {
-    public class BidRequestRepo : IBidRequest
+    public class BidRequestRepo : IBidRequestRepo
     {
         private ApplicationDbContext context;
 
@@ -18,7 +18,7 @@ namespace CapStoneProject.Repositories
 
         public IQueryable<BidRequest> GetAllBidRequests()
         {
-            return context.BidRequests;
+            return context.BidRequests.Include(r => r.User);
         }
 
         public BidRequest GetBidRequestByUserID(int id)
@@ -26,12 +26,23 @@ namespace CapStoneProject.Repositories
             return context.BidRequests.First(r => r.BidRequestID == id);
         }
 
-        //public BidRequest GetBidRequestByClientName(string name)
-        //{
+        public BidRequest GetBidRequestByClientName(string name)
+        {
 
 
-        //    return context.BidRequests.First(n => n.User.Client.LastName == name);
-      //}
+            return context.BidRequests.First(n => n.User.LastName == name);
+        }
+
+        public int Update(BidRequest req)
+        {
+            if (req.BidRequestID == 0)
+                context.BidRequests.Add(req);
+            else
+                context.BidRequests.Update(req);
+
+            return context.SaveChanges();
+        }
+
 
         public BidRequest DeleteBR(int id)
         {
