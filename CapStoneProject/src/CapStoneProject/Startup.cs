@@ -41,6 +41,8 @@ namespace CapStoneProject
                 opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IReviewRepo, ReviewRepo>();
+            services.AddTransient<IClientRepo, ClientRepo>();
+            services.AddTransient<IUserRepo, UserRepo>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();

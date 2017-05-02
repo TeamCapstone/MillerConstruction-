@@ -8,13 +8,17 @@ using CapStoneProject.Repositories;
 using CapStoneProject.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CapStoneProject.Repositories.SeedData
 {
     public class AllSeedData
     {
-        public static void EnsurePopulated(IApplicationBuilder app)
+        public static async Task EnsurePopulated(IApplicationBuilder app)
         {
+            UserManager<UserIdentity> userManager = app.ApplicationServices.GetRequiredService<UserManager<UserIdentity>>();
+            RoleManager<IdentityRole> roleManager = app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>();
             ApplicationDbContext context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
 
             if (!context.Reviews.Any() )
@@ -22,16 +26,20 @@ namespace CapStoneProject.Repositories.SeedData
 
                 //////////////////////////////////////////////////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////
+                
+
                 UserIdentity user = new UserIdentity
                 {
                     FirstName = "Henry",
                     LastName = "Homes",
                     Email = "Hello1@gmail.com",
-                    //we need to add a password
+                    Password = "Capstone1!",
+                    UserName = "Hello1@gmail.com"
 
                 };
 
                 context.Users.Add(user);
+                
 
                 Review message = new Review
                 {
@@ -67,6 +75,21 @@ namespace CapStoneProject.Repositories.SeedData
                 };
 
                 context.Add(message);
+
+                foreach (UserIdentity m in context.Users)
+                {
+                    string password = m.Password;
+                    string role = "User";
+                    IdentityResult result = await userManager.CreateAsync(m, password);
+                    if (await roleManager.FindByNameAsync(role) == null)
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(m, role);
+                        }
+                    }
+                }
 
                 context.SaveChanges();
             }
