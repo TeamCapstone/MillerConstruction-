@@ -41,5 +41,11 @@ namespace CapStoneProject.Controllers
         {
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
         }
+
+        [Authorize]
+        public IActionResult CreateProject() //for when the admin creates a project
+        {
+            return View();
+        }
     }
 }
