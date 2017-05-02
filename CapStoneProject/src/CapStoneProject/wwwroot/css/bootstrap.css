@@ -4246,6 +4246,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
     margin-left: 0;
     padding-top: 20px;
+    background-color: black;
   }
 }
 .navbar-static-top {
