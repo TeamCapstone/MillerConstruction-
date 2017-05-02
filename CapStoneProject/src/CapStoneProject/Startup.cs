@@ -41,12 +41,13 @@ namespace CapStoneProject
                 opts.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IReviewRepo, ReviewRepo>();
-            services.AddTransient<IBidRequestRepo, BidRequestRepo>();
-            services.AddTransient<IBidRepo, BidRepo>();
+            services.AddTransient<IClientRepo, ClientRepo>();
+            services.AddTransient<IUserRepo, UserRepo>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
-            
+            //services.AddTransient<IBidRequest, BidRequest>();
+            //services.AddTransient<IBid, Bid>();
 
         }
 
