@@ -7,13 +7,15 @@ using CapStoneProject.Models;
 
 namespace CapStoneProject.Repositories.Interfaces
 {
-    public interface IBid
+    public interface IBidRepo
     {
         IQueryable<Bid> GetAllBids();
 
         Bid GetBidByUserID(int id);
 
-        //Bid GetBidByClientName(string lastName);
+        Bid GetBidByClientName(string lastName);
+
+        int Update(Bid req);
 
         Bid DeleteBR(int id);
     }

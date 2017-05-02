@@ -1,0 +1,44 @@
+﻿@model List<BidRequest>
+
+@{ 
+    Layout = "_Layout";
+}
+
+
+<div class="container" id="formDiv">
+    <div class="row" >
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h2>All Current Quote Requests</h2>
+            <table class="table table-striped table-bordered table-condensed">
+                @foreach (var v in Model)
+            {
+                    <tr>
+                        @if (v.User.LastName == null)
+                        {
+                            <td>@v.User.FirstName</td>
+                        }
+                        else
+                        {
+                            <td>@v.User.LastName</td>
+                        }
+                        <td>@v.ProjectDescription</td>
+                        <td>@v.ProjectLocation</td>
+                        <td>
+                            <form asp-action="Delete" method="post" class="">
+                                <input class="" type="hidden" name="BidRequestID" value="@v.BidRequestID" />
+                                <div class="btn-toolbar">
+                                    <button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>
+                                    <a asp-action="Respond" class="btn btn-sm btn-primary pull-right" asp-route-bidrequestId="@v.BidRequestID">Respond</a>
+                                    <a asp-action="View" class="btn btn-sm btn-success pull-right" asp-route-bidrequestId="@v.BidRequestID">View</a>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
