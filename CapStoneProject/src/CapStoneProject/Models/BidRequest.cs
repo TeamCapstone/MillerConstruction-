@@ -18,12 +18,12 @@ namespace CapStoneProject.Models
 
         public string ProjectLocation { get; set; }
 
-        public bool? NewBuild { get; set; }
+        public bool NewBuild { get; set; }
 
-        public bool? Remodel { get; set; }
+        public bool Remodel { get; set; }
 
-        public bool? Concrete { get; set; }
+        public bool Concrete { get; set; }
 
-        public bool? FrameWork { get; set; }
+        public bool FrameWork { get; set; }
     }
 }

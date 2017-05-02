@@ -5,32 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CapStoneProject.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    ClientID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    City = table.Column<string>(nullable: true),
-                    CompanyName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    State = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    UserIdentityID = table.Column<string>(nullable: true),
-                    Zipcode = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.ClientID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -93,12 +71,12 @@ namespace CapStoneProject.Migrations
                 {
                     BidRequestID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Concrete = table.Column<bool>(nullable: true),
-                    FrameWork = table.Column<bool>(nullable: true),
-                    NewBuild = table.Column<bool>(nullable: true),
+                    Concrete = table.Column<bool>(nullable: false),
+                    FrameWork = table.Column<bool>(nullable: false),
+                    NewBuild = table.Column<bool>(nullable: false),
                     ProjectDescription = table.Column<string>(nullable: true),
                     ProjectLocation = table.Column<string>(nullable: true),
-                    Remodel = table.Column<bool>(nullable: true),
+                    Remodel = table.Column<bool>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -107,6 +85,34 @@ namespace CapStoneProject.Migrations
                     table.ForeignKey(
                         name: "FK_BidRequests_AspNetUsers_UserId",
                         column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    City = table.Column<string>(nullable: true),
+                    CompanyName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    UserIdentityId = table.Column<string>(nullable: true),
+                    Zipcode = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientID);
+                    table.ForeignKey(
+                        name: "FK_Clients_AspNetUsers_UserIdentityId",
+                        column: x => x.UserIdentityId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -350,6 +356,11 @@ namespace CapStoneProject.Migrations
                 name: "IX_BidRequests_UserId",
                 table: "BidRequests",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_UserIdentityId",
+                table: "Clients",
+                column: "UserIdentityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ReviewID",

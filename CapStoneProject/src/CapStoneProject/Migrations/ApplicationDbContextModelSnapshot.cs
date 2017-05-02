@@ -51,17 +51,17 @@ namespace CapStoneProject.Migrations
                     b.Property<int>("BidRequestID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool?>("Concrete");
+                    b.Property<bool>("Concrete");
 
-                    b.Property<bool?>("FrameWork");
+                    b.Property<bool>("FrameWork");
 
-                    b.Property<bool?>("NewBuild");
+                    b.Property<bool>("NewBuild");
 
                     b.Property<string>("ProjectDescription");
 
                     b.Property<string>("ProjectLocation");
 
-                    b.Property<bool?>("Remodel");
+                    b.Property<bool>("Remodel");
 
                     b.Property<string>("UserId");
 
@@ -94,11 +94,13 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("Street");
 
-                    b.Property<string>("UserIdentityID");
+                    b.Property<string>("UserIdentityId");
 
                     b.Property<string>("Zipcode");
 
                     b.HasKey("ClientID");
+
+                    b.HasIndex("UserIdentityId");
 
                     b.ToTable("Clients");
                 });
@@ -380,6 +382,13 @@ namespace CapStoneProject.Migrations
                     b.HasOne("CapStoneProject.Models.UserIdentity", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CapStoneProject.Models.Client", b =>
+                {
+                    b.HasOne("CapStoneProject.Models.UserIdentity", "UserIdentity")
+                        .WithMany()
+                        .HasForeignKey("UserIdentityId");
                 });
 
             modelBuilder.Entity("CapStoneProject.Models.Comment", b =>
