@@ -31,7 +31,7 @@ namespace CapStoneProject.Controllers
         }
 
         [Authorize]
-        public IActionResult Index(string projStatus) //This one is for admin to view currentprojects
+        public ViewResult Index(string projStatus) //This one is for admin to view currentprojects
         {
             return View(projectRepo.GetAllCurrentProjects(projStatus));
         }
@@ -40,6 +40,12 @@ namespace CapStoneProject.Controllers
         public IActionResult ClientProjects(int clientID) //This one is for a client to view his/her projects
         {
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
+        }
+
+        [Authorize]
+        public IActionResult CreateProject() //for when the admin creates a project
+        {
+            return View();
         }
     }
 }

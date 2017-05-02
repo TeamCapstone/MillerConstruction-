@@ -1,15 +1,28 @@
 ﻿@* This page will be for Admin to view ongoing projects and info *@
 @model IEnumerable<Project>
 
+@* Think of using a div element to form a border around majority of page *@
+
 <table>
-    @foreach(var p in Model)
-    {
+    <thead>
         <tr>
-            <td>@p.ProjectName</td>
-            <td>@(p.Client.LastName + ", " + p.Client.FirstName) </td>
-            <td>@p.StartDate</td>
-            <td>@p.ProjectStatus</td>
-            <td>@p.StatusDate</td>
+            <th>Project Name</th>
+            <th>Client</th>
+            <th>Start Date</th>
+            <th>Status</th>
+            <th>Last Updated</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProjectName</td>
+                <td>@(p.Client.LastName + ", " + p.Client.FirstName) </td>
+                <td>@p.StartDate</td>
+                <td>@p.ProjectStatus</td>
+                <td>@p.StatusDate</td>
+            </tr>
+        }
+    </tbody>
 </table>
