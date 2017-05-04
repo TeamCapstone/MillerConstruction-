@@ -46,8 +46,9 @@ namespace CapStoneProject
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
-            //services.AddTransient<IBidRequest, BidRequest>();
-            //services.AddTransient<IBid, Bid>();
+            services.AddTransient<IBidRequestRepo, BidRequestRepo>();
+            services.AddTransient<IBidRepo, BidRepo>();
+            services.AddTransient<IProjectRepo, ProjectRepo>();
 
         }
 
@@ -64,7 +65,7 @@ namespace CapStoneProject
             ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
             Configuration).Wait();
 
-            AllSeedData.EnsurePopulated(app);
+            AllSeedData.EnsurePopulated(app).Wait();
         }
     }
 }

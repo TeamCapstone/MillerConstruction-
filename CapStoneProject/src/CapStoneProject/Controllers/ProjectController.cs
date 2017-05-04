@@ -43,8 +43,19 @@ namespace CapStoneProject.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult CreateProject() //for when the admin creates a project
         {
+            var projectVM = new VMCreateProject();
+
+            return View(projectVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProject(VMCreateProject projectVM)
+        {
+            //TODO: Add in code for creating project
+
             return View();
         }
     }

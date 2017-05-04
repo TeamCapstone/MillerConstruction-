@@ -1,26 +1,38 @@
 ﻿@* This page will be for Client to view his/her ongoing projects and info *@
 @model IEnumerable<Project>
+@{ 
+    ViewBag.Title = "Client Page";
+}
 
-@* Think of using a div element to form a border around majority of page *@
+@* Think of using a div element to form a border/frame around majority of page *@
 
-<table>
-    <thead>
-        <tr>
-            <th>Project Name</th>
-            <th>Start Date</th>
-            <th>Status</th>
-            <th>Last Updated</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model)
-        {
+<!--Projects block-->
+<div class="container-fluid">
+    <table class="table-bordered">
+        <thead>
             <tr>
-                <td>@p.ProjectName</td>
-                <td>@p.StartDate</td>
-                <td>@p.ProjectStatus</td>
-                <td>@p.StatusDate</td>
+                <th>Project Name</th>
+                <th>Start Date</th>
+                <th>Status</th>
+                <th>Last Updated</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.ProjectName</td>
+                    <td>@p.StartDate</td>
+                    <td>@p.ProjectStatus</td>
+                    <td>@p.StatusDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!--Invoices block-->
+
+<!--Post Review block-->
+
+<!--Update Information block-->
