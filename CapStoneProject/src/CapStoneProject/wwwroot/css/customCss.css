@@ -14,12 +14,16 @@
   background-color: white;  
 }
 
+#brandDiv{
+    padding-bottom: 50px;
+}
+
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
     color: orangered;
     margin-bottom: 0px;
-    padding: 0px;
+    padding-top: 0px;
     border-bottom: 0px;
     border-radius: 0px;
 }
