@@ -63,7 +63,6 @@ namespace CapStoneProject.Controllers
 
         //User and admin
         [HttpGet]
-        [Route("MakeReview")]
         public ViewResult MakeReview()
         {
             return View();
@@ -76,10 +75,10 @@ namespace CapStoneProject.Controllers
             if (ModelState.IsValid)
             {
                 var review = new Review();
-                UserIdentity user = await UserManager.FindByNameAsync(User.Identity.Name);
+                UserIdentity user = await UserManager.FindByNameAsync(User.Identity.Name);//could be here
                 review.Subject = subject;
                 review.Body = body;
-                review.Approved = true;
+                review.Approved = false;
                 review.Date = DateTime.Now;
                 if (user != null)
                     review.From = user;
@@ -116,17 +115,10 @@ namespace CapStoneProject.Controllers
             return RedirectToAction("AllReviews", "Review");
         }
 
-        /*[HttpGet]
-public IActionResult Search(string search)
-{
-    var words = from m in context.Reviews
-                select m;
-    if (!string.IsNullOrEmpty(search))
-    {
-        words = words.Where(m => m.Subject.Contains(search)).Include(m => m.Body.Contains(search));
-    }
-    return View(words);
-}*/
+        public ViewResult ReviewAfterPost()
+        {
+            return View();
+        }
 
     }
 }

@@ -13,11 +13,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CapStoneProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+       
         private UserManager<UserIdentity> userManager;
         private IReviewRepo reviewRepo;
         private readonly ApplicationDbContext context;
+       
 
         /* private IUserValidator<UserIdentity> userValidator;
          private IPasswordValidator<UserIdentity> passwordValidator;
@@ -142,9 +145,10 @@ namespace CapStoneProject.Controllers
            return View(reviewRepo.GetAllReviews().ToList());
         }
 
-        public IActionResult EditReview(int ReviewID)
+        public ViewResult EditReview(int ReviewID)
         {
             ViewBag.ReviewID = ReviewID;
+           
             return View(reviewRepo.GetAllReviews().FirstOrDefault(m => m.ReviewID == ReviewID));
 
         }
@@ -156,7 +160,7 @@ namespace CapStoneProject.Controllers
             {
                 reviewRepo.Update(review);
                 TempData["review"] = $"{review.ReviewID} has been saved";
-                return RedirectToAction("ReviewPanel");
+                return RedirectToAction("ReviewPanel", "Admin");
             }
             else
             {
