@@ -5,7 +5,7 @@
 
 <h2>Register</h2>
 <div asp-validation-summary="All" class="text-danger"></div>
-<form asp-action="Register" method="post">
+<form asp-controller="Client" asp-action="Create" method="post">
     <p>
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" />
