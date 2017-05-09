@@ -146,3 +146,38 @@
    width: 50px;
    height: 50px;
 }
+#RAP {
+    align-content: center;
+    text-align: center;
+    background: #99badd;
+   
+  
+}
+.square{
+    width:100px;
+    height:100px;
+        align-content: center;
+    text-align: center;
+}
+
+.v{
+    border-left:1px solid #000;
+    border-right:1px solid #000;
+        align-content: center;
+    text-align: center;
+}
+
+.h{
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
+        align-content: center;
+    text-align: center;
+}
+.middle {
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
+    padding-left: 100px;
+    padding-right: 100px;
+        align-content: center;
+    text-align: center;
+}

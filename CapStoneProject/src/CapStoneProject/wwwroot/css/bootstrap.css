@@ -4199,7 +4199,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-collapse {
-    width: auto;
+    width: auto;/*//here*/
     border-top: 0;
     -webkit-box-shadow: none;
             box-shadow: none;
@@ -4392,7 +4392,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-form .form-control {
     display: inline-block;
-    width: auto;
+    width: auto;/*here*/
     vertical-align: middle;
   }
   .navbar-form .form-control-static {
