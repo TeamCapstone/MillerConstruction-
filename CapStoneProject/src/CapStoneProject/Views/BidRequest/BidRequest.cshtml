@@ -1,5 +1,6 @@
 ﻿
 @model CapStoneProject.Models.BidRequest
+
 @{
     ViewData["Title"] = "Bid Request";
     Layout = "_Layout";
@@ -8,8 +9,13 @@
 <div class="container" id="formDiv">
     <div class="col-lg-2"></div>
     <div class="col-lg-8" >
-        <h3>Request a Quote</h3>
-        <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="BRForm">
+       
+        @{
+            Html.RenderPartial("LoginPartial");
+        }
+
+        <h2 id="BRtitle">Request a Quote</h2>
+        <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="interiorDiv">
             <input asp-for="BidRequestID" type="hidden" />
 
             <div class="row">
@@ -109,7 +115,7 @@
 
                     <div class="text-center">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
                 </div>
