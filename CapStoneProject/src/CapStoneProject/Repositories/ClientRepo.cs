@@ -1,5 +1,6 @@
 ﻿using CapStoneProject.Models;
 using CapStoneProject.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace CapStoneProject.Repositories
         {
             get
             {
-                return context.Clients.ToList();
+                return context.Clients.Include(c => c.UserIdentity).ToList();
             }
         }
 
@@ -33,6 +34,24 @@ namespace CapStoneProject.Repositories
         {
             context.Clients.Add(client);
             return context.SaveChanges();
+        }
+
+        public int Update(Client client)
+        {
+            context.Clients.Update(client);
+            return context.SaveChanges();
+        }
+
+        public int Delete(int clientId)
+        {
+
+            Client client = Client.FirstOrDefault(m => m.ClientID == clientId);
+            if (client != null)
+            {
+                context.Clients.Remove(client);
+                return context.SaveChanges();
+            }
+            return clientId;
         }
 
         public Client GetClientById(int id)
@@ -52,7 +71,7 @@ namespace CapStoneProject.Repositories
 
         public Client GetClientByEmail(string email)
         {
-            return Client.FirstOrDefault(c => c.Email == email);
+            return Client.FirstOrDefault(c => c.UserIdentity.Email == email);
         }
     }
 }
