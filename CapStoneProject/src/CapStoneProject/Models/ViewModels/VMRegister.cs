@@ -8,6 +8,8 @@ namespace CapStoneProject.Models.ViewModels
 {
     public class VMRegister
     {
+        public int ClientID { get; set;}
+
         [Required]
         public string FirstName { get; set; }
 
@@ -26,7 +28,7 @@ namespace CapStoneProject.Models.ViewModels
 
         public string Zipcode { get; set; }
 
-        [Required]
+        
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Email is not Valid")]
         public string Email { get; set; }
 
