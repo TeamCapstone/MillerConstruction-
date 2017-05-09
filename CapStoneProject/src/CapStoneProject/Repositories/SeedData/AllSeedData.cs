@@ -49,7 +49,7 @@ namespace CapStoneProject.Repositories.SeedData
                     Body = "it them a bit more time than I though it would be but it was worth the wait!!",
                     From = user,
                     Approved = true,
-                    Date = new DateTime(2006, 8, 22).Date,
+                    Date = new DateTime(2006, 8, 22),
 
                 };
 
@@ -83,7 +83,7 @@ namespace CapStoneProject.Repositories.SeedData
                     Subject = "Hated it!",
                     Body = "it them a bit more time than I though and it was not worth it!!",
                     From = user,
-                    Approved = false,
+                    Approved = true,
                     Date = new DateTime(2007, 8, 22),
 
                 };

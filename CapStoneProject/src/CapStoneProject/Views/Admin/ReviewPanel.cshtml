@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Review>
 @{
-    ViewBag.Title = "All Messages";
+    ViewBag.Title = "All Reviews";
     Layout = "_Layout";
 }
 <!DOCTYPE html>
@@ -38,12 +38,21 @@
                 <td class="text-left">@review.Subject</td>
                 <td class="text-left">@review.Body</td>
                 <td class="text-left">@review.Approved</td>
+                @if (review.Date == null)
+                {
+                    review.Date = DateTime.Now;
                 <td class="text-left">@review.Date.ToString("d")</td>
+                }
+                else
+                {
+                   
+                    <td class="text-left">@review.Date.ToString("d")</td>
+                }
                 <td class="text-center">
 
                     <form asp-action="DeleteReview" method="post">
                         <div class="btn-toolbar">
-                            <a asp-action="EditReview" class="btn btn-sm btn-warning"
+                            <a asp-action="EditReview" asp-controller="Admin" class="btn btn-sm btn-warning"
                                asp-route-ReviewID="@review.ReviewID">
                                 Edit
                             </a>
