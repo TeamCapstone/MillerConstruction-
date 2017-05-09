@@ -73,5 +73,18 @@ namespace CapStoneProject.Repositories
         {
             return Client.FirstOrDefault(c => c.UserIdentity.Email == email);
         }
+
+        public bool ContainsClient(Client client)
+        {
+            Client confirm =
+                (from c in context.Clients where c.ClientID == client.ClientID select c)
+                .FirstOrDefault<Client>();
+
+            if(confirm != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
