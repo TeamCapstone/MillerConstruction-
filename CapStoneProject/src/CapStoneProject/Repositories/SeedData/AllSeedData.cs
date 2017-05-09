@@ -43,6 +43,20 @@ namespace CapStoneProject.Repositories.SeedData
                     }
                 }
 
+                Client client = new Client
+                {
+                    FirstName = "Henry",
+                    LastName = "Homes",
+                    CompanyName = "Murder Company Inc.",
+                    Street = "999 Elm Street",
+                    City = "Eugene",
+                    State = "OR",
+                    Zipcode = "97405",
+                    PhoneNumber = "541-548-9852",
+                    UserIdentity = user
+                };
+                context.Clients.Add(client);
+
                 Review message = new Review
                 {
                     Subject = "Loved it!",
@@ -55,7 +69,7 @@ namespace CapStoneProject.Repositories.SeedData
 
                 context.Add(message);
 
-                user = new UserIdentity
+                UserIdentity user2 = new UserIdentity
                 {
                     FirstName = "Sherlock",
                     LastName = "Homes",
@@ -65,24 +79,38 @@ namespace CapStoneProject.Repositories.SeedData
 
                 };
 
-                
-                IdentityResult result2 = await userManager.CreateAsync(user, user.Password);
+                IdentityResult result2 = await userManager.CreateAsync(user2, user.Password);
                 if (await roleManager.FindByNameAsync(role) == null)
                 {
                     await roleManager.CreateAsync(new IdentityRole(role));
                     if (result.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(user, role);
+                        await userManager.AddToRoleAsync(user2, role);
                     }
                 }
 
-               
+                Client client2 = new Client
+                {
+                    FirstName = "Sherlock",
+                    LastName = "Homes",
+                    CompanyName = "Murder Company Inc.",
+                    Street = "999 Elm Street",
+                    City = "Eugene",
+                    State = "OR",
+                    Zipcode = "97405",
+                    PhoneNumber = "541-548-9852",
+                    UserIdentity = user2
+                };
+
+                context.Clients.Add(client2);
+
+
 
                 message = new Review
                 {
                     Subject = "Hated it!",
                     Body = "it them a bit more time than I though and it was not worth it!!",
-                    From = user,
+                    From = user2,
                     Approved = false,
                     Date = new DateTime(2006, 8, 22),
 

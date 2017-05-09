@@ -10,6 +10,8 @@ namespace CapStoneProject.Repositories.Interfaces
     {
         List<Client> GetAllClients();
         int Create(Client client);
+        int Update(Client client);
+        int Delete(int id);
         Client GetClientById(int id);
         Client GetClientByFirstName(string firstName);
         Client GetClientByLastName(string lastName);

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CapStoneProject.Models.ViewModels;
 using CapStoneProject.Repositories;
 using CapStoneProject.Repositories.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -65,6 +67,65 @@ namespace CapStoneProject.Controllers
                 return View(vm);
             }
         }
+
+        public async Task<IActionResult> ClientInfo()
+        {
+            UserIdentity user = new UserIdentity();
+            string name = HttpContext.User.Identity.Name;
+            user = await userManager.FindByNameAsync(name);
+            Client client = new Models.Client();
+            client = clientRepo.GetClientByEmail(user.Email);
+            return View(client);
+        }
+
+        public IActionResult UserEdit(int id)
+        {
+            Client client = new Client();
+            client = clientRepo.GetClientById(id);
+            return View(client);
+        }
+
+        [HttpPost]
+        public IActionResult UserEdit(Client client)
+        {
+            clientRepo.Update(client);
+            return RedirectToAction("ClientInfo", "Client");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            Client client = new Client();
+            client = clientRepo.GetClientById(id);
+            return View(client);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Client client)
+        {
+            if (ModelState.IsValid)
+            {
+                clientRepo.Update(client);
+                return RedirectToAction("AllClients", "Client");
+            }
+            else
+            {
+                return View(client);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Client client)
+        {
+            int id = client.ClientID;
+            clientRepo.Delete(id);
+            return RedirectToAction("AllClients", "Client");
+        }
+
+        public ViewResult AllClients()
+        {
+            return View(clientRepo.GetAllClients().ToList());
+        }
+
     }
 }
 

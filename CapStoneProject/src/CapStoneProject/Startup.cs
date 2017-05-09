@@ -43,11 +43,12 @@ namespace CapStoneProject
             services.AddTransient<IReviewRepo, ReviewRepo>();
             services.AddTransient<IClientRepo, ClientRepo>();
             services.AddTransient<IUserRepo, UserRepo>();
+            services.AddTransient<IBidRequestRepo, BidRequestRepo>();
+            services.AddTransient<IBidRepo, BidRepo>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
-            //services.AddTransient<IBidRequest, BidRequest>();
-            //services.AddTransient<IBid, Bid>();
+            
 
         }
 
@@ -64,7 +65,8 @@ namespace CapStoneProject
             ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
             Configuration).Wait();
 
-            AllSeedData.EnsurePopulated(app);
+            AllSeedData.EnsurePopulated(app).Wait();
+           
         }
     }
 }
