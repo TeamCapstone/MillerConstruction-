@@ -43,12 +43,18 @@ namespace CapStoneProject
             services.AddTransient<IReviewRepo, ReviewRepo>();
             services.AddTransient<IClientRepo, ClientRepo>();
             services.AddTransient<IUserRepo, UserRepo>();
-            services.AddMvc();
+            services.AddTransient<IBidRequestRepo, BidRequestRepo>();
+            services.AddTransient<IBidRepo, BidRepo>();
             services.AddMemoryCache();
             services.AddSession();
+<<<<<<< HEAD
             services.AddTransient<IBidRequestRepo, BidRequestRepo>();
             services.AddTransient<IBidRepo, BidRepo>();
             services.AddTransient<IProjectRepo, ProjectRepo>();
+=======
+            services.AddMvc();
+
+>>>>>>> master
 
         }
 
@@ -59,13 +65,18 @@ namespace CapStoneProject
             app.UseDeveloperExceptionPage();
             loggerFactory.AddConsole();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
 
             ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
             Configuration).Wait();
 
+<<<<<<< HEAD
             AllSeedData.EnsurePopulated(app).Wait();
+=======
+             AllSeedData.EnsurePopulated(app).Wait();
+>>>>>>> master
         }
     }
 }

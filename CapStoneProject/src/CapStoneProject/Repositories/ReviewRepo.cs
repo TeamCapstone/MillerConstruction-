@@ -10,7 +10,7 @@ namespace CapStoneProject.Repositories
     public class ReviewRepo : IReviewRepo
     {
         private ApplicationDbContext context;
-        private UserIdentity user;
+        //private UserIdentity user;
         public ReviewRepo(ApplicationDbContext ctx)//going to take a instants of context
         {
             context = ctx;
@@ -44,19 +44,20 @@ namespace CapStoneProject.Repositories
 
         public int Update(Review review)
         {
-            if (review.Approved == true)
-            {
+            //if (review.Approved == true)
+            //{
                 if (review.ReviewID == 0)
                     context.Reviews.Add(review);
+                   
                 else
                     context.Reviews.Update(review);
 
                 return context.SaveChanges();
-            }
-            else
-            {
-                return review.ReviewID;
-            }
+            //}
+            //else
+            //{
+            //    return review.ReviewID;
+            //}
         }
 
         public Review DeleteReview(int reviewID)

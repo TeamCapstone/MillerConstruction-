@@ -43,8 +43,7 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(VMLoginModel details,
-                string returnUrl)
+        public async Task<IActionResult> Login(VMLoginModel details, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +64,35 @@ namespace CapStoneProject.Controllers
             }
             return View(details);
         }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BRLogin(VMLogin vm)
+        {
+
+            if (ModelState.IsValid)
+            {
+                UserIdentity user = await userManager.FindByNameAsync(vm.UserName);
+                if (user != null)
+                {
+                    await signInManager.SignOutAsync();
+                    Microsoft.AspNetCore.Identity.SignInResult result =
+                            await signInManager.PasswordSignInAsync(
+                                user, vm.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("LoggedInBidRequest", "BidRequest");
+                    }
+                }
+                ModelState.AddModelError(nameof(VMLogin.UserName),
+                    "Invalid user or password");
+            }
+            return View(vm);
+
+        }
+
 
         [Authorize]
         public async Task<IActionResult> Logout()
