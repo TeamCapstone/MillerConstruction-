@@ -43,8 +43,43 @@ namespace CapStoneProject.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public IActionResult CreateProject() //for when the admin creates a project
         {
+            var projectVM = new VMCreateProject();
+
+            return View(projectVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProject(VMCreateProject projectVM)
+        {
+            //find user in db by email
+            UserIdentity user = await userManager.FindByEmailAsync(projectVM.Email);
+            //if user is found
+            if (user != null)
+            {
+                //if model requirements fulfilled
+                if (ModelState.IsValid)
+                {
+                    //finds user in Clients based on Identity
+
+                    //TODO: Fill in Client
+                    Project project = new Project {
+                        ProjectName = projectVM.ProjectName,
+                        StartDate = projectVM.StartDate, OriginalEstimate = projectVM.Estimate};
+                }
+                else
+                {
+                    //if model not valid
+                }
+            }
+            else
+            {
+                //if user not found
+            }
+            
+
             return View();
         }
     }
