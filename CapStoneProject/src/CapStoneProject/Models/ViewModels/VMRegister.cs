@@ -35,5 +35,7 @@ namespace CapStoneProject.Models.ViewModels
         //[Required]
         //[RegularExpression("^.*(?=.{10,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must be ten characters long upper and lower case, digit and special character")]
         public string Password { get; set; }
+
+  
     }
 }

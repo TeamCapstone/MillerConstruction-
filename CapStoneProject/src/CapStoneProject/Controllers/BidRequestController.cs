@@ -65,6 +65,7 @@ namespace CapStoneProject.Controllers
             }
             return View(bidreq);
         }
+        
 
         [HttpGet]
         public IActionResult Bid()
@@ -100,10 +101,13 @@ namespace CapStoneProject.Controllers
             return View(bidReqRepo.GetAllBidRequests().ToList());
         }
 
-        public ActionResult ModalAction(int id)
-        {
-            ViewBag.Id = id;
-            return PartialView("LoginModal");
-        }
+        //public ActionResult ModalAction(int id)
+        //{
+        //    ViewBag.Id = id;
+        //    return PartialView("LoginModal");
+        //}
+
+
+        
     }
 }

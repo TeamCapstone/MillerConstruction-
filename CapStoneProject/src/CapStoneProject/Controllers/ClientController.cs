@@ -12,6 +12,9 @@ using CapStoneProject.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 
+
+
+
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CapStoneProject.Controllers
@@ -33,6 +36,7 @@ namespace CapStoneProject.Controllers
 
         public IActionResult Create()
         {
+         
             return View(new VMRegister());
         }
 
