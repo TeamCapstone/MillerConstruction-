@@ -50,6 +50,7 @@ namespace CapStoneProject
             services.AddSession();
             services.AddMvc();
 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,7 +66,6 @@ namespace CapStoneProject
 
             ApplicationDbContext.CreateAdminAccount(app.ApplicationServices,
             Configuration).Wait();
-
 
             AllSeedData.EnsurePopulated(app).Wait();
         }

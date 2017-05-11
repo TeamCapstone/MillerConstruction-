@@ -56,7 +56,11 @@ namespace CapStoneProject.Controllers
                                 user, details.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        if (await userManager.IsInRoleAsync(user, "Admin"))
+                            return RedirectToAction("AdminPage", "Admin");                     
+                        else
+                            return RedirectToAction("UserPage", "User");
+
                     }
                 }
                 ModelState.AddModelError(nameof(VMLoginModel.Email),
@@ -65,16 +69,20 @@ namespace CapStoneProject.Controllers
             return View(details);
         }
 
+        [AllowAnonymous]
+        public IActionResult BRLogin()
+        {
+            return View();
+        }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BRLogin(VMLogin vm)
+        public async Task<IActionResult> BRLogin(VMLoginModel vm)
         {
-
             if (ModelState.IsValid)
             {
-                UserIdentity user = await userManager.FindByNameAsync(vm.UserName);
+                UserIdentity user = await userManager.FindByEmailAsync(vm.Email);
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();
@@ -86,12 +94,12 @@ namespace CapStoneProject.Controllers
                         return RedirectToAction("LoggedInBidRequest", "BidRequest");
                     }
                 }
-                ModelState.AddModelError(nameof(VMLogin.UserName),
+                ModelState.AddModelError(nameof(VMLoginModel.Email),
                     "Invalid user or password");
             }
             return View(vm);
 
-        }
+         }
 
 
         [Authorize]
