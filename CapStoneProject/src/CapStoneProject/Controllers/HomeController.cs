@@ -27,7 +27,7 @@ namespace CapStoneProject.Controllers
                 ["User"] = HttpContext.User.Identity.Name,
                 ["Authenticated"] = HttpContext.User.Identity.IsAuthenticated,
                 ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
-                ["In Users Role"] = HttpContext.User.IsInRole("Users")
+                ["In Users Role"] = HttpContext.User.IsInRole("User")
             };
     }
 }
