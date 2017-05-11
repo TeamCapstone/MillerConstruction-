@@ -67,7 +67,13 @@
 
 
 #layoutDiv{
-    
+     background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    font-family: Arial;
+    margin: 0px;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    min-height: 500px;
 }
 
 #missionDiv {
