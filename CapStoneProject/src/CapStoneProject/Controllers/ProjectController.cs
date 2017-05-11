@@ -18,14 +18,16 @@ namespace CapStoneProject.Controllers
     {
         private readonly ApplicationDbContext context;
         private IProjectRepo projectRepo;
+        private IClientRepo clientRepo;
         private UserManager<UserIdentity> userManager;
         private SignInManager<UserIdentity> signInManager;
 
-        public ProjectController(ApplicationDbContext ctx, IProjectRepo projRepo, 
+        public ProjectController(ApplicationDbContext ctx, IProjectRepo projRepo, IClientRepo cliRepo, 
             UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> signInMgr)
         {
             context = ctx;
             projectRepo = projRepo;
+            clientRepo = cliRepo;
             userManager = usrMgr;
             signInManager = signInMgr;
         }
@@ -63,11 +65,25 @@ namespace CapStoneProject.Controllers
                 if (ModelState.IsValid)
                 {
                     //finds user in Clients based on Identity
+                    Client client = clientRepo.GetClientByEmail(projectVM.Email);
 
-                    //TODO: Fill in Client
-                    Project project = new Project {
-                        ProjectName = projectVM.ProjectName,
-                        StartDate = projectVM.StartDate, OriginalEstimate = projectVM.Estimate};
+                    if (client != null)
+                    {
+                        //if client is found
+                        //create project
+                        Project project = new Project
+                        {
+                            Client = client, ProjectName = projectVM.ProjectName,
+                            StartDate = projectVM.StartDate, OriginalEstimate = projectVM.Estimate
+                        };
+
+                        //if clientRepo contains client clientrepo.containsclient
+
+                    }
+                    else
+                    {
+                        //if client not found
+                    }
                 }
                 else
                 {
