@@ -28,6 +28,7 @@
                     <form asp-action="Delete" asp-route-id=@c.ClientID method="post">
                         <a class="btn btn-sm btn-primary" asp-action="Edit"
                            asp-route-id=@c.ClientID>Edit</a>
+                        <input type="hidden" name="ClientID" value="@c.ClientID" />
                         <button type="submit"
                                 class="btn btn-sm btn-danger">
                             Delete
