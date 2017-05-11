@@ -2,18 +2,19 @@
 @{ 
     ViewBag.Title = "Create Project";
 }
-<!--Need to pass in bid object-->
+
 <h1 class="text-center">Create New Project:</h1>
 <form asp-controller="Project" asp-action="CreateProject" method="post">
-    <div class="form-group">
-        <h3>Client Last Name</h3>
-        <div><span asp-validation-for="LastName" class="text-danger"></span></div>
-        <input asp-for="LastName" class="form-control"/><br />
-    </div>
+    <!--Need to pass in bid object-->
     <div class="form-group">
         <h3>Client E-mail</h3>
         <div><span asp-validation-for="Email" class="text-danger"></span></div>
         <input asp-for="Email" class="form-control" /><br />
+    </div>
+    <div class="form-group">
+        <h3>Client Last Name</h3>
+        <div><span asp-validation-for="LastName" class="text-danger"></span></div>
+        <input asp-for="LastName" class="form-control"/><br />
     </div>
     <div class="form-group">
         <h3>Project Name</h3>
