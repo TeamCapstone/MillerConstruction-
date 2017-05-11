@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CapStoneProject.Models.ViewModels;
 using CapStoneProject.Models;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,6 +19,7 @@ namespace CapStoneProject.Controllers
     {
        
         private UserManager<UserIdentity> userManager;
+        private RoleManager<IdentityRole> roleManager;
         private IReviewRepo reviewRepo;
         private readonly ApplicationDbContext context;
        
@@ -27,9 +29,10 @@ namespace CapStoneProject.Controllers
          private IPasswordHasher<UserIdentity> passwordHasher;*/
 
 
-        public AdminController(UserManager<UserIdentity> usrMgr, IReviewRepo repo, ApplicationDbContext Context)
+        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, IReviewRepo repo, ApplicationDbContext Context)
         {
             userManager = usrMgr;
+            roleManager = roleMgr;
             reviewRepo = repo;
             context = Context;
             /*userValidator = userValid;
@@ -51,22 +54,39 @@ namespace CapStoneProject.Controllers
                     UserName = model.Name,
                     Email = model.Email
                 };
-                IdentityResult result
-                    = await userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                IdentityResult result = await userManager.CreateAsync(user, model.Password);
+
+                string role = "User";
+
+                if (await roleManager.FindByNameAsync(role) == null)
                 {
-                    return RedirectToAction("Index");
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                    if (result.Succeeded)
+                    {                       
+                        await userManager.AddToRoleAsync(user, role);
+                        return RedirectToAction("User", "UserPage");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
                 }
                 else
                 {
-                    foreach (IdentityError error in result.Errors)
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", error.Description);
+                        await userManager.AddToRoleAsync(user, role);
+                        return RedirectToAction("User", "UserPage");
                     }
                 }
             }
+           
             return View(model);
+         
         }
 
         [HttpPost]
@@ -192,6 +212,11 @@ namespace CapStoneProject.Controllers
                 words = words.Where(m => m.Subject.Contains(searchString) || m.Body.Contains(searchString) || m.From.FirstName.Contains(searchString));
             }
             return View(await words.ToListAsync());
+        }
+
+        public ViewResult AdminPage()
+        {
+            return View();
         }
     }
 }

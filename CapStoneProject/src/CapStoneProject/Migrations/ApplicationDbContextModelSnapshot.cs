@@ -81,8 +81,7 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("CompanyName");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
