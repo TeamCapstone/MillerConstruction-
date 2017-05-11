@@ -14,12 +14,16 @@
   background-color: white;  
 }
 
+#brandDiv{
+    padding-bottom: 50px;
+}
+
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
     color: orangered;
     margin-bottom: 0px;
-    padding: 0px;
+    padding-top: 0px;
     border-bottom: 0px;
     border-radius: 0px;
 }
@@ -63,7 +67,13 @@
 
 
 #layoutDiv{
-    
+     background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    font-family: Arial;
+    margin: 0px;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    min-height: 500px;
 }
 
 #missionDiv {

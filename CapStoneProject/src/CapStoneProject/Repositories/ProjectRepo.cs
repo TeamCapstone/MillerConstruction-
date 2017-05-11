@@ -44,5 +44,15 @@ namespace CapStoneProject.Repositories
             return context.Projects.Where(p => p.Client.ClientID == clientID
             && p.ProjectStatus != "Completed");
         }
+
+        public int ProjectUpdate(Project project)
+        {
+            if (project.ProjectID == 0)
+                context.Projects.Add(project);
+            else
+                context.Projects.Update(project);
+
+            return context.SaveChanges();
+        }
     }
 }

@@ -16,7 +16,6 @@ namespace CapStoneProject.Controllers
     public class RoleAdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
-
         private UserManager<UserIdentity> userManager;
 
         public RoleAdminController(RoleManager<IdentityRole> roleMgr,
@@ -35,8 +34,7 @@ namespace CapStoneProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result
-                    = await roleManager.CreateAsync(new IdentityRole(name));
+                IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");

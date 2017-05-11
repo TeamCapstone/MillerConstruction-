@@ -16,7 +16,7 @@ namespace CapStoneProject.Repositories.Interfaces
         Client GetClientByFirstName(string firstName);
         Client GetClientByLastName(string lastName);
         Client GetClientByEmail(string email);
-        
+        bool ContainsClient(Client client);
 
     }
 }
