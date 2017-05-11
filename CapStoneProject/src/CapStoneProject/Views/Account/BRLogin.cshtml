@@ -1,5 +1,6 @@
-﻿@model VMLogin
+﻿@model VMLoginModel
 @{
+    Layout = "_Layout2";
 }
 
 <div class="row" id="brloginFrm">
@@ -7,7 +8,7 @@
         <h4>If you have already created an account with us, please sign in, otherwise proceed with the form below.</h4>
         <div class="col-md-5">
             <div class="form-group">
-                <input asp-for="UserName" class="form-control" placeholder="Email:" required />
+                <input asp-for="Email" class="form-control" placeholder="Email:" required />
             </div>
         </div>
         <div class="col-md-5">
@@ -19,4 +20,5 @@
             <button class="btn btn-success" type="submit">Log In</button>
         </div>
     </form>
+    <p>Otherwise please click <a href="@Url.Action("BidRequest", "BidRequest")">here</a></p>
 </div>
