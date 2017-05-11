@@ -56,7 +56,11 @@ namespace CapStoneProject.Controllers
                                 user, details.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        if (await userManager.IsInRoleAsync(user, "Admin"))
+                            return RedirectToAction("AdminPage", "Admin");                     
+                        else
+                            return RedirectToAction("UserPage", "User");
+
                     }
                 }
                 ModelState.AddModelError(nameof(VMLoginModel.Email),

@@ -82,10 +82,16 @@ namespace CapStoneProject.Controllers
             return View(client);
         }
 
-        public IActionResult UserEdit(int id)
+        public async Task<IActionResult> UserEdit(int id)
         {
+            UserIdentity user = new UserIdentity();
+            string name = HttpContext.User.Identity.Name;
+            user = await userManager.FindByNameAsync(name);
             Client client = new Client();
-            client = clientRepo.GetClientById(id);
+            client = clientRepo.GetClientByEmail(user.Email);
+            if (client == null)
+                return RedirectToAction("Create", "Client");
+            else
             return View(client);
         }
 

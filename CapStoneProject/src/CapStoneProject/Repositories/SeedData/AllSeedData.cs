@@ -42,6 +42,13 @@ namespace CapStoneProject.Repositories.SeedData
                         await userManager.AddToRoleAsync(user, role);
                     }
                 }
+                else
+                {
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user, role);
+                    }
+                }
 
                 Client client = new Client
                 {
@@ -83,6 +90,13 @@ namespace CapStoneProject.Repositories.SeedData
                 if (await roleManager.FindByNameAsync(role) == null)
                 {
                     await roleManager.CreateAsync(new IdentityRole(role));
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user2, role);
+                    }
+                }
+                else
+                {
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(user2, role);
