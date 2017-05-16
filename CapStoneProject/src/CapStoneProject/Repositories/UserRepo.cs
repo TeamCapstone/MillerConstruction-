@@ -30,6 +30,12 @@ namespace CapStoneProject.Repositories
             return context.SaveChanges();
         }
 
+        public int Edit(UserIdentity user)
+        {
+            context.Users.Update(user);
+            return context.SaveChanges();
+        }
+
         public List<string> GetAllEmails()
         {
             List<string> email = new List<string>();

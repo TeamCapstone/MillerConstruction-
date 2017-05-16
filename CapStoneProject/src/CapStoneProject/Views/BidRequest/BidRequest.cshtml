@@ -3,8 +3,37 @@
 
 @{
     ViewData["Title"] = "Bid Request";
-    Layout = "_Layout";
+    Layout = "_Layout2";
 }
+
+<script>
+    $(document).ready(function () {
+        $("#interiorDiv").on("submit", function (event) {
+
+            var matched,
+                password = $("#brPass1").val(),
+                confirm = $("#brPass2").val();
+
+            matched = (password == confirm && password != "") ? true : false;
+            if(matched) {
+                //Producton
+                $("#interiorDiv").submit();
+
+                //Testing
+                //$("#responseDiv").html("Passwords Match");
+                //return false;
+            }
+            else {
+                $("#responseDiv").html("Passwords don't match.");
+
+                return false;
+            }
+        });
+
+
+    })
+</script>
+
 
 <div class="container" id="formDiv">
     <div class="col-lg-2"></div>
@@ -12,6 +41,7 @@
 
         <h2 id="BRtitle">Request a Quote</h2>
         <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="interiorDiv">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <input asp-for="BidRequestID" type="hidden" />
 
             <div class="row">
@@ -23,7 +53,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" asp-for="User.LastName" value="" placeholder="Last Name:" id="clientNameBR" required>
+                        <input class="form-control" type="text" asp-for="User.LastName" value=""  placeholder="Last Name:" id="clientNameBR" required>
                         <span asp-validation-for="User.LastName" class="text-danger"></span>
                     </div>
                 </div>
@@ -46,14 +76,15 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <input class="form-control" type="password" asp-for="User.Password" value="" placeholder="Password:" id="clientEmailBR1"  required>
+                            <input class="form-control" type="password" asp-for="User.Password" value="" placeholder="Password:" id="brPass1"  required>
                             <span asp-validation-for="User.Password" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <input class="form-control" type="password" asp-for="User.Password" value="" placeholder="Retype your passwor:" id="clientEmailBR2"  required>
-                            <span asp-validation-for="User.Password" class="text-danger"></span>
+                            <input class="form-control" type="password" asp-for="User.Password" value="" placeholder="Retype your passwor:" id="brPass2"  required>
+                            <span asp-validation-for="User.Password" class="text-danger" id="responseDiv"></span>
+                           
                         </div>
                     </div>
               
@@ -111,7 +142,7 @@
 
                     <div class="text-center">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -119,9 +150,11 @@
             </div>
 
         </form>
+        
     </div>
     <div class="col-lg-2"></div>
 </div>
+
 
 
 

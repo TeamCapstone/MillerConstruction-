@@ -23,12 +23,15 @@ namespace CapStoneProject.Controllers
     public class BidRequestController : Controller
     {
         private IBidRequestRepo bidReqRepo;
+        private IBidRepo bidRepo;
         protected UserManager<UserIdentity> UserManager;
         private CancellationToken taskCancellationToken;
 
-        public BidRequestController(UserManager<UserIdentity> userMgr, IBidRequestRepo repo)
+
+        public BidRequestController(UserManager<UserIdentity> userMgr, IBidRequestRepo repo, IBidRepo bRepo)
         {
             bidReqRepo = repo;
+            bidRepo = bRepo;
             UserManager = userMgr;
 
         }
@@ -42,6 +45,7 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public async Task<IActionResult> BidRequest(BidRequest bidreq)
         {
+            //TODO: check to see if email is alread in the database
             if (ModelState.IsValid)
             {
 
@@ -108,13 +112,24 @@ namespace CapStoneProject.Controllers
             }
             return View(bidreq);
         }
-        
+
+
+        //[HttpGet]
+        //public ViewResult Bid(int brID) => View(bidReqRepo.GetAllBidRequests()
+        //    .FirstOrDefault(r => r.BidRequestID == brID));
 
         [HttpGet]
-        public IActionResult Bid()
+        public ViewResult Bid(int brID) => View(bidRepo.GetAllBids()
+            .FirstOrDefault(r => r.BidReq.BidRequestID == brID));
+
+        [HttpPost]
+        public ViewResult Bid(Bid bid)
         {
-            return View();
+            bidRepo.Update(bid);
+            return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());
         }
+
+      
 
         [HttpGet]
         public IActionResult Success()
@@ -131,6 +146,9 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public IActionResult LoggedInBidRequest(BidRequest bidreq)
         {
+            //get the user
+            var userID = UserManager.GetUserId(HttpContext.User);
+
             if (ModelState.IsValid)
             {
                 bidReqRepo.Update(bidreq);
@@ -143,13 +161,6 @@ namespace CapStoneProject.Controllers
         {
             return View(bidReqRepo.GetAllBidRequests().ToList());
         }
-
-        //public ActionResult ModalAction(int id)
-        //{
-        //    ViewBag.Id = id;
-        //    return PartialView("LoginModal");
-        //}
-
 
         
     }

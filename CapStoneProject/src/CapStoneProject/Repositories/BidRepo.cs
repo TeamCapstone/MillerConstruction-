@@ -15,6 +15,7 @@ namespace CapStoneProject.Repositories
         {
             context = ctx;
         }
+      
 
         public IQueryable<Bid> GetAllBids()
         {

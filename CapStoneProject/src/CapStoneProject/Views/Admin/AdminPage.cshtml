@@ -1,1 +1,13 @@
-﻿<h1> @Html.ActionLink("List of Clients", "AllClients", "Client")</h1>
+﻿
+@if (User.Identity.Name == null)
+{
+    <div class="text-center" id="greeting">Welcome Guest!</div>
+            <br />
+}
+else
+{
+    <div class="text-center" id="greeting">Welcome @User.Identity.Name!</div>
+            <br />
+}
+
+<h1> @Html.ActionLink("List of Clients", "AllClients", "Client")</h1>

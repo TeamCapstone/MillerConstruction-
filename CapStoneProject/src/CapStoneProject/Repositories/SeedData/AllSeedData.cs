@@ -33,22 +33,11 @@ namespace CapStoneProject.Repositories.SeedData
                 };
 
                 string role = "User";
+                await roleManager.CreateAsync(new IdentityRole(role));
                 IdentityResult result = await userManager.CreateAsync(user, user.Password);
-                if (await roleManager.FindByNameAsync(role) == null)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                    if (result.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user, role);
-                    }
-                }
-                else
-                {
-                    if (result.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user, role);
-                    }
-                }
+                await userManager.AddToRoleAsync(user, role);
+
+                
 
                 Client client = new Client
                 {
@@ -86,22 +75,24 @@ namespace CapStoneProject.Repositories.SeedData
 
                 };
 
-                IdentityResult result2 = await userManager.CreateAsync(user2, user.Password);
-                if (await roleManager.FindByNameAsync(role) == null)
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                    if (result.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user2, role);
-                    }
-                }
-                else
-                {
-                    if (result.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user2, role);
-                    }
-                }
+                IdentityResult result2 = await userManager.CreateAsync(user2, user2.Password);
+                await userManager.AddToRoleAsync(user2, role);
+                //if (await roleManager.FindByNameAsync(role) == null)
+                //{
+                    
+                //    if (result2.Succeeded)
+                //    {
+                //        await userManager.AddToRoleAsync(user2, role);
+                //    }
+                //}
+                //else
+                //{
+                //    await roleManager.CreateAsync(new IdentityRole(role));
+                //    if (result2.Succeeded)
+                //    {
+                //        await userManager.AddToRoleAsync(user2, role);
+                //    }
+                //}
 
                 Client client2 = new Client
                 {
@@ -118,7 +109,34 @@ namespace CapStoneProject.Repositories.SeedData
 
                 context.Clients.Add(client2);
 
+                UserIdentity user3 = new UserIdentity
+                {
+                    FirstName = "John",
+                    LastName = "Doe",
+                    Email = "john@gmail.com",
+                    Password = "Capstone1!",
+                    UserName = "john@gmail.com"
 
+                };
+
+                IdentityResult result3 = await userManager.CreateAsync(user3, user3.Password);
+                await userManager.AddToRoleAsync(user3, role);
+                //if (await roleManager.FindByNameAsync(role) == null)
+                //{
+                //    await roleManager.CreateAsync(new IdentityRole(role));
+                //    if (result.Succeeded)
+                //    {
+                //        await userManager.AddToRoleAsync(user2, role);
+                //    }
+                //}
+                //else
+                //{
+                //    await roleManager.CreateAsync(new IdentityRole(role));
+                //    if (result3.Succeeded)
+                //    {
+                //        await userManager.AddToRoleAsync(user2, role);
+                //    }
+                //}
 
                 message = new Review
                 {
