@@ -48,9 +48,11 @@ namespace CapStoneProject.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult CreateProject() //for when the admin creates a project
+        public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
         {
             var projectVM = new VMCreateProject();
+            projectVM.BidID = bidID;
+            projectVM.ClientID = clientID;
 
             return View(projectVM);
         }
@@ -67,14 +69,14 @@ namespace CapStoneProject.Controllers
                 //if user is found
 
                 //finds user in Clients based on Email from user
-                Client client = clientRepo.GetClientByEmail(user.Email);
+                Client client = clientRepo.GetClientById(projectVM.ClientID);
 
                 if (clientRepo.ContainsClient(client) == true) //(user != null && client != null)
                 {
                     //if client is entered and found
 
                     //searches for open bid for given client
-                    Bid bid = bidrepo.GetBidByUserID(client.ClientID);
+                    Bid bid = bidrepo.GetBidByClientName(projectVM.LastName);
                     
                     if(bid != null)
                     {
@@ -85,7 +87,7 @@ namespace CapStoneProject.Controllers
                             ProjectName = projectVM.ProjectName,
                             StartDate = projectVM.StartDate,
                             OriginalEstimate = projectVM.Estimate,
-                            Bid = bid
+                            Bid = bidrepo.GetBidByClientName(projectVM.LastName)
                         };
 
                         projectRepo.ProjectUpdate(project);
@@ -109,6 +111,18 @@ namespace CapStoneProject.Controllers
                 //if model not valid
                 ModelState.AddModelError("Email", "Please make sure all fields are filled");
             }
+
+            return View(projectVM);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult EditProject(int projectID) //for when the admin edits a project
+        {
+            var project = new Project(); //TODO: create repo method to search by id
+            var projectVM = new VMCreateProject();
+            projectVM.LastName = project.Client.LastName;
+            projectVM.Email = project.Client.Email;
 
             return View(projectVM);
         }
