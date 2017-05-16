@@ -54,5 +54,10 @@ namespace CapStoneProject.Repositories
 
             return context.SaveChanges();
         }
+
+        public int ProjectUpdate(Client client)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
