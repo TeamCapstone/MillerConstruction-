@@ -15,9 +15,11 @@
 }
 
 #brandDiv{
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
-
+#navUL {
+    padding-top: 50px;
+}
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;

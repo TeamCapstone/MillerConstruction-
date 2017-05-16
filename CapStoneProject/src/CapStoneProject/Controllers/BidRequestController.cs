@@ -10,6 +10,11 @@ using CapStoneProject.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using MimeKit;
+using System.Security.Cryptography.X509Certificates;
+using Google.Apis.Auth.OAuth2;
+using System.Threading;
+using MailKit.Net.Smtp;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,7 +24,7 @@ namespace CapStoneProject.Controllers
     {
         private IBidRequestRepo bidReqRepo;
         protected UserManager<UserIdentity> UserManager;
-
+        private CancellationToken taskCancellationToken;
 
         public BidRequestController(UserManager<UserIdentity> userMgr, IBidRequestRepo repo)
         {
@@ -48,10 +53,48 @@ namespace CapStoneProject.Controllers
                     LastName = bidreq.User.LastName
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, bidreq.User.Password);
-                
+
+                /*var certificate = new X509Certificate2(@"C:\Users\silva\Desktop\ProjectStone\Credentials\CapstoneJOCA-7e6ff15dda38.p12", "notasecret", X509KeyStorageFlags.Exportable);
+                var credential = new ServiceAccountCredential(new ServiceAccountCredential
+                    .Initializer("capstonejoca@capstonejoca.iam.gserviceaccount.com")
+                {
+                    // Note: other scopes can be found here: https://developers.google.com/gmail/api/auth/scopes
+                    Scopes = new[] { "https://mail.google.com/" },
+                    User = "capstonejoca@capstonejoca.iam.gserviceaccount.com"
+                }.FromCertificate(certificate));
+
+                //You can also use FromPrivateKey(privateKey) where privateKey
+                // is the value of the fiel 'private_key' in your serviceName.json file
+
+
+                bool success = credential.RequestAccessTokenAsync(System.Threading.CancellationToken.None).Result;*/
+
 
                 if (result.Succeeded)
                 {
+
+
+                   /* var message = new MimeMessage();
+                    message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                    message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                    message.Subject = "bid Request Requested";
+
+                    message.Body = new TextPart("plain")
+                    {
+                        Text = @"Hey Admin, A new bid request was created please look at it and respond."
+                    };
+
+                    using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 587);
+
+                        // use the OAuth2.0 access token obtained above as the password
+                        client.Authenticate("jocaproject6@gmail.com", credential.Token.AccessToken);//need a domain name.
+
+                        client.Send(message);
+                        client.Disconnect(true);
+                    }*/
+
                     bidReqRepo.Update(bidreq);
                     return RedirectToAction("Success");
                 }
