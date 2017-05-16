@@ -32,6 +32,7 @@ namespace CapStoneProject.Repositories
 
             return context.BidRequests.First(n => n.User.LastName == name);
         }
+        //TODO: write method to check if email is in database
 
         public int Update(BidRequest req)
         {

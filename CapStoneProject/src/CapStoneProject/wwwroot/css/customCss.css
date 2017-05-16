@@ -14,10 +14,14 @@
   background-color: white;  
 }
 
-#brandDiv{
-    padding-bottom: 50px;
-}
 
+/*Navigation Section Css*/
+#brandDiv{
+    padding-bottom: 100px;
+}
+#navUL {
+    padding-top: 50px;
+}
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
@@ -39,7 +43,7 @@
     background-color: black; 
 }
 
-
+/*Footer Section*/
 #footDiv{
     font-family: 'Bauhaus 93';
     font-size: 160%;
@@ -51,7 +55,7 @@
     font-size: 50%;
 }
 
-/*this may look better without the background color*/
+/*Home Page Section*/
 #myCarousel{
     margin-top: 0px;
     padding-top: 0px;
@@ -63,17 +67,6 @@
     margin-right: auto;
     min-width: 70%;
     max-height: 400px;
-}
-
-
-#layoutDiv{
-     background: url('../images/concrete1.jpg') no-repeat center center fixed;
-    font-family: Arial;
-    margin: 0px;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    min-height: 500px;
 }
 
 #missionDiv {
@@ -95,6 +88,19 @@
     font-size: 20px;
 }
 
+/*Layout2 Section, all other pages*/
+
+#layoutDiv{
+    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    font-family: Arial;
+    margin: 0px;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    min-height: 600px;
+}
+
+/*All Forms Change html*/
 #formDiv{
     background: url('../images/concrete1.jpg') no-repeat center center fixed;
     font-family: Arial;
@@ -105,19 +111,6 @@
     min-height: 500px;
 }
 
-#BRtitle{
-    font-family: 'Bauhaus 93';
-}
-#brloginFrm{
-    text-align: center; 
-    font-size: 20px;
-    color:tan;
-    background: rgb(255, 255, 255);
-    background: rgba(255, 255, 255, 0.75);  
-    padding: 20px;
-    border-radius: 5px;
-}
-
 #interiorDiv{
     background: rgb(255, 255, 255);
     background: rgba(255, 255, 255, 0.75);  
@@ -125,6 +118,61 @@
     border-radius: 5px;
 }
 
+#bidCustDiv{
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.75);  
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/*Bid Request Section*/
+#BRtitle {
+    font-family: 'Bauhaus 93';
+}
+#brLogTitle{
+    padding: 10px;
+    margin-bottom: 20px;
+    text-shadow: .5px .5px .5px #000000;
+}
+#brloginFrm{
+    text-align: center; 
+    font-size: 20px;
+    color:tan;
+    text-shadow: .5px .5px .5px #000000;
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.75);  
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/*Refactoring About, Services and FAQ Section*/
+.ASFTitle{
+    text-align: center;
+    font-family: 'Bauhaus 93';
+    color: tan;
+    padding: 5px;
+    text-shadow: .5px .5px .5px #000000;
+}
+.ASFDiv{
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.75); 
+    margin-top: 50px; 
+    padding: 20px;
+    border-radius: 5px;
+    font-family: Arial;
+    font-size: 2em;
+}
+/*About Page Section*/
+
+
+/*Services Page Section */
+
+
+/*FAQ Page Section*/
+
+
+/*Review Page Section*/
 #reviewDiv{
     background: rgb(255, 255, 255);
     background: rgba(255, 255, 255, 0.75);  
@@ -139,8 +187,10 @@
     border-radius: 5px;
 }
 
+
+/*Gallery Page Section*/
 #galDiv{
-      background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    background: url('../images/concrete1.jpg') no-repeat center center fixed;
     margin: 0px;
     width: 100%;
     padding-bottom: 50px;
@@ -156,13 +206,42 @@
    width: 50px;
    height: 50px;
 }
+
 #RAP {
     align-content: center;
     text-align: center;
-    background: #99badd;
-   
-  
+    background: #99badd; 
 }
+
+
+/*Login Section*/
+#LogTitle{
+    padding: 10px;
+    margin-bottom: 20px;
+    text-shadow: .5px .5px .5px #000000;
+}
+#loginFrm{
+    text-align: center; 
+    font-size: 20px;
+    color:tan;
+    text-shadow: .5px .5px .5px #000000;
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.75);  
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+/*Joel Section :)*/
+
+
 .square{
     width:100px;
     height:100px;

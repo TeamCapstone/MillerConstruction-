@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CapStoneProject.Controllers
 {
-    public class ServicesController : Controller
+    public class FAQController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Services()
+        public IActionResult FAQ()
         {
             return View();
         }
