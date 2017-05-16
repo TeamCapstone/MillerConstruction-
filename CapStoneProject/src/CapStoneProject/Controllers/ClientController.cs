@@ -136,6 +136,8 @@ namespace CapStoneProject.Controllers
             return View(clientRepo.GetAllClients().ToList());
         }
 
+        //TODO: Ad Search by email, first name, last name
+
     }
 }
 
