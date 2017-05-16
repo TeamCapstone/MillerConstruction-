@@ -26,7 +26,7 @@ namespace CapStoneProject.Models.ViewModels
 
         public string State { get; set; }
 
-        [RegularExpression("^\d{5}$", ErrorMessage = "Zipcode not valid" )]
+        [RegularExpression(@"^\d{5}$", ErrorMessage = "Zipcode not valid" )]
         public string Zipcode { get; set; }
 
         

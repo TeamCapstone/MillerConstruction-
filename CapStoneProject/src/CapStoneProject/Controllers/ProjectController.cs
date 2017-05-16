@@ -92,7 +92,7 @@ namespace CapStoneProject.Controllers
 
                         projectRepo.ProjectUpdate(project);
 
-                        return RedirectToAction("view", "controller");
+                        return RedirectToAction("view", "controller"); //TODO: fill in
                     }
                     else
                     {
@@ -120,11 +120,17 @@ namespace CapStoneProject.Controllers
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
             var project = new Project(); //TODO: create repo method to search by id
-            var projectVM = new VMCreateProject();
+            var projectVM = new VMCreateProject(); //TODO: create new VM for Edit Project
             projectVM.LastName = project.Client.LastName;
             projectVM.Email = project.Client.Email;
 
             return View(projectVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProject(VMCreateProject projectVM)
+        {
+            return RedirectToAction("view", "controller"); //TODO: fill in
         }
     }
 }
