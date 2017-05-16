@@ -3,22 +3,31 @@
     Layout = "_Layout2";
 }
 
-<div class="row" id="brloginFrm">
-    <form asp-controller="Account" asp-action="BRLogin" method="post" class="">
-        <h4>If you have already created an account with us, please sign in, otherwise proceed with the form below.</h4>
-        <div class="col-md-5">
-            <div class="form-group">
-                <input asp-for="Email" class="form-control" placeholder="Email:" required />
-            </div>
+<div class="container">
+    <div class="row" >
+
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8" id="brloginFrm">
+            <form asp-controller="Account" asp-action="BRLogin" method="post" class="">
+                <h3 id="brLogTitle">If you have already created an account with us, please sign in.</h3>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input asp-for="Email" class="form-control" placeholder="Email:" required />
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <input asp-for="Password" class="form-control" placeholder="Password:" type="password" required />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-success" type="submit">Log In</button>
+                </div>
+            </form>
+            <br />
+            <br />
+            <h3>Otherwise, please click <a href="@Url.Action("BidRequest", "BidRequest")">here</a> where you can create an account and request a quote at the same time.</h3>
         </div>
-        <div class="col-md-5">
-            <div class="form-group">
-                <input asp-for="Password" class="form-control" placeholder="Password:" type="password" required />
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <button class="btn btn-success" type="submit">Log In</button>
-        </div>
-    </form>
-    <p>Otherwise please click <a href="@Url.Action("BidRequest", "BidRequest")">here</a></p>
+        <div class="col-lg-2"></div>
+    </div>
 </div>

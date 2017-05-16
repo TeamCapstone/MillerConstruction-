@@ -1,28 +1,58 @@
-﻿@model CapStoneProject.Models.ViewModels.VMBid
+﻿@model Bid
 @{
     ViewData["Title"] = "Bid";
-    Layout = "_Layout";
+    Layout = "_Layout2";
 }
 
 <div class="container" id="formDiv">
     <div class="col-lg-2"></div>
     <div class="col-lg-8">
+        <h2 id="BRtitle">Customers Request</h2>
+
+        <div class="col-lg-12" id="bidCustDiv">
+            <form >
+                <input asp-for="BidReq.BidRequestID" type="hidden" />
+                <div class="form-group">
+                    <label>Customer Name:</label><br />
+                    <div class="col-lg-6">
+                        <input class="form-control" type="text" asp-for="User.FirstName" value="" placeholder="First Name:" id="firstB" required>
+                        <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="form-control" type="text" asp-for="User.LastName" value="" placeholder="Last Name:" id="lastB" required>
+                        <span asp-validation-for="User.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group ">
+                        <label asp-for="BidReq.ProjectDescription">Project Description:</label><br />
+                        <textarea asp-for="BidReq.ProjectDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span asp-validation-for="BidReq.ProjectDescription" class="text-danger"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br />
+
+
         <h2 id="BRtitle">Provide a Quote</h2>
-        <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="interiorDiv">
+        <form asp-controller="BidRequest" asp-action="Bid" method="post" class="" id="interiorDiv">
             <input asp-for="BidID" type="hidden" />
 
             <div class="row">
                 <div class="col-lg-12">
                     
                     <div class="form-group">
-                        <label asp-for="CustomerFirst">Customer Name:</label><br />
+                        <label asp-for="User.FirstName">Customer Name:</label><br />
                         <div class="col-lg-6">
-                            <input class="form-control" type="text" asp-for="CustomerFirst" value="" placeholder="First Name:" id="firstB" required>
-                            <span asp-validation-for="CustomerFirst" class="text-danger"></span>
+                            <input class="form-control" type="text" asp-for="User.FirstName" value="" placeholder="First Name:" id="firstB" required>
+                            <span asp-validation-for="User.FirstName" class="text-danger"></span>
                         </div>
                         <div class="col-lg-6">
-                            <input class="form-control" type="text" asp-for="CustomerLast" value="" placeholder="Last Name:" id="lastB" required>
-                            <span asp-validation-for="CustomerLast" class="text-danger"></span>
+                            <input class="form-control" type="text" asp-for="User.LastName" value="" placeholder="Last Name:" id="lastB" required>
+                            <span asp-validation-for="User.LastName" class="text-danger"></span>
                         </div>   
                     </div>
 
@@ -35,11 +65,11 @@
                 
                 <div class="col-lg-12">
                     <div class="form-group ">
-                        <label asp-for="ProjectDescription">Project Description:</label><br />
-                        <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+                        <label asp-for="RevisedProjectDescription">Revised Project Description:</label><br />
+                        <textarea asp-for="RevisedProjectDescription" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                        <span asp-validation-for="RevisedProjectDescription" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-12"></div>
