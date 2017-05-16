@@ -4,7 +4,7 @@
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="UserEdit" method="post">
+<form asp-action="EditClient" method="post">
     <div class="form-group">
         <label hidden asp-for="ClientID"></label>
         <input hidden asp-for="ClientID" class="form-control" />
@@ -49,4 +49,5 @@
     <button type="submit" class="btn btn-primary">Save</button>
     <a asp-controller="User" asp-action="UserPage" class="btn btn-default">Cancel</a>
 </form>
+
 

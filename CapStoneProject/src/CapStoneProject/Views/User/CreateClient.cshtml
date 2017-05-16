@@ -1,0 +1,50 @@
+﻿@model CapStoneProject.Models.ViewModels.VMRegister
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-controller="User" asp-action="CreateClient" method="post">
+    <p>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" />
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Street"></label>
+        <input asp-for="Street" />
+        <span asp-validation-for="Street" class="text-danger"></span>
+
+        <label asp-for="City"></label>
+        <input asp-for="City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+
+        <label asp-for="State"></label>
+        <input asp-for="State" />
+        <span asp-validation-for="State" class="text-danger"></span>
+
+        <label asp-for="Zipcode"></label>
+        <input asp-for="Zipcode" />
+        <span asp-validation-for="Zipcode" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </p>
+
+
+    <button type="submit">Register</button>
+</form>
+
+

@@ -13,6 +13,6 @@ namespace CapStoneProject.Repositories.Interfaces
         IEnumerable<Project> GetProjectsByClient(int clientID); //Gets client's projects by client id
         Project GetLatestClientProject(int clientID); //Gets latest client project
         IEnumerable<Project> GetCurrentProjects(int clientID); //gets current client projects
-        int ProjectUpdate(Client client); //Updates db context
+        int ProjectUpdate(Project project); //Updates db context
     }
 }

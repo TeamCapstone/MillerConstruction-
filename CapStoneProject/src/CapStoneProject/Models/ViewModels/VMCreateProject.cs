@@ -12,8 +12,11 @@ namespace CapStoneProject.Models.ViewModels
          client ID, client name, email, etc. Figure out also how to tie in bid object*/
 
         //temporarily using client last name and email to search for client in db
-        [Required]
+        public int BidID { get; set; }
+
         public string LastName { get; set; }
+
+        public int ClientID { get; set; }
 
         [Required]
         public string Email { get; set; }
