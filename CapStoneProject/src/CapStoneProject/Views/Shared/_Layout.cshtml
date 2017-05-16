@@ -10,11 +10,11 @@
 
     <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -25,8 +25,6 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-   
-    
 
 
     <!-- Custom Fonts from Freelancer  I think we arent actually using these-->
@@ -44,21 +42,19 @@
         <nav class="navbar navbar-toggleable-md " id="navDiv" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="myNavBar" >
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-
-                <div class="collapse navbar-collapse" id="">
                     <div id="brandDiv">
                         <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                             <img src="~/images/Logo2.jpg" alt="logo" id="logoImg">
                         </a>
                     </div>
-                    <div class="collapse navbar-collapse" id="myNavbar">
+                    <button type="button" class="navbar-toggle collapsed " style="margin-bottom: -100px;margin-top: -90px;" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-hidden="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-th" style="font-size:50px;color:red;  "></span>
+                    </button>
+
+                </div>
+                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+
+                   
                         <ul class="nav navbar-nav navbar-right mr-auto" id="navUL">
                             @if (User.Identity.Name == null)
                             {
@@ -68,7 +64,7 @@
                             {
                                 <li class="nav-item"><a asp-action="BidRequest" asp-controller="BidRequest">Request a Quote</a></li>
                             }
-                            
+
                             <li class="nav-item"><a asp-action="Index" asp-controller="Services">Services</a></li>
                             <li class="nav-item"><a asp-action="Index" asp-controller="About">About</a></li>
                             <li class="nav-item"><a asp-action="Index" asp-controller="FAQ">FAQ</a></li>
@@ -82,9 +78,9 @@
                             {
                                 <li class="nav-item"><a asp-action="Logout" asp-controller="Account">Logout</a></li>
                             }
-                            
+
                         </ul>
-                    </div>
+                    
                 </div>
             </div>
         </nav>

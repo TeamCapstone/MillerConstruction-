@@ -1,12 +1,12 @@
 ﻿@model List<BidRequest>
 
-@{ 
+@{
     Layout = "_Layout";
 }
 
 
 <div class="container" id="formDiv">
-    <div class="row" >
+    <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <h2>All Current Quote Requests</h2>
@@ -14,6 +14,7 @@
                 @foreach (var v in Model)
             {
                     <tr>
+                        <td>@v.BidRequestID</td>
                         @if (v.User.LastName == null)
                         {
                             <td>@v.User.FirstName</td>
@@ -26,11 +27,10 @@
                         <td>@v.ProjectLocation</td>
                         <td>
                             <form asp-action="Delete" method="post" class="">
-                                <input class="" type="hidden" name="BidRequestID" value="@v.BidRequestID" />
                                 <div class="btn-toolbar">
                                     <button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>
-                                    <a asp-action="Respond" class="btn btn-sm btn-primary pull-right" asp-route-bidrequestId="@v.BidRequestID">Respond</a>
-                                    <a asp-action="View" class="btn btn-sm btn-success pull-right" asp-route-bidrequestId="@v.BidRequestID">View</a>
+                                    <a asp-action="Bid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidRequestId="@v.BidRequestID">Respond</a>
+                                    <input class="" type="hidden" name="BidRequestID" value="@v.BidRequestID" />
                                 </div>
                             </form>
                         </td>
