@@ -34,7 +34,7 @@ namespace CapStoneProject.Controllers
             signInManager = signInMgr;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string projStatus) //This one is for admin to view currentprojects
         {
             return View(projectRepo.GetAllCurrentProjects(projStatus));
@@ -46,7 +46,7 @@ namespace CapStoneProject.Controllers
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
         {
@@ -115,14 +115,19 @@ namespace CapStoneProject.Controllers
             return View(projectVM);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
-            var project = new Project(); //TODO: create repo method to search by id
+            var project = projectRepo.GetProjectByID(projectID);
             var projectVM = new VMCreateProject(); //TODO: create new VM for Edit Project
             projectVM.LastName = project.Client.LastName;
             projectVM.Email = project.Client.Email;
+            projectVM.BidID = project.Bid.BidID;
+            projectVM.ClientID = project.Client.ClientID;
+            projectVM.Estimate = project.OriginalEstimate;
+            projectVM.ProjectName = project.ProjectName;
+            projectVM.StartDate = project.StartDate;
 
             return View(projectVM);
         }
@@ -130,7 +135,18 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProject(VMCreateProject projectVM)
         {
-            return RedirectToAction("view", "controller"); //TODO: fill in
+            if (ModelState.IsValid)
+            {
+                //TODO: Fill in
+
+                return RedirectToAction("view", "controller"); //TODO: fill in
+            }
+            else
+            {
+                ModelState.AddModelError("", "");
+            }
+
+            return View(projectVM);
         }
     }
 }
