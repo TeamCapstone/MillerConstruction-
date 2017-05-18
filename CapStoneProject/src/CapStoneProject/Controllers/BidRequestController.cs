@@ -132,7 +132,7 @@ namespace CapStoneProject.Controllers
       
 
         [HttpGet]
-        public IActionResult Success()
+        public ViewResult Success()
         {
             return View();
         }

@@ -138,6 +138,28 @@ namespace CapStoneProject.Controllers
 
         //TODO: Ad Search by email, first name, last name
 
+        public ViewResult Searchby()
+        {
+            return View(new VMClientSearch());
+        }
+
+        [HttpPost]
+        public IActionResult SearchBy(VMClientSearch cs)
+        {
+            Client c = new Client();
+            if (cs.SearchCategory == "Email")
+                c = clientRepo.GetClientByEmail(cs.SearchValue);
+            else if (cs.SearchCategory == "FirstName")
+                c = clientRepo.GetClientByFirstName(cs.SearchValue);
+            else if (cs.SearchCategory == "LastName")
+                c = clientRepo.GetClientByLastName(cs.SearchValue);
+
+            if (c == null)
+                return View();
+            else
+                return RedirectToAction("Edit", new { id = c.ClientID });
+        }
+
     }
 }
 
