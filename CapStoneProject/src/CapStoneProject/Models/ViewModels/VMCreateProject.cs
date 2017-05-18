@@ -12,6 +12,8 @@ namespace CapStoneProject.Models.ViewModels
          client ID, client name, email, etc. Figure out also how to tie in bid object*/
 
         //temporarily using client last name and email to search for client in db
+        public int ProjectID { get; set; } //To be used by EditProject
+
         public int BidID { get; set; }
 
         public string LastName { get; set; }
@@ -28,6 +30,10 @@ namespace CapStoneProject.Models.ViewModels
         public string ProjectName { get; set; }
 
         [Required]
-        public decimal Estimate { get; set; }
+        public decimal Estimate { get; set; } //To be used by EditProject
+
+        public string Status { get; set; } //To be used by EditProject
+
+        public DateTime StatusDate { get; set; } //To be used by EditProject
     }
 }

@@ -120,30 +120,36 @@ namespace CapStoneProject.Controllers
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
             var project = projectRepo.GetProjectByID(projectID);
-            var projectVM = new VMCreateProject(); //TODO: create new VM for Edit Project
-            projectVM.LastName = project.Client.LastName;
-            projectVM.Email = project.Client.Email;
-            projectVM.BidID = project.Bid.BidID;
-            projectVM.ClientID = project.Client.ClientID;
-            projectVM.Estimate = project.OriginalEstimate;
-            projectVM.ProjectName = project.ProjectName;
-            projectVM.StartDate = project.StartDate;
+            var projectVM = new VMCreateProject {LastName = project.Client.LastName,
+                Email = project.Client.Email, ProjectName = project.ProjectName,
+                Estimate = project.TotalCost, StartDate = project.StartDate,
+                Status = project.ProjectStatus, StatusDate = project.StatusDate,
+                ProjectID = project.ProjectID}; //TODO: create new VM for Edit Project
 
             return View(projectVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProject(VMCreateProject projectVM)
+        public IActionResult EditProject(VMCreateProject projectVM)
         {
-            if (ModelState.IsValid)
+            Project project = projectRepo.GetProjectByID(projectVM.ProjectID);
+
+            if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null
+                && projectVM.StatusDate != null)
             {
                 //TODO: Fill in
+                project.TotalCost = projectVM.Estimate;
+                project.StartDate = projectVM.StartDate;
+                project.ProjectStatus = projectVM.Status;
+                project.StatusDate = projectVM.StatusDate;
+
+                projectRepo.ProjectUpdate(project);
 
                 return RedirectToAction("view", "controller"); //TODO: fill in
             }
             else
             {
-                ModelState.AddModelError("", "");
+                ModelState.AddModelError("StartDate", "This field cannot be left blank");
             }
 
             return View(projectVM);
