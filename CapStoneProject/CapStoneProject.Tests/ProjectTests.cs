@@ -25,7 +25,7 @@ namespace CapStoneProject.Tests
         private ClientRepo cRepo;
 
         [Fact]
-        public void CreateProject()
+        public void CreateProject() //TODO: add a moq framework
         {
             //Arrange client
             var client = new Client {FirstName = "Cody", LastName = "Noteboom", Email = "cnote@gmail.com"};
@@ -33,13 +33,17 @@ namespace CapStoneProject.Tests
             var bid = new Bid { TotalEstimate = 4500.67M };
             //Arrange project
             var project = new Project {ProjectName = "Kitchen Remodel" };
+            var project2 = new Project();
 
             //Act
             project.Client = client;
             project.Bid = bid;
+            projectRepo.ProjectUpdate(project);
+            project2 = projectRepo.GetProjectsByClient(client.ClientID).FirstOrDefault();
 
             //Assert
             Assert.Equal("Cody", project.Client.FirstName);
+            Assert.NotEqual(project.ProjectID, project2.ProjectID);
         }
     }
 }

@@ -8,8 +8,8 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170511203431_initial")]
-    partial class initial
+    [Migration("20170518233443_try")]
+    partial class @try
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("ProjectedTimeFrame");
 
                     b.Property<DateTime>("ProposedStartDate");
+
+                    b.Property<string>("RevisedProjectDescription");
 
                     b.Property<decimal>("SupplyCost");
 
