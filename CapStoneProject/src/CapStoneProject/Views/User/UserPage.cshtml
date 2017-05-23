@@ -1,5 +1,7 @@
-﻿@{
-    Layout = "_Layout2";
-}
+﻿<h1> @Html.ActionLink("Update Personal Information", "EditClient", "User")</h1>
 
-<h1> @Html.ActionLink("Update Personal Information", "EditClient", "User")</h1>
+<span type="span" class="btn btn-danger">
+    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+
+    @Html.ActionLink("Add a Review", "MakeReview", "Review", null, new { @style = "color:black; text-algin: center; padding-left:3px;" })
+</span>

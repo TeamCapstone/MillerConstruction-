@@ -18,7 +18,7 @@ namespace CapStoneProject.Repositories
 
         public IQueryable<Review> GetAllReviews()
         {
-            return context.Reviews.Include(m => m.From).Include(m => m.Comments);
+            return context.Reviews.Include(m => m.From).Include(m => m.Comments).OrderByDescending(m => m.Date);
         }
 
         public IQueryable<Review> GetAllApproved()

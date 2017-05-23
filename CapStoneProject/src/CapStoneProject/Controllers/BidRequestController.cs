@@ -15,6 +15,7 @@ using System.Security.Cryptography.X509Certificates;
 using Google.Apis.Auth.OAuth2;
 using System.Threading;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

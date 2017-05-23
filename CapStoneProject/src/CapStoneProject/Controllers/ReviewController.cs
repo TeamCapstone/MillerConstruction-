@@ -83,7 +83,7 @@ namespace CapStoneProject.Controllers
                 if (user != null)
                     review.From = user;
                 reviewRepo.Update(review);
-                return RedirectToAction("AllReviews", "Review");
+                return RedirectToAction("ReviewAfterPost", "Review");
             }
             else
             {
