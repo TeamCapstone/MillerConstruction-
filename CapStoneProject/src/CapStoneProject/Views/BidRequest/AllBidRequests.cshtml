@@ -11,8 +11,17 @@
         <div class="col-lg-8">
             <h2>All Current Quote Requests</h2>
             <table class="table table-striped table-bordered table-condensed">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Action</th>
+
+                </tr>
+               
                 @foreach (var v in Model)
-            {
+                {
                     <tr>
                         <td>@v.BidRequestID</td>
                         @if (v.User.LastName == null)
@@ -29,7 +38,8 @@
                             <form asp-action="Delete" method="post" class="">
                                 <div class="btn-toolbar">
                                     <button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>
-                                    <a asp-action="Bid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidRequestId="@v.BidRequestID">Respond</a>
+                                    @*<a href="@Url.Action("Bid", "BidRequest", new { id = v.BidRequestID })" class="btn btn-sm btn-primary pull-right">Respond</a>*@
+                                    <a asp-action="Bid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidrequestId="@v.BidRequestID">Respond</a>
                                     <input class="" type="hidden" name="BidRequestID" value="@v.BidRequestID" />
                                 </div>
                             </form>

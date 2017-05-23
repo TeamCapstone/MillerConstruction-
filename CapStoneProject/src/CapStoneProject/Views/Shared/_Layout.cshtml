@@ -31,8 +31,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/customCss.css" rel="stylesheet" />
 
 </head>
@@ -52,64 +51,36 @@
                     </button>
 
                 </div>
-                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">   
+                    <ul class="nav navbar-nav navbar-right mr-auto" id="navUL">
+                        @if (User.Identity.Name == null)
+                        {
+                            <li class="nav-item"><a asp-action="BRLogin" asp-controller="Account">Request a Quote</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a asp-action="LoggedInBidRequest" asp-controller="BidRequest">Request a Quote</a></li>
+                        }
 
-                   
-                        <ul class="nav navbar-nav navbar-right mr-auto" id="navUL">
-                            @if (User.Identity.Name == null)
-                            {
-                                <li class="nav-item"><a asp-action="BRLogin" asp-controller="Account">Request a Quote</a></li>
-                            }
-                            else
-                            {
-                                <li class="nav-item"><a asp-action="BidRequest" asp-controller="BidRequest">Request a Quote</a></li>
-                            }
+                        <li class="nav-item"><a asp-action="Services" asp-controller="Services">Services</a></li>
+                        <li class="nav-item"><a asp-action="About" asp-controller="About">About</a></li>
+                        <li class="nav-item"><a asp-action="FAQ" asp-controller="FAQ">FAQ</a></li>
+                        <li class="nav-item"><a asp-action="AllApprovedReviews" asp-controller="Review">Reviews</a></li>
+                        <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>
+                        @if (User.Identity.Name == null)
+                        {
+                            <li class="nav-item"><a asp-action="Login" asp-controller="Account">Login</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+                        }
 
-                            <li class="nav-item"><a asp-action="Index" asp-controller="Services">Services</a></li>
-                            <li class="nav-item"><a asp-action="Index" asp-controller="About">About</a></li>
-                            <li class="nav-item"><a asp-action="Index" asp-controller="FAQ">FAQ</a></li>
-                            <li class="nav-item"><a asp-action="AllApprovedReviews" asp-controller="Review">Reviews</a></li>
-                            <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>
-                            @if (User.Identity.Name == null)
-                            {
-                                <li class="nav-item"><a asp-action="Login" asp-controller="Account">Login</a></li>
-                            }
-                            else
-                            {
-                                <li class="nav-item"><a asp-action="Logout" asp-controller="Account">Logout</a></li>
-                            }
-
-                        </ul>
-                    
+                    </ul>      
                 </div>
             </div>
         </nav>
     </div>
-    @* nav that toggles the collape but the styling isnt right *@
-    @*<nav class="navbar navbar-inverse" id="navDiv">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><img src="~/images/Logo2.jpg" alt="logo" id="logoImg"></a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right" id="navUL">
-                        <li class="nav-item"><a asp-action="Index" asp-controller="Home">Request a Quote</a></li>
-                        <li class="nav-item"><a asp-action="YourVeg" asp-controller="List">Services</a></li>
-                        <li class="nav-item"><a asp-action="Design" asp-controller="Design">About</a></li>
-                        <li class="nav-item"><a asp-action="Design" asp-controller="Design">FAQ</a></li>
-                        <li class="nav-item"><a asp-action="Design" asp-controller="Design">Reviews</a></li>
-                        <li class="nav-item"><a asp-action="Design" asp-controller="Design">Gallery</a></li>
-                        <li class="nav-item"><a asp-action="Login" asp-controller="Login">Login</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
-
 
     <div>
         @RenderBody()
@@ -139,7 +110,23 @@
                     </ul>
                 </div>
                 <div class="col-md-4 footDiv">
-                    <h3>Admin Login</h3>
+                  <br />
+                    @if (User.Identity.Name == null)
+                    {
+                        <h3><a asp-action="Login" asp-controller="Account">Login</a></h3>
+                    }
+                    else
+                    {
+                        @if (User.Identity.Name != "Admin")
+                        {
+                            <a asp-action="UserPage" asp-controller="User" class="welcome">Welcome @User.Identity.Name, go to User Portal</a>
+                        }
+                        else
+                        {
+                            <a asp-action="AdminPage" asp-controller="Admin" class="welcome">Welcome @User.Identity.Name</a>
+
+                        }
+                    }
                     <p>Thank you for visiting.</p>
                 </div>
 

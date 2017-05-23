@@ -10,10 +10,9 @@ namespace CapStoneProject.Models
     {
         public int BidID { get; set; }
        
-        public BidRequest BidReq { get; set; }
-
-        //I am not sure we need a userid here since its in the bidrequest model but just incase
         public UserIdentity User { get; set; }
+
+        public BidRequest BidReq { get; set; }
 
         public string RevisedProjectDescription { get; set; }
 

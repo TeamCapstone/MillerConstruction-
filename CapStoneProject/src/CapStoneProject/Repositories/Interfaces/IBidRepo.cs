@@ -18,5 +18,7 @@ namespace CapStoneProject.Repositories.Interfaces
         int Update(Bid req);
 
         Bid DeleteBR(int id);
+
+        //Bid GetBidRequestByID(int id);
     }
 }
