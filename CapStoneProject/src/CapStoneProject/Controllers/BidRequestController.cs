@@ -59,6 +59,26 @@ namespace CapStoneProject.Controllers
 
                     if (result.Succeeded)
                     {
+                        //emailing the client to notify of request
+                        var message = new MimeMessage();
+                        message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        message.Subject = "bid Request Requested";
+
+                        message.Body = new TextPart("plain")
+                        {
+                            Text = @"Hey Admin, A new bid request was created please look at it and respond."
+                        };
+
+                        using (var client = new SmtpClient())
+                        {
+                            client.Connect("smtp.gmail.com", 587, false);
+                            client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
+                            client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
+                            client.Send(message);
+                            client.Disconnect(true);
+                        }
+
                         bidReqRepo.Update(bidreq);
                         return RedirectToAction("Success");
                     }
@@ -71,14 +91,8 @@ namespace CapStoneProject.Controllers
                     }
                 }
             }
-            
             return View(bidreq);
         }
-
-        //TODO: fix this
-        //[HttpGet]
-        //public ViewResult Bid(int bidrequestID) => View(bidRepo.GetAllBids().Include(r => r.BidReq)
-        //    .FirstOrDefault(b => b.BidReq.BidRequestID == bidrequestID));
 
         [HttpGet]
         public ViewResult Bid(int bidrequestID)
@@ -109,7 +123,7 @@ namespace CapStoneProject.Controllers
                 bid.ProposedStartDate = bid.ProposedStartDate;
                 bid.SupplyCost = vmbid.SupplyCost;
                 bid.TotalEstimate = vmbid.TotalEstimate;
-               
+
                 bidRepo.Update(bid);
                 return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());
             }
@@ -119,7 +133,7 @@ namespace CapStoneProject.Controllers
             }
             return View(vmbid);
         }
-    
+
 
 
 
@@ -153,7 +167,5 @@ namespace CapStoneProject.Controllers
         {
             return View(bidReqRepo.GetAllBidRequests().ToList());
         }
-
-        
     }
 }
