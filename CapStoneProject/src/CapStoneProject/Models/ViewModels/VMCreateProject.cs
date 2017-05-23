@@ -30,10 +30,10 @@ namespace CapStoneProject.Models.ViewModels
         public string ProjectName { get; set; }
 
         [Required]
-        public decimal Estimate { get; set; } //To be used by EditProject
+        public decimal Estimate { get; set; } //To be editable by EditProject
 
-        public string Status { get; set; } //To be used by EditProject
+        public string Status { get; set; } //To be editable by EditProject
 
-        public DateTime StatusDate { get; set; } //To be used by EditProject
+        public DateTime StatusDate { get; set; } //To be editable by EditProject
     }
 }
