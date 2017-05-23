@@ -34,7 +34,7 @@ namespace CapStoneProject.Controllers
             signInManager = signInMgr;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ViewResult Index(string projStatus) //This one is for admin to view currentprojects
         {
             return View(projectRepo.GetAllCurrentProjects(projStatus));
@@ -46,7 +46,7 @@ namespace CapStoneProject.Controllers
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
         }
 
-        [Authorize]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
         {
@@ -92,7 +92,7 @@ namespace CapStoneProject.Controllers
 
                         projectRepo.ProjectUpdate(project);
 
-                        return RedirectToAction("view", "controller");
+                        return RedirectToAction("AdminPage", "Admin"); //TODO: fill in with AdminPage and controller that holds it
                     }
                     else
                     {
@@ -115,14 +115,42 @@ namespace CapStoneProject.Controllers
             return View(projectVM);
         }
 
-        [Authorize]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
-            var project = new Project(); //TODO: create repo method to search by id
-            var projectVM = new VMCreateProject();
-            projectVM.LastName = project.Client.LastName;
-            projectVM.Email = project.Client.Email;
+            var project = projectRepo.GetProjectByID(projectID);
+            var projectVM = new VMCreateProject {LastName = project.Client.LastName,
+                Email = project.Client.Email, ProjectName = project.ProjectName,
+                Estimate = project.TotalCost, StartDate = project.StartDate,
+                Status = project.ProjectStatus, StatusDate = project.StatusDate,
+                ProjectID = project.ProjectID}; //TODO: create new VM for Edit Project
+
+            return View(projectVM);
+        }
+
+        [HttpPost]
+        public IActionResult EditProject(VMCreateProject projectVM)
+        {
+            Project project = projectRepo.GetProjectByID(projectVM.ProjectID);
+
+            if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null
+                && projectVM.StatusDate != null)
+            {
+                //TODO: Fill in
+                project.TotalCost = projectVM.Estimate;
+                project.StartDate = projectVM.StartDate;
+                project.ProjectStatus = projectVM.Status;
+                project.StatusDate = projectVM.StatusDate;
+
+                projectRepo.ProjectUpdate(project);
+
+                return RedirectToAction("AdminPage", "Admin"); //TODO: fill in with AdminPage and controller that holds it
+            }
+            else
+            {
+                ModelState.AddModelError("StartDate", "This field cannot be left blank");
+            }
 
             return View(projectVM);
         }

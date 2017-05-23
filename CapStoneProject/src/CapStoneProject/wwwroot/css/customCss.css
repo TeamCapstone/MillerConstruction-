@@ -2,10 +2,6 @@
     font-family:'Bauhaus 93';
 }
 
-/** {
-  border-radius: 0 !important;
-}*/
-
 .navbar-default .navbar-toggle {
   border-color: transparent;  
   float: left;  
@@ -13,7 +9,6 @@
 .navbar-default .navbar-toggle .icon-bar {
   background-color: white;  
 }
-
 
 /*Navigation Section Css*/
 #brandDiv{
@@ -53,6 +48,11 @@
 
 #footBelow{
     font-size: 50%;
+}
+
+.welcome{
+    color: orangered;
+
 }
 
 /*Home Page Section*/
@@ -157,6 +157,13 @@
     border-radius: 5px;
 }
 
+/*Partial Views*/
+#parTitle{
+    font-family: 'Bauhaus 93';
+    font-size: 30px;
+    padding: 10px;
+}
+
 /*Refactoring About, Services and FAQ Section*/
 .ASFTitle{
     text-align: center;
@@ -222,6 +229,9 @@
     align-content: center;
     text-align: center;
     background: #99badd; 
+    padding-bottom: 150px;
+    padding-top: 150px;
+    font-size: large;
 }
 
 
@@ -278,6 +288,20 @@
     border-bottom:1px solid #000;
     padding-left: 100px;
     padding-right: 100px;
-        align-content: center;
+    align-content: center;
     text-align: center;
+}
+
+.erForm {
+    padding-left: 500px;
+    padding-right: 400px;
+    padding-top: 100px;
+    height: 404px;
+    font-size: x-large
+}
+.positioner{
+    position: relative;
+    left: 700px;
+    top: 250px;
+    font-size: x-large;
 }

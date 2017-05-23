@@ -9,13 +9,19 @@ namespace CapStoneProject.Models.ViewModels
     public class VMCreateProject
     {
         /*When creating project, decide whether to instantiate client object by entering either
-         client ID, client name, email, etc. Figure out also how to tie in bid object*/
-
+         client ID, client name, email, etc*/
+   
         //temporarily using client last name and email to search for client in db
+
+        //To be used by EditProject
+        public int ProjectID { get; set; } 
+
+        //to link
         public int BidID { get; set; }
 
         public string LastName { get; set; }
 
+        //to link client to project
         public int ClientID { get; set; }
 
         [Required]
@@ -28,6 +34,10 @@ namespace CapStoneProject.Models.ViewModels
         public string ProjectName { get; set; }
 
         [Required]
-        public decimal Estimate { get; set; }
+        public decimal Estimate { get; set; } //To be editable by EditProject
+
+        public string Status { get; set; } //To be editable by EditProject
+
+        public DateTime StatusDate { get; set; } //To be editable by EditProject
     }
 }
