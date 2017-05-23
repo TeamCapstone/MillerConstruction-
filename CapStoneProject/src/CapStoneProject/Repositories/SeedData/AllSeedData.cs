@@ -144,7 +144,7 @@ namespace CapStoneProject.Repositories.SeedData
                     Body = "it them a bit more time than I though and it was not worth it!!",
                     From = user2,
                     Approved = false,
-                    Date = new DateTime(2006, 8, 22),
+                    Date = new DateTime(2010, 8, 10),
 
                 };
 

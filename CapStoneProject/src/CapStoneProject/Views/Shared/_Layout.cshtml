@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width" />
 
     <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
@@ -62,12 +64,12 @@
                             }
                             else
                             {
-                                <li class="nav-item"><a asp-action="BidRequest" asp-controller="BidRequest">Request a Quote</a></li>
+                                <li class="nav-item"><a asp-action="LoggedInBidRequest" asp-controller="BidRequest">Request a Quote</a></li>
                             }
 
-                            <li class="nav-item"><a asp-action="Index" asp-controller="Services">Services</a></li>
-                            <li class="nav-item"><a asp-action="Index" asp-controller="About">About</a></li>
-                            <li class="nav-item"><a asp-action="Index" asp-controller="FAQ">FAQ</a></li>
+                            <li class="nav-item"><a asp-action="Services" asp-controller="Services">Services</a></li>
+                            <li class="nav-item"><a asp-action="About" asp-controller="About">About</a></li>
+                            <li class="nav-item"><a asp-action="FAQ" asp-controller="FAQ">FAQ</a></li>
                             <li class="nav-item"><a asp-action="AllApprovedReviews" asp-controller="Review">Reviews</a></li>
                             <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>
                             @if (User.Identity.Name == null)

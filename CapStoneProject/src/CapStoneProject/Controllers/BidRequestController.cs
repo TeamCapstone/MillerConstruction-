@@ -15,6 +15,7 @@ using System.Security.Cryptography.X509Certificates;
 using Google.Apis.Auth.OAuth2;
 using System.Threading;
 using MailKit.Net.Smtp;
+using MailKit.Security;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -64,7 +65,7 @@ namespace CapStoneProject.Controllers
                 {
                     // Note: other scopes can be found here: https://developers.google.com/gmail/api/auth/scopes
                     Scopes = new[] { "https://mail.google.com/" },
-                    User = "capstonejoca@capstonejoca.iam.gserviceaccount.com"
+                    User = "capstonejoca@capstonejoca.iam.gserviceaccount.com"//Domain Name
                 }.FromCertificate(certificate));
 
                 //You can also use FromPrivateKey(privateKey) where privateKey
@@ -78,7 +79,7 @@ namespace CapStoneProject.Controllers
                 {
 
 
-                   /* var message = new MimeMessage();
+                    var message = new MimeMessage();
                     message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
                     message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
                     message.Subject = "bid Request Requested";
@@ -89,6 +90,15 @@ namespace CapStoneProject.Controllers
                     };
 
                     using (var client = new SmtpClient())
+                    {
+                        client.Connect("smtp.gmail.com", 587,false);
+                        client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
+                        client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
+                        client.Send(message);
+                        client.Disconnect(true);
+                    }
+
+                    /*using (var client = new SmtpClient())
                     {
                         client.Connect("smtp.gmail.com", 587);
 
