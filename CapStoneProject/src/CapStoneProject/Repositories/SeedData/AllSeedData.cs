@@ -48,7 +48,8 @@ namespace CapStoneProject.Repositories.SeedData
                     City = "Eugene",
                     State = "OR",
                     Zipcode = "97405",
-                    PhoneNumber = "541-548-9852",
+                    PhoneNumber = "(541) 548-9852",
+                    Email = "Hello1@gmail.com",
                     UserIdentity = user
                 };
                 context.Clients.Add(client);
@@ -103,7 +104,8 @@ namespace CapStoneProject.Repositories.SeedData
                     City = "Eugene",
                     State = "OR",
                     Zipcode = "97405",
-                    PhoneNumber = "541-548-9852",
+                    PhoneNumber = "(541) 548-9852",
+                    Email = "bstreet@gmail.com",
                     UserIdentity = user2
                 };
 

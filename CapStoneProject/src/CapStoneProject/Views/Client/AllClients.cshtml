@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Client>
 
-@{
-    Layout = "_Layout2";
-}
+<h1> @Html.ActionLink("Search for client", "SearchBy", "Client")</h1>
 
 <div class="bg-primary panel-body"><h4>Clients</h4></div>
 
@@ -29,6 +27,13 @@
                 <td>@c.PhoneNumber</td>
                 <td>@c.Email</td>
                 <td>
+                    <form asp-action="Index" asp-route-id=@c.ClientID asp-controller="Invoice" method="get">
+                        <input type="hidden" name="ClientID" value="@c.ClientID" />
+                        <button type="submit"
+                                class="btn btn-sm btn-warning">
+                            Upload Invoice
+                        </button>
+                    </form>
                     <form asp-action="Delete" asp-route-id=@c.ClientID method="post">
                         <a class="btn btn-sm btn-primary" asp-action="Edit"
                            asp-route-id=@c.ClientID>Edit</a>
