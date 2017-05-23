@@ -46,6 +46,7 @@ namespace CapStoneProject
             services.AddTransient<IBidRequestRepo, BidRequestRepo>();
             services.AddTransient<IBidRepo, BidRepo>();
             services.AddTransient<IProjectRepo, ProjectRepo>();
+            services.AddTransient<IInvoiceRepo, InvoiceRepo>();
             services.AddMemoryCache();
             services.AddSession();
             services.AddMvc();

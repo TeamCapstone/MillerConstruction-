@@ -21,14 +21,16 @@ namespace CapStoneProject.Controllers
         private RoleManager<IdentityRole> roleManager;
         private IClientRepo clientRepo;
         private IUserRepo userRepo;
+        private IInvoiceRepo invoiceRepo;
 
-        public UserController(IUserRepo usrRepo, RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
+        public UserController(IInvoiceRepo invRepo, IUserRepo usrRepo, RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
         {
             userManager = usrMgr;
             signInManager = sim;
             roleManager = roleMgr;
             clientRepo = clRepo;
             userRepo = usrRepo;
+            invoiceRepo = invRepo;
         }
 
         // GET: /<controller>/
@@ -36,6 +38,28 @@ namespace CapStoneProject.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> InvoiceList(int id)
+        {
+            UserIdentity user = new UserIdentity();
+            string name = HttpContext.User.Identity.Name;
+            user = await userManager.FindByNameAsync(name);
+            Client client = new Client();
+            client = clientRepo.GetClientByEmail(user.Email);
+            List<Invoice> invoices = new List<Invoice>();
+            invoices = invoiceRepo.GetAllInvoicesByClient(client);
+            if (invoices == null)
+            {
+                TempData["ErrorMessage"] = "No Invoices";
+                return RedirectToAction("UserPage", "User");
+            }
+            else
+            {               
+                return View(invoices);
+            }            
+        }
+
+        
 
         public ViewResult UserPage()
         {

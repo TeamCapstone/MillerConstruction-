@@ -131,7 +131,10 @@ namespace CapStoneProject.Migrations
                     b.Property<int>("InvoiceID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClientID");
+                    b.Property<int?>("ClientID")
+                        .IsRequired();
+
+                    b.Property<string>("InvoiceFilename");
 
                     b.Property<int?>("ProjectID");
 
@@ -403,7 +406,8 @@ namespace CapStoneProject.Migrations
                 {
                     b.HasOne("CapStoneProject.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientID");
+                        .HasForeignKey("ClientID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CapStoneProject.Models.Project", "Project")
                         .WithMany()

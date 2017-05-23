@@ -24,10 +24,13 @@ namespace CapStoneProject.Models
 
         public string State { get; set; }
 
+        [RegularExpression(@"^\d{5}$", ErrorMessage = "Zipcode not valid")]
         public string Zipcode { get; set; }
 
+        [RegularExpression(@"^(\(\d{3}\)\s*)?\d{3}[\s-]?\d{4}$", ErrorMessage = "Accepted format (999) 999-9999")]
         public string PhoneNumber { get; set; }
 
+        [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Email is not Valid")]
         public string Email { get; set; }
 
     }
