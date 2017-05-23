@@ -155,6 +155,74 @@ namespace CapStoneProject.Repositories.SeedData
 
                 context.SaveChanges();
             }
+
+            /*this adds a test project to seeddata. this needs to create a 
+            client, bid and bidrequest in order to do so*/
+            if (!context.Projects.Any())
+            {
+                //finds user
+                UserIdentity bidUser = await userManager.FindByEmailAsync("Hello1@gmail.com");
+
+                //creates bidrequest from
+                BidRequest bidReq = new BidRequest
+                {
+                    User = bidUser,
+                    Concrete = false,
+                    FrameWork = false,
+                    NewBuild = true,
+                    ProjectDescription = "Test bidrequest",
+                    ProjectLocation = "Your house",
+                    Remodel = false
+                };
+                context.BidRequests.Add(bidReq);
+
+                //creates bid from user Henry Holmes
+                Bid bid = new Bid
+                {
+                    ProposedStartDate = DateTime.Now,
+                    TotalEstimate = 6548.06M,
+                    RevisedProjectDescription = "Test bid for test project",
+                    BidReq = bidReq
+                };
+                bid.User = bidUser;
+                if (bid.User != null)
+                {
+                    context.Bids.Add(bid);
+                }
+
+                //creates client from Henry
+                Client client = new Client();
+                UserIdentity clientUser = bidUser;
+                client.UserIdentity = clientUser;
+                if (client.UserIdentity != null)
+                {
+                    client.FirstName = clientUser.FirstName;
+                    client.LastName = clientUser.LastName;
+                    client.Email = clientUser.Email;
+                }
+                else
+                {
+                    client.FirstName = "Ricky";
+                    client.LastName = "Bobby";
+                    client.Email = "TalladegaNights@gmail.com";
+                }
+                context.Clients.Add(client);
+
+                //creates project
+                Project project = new Project
+                {
+                    Client = client,
+                    Bid = bid,
+                    ProjectName = "Test Project",
+                    OriginalEstimate = 6548.06M,
+                    StartDate = DateTime.Now,
+                    ProjectStatus = "Started",
+                    StatusDate = DateTime.Now,
+                    AdditionalCosts = 1.94M,
+                    TotalCost = 6550M
+                };
+                context.Projects.Add(project);
+            }
         }
     }
 }

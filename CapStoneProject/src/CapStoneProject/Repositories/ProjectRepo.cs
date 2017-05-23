@@ -27,6 +27,11 @@ namespace CapStoneProject.Repositories
             return context.Projects.Where(p => p.ProjectStatus == projStatus);
         }
 
+        public Project GetProjectByID(int projectID)
+        {
+            return context.Projects.Where(p => p.ProjectID == projectID).FirstOrDefault();
+        }
+
         public IEnumerable<Project> GetProjectsByClient(int clientID)
         {
             return context.Projects.Where(p => p.Client.ClientID == clientID);
