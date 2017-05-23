@@ -211,6 +211,9 @@
     align-content: center;
     text-align: center;
     background: #99badd; 
+    padding-bottom: 150px;
+    padding-top: 150px;
+    font-size: large;
 }
 
 
@@ -269,4 +272,17 @@
     padding-right: 100px;
         align-content: center;
     text-align: center;
+}
+.erForm {
+    padding-left: 500px;
+    padding-right: 400px;
+    padding-top: 100px;
+    height: 404px;
+    font-size: x-large
+}
+.positioner{
+    position: relative;
+    left: 700px;
+    top: 250px;
+    font-size: x-large;
 }

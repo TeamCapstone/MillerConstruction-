@@ -21,7 +21,7 @@
 
     <br />
     <table class="table table-striped table-bordered table-condensed">
-        <tr>
+        <tr class="info">
             <th class="text-center">ReviewID</th>
             <th class="text-center">Review Name</th>
             <th class="text-center">Subject</th>
@@ -32,12 +32,12 @@
         </tr>
         @foreach (var review in Model)
         {
-            <tr>
-                <td class="text-left">@review.ReviewID</td>
+            <tr class="danger">
+                <td class="table-danger">@review.ReviewID</td>
                 <td class="text-left">@review.From.FirstName</td>
-                <td class="text-left">@review.Subject</td>
+                <td class="table-danger">@review.Subject</td>
                 <td class="text-left">@review.Body</td>
-                <td class="text-left">@review.Approved</td>
+                <td class="table-danger">@review.Approved</td>
                 @if (review.Date == null)
                 {
                     review.Date = DateTime.Now;
