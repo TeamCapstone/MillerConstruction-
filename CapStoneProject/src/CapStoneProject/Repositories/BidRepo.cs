@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CapStoneProject.Models;
+using Microsoft.EntityFrameworkCore;
 using CapStoneProject.Repositories.Interfaces;
+using System;
 
 namespace CapStoneProject.Repositories
 {
@@ -16,10 +16,9 @@ namespace CapStoneProject.Repositories
             context = ctx;
         }
       
-
         public IQueryable<Bid> GetAllBids()
         {
-            return context.Bids;
+            return context.Bids.Include(r => r.BidReq);
         }
 
         public Bid GetBidByUserID(int id)
@@ -27,6 +26,11 @@ namespace CapStoneProject.Repositories
             return context.Bids.First(r => r.BidID == id);
         }
 
+        //public BidRequest GetBidReqByID(int id)
+        //{
+        //    return context.Bids.FirstOrDefault(r => r.BidReq.BidRequestID == id);
+        //}
+       
 
         public Bid GetBidByClientName(string name)
         {

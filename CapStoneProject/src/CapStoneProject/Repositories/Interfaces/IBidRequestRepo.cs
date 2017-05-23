@@ -10,11 +10,13 @@ namespace CapStoneProject.Repositories.Interfaces
     {
         IQueryable<BidRequest> GetAllBidRequests();
 
-        BidRequest GetBidRequestByUserID(int id);
+        BidRequest GetBidRequestByID(int id);
         
         BidRequest GetBidRequestByClientName(string lastName);
 
         int Update(BidRequest req);
+
+        bool UniqueEmail(string email);
 
         BidRequest DeleteBR(int id);
     }

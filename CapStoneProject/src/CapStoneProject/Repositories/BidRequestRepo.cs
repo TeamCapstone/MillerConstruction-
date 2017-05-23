@@ -21,19 +21,17 @@ namespace CapStoneProject.Repositories
             return context.BidRequests.Include(r => r.User);
         }
 
-        public BidRequest GetBidRequestByUserID(int id)
+        public BidRequest GetBidRequestByID(int id)
         {
-            return context.BidRequests.First(r => r.BidRequestID == id);
+            return context.BidRequests.Include(u => u.User).First(r => r.BidRequestID == id);
         }
+
 
         public BidRequest GetBidRequestByClientName(string name)
         {
-
-
             return context.BidRequests.First(n => n.User.LastName == name);
         }
-        //TODO: write method to check if email is in database
-
+       
         public int Update(BidRequest req)
         {
             if (req.BidRequestID == 0)
@@ -44,7 +42,16 @@ namespace CapStoneProject.Repositories
             return context.SaveChanges();
         }
 
+        public bool UniqueEmail(string email)
+        {
+            BidRequest br = context.BidRequests.FirstOrDefault(r => r.User.Email == email);
+            if (br == null)
+                return false; //no user with that email in the db
+            else
+                return true;
+        }
 
+        
         public BidRequest DeleteBR(int id)
         {
             BidRequest bReq = context.BidRequests.FirstOrDefault(br => br.BidRequestID == id);

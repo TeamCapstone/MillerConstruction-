@@ -12,6 +12,7 @@ namespace CapStoneProject.Models.ViewModels
         public string CustomerFirst { get; set; }
         public string CustomerLast { get; set; }
         public string ProjectDescription { get; set; }
+        public string RevisedProjectDescription { get; set; }
         public string MaterialsDescription { get; set; }
         public decimal SupplyCost { get; set; }
         public decimal LaborCost { get; set; }

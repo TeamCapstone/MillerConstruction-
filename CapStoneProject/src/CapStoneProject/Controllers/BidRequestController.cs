@@ -46,100 +46,97 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public async Task<IActionResult> BidRequest(BidRequest bidreq)
         {
-            //TODO: check to see if email is alread in the database
-            if (ModelState.IsValid)
+            if (!bidReqRepo.UniqueEmail(bidreq.User.Email)) //if false, its not in the database so it is a unique eamil
             {
-
-                UserIdentity user = new UserIdentity
-                {
-                    UserName = bidreq.User.Email,
-                    Email = bidreq.User.Email,
-                    FirstName = bidreq.User.FirstName,
-                    LastName = bidreq.User.LastName
-                };
-                IdentityResult result = await UserManager.CreateAsync(user, bidreq.User.Password);
-
-                /*var certificate = new X509Certificate2(@"C:\Users\silva\Desktop\ProjectStone\Credentials\CapstoneJOCA-7e6ff15dda38.p12", "notasecret", X509KeyStorageFlags.Exportable);
-                var credential = new ServiceAccountCredential(new ServiceAccountCredential
-                    .Initializer("capstonejoca@capstonejoca.iam.gserviceaccount.com")
-                {
-                    // Note: other scopes can be found here: https://developers.google.com/gmail/api/auth/scopes
-                    Scopes = new[] { "https://mail.google.com/" },
-                    User = "capstonejoca@capstonejoca.iam.gserviceaccount.com"//Domain Name
-                }.FromCertificate(certificate));
-
-                //You can also use FromPrivateKey(privateKey) where privateKey
-                // is the value of the fiel 'private_key' in your serviceName.json file
-
-
-                bool success = credential.RequestAccessTokenAsync(System.Threading.CancellationToken.None).Result;*/
-
-
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
 
+                    bidreq.User.UserName = bidreq.User.Email;
+                    bidreq.User.Email = bidreq.User.Email;
+                    bidreq.User.FirstName = bidreq.User.FirstName;
+                    bidreq.User.LastName = bidreq.User.LastName;
 
-                    var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
-                    message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
-                    message.Subject = "bid Request Requested";
+                    IdentityResult result = await UserManager.CreateAsync(bidreq.User, bidreq.User.Password);
 
-                    message.Body = new TextPart("plain")
+                    if (result.Succeeded)
                     {
-                        Text = @"Hey Admin, A new bid request was created please look at it and respond."
-                    };
+                        //emailing the client to notify of request
+                        var message = new MimeMessage();
+                        message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        message.Subject = "bid Request Requested";
 
-                    using (var client = new SmtpClient())
-                    {
-                        client.Connect("smtp.gmail.com", 587,false);
-                        client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
-                        client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
-                        client.Send(message);
-                        client.Disconnect(true);
+                        message.Body = new TextPart("plain")
+                        {
+                            Text = @"Hey Admin, A new bid request was created please look at it and respond."
+                        };
+
+                        using (var client = new SmtpClient())
+                        {
+                            client.Connect("smtp.gmail.com", 587, false);
+                            client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
+                            client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
+                            client.Send(message);
+                            client.Disconnect(true);
+                        }
+
+                        bidReqRepo.Update(bidreq);
+                        return RedirectToAction("Success");
                     }
-
-                    /*using (var client = new SmtpClient())
+                    else
                     {
-                        client.Connect("smtp.gmail.com", 587);
-
-                        // use the OAuth2.0 access token obtained above as the password
-                        client.Authenticate("jocaproject6@gmail.com", credential.Token.AccessToken);//need a domain name.
-
-                        client.Send(message);
-                        client.Disconnect(true);
-                    }*/
-
-                    bidReqRepo.Update(bidreq);
-                    return RedirectToAction("Success");
-                }
-                else
-                {
-                    foreach(IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
             }
             return View(bidreq);
         }
 
-
-        //[HttpGet]
-        //public ViewResult Bid(int brID) => View(bidReqRepo.GetAllBidRequests()
-        //    .FirstOrDefault(r => r.BidRequestID == brID));
-
         [HttpGet]
-        public ViewResult Bid(int brID) => View(bidRepo.GetAllBids()
-            .FirstOrDefault(r => r.BidReq.BidRequestID == brID));
-
-        [HttpPost]
-        public ViewResult Bid(Bid bid)
+        public ViewResult Bid(int bidrequestID)
         {
-            bidRepo.Update(bid);
-            return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());
+            BidRequest br = bidReqRepo.GetBidRequestByID(bidrequestID);
+            VMBid vmbid = new VMBid();
+            vmbid.BidRequestID = bidrequestID;
+            vmbid.CustomerFirst = br.User.FirstName;
+            vmbid.CustomerLast = br.User.LastName;
+            vmbid.ProjectDescription = br.ProjectDescription;
+            return View(vmbid);
         }
 
-      
+
+        [HttpPost]
+        public ViewResult Bid(VMBid vmbid)
+        {
+            if (ModelState.IsValid)
+            {
+                var br = bidReqRepo.GetBidRequestByID(vmbid.BidRequestID);
+                Bid bid = new Models.Bid();
+                bid.BidReq = br;
+                bid.User = br.User;
+                bid.LaborCost = vmbid.LaborCost;
+                bid.MaterialsDescription = vmbid.MaterialsDescription;
+                bid.RevisedProjectDescription = vmbid.RevisedProjectDescription;
+                bid.ProjectedTimeFrame = vmbid.ProjectedTimeFrame;
+                bid.ProposedStartDate = bid.ProposedStartDate;
+                bid.SupplyCost = vmbid.SupplyCost;
+                bid.TotalEstimate = vmbid.TotalEstimate;
+
+                bidRepo.Update(bid);
+                return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill out all fields in the form.");
+            }
+            return View(vmbid);
+        }
+
+
+
 
         [HttpGet]
         public IActionResult Success()
@@ -171,7 +168,5 @@ namespace CapStoneProject.Controllers
         {
             return View(bidReqRepo.GetAllBidRequests().ToList());
         }
-
-        
     }
 }
