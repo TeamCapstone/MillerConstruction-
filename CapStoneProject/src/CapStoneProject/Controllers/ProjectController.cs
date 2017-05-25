@@ -117,9 +117,9 @@ namespace CapStoneProject.Controllers
 
         //[Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult EditProject(int projectID) //for when the admin edits a project
+        public IActionResult EditProject(int projectid) //for when the admin edits a project
         {
-            var project = projectRepo.GetProjectByID(projectID);
+            var project = projectRepo.GetProjectByID(projectid);
             var projectVM = new VMCreateProject {LastName = project.Client.LastName,
                 Email = project.Client.Email, ProjectName = project.ProjectName,
                 Estimate = project.TotalCost, StartDate = project.StartDate,
