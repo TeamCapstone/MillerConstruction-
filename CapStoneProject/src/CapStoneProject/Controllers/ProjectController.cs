@@ -48,11 +48,11 @@ namespace CapStoneProject.Controllers
 
         //[Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
+        public IActionResult CreateProject(int bidid, int clientid) //for when the admin creates a project
         {
             var projectVM = new VMCreateProject();
-            projectVM.BidID = bidID;
-            projectVM.ClientID = clientID;
+            projectVM.BidID = bidid;
+            projectVM.ClientID = clientid;
 
             return View(projectVM);
         }
@@ -66,17 +66,15 @@ namespace CapStoneProject.Controllers
             //if model requirements fulfilled
             if (ModelState.IsValid)
             {
-                //if user is found
-
                 //finds user in Clients based on Email from user
                 Client client = clientRepo.GetClientById(projectVM.ClientID);
 
-                if (clientRepo.ContainsClient(client) == true) //(user != null && client != null)
+                if (user != null) //(user != null)
                 {
-                    //if client is entered and found
+                    //if user is entered and found
 
-                    //searches for open bid for given client
-                    Bid bid = bidrepo.GetBidByClientName(projectVM.LastName);
+                    //searches for open bid for given user
+                    Bid bid = bidrepo.GetBidByClientName(user.LastName);
                     
                     if(bid != null)
                     {
@@ -87,12 +85,12 @@ namespace CapStoneProject.Controllers
                             ProjectName = projectVM.ProjectName,
                             StartDate = projectVM.StartDate,
                             OriginalEstimate = projectVM.Estimate,
-                            Bid = bidrepo.GetBidByClientName(projectVM.LastName)
+                            Bid = bidrepo.GetBidByClientName(user.LastName)
                         };
 
                         projectRepo.ProjectUpdate(project);
 
-                        return RedirectToAction("AdminPage", "Admin"); //TODO: fill in with AdminPage and controller that holds it
+                        return RedirectToAction("AdminPage", "Admin");
                     }
                     else
                     {
@@ -120,24 +118,23 @@ namespace CapStoneProject.Controllers
         public IActionResult EditProject(int projectid) //for when the admin edits a project
         {
             var project = projectRepo.GetProjectByID(projectid);
-            var projectVM = new VMCreateProject {LastName = project.Client.LastName,
-                Email = project.Client.Email, ProjectName = project.ProjectName,
-                Estimate = project.TotalCost, StartDate = project.StartDate,
-                Status = project.ProjectStatus, StatusDate = project.StatusDate,
-                ProjectID = project.ProjectID}; //TODO: create new VM for Edit Project
+            var projectVM = new VMEditProject {LastName = project.Client.LastName,
+                FirstName = project.Client.FirstName, Email = project.Client.Email,
+                ProjectName = project.ProjectName, Estimate = project.TotalCost,
+                StartDate = project.StartDate, Status = project.ProjectStatus,
+                StatusDate = project.StatusDate, ProjectID = project.ProjectID}; 
 
             return View(projectVM);
         }
 
         [HttpPost]
-        public IActionResult EditProject(VMCreateProject projectVM)
+        public IActionResult EditProject(VMEditProject projectVM)
         {
             Project project = projectRepo.GetProjectByID(projectVM.ProjectID);
 
             if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null
                 && projectVM.StatusDate != null)
             {
-                //TODO: Fill in
                 project.TotalCost = projectVM.Estimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
@@ -145,7 +142,7 @@ namespace CapStoneProject.Controllers
 
                 projectRepo.ProjectUpdate(project);
 
-                return RedirectToAction("AdminPage", "Admin"); //TODO: fill in with AdminPage and controller that holds it
+                return RedirectToAction("AdminPage", "Admin");
             }
             else
             {
