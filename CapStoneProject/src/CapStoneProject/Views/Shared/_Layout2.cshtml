@@ -97,27 +97,28 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-4 footDiv">
-                    <h3>Servicing</h3>
+                <div class="col-md-4">
+
                     <p>
+                        <h3 class="welcome">Servicing</h3>
                         Canby, OR and
                         <br /> surrounding areas.
                     </p>
                 </div>
-                <div class="col-md-4 footDiv">
+                <div class="col-md-4">
                     <h3>links</h3>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
+                    <ul class="list-inline ">
+                        <li class="socFtr">
+                            <a href="https://www.facebook.com/millerccinc/" class="btn-social btn-outline socFtr"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
                         </li>
-                        <li>
-                            <a href="#" class="btn-social btn-outline"><span class="sr-only">Instagram</span><i class="fa fa-fw fa-instagram"></i></a>
+                        <li class="socFtr">
+                            <a href="#" class="btn-social btn-outline socFtr"><span class="sr-only">Instagram</span><i class="fa fa-fw fa-instagram"></i></a>
                         </li>
 
                     </ul>
                 </div>
-                <div class="col-md-4 footDiv">
-                    <br />
+                <div class="col-md-4" id="rtFtDiv">
+
                     @if (User.Identity.Name == null)
                     {
                         <h3><a asp-action="Login" asp-controller="Account">Login</a></h3>
