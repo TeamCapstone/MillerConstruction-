@@ -68,7 +68,7 @@ namespace CapStoneProject.Controllers
                 Client altC = new Client();
                 projectVM.ClientID = altC.ClientID;
                 projectVM.BidID = bidID;               
-                projectVM.LastName = b.User.LastName;
+                //projectVM.LastName = b.User.LastName;
                 projectVM.Email = b.User.Email;
 
             }
@@ -76,7 +76,7 @@ namespace CapStoneProject.Controllers
             {
                 projectVM.BidID = bidID;
                 projectVM.ClientID = c.ClientID;
-                projectVM.LastName = b.User.LastName;
+                //projectVM.LastName = b.User.LastName;
                 projectVM.Email = b.User.Email;
             }
             
@@ -106,7 +106,7 @@ namespace CapStoneProject.Controllers
                     //if client is entered and found
 
                     //searches for open bid for given client
-                    Bid bid = bidrepo.GetBidByClientName(projectVM.LastName);
+                    Bid bid = bidrepo.GetBidByID(projectVM.BidID);
                     
                     if(bid != null)
                     {
@@ -117,7 +117,7 @@ namespace CapStoneProject.Controllers
                             ProjectName = projectVM.ProjectName,
                             StartDate = projectVM.StartDate,
                             OriginalEstimate = projectVM.Estimate,
-                            Bid = bidrepo.GetBidByClientName(projectVM.LastName)
+                            Bid = bidrepo.GetBidByID(projectVM.BidID)
                         };
 
                         projectRepo.ProjectUpdate(project);
@@ -150,7 +150,7 @@ namespace CapStoneProject.Controllers
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
             var project = projectRepo.GetProjectByID(projectID);
-            var projectVM = new VMCreateProject {LastName = project.Client.LastName,
+            var projectVM = new VMEditProject {LastName = project.Client.LastName,
                 Email = project.Client.Email, ProjectName = project.ProjectName,
                 Estimate = project.TotalCost, StartDate = project.StartDate,
                 Status = project.ProjectStatus, StatusDate = project.StatusDate,
@@ -160,7 +160,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProject(VMCreateProject projectVM)
+        public IActionResult EditProject(VMEditProject projectVM)
         {
             Project project = projectRepo.GetProjectByID(projectVM.ProjectID);
 
