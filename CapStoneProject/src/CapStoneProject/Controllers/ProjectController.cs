@@ -66,9 +66,6 @@ namespace CapStoneProject.Controllers
             //if model requirements fulfilled
             if (ModelState.IsValid)
             {
-                //finds user in Clients based on Email from user
-                Client client = clientRepo.GetClientById(projectVM.ClientID);
-
                 if (user != null) //(user != null)
                 {
                     //if user is entered and found
@@ -78,19 +75,30 @@ namespace CapStoneProject.Controllers
                     
                     if(bid != null)
                     {
-                        //create project
-                        Project project = new Project
+                        //finds user in Clients based on Email from user
+                        Client client = clientRepo.GetClientById(projectVM.ClientID);
+
+                        if(client.ClientID != 0) //if clientid isnt 0, i.e. client found
                         {
-                            Client = clientRepo.GetClientById(client.ClientID),
-                            ProjectName = projectVM.ProjectName,
-                            StartDate = projectVM.StartDate,
-                            OriginalEstimate = projectVM.Estimate,
-                            Bid = bidrepo.GetBidByClientName(user.LastName)
-                        };
+                            //create project
+                            Project project = new Project
+                            {
+                                Client = clientRepo.GetClientById(client.ClientID),
+                                ProjectName = projectVM.ProjectName,
+                                StartDate = projectVM.StartDate,
+                                OriginalEstimate = projectVM.Estimate,
+                                Bid = bidrepo.GetBidByClientName(user.LastName)
+                            };
 
-                        projectRepo.ProjectUpdate(project);
+                            projectRepo.ProjectUpdate(project);
 
-                        return RedirectToAction("AdminPage", "Admin");
+                            return RedirectToAction("AdminPage", "Admin");
+                        }
+                        else //if clientid is 0
+                        {
+                            //pass in user info, send to create client. after client created,
+                            //redirect back to create project
+                        }
                     }
                     else
                     {
