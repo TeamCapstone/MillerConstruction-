@@ -68,7 +68,7 @@ namespace CapStoneProject.Controllers
                 Client altC = new Client();
                 projectVM.ClientID = altC.ClientID;
                 projectVM.BidID = bidID;               
-                //projectVM.LastName = b.User.LastName;
+                projectVM.LastName = b.User.LastName;
                 projectVM.Email = b.User.Email;
 
             }
@@ -76,7 +76,7 @@ namespace CapStoneProject.Controllers
             {
                 projectVM.BidID = bidID;
                 projectVM.ClientID = c.ClientID;
-                //projectVM.LastName = b.User.LastName;
+                projectVM.LastName = b.User.LastName;
                 projectVM.Email = b.User.Email;
             }
             
@@ -113,6 +113,7 @@ namespace CapStoneProject.Controllers
                         //create project
                         Project project = new Project
                         {
+                            ProjectID = projectVM.ProjectID,
                             Client = clientRepo.GetClientById(client.ClientID),
                             ProjectName = projectVM.ProjectName,
                             StartDate = projectVM.StartDate,
