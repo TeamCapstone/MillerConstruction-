@@ -47,15 +47,45 @@ namespace CapStoneProject.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
+        //[HttpGet]
+        //public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
+        //{
+        //    var projectVM = new VMCreateProject();
+        //    projectVM.BidID = bidID;
+        //    projectVM.ClientID = clientID;
+
+        //    return View(projectVM);
+        //}
+
         [HttpGet]
-        public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
+        public IActionResult CreateProject(int bidID)
         {
-            var projectVM = new VMCreateProject();
-            projectVM.BidID = bidID;
-            projectVM.ClientID = clientID;
+            VMCreateProject projectVM = new VMCreateProject();
+            Bid b = bidrepo.GetBidByID(bidID);
+            Client c = clientRepo.GetClientByEmail(b.User.Email);
+            if (c == null)
+            {
+                Client altC = new Client();
+                projectVM.ClientID = altC.ClientID;
+                projectVM.BidID = bidID;               
+                projectVM.LastName = b.User.LastName;
+                projectVM.Email = b.User.Email;
+
+            }
+            else
+            {
+                projectVM.BidID = bidID;
+                projectVM.ClientID = c.ClientID;
+                projectVM.LastName = b.User.LastName;
+                projectVM.Email = b.User.Email;
+            }
+            
 
             return View(projectVM);
         }
+
+      
+
 
         [HttpPost]
         public async Task<IActionResult> CreateProject(VMCreateProject projectVM)
