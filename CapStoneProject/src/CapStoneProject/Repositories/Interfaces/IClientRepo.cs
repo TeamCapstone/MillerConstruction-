@@ -8,7 +8,7 @@ namespace CapStoneProject.Repositories.Interfaces
 {
     public interface IClientRepo
     {
-        List<Client> GetAllClients();
+        IQueryable<Client> GetAllClients();
         int Create(Client client);
         int Update(Client client);
         int Delete(int id);

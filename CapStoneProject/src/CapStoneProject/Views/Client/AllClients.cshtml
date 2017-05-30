@@ -4,13 +4,26 @@
     Layout = "_Layout2";
 }
 
-<h1> @Html.ActionLink("Search for client", "SearchBy", "Client")</h1>
+<div id="modal-container" class="modal fade hidden-print" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
 
 <div class="bg-primary panel-body"><h4>Clients</h4></div>
 
 <div class="text-danger" asp-validation-summary="All"></div>
 
-<table class="table table-condensed table-bordered">
+<form asp-controller="Client" asp-action="AllClients">
+    <p>
+        <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table table-condensed table-bordered" id="interiorDiv">
     <tr><th>First Name</th><th>Last Name</th><th>Company Name</th><th>Street</th><th>City</th><th>State</th><th>Zipcode</th><th>Phone Number</th><th>Email</th></tr>
     @if (Model.Count() == 0)
     {
@@ -31,12 +44,16 @@
                 <td>@c.PhoneNumber</td>
                 <td>@c.Email</td>
                 <td>
-                    <form asp-action="Index" asp-route-id=@c.ClientID asp-controller="Invoice" method="get">
+                    <form asp-action="ModalAction" asp-route-id=@c.ClientID asp-controller="Client" method="get">
+                        
+                        <a asp-action="ModalAction" asp-controller="Client" 
+                           asp-route-id=@c.ClientID data-target="#modal-container" data-toggle="modal" class="btn btn-sm btn-warning">Upload Invoice</a>
+                        
                         <input type="hidden" name="ClientID" value="@c.ClientID" />
-                        <button type="submit"
+                        @*<button data-toggle="modal" data-target="#modal-container" type="submit"
                                 class="btn btn-sm btn-warning">
                             Upload Invoice
-                        </button>
+                        </button>*@
                     </form>
                     <form asp-action="Delete" asp-route-id=@c.ClientID method="post">
                         <a class="btn btn-sm btn-primary" asp-action="Edit"
@@ -47,9 +64,11 @@
                             Delete
                         </button>
                     </form>
-</td>
+                </td>
             </tr>
         }
     }
 </table>
 <a class="btn btn-primary" asp-action="Create">Create</a>
+
+
