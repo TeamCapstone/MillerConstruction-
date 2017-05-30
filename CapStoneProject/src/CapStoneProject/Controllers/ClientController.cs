@@ -10,6 +10,10 @@ using CapStoneProject.Models.ViewModels;
 using CapStoneProject.Repositories;
 using CapStoneProject.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 
 
@@ -25,13 +29,17 @@ namespace CapStoneProject.Controllers
         private SignInManager<UserIdentity> signInManager;
         private RoleManager<IdentityRole> roleManager;
         private IClientRepo clientRepo;
+        private IHostingEnvironment environment;
+        private IInvoiceRepo invoiceRepo;
 
-        public ClientController(RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
+        public ClientController(IHostingEnvironment env, IInvoiceRepo invRepo,RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
         {
             userManager = usrMgr;
             signInManager = sim;
             roleManager = roleMgr;
             clientRepo = clRepo;
+            environment = env;
+            invoiceRepo = invRepo;
         }
 
         public IActionResult Create()
@@ -132,7 +140,7 @@ namespace CapStoneProject.Controllers
         }
 
         public ViewResult AllClients()
-        {
+        {            
             return View(clientRepo.GetAllClients().ToList());
         }
 
@@ -158,6 +166,66 @@ namespace CapStoneProject.Controllers
                 return View();
             else
                 return RedirectToAction("Edit", new { id = c.ClientID });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AllClients(string searchString)
+        {
+            var clients = clientRepo.GetAllClients();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                clients = clients.Where(m => m.FirstName.Contains(searchString) || m.LastName.Contains(searchString) || m.Email.Contains(searchString) || m.CompanyName.Contains(searchString));
+            }
+            return View(await clients.ToListAsync());
+        }
+
+        public ActionResult ModalAction(int Id)
+        {
+            Client client = new Client();
+            client = clientRepo.GetClientById(Id);
+            ViewBag.Id = Id;
+            return PartialView("ModalContent");
+        }
+
+        [HttpGet]
+        public IActionResult InvoiceUpload(int clientId)
+        {
+            Client client = new Client();
+            client = clientRepo.GetClientById(clientId);
+            return View(client);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InvoiceUpload(ICollection<IFormFile> files, int id)
+        {
+            Invoice invoice = new Invoice();
+            Client c = new Client();
+            c = clientRepo.GetClientById(id);
+            //Client c = clientRepo.GetClientById(client.ClientID);
+            var uploads = Path.Combine(environment.WebRootPath, "invoices");
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    invoice.InvoiceFilename = file.FileName;
+                    invoice.Client = c;
+                    invoiceRepo.Create(invoice);
+
+                    using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                }
+            }
+            return RedirectToAction("AdminPage", "Admin");
+        }
+
+        public FileResult Download(string fname)
+        {
+            var filename = fname;
+            var filepath = "wwwroot/invoices/" + filename;
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filepath);
+            return File(fileBytes, "application/x-msdownload", filename);
         }
 
     }

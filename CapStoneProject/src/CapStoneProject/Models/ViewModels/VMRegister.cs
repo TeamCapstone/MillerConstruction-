@@ -20,6 +20,7 @@ namespace CapStoneProject.Models.ViewModels
 
         public string Street { get; set; }
 
+        [RegularExpression(@"^(\(\d{3}\)\s*)?\d{3}[\s-]?\d{4}$", ErrorMessage = "Accepted format (999) 999-9999")]
         public string PhoneNumber { get; set; }
 
         public string City { get; set; }
