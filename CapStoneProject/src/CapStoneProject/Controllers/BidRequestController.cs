@@ -16,6 +16,7 @@ using Google.Apis.Auth.OAuth2;
 using System.Threading;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using MailKit.Net.Imap;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -60,10 +61,13 @@ namespace CapStoneProject.Controllers
 
                     if (result.Succeeded)
                     {
+
+
+
                         //emailing the client to notify of request
                         var message = new MimeMessage();
                         message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
-                        message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        message.To.Add(new MailboxAddress("Joel", "jocaproject6@gmail.com"));
                         message.Subject = "bid Request Requested";
 
                         message.Body = new TextPart("plain")
@@ -73,10 +77,16 @@ namespace CapStoneProject.Controllers
 
                         using (var client = new SmtpClient())
                         {
-                            client.Connect("smtp.gmail.com", 587, false);
-                            client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
+                            client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+                            client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
+
+                            client.AuthenticationMechanisms.Remove("XOAUTH2");
+
                             client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
+
                             client.Send(message);
+
                             client.Disconnect(true);
                         }
 

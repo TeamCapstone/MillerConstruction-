@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CapStoneProject.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -322,7 +322,8 @@ namespace CapStoneProject.Migrations
                 {
                     InvoiceID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClientID = table.Column<int>(nullable: true),
+                    ClientID = table.Column<int>(nullable: false),
+                    InvoiceFilename = table.Column<string>(nullable: true),
                     ProjectID = table.Column<int>(nullable: true),
                     TotalPrice = table.Column<decimal>(nullable: false)
                 },
@@ -334,7 +335,7 @@ namespace CapStoneProject.Migrations
                         column: x => x.ClientID,
                         principalTable: "Clients",
                         principalColumn: "ClientID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Invoices_Projects_ProjectID",
                         column: x => x.ProjectID,
