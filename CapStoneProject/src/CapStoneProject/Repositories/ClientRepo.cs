@@ -25,9 +25,16 @@ namespace CapStoneProject.Repositories
             }
         }
 
-        public List<Client> GetAllClients()
+        //public List<Client> GetAllClients()
+        //{
+        //    return Client.ToList();
+        //}
+
+        public IQueryable<Client> GetAllClients()
         {
-            return Client.ToList();
+
+            return context.Clients.Include(c => c.UserIdentity);
+
         }
 
         public int Create(Client client)
