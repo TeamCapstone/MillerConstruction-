@@ -17,10 +17,15 @@
 #navUL {
     padding-top: 50px;
 }
+
+#innerNavLI1, #innerNavLI2, #innerNavLI3{
+    color: red;
+}
+
 #navDiv{
     font-family: 'Bauhaus 93';
     background-color: black;
-    color: orangered;
+    color: red;
     margin-bottom: 0px;
     padding-top: 0px;
     border-bottom: 0px;
@@ -41,9 +46,13 @@
 /*Footer Section*/
 #footDiv{
     font-family: 'Bauhaus 93';
-    font-size: 160%;
+    font-size: 200%;
     background-color: black;
     color: red;
+}
+
+#rtFtDiv{
+    padding-top: 15px;
 }
 
 #footBelow{
@@ -51,8 +60,13 @@
 }
 
 .welcome{
-    color: orangered;
+    color: blanchedalmond;
+}
 
+.socFtr{
+    padding: 10px;
+    font-size: 60px;
+    color: blanchedalmond;
 }
 
 /*Home Page Section*/
@@ -69,8 +83,9 @@
     max-height: 400px;
 }
 
+
 #missionDiv {
-    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    background: url('../images/concrete1_1.jpg') no-repeat center center fixed;
     height: 400px;
     min-width: 97%;
     margin: 20px;
@@ -91,7 +106,7 @@
 /*Layout2 Section, all other pages*/
 
 #layoutDiv{
-    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    background: url('../images/concrete1_1.jpg') no-repeat center center fixed;
     font-family: Arial;
     margin: 0px;
     width: 100%;
@@ -101,8 +116,8 @@
 }
 
 /*All Forms Change html*/
-#formDiv{
-    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+.formDiv{
+    background: url('../images/concrete1_1.jpg') no-repeat center center fixed;
     font-family: Arial;
     margin: 0px;
     width: 100%;
@@ -112,7 +127,7 @@
 }
 
 #userPageDiv{
-    background: url('../images/concrete1.jpg') no-repeat center center fixed;
+    background: url('../images/concrete1_1.jpg') no-repeat center center fixed;
     font-family: Arial;
     margin: 0px;
     width: 100%;
@@ -135,6 +150,15 @@
     padding: 20px;
     border-radius: 5px;
 }
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: blanchedalmond; 
+ }
+.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+   background-color: white; 
+ }
 
 /*Bid Request Section*/
 #BRtitle {
@@ -182,11 +206,7 @@
     font-size: 2em;
 }
 /*About Page Section*/
-
-
 /*Services Page Section */
-
-
 /*FAQ Page Section*/
 
 
@@ -207,24 +227,37 @@
 
 
 /*Gallery Page Section*/
-#galDiv{
-    background: url('../images/concrete1.jpg') no-repeat center center fixed;
-    margin: 0px;
-    width: 100%;
-    padding-bottom: 50px;
-    min-height: 500px;
+#galIndexRow{
+    padding-top: 20px;
 }
 
-#galFR{
-   width: 50px;
-   height: 50px;
+.galIntro{
+    border-radius: 5px;
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    -webkit-box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 5px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 5px 2px rgba(0,0,0,0.75);
+    margin-bottom:20px;
 }
 
-#galCon{
-   width: 50px;
-   height: 50px;
+img:hover {
+  filter: none; /* IE6-9 */
+  -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+ 
 }
 
+.galHeading{
+    text-align: center;
+    font-family: 'Bauhaus 93';
+    color: white;
+    padding: 5px;
+    text-shadow: .5px .5px .5px black;
+}
+
+
+
+/*figure out where this is.....*/
 #RAP {
     align-content: center;
     text-align: center;

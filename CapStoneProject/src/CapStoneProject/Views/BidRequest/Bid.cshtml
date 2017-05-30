@@ -127,7 +127,7 @@
                     <div class="form-group">
                         <div class="col-lg-4">
                             <label asp-for="ProposedStartDate">Proprosed Start Date:</label>
-                            <input class="form-control" type="date" asp-for="ProposedStartDate" id="supplyVM">
+                            <input class="form-control" type="date" asp-for="ProposedStartDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" id="supplyVM">
                         </div>
                     </div>
                 </div>

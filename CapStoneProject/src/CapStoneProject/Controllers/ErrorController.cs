@@ -8,28 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CapStoneProject.Controllers
 {
-    public class GalleryController : Controller
+    public class ErrorController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
-
-        public ViewResult Concrete()
-        {
-            return View();
-        }
-
-        public ViewResult Framing()
-        {
-            return View();
-        }
-
-        public ViewResult Remodel()
-        {
-            return View();
-        }
-
     }
 }

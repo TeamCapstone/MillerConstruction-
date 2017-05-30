@@ -1,18 +1,25 @@
-﻿<div class="container" id="galDiv">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="container" id="galFR">
-                <h2>Framework Gallery</h2>
-                <img src="../images/craftsPorchSide.jpg" class="img-responsive" alt="craftsman porch">
-            </div>
-        </div>
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <div class="container" id="galCon">
-                <h2>Concrete Gallery</h2>
-                <img src="../images/leafConcrete.jpg" class="img-responsive" alt="craftsman porch">
-            </div>
-        </div>
+﻿
 
+@{
+    ViewData["Title"] = "Gallery";
+    Layout = "_Layout2";
+}
+
+<div class="container">
+    <div class="row" id="galIndexRow">
+
+        <div class="col-lg-4" >
+            <a href="@Url.Action("Remodel", "Gallery")"><img class="img-responsive galIntro" src="~/images/bathSurround.jpg" /></a>
+            <h2 class="text-center"><a href="@Url.Action("Remodel", "Gallery")" class="galHeading">Remodel Gallery</a></h2>
         </div>
+        <div class="col-lg-4" >
+            <a href="@Url.Action("Concrete", "Gallery")"><img class="img-responsive galIntro" src="~/images/leafConcrete.jpg" /></a>
+            <h2 class="text-center"><a href="@Url.Action("Concrete", "Gallery")" class="galHeading">Concrete Gallery</a></h2>
+        </div>
+        <div class="col-lg-4" >
+            <a href="@Url.Action("Framing", "Gallery")"><img class="img-responsive galIntro" src="~/images/deck.jpg" /></a>
+            <h2 class="text-center"><a href="@Url.Action("Framing", "Gallery")" class="galHeading">Framing Gallery</a></h2>
+        </div>
+        
+    </div>
 </div>
