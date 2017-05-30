@@ -8,8 +8,8 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170523232745_initial")]
-    partial class initial
+    [Migration("20170530211029_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("ProjectLocation");
 
                     b.Property<bool>("Remodel");
+
+                    b.Property<bool>("Responded");
 
                     b.Property<string>("UserId");
 
