@@ -15,6 +15,7 @@
                 <th>Start Date</th>
                 <th>Status</th>
                 <th>Last Updated</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                     <td>@p.StartDate</td>
                     <td>@p.ProjectStatus</td>
                     <td>@p.StatusDate</td>
+                    <td><a asp-action="EditProject" asp-controller="Project" asp-route-projectid="@p.ProjectID" class="btn-primary" value="@DateTime.Today.ToString()">Edit Project</a></td>
                 </tr>
             }
         </tbody>

@@ -1,24 +1,30 @@
-﻿@model VMCreateProject
+﻿@model VMEditProject
 @{
     ViewBag.Title = "Edit Project";
 }
 
 <h1 class="text-center">Edit Project:</h1>
 <form asp-controller="Project" asp-action="EditProject" method="post">
+    <input asp-for="ProjectID" type="hidden" />
+    <div class="form-group">
+        <h3>Project Name</h3>
+        <div><span asp-validation-for="ProjectName" class="text-danger"></span></div>
+        <input asp-for="ProjectName" class="form-control" disabled /><br />
+    </div>
     <div class="form-group">
         <h3>Client E-mail</h3>
         <div><span asp-validation-for="Email" class="text-danger"></span></div>
         <input asp-for="Email" class="form-control" disabled /><br />
     </div>
     <div class="form-group">
-        <h3>Client Last Name</h3>
+        <h3>Client E-mail</h3>
         <div><span asp-validation-for="LastName" class="text-danger"></span></div>
         <input asp-for="LastName" class="form-control" disabled /><br />
     </div>
     <div class="form-group">
-        <h3>Project Name</h3>
-        <div><span asp-validation-for="ProjectName" class="text-danger"></span></div>
-        <input asp-for="ProjectName" class="form-control" disabled /><br />
+        <h3>Client E-mail</h3>
+        <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+        <input asp-for="FirstName" class="form-control" disabled /><br />
     </div>
     <div class="form-group">
         <h3>Estimated Cost</h3>

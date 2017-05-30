@@ -1,7 +1,7 @@
 ﻿@model List<BidRequest>
 
 @{
-    Layout = "_Layout";
+    Layout = "_Layout2";
 }
 
 
@@ -16,31 +16,30 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Location</th>
-                    <th>Action</th>
+                    <th class="text-right">Action</th>
 
                 </tr>
                
-                @foreach (var v in Model)
+                @foreach (var br in Model)
                 {
                     <tr>
-                        <td>@v.BidRequestID</td>
-                        @if (v.User.LastName == null)
+                        <td>@br.BidRequestID</td>
+                        @if (br.User.LastName == null)
                         {
-                            <td>@v.User.FirstName</td>
+                            <td>@br.User.FirstName</td>
                         }
                         else
                         {
-                            <td>@v.User.LastName</td>
+                            <td>@br.User.LastName</td>
                         }
-                        <td>@v.ProjectDescription</td>
-                        <td>@v.ProjectLocation</td>
+                        <td>@br.ProjectDescription</td>
+                        <td>@br.ProjectLocation</td>
                         <td>
-                            <form asp-action="Delete" method="post" class="">
+                            <form asp-action="DeleteBidReq" method="post" class="">
                                 <div class="btn-toolbar">
-                                    <button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>
-                                    @*<a href="@Url.Action("Bid", "BidRequest", new { id = v.BidRequestID })" class="btn btn-sm btn-primary pull-right">Respond</a>*@
-                                    <a asp-action="Bid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidrequestId="@v.BidRequestID">Respond</a>
-                                    <input class="" type="hidden" name="BidRequestID" value="@v.BidRequestID" />
+                                    <button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>                                
+                                    <a asp-action="Bid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidrequestId="@br.BidRequestID">Respond</a>
+                                    <input class="" type="hidden" name="BidRequestID" value="@br.BidRequestID" />
                                 </div>
                             </form>
                         </td>

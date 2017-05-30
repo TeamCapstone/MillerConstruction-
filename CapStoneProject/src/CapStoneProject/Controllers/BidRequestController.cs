@@ -16,7 +16,6 @@ using Google.Apis.Auth.OAuth2;
 using System.Threading;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using MailKit.Net.Imap;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -61,34 +60,25 @@ namespace CapStoneProject.Controllers
 
                     if (result.Succeeded)
                     {
-
-
-
                         //emailing the client to notify of request
-                        var message = new MimeMessage();
-                        message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
-                        message.To.Add(new MailboxAddress("Joel", "jocaproject6@gmail.com"));
-                        message.Subject = "bid Request Requested";
+                        //var message = new MimeMessage();
+                        //message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        //message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        //message.Subject = "bid Request Requested";
 
-                        message.Body = new TextPart("plain")
-                        {
-                            Text = @"Hey Admin, A new bid request was created please look at it and respond."
-                        };
+                        //message.Body = new TextPart("plain")
+                        //{
+                        //    Text = @"Hey Admin, A new bid request was created please look at it and respond."
+                        //};
 
-                        using (var client = new SmtpClient())
-                        {
-                            client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-
-                            client.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-
-                            client.AuthenticationMechanisms.Remove("XOAUTH2");
-
-                            client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
-
-                            client.Send(message);
-
-                            client.Disconnect(true);
-                        }
+                        //using (var client = new SmtpClient())
+                        //{
+                        //    client.Connect("smtp.gmail.com", 587, false);
+                        //    client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
+                        //    client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
+                        //    client.Send(message);
+                        //    client.Disconnect(true);
+                        //}
 
                         bidReqRepo.Update(bidreq);
                         return RedirectToAction("Success");
@@ -134,7 +124,8 @@ namespace CapStoneProject.Controllers
                 bid.ProposedStartDate = bid.ProposedStartDate;
                 bid.SupplyCost = vmbid.SupplyCost;
                 bid.TotalEstimate = vmbid.TotalEstimate;
-
+                br.Responded = true;
+                bidReqRepo.Update(br);
                 bidRepo.Update(bid);
                 return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());
             }
@@ -168,6 +159,11 @@ namespace CapStoneProject.Controllers
 
             if (ModelState.IsValid)
             {
+                bidreq.User.UserName = bidreq.User.Email;
+                bidreq.User.Email = bidreq.User.Email;
+                bidreq.User.FirstName = bidreq.User.FirstName;
+                bidreq.User.LastName = bidreq.User.LastName;
+
                 bidReqRepo.Update(bidreq);
                 return RedirectToAction("Success");
             }
@@ -178,5 +174,39 @@ namespace CapStoneProject.Controllers
         {
             return View(bidReqRepo.GetAllBidRequests().ToList());
         }
+
+        public IActionResult AllBids()
+        {
+            return View(bidRepo.GetAllBids().ToList());
+        }
+
+        //TODO: finish and create html
+        public ViewResult ViewBid(int bidID)
+        {
+            return View();
+        }
+
+        //TODO: Delete bid and br
+        public IActionResult DeleteBidReq(int bidrequestID)
+        {
+            BidRequest deletedBR = bidReqRepo.DeleteBR(bidrequestID);
+            if (deletedBR == null)
+            {
+                return View("Error");
+            }
+            return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());           
+        }
+
+        public IActionResult DeleteBid(int bidID)
+        {
+            Bid deletedB = bidRepo.DeleteBid(bidID);
+            if (deletedB == null)
+            {
+                return View("Error");
+            }
+            return View("AllBids", bidRepo.GetAllBids().ToList());
+        }
+
+        
     }
 }
