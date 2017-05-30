@@ -15,5 +15,21 @@ namespace CapStoneProject.Controllers
         {
             return View();
         }
+
+        public ViewResult Concrete()
+        {
+            return View();
+        }
+
+        public ViewResult Framing()
+        {
+            return View();
+        }
+
+        public ViewResult Remodel()
+        {
+            return View();
+        }
+
     }
 }
