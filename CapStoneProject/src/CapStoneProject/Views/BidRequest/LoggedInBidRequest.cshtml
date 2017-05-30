@@ -20,12 +20,17 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-
-                        <input class="form-control" type="text" asp-for="User.FirstName" value="" placeholder="First Name:" id="clientNameBR" required>
+                        <input class="form-control" type="text" asp-for="User.FirstName" value="" placeholder="First Name:" id="clientFNameBR" required>
                         <span asp-validation-for="User.FirstName" class="text-danger"></span>
                     </div>
-
                 </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input class="form-control" type="text" asp-for="User.LastName" value="" placeholder="Last Name:" id="clientLNameBR" required>
+                            <span asp-validation-for="User.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
                 <div class="col-lg-6"></div>
 
                 <br />

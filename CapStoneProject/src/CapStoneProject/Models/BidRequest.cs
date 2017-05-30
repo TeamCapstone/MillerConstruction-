@@ -23,5 +23,7 @@ namespace CapStoneProject.Models
         public bool Concrete { get; set; }
 
         public bool FrameWork { get; set; }
+
+        public bool Responded { get; set; }
     }
 }

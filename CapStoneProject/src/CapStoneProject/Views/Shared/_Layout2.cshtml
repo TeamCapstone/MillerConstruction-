@@ -66,12 +66,30 @@
                             <li class="nav-item"><a asp-action="LoggedInBidRequest" asp-controller="BidRequest">Request a Quote</a></li>
                         }
 
-                        <li class="nav-item"><a asp-action="Services" asp-controller="Services">Services</a></li>
+                        @*<li class="nav-item"><a asp-action="Services" asp-controller="Services">Services</a></li>
                         <li class="nav-item"><a asp-action="About" asp-controller="About">About</a></li>
                         <li class="nav-item"><a asp-action="FAQ" asp-controller="FAQ">FAQ</a></li>
                         <li class="nav-item"><a asp-action="AllApprovedReviews" asp-controller="Review">Reviews</a></li>
+                        <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>*@
+                       
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Details
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li class="nav-item"><a class="dropdown-item" asp-action="About" asp-controller="About" id="innerNavLI1">About</a></li>
+                                
+                                <li class="nav-item"><a class="dropdown-item" asp-action="Services" asp-controller="Services" id="innerNavLI3">Services</a></li>
+                                <li class="nav-item"><a class="dropdown-item" asp-action="FAQ" asp-controller="FAQ" id="innerNavLI1">FAQ</a></li>
+                                <li class="nav-item"><a class="dropdown-item" asp-action="AllApprovedReviews" asp-controller="Review" id="innerNavLI2">Reviews</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>
-                        @if (User.Identity.Name == null)
+
+                        
+                        
+                         @if (User.Identity.Name == null)
                         {
                             <li class="nav-item"><a asp-action="Login" asp-controller="Account">Login</a></li>
                         }
@@ -96,25 +114,26 @@
     <footer class="footer container-fluid text-center" id="footDiv">
         <div class="container">
             <div class="row">
+                <h3 class="text-center welcome">Miller Custom Construction Inc.</h3>
+            </div>
+            <div class="row">
 
                 <div class="col-md-4">
 
                     <p>
-                        <h3 class="welcome">Servicing</h3>
+                        <h3 class="welcome">Serving</h3>
                         Canby, OR and
                         <br /> surrounding areas.
                     </p>
                 </div>
-                <div class="col-md-4">
-                    <h3>links</h3>
-                    <ul class="list-inline ">
-                        <li class="socFtr">
-                            <a href="https://www.facebook.com/millerccinc/" class="btn-social btn-outline socFtr"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
-                        </li>
-                        <li class="socFtr">
-                            <a href="#" class="btn-social btn-outline socFtr"><span class="sr-only">Instagram</span><i class="fa fa-fw fa-instagram"></i></a>
-                        </li>
 
+                <div class="col-md-4">
+
+                    <ul class="list-inline ">
+
+                        <li class="socFtr">
+                            <a href="https://www.facebook.com/millerccinc/" class="btn-social btn-outline socFtr"><span class="sr-only">Facebook</span><i class="fa fa-facebook-square"></i></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-4" id="rtFtDiv">

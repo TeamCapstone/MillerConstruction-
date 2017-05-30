@@ -18,19 +18,14 @@ namespace CapStoneProject.Repositories
       
         public IQueryable<Bid> GetAllBids()
         {
-            return context.Bids.Include(r => r.BidReq);
+            return context.Bids.Include(r => r.BidReq).Include(u => u.User);
         }
 
-        public Bid GetBidByUserID(int id)
+        public Bid GetBidByID(int id)
         {
-            return context.Bids.First(r => r.BidID == id);
+            return context.Bids.Include(u => u.User).Include(br => br.BidReq).First(b => b.BidID == id);
         }
 
-        //public BidRequest GetBidReqByID(int id)
-        //{
-        //    return context.Bids.FirstOrDefault(r => r.BidReq.BidRequestID == id);
-        //}
-       
 
         public Bid GetBidByClientName(string name)
         {
@@ -47,7 +42,7 @@ namespace CapStoneProject.Repositories
             return context.SaveChanges();
         }
 
-        public Bid DeleteBR(int id)
+        public Bid DeleteBid(int id)
         {
             Bid dbBid = context.Bids.FirstOrDefault(br => br.BidID == id);
             if (dbBid != null)
