@@ -55,7 +55,7 @@ namespace CapStoneProject.Controllers
                     }
                 }
             }
-            return RedirectToAction("AdminPage", "Admin");
+            return RedirectToAction("AllClients", "Client");
         }
 
         public FileResult Download(string fname)

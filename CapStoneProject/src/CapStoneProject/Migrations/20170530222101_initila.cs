@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CapStoneProject.Migrations
 {
-    public partial class init : Migration
+    public partial class initila : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
