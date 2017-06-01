@@ -18,7 +18,7 @@
     padding-top: 50px;
 }
 
-#innerNavLI1, #innerNavLI2, #innerNavLI3{
+#innerNavLI1, #innerNavLI2, #innerNavLI3,#innerNavLI4,#innerNavLI5{
     color: red;
 }
 
@@ -153,7 +153,7 @@
 
 .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: blanchedalmond; 
+   background-color: antiquewhite; 
  }
 .table-striped>tbody>tr:nth-child(even)>td, 
 .table-striped>tbody>tr:nth-child(even)>th {
