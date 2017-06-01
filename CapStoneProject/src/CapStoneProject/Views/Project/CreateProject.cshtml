@@ -7,6 +7,7 @@
 <form asp-controller="Project" asp-action="CreateProject" method="post">
     <input asp-for="BidID" type="hidden" />
     <input asp-for="ClientID" type="hidden" />
+    <input asp-for="ProjectID" type="hidden" />
     <div class="form-group">
         <h3>Client E-mail</h3>
         <div><span asp-validation-for="Email" class="text-danger"></span></div>
