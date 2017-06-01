@@ -155,7 +155,7 @@ namespace CapStoneProject.Repositories.SeedData
                 
                 
 
-                context.SaveChanges();
+                
             }
 
             /*this adds a test project to seeddata. this needs to create a 
@@ -224,6 +224,8 @@ namespace CapStoneProject.Repositories.SeedData
                     TotalCost = 6550M
                 };
                 context.Projects.Add(project);
+
+                context.SaveChanges();
             }
         }
     }
