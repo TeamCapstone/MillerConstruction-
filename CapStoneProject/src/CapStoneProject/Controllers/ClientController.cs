@@ -201,7 +201,6 @@ namespace CapStoneProject.Controllers
             Invoice invoice = new Invoice();
             Client c = new Client();
             c = clientRepo.GetClientById(id);
-            //Client c = clientRepo.GetClientById(client.ClientID);
             var uploads = Path.Combine(environment.WebRootPath, "invoices");
             foreach (var file in files)
             {
@@ -209,6 +208,7 @@ namespace CapStoneProject.Controllers
                 {
                     invoice.InvoiceFilename = file.FileName;
                     invoice.Client = c;
+                    invoice.Date = DateTime.Today;
                     invoiceRepo.Create(invoice);
 
                     using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))

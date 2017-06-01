@@ -78,6 +78,12 @@ namespace CapStoneProject.Repositories
                     select t).ToList();
         }
 
-   
+        public List<Invoice> GetAllInvoicesByClientId(int i)
+        {
+            return (from t in context.Invoices
+                    where t.Client.ClientID == i
+                    select t).ToList();
+        }
+
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CapStoneProject.Migrations
 {
-    public partial class init : Migration
+    public partial class intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -324,6 +324,7 @@ namespace CapStoneProject.Migrations
                     InvoiceID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClientID = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     InvoiceFilename = table.Column<string>(nullable: true),
                     ProjectID = table.Column<int>(nullable: true),
                     TotalPrice = table.Column<decimal>(nullable: false)

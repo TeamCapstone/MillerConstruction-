@@ -61,9 +61,14 @@ namespace CapStoneProject.Controllers
 
         
 
-        public ViewResult UserPage()
+        public async Task<IActionResult> UserPage()
         {
-            return View();
+            UserIdentity user = new UserIdentity();
+            string name = HttpContext.User.Identity.Name;
+            user = await userManager.FindByNameAsync(name);
+            Client client = new Client();
+            client = clientRepo.GetClientByEmail(user.Email);
+            return View(client);
         }
 
         public IActionResult CreateClient()
