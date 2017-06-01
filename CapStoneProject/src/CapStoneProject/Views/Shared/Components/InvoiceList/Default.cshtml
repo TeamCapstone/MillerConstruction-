@@ -1,17 +1,11 @@
 ﻿@model List<Invoice>
 
 <div class="container" id="formDiv">
-    @*@foreach (Invoice i in Model)
-        {
-            <img src="~/invoices/@i.InvoiceFilename" />
-        }*@
-
         @foreach (Invoice i in Model)
         {
-            <p>
-                @i.Date.ToString("MMMM dd, yyyy")
+            <p> @i.Date.ToString("MMMM dd, yyyy")
             <a asp-action="Download" asp-controller="Invoice" asp-route-fname=@i.InvoiceFilename>Download</a>
-             </p>
-             <br>
-          }
+            </p>
+            <br>
+        }
 </div>
