@@ -45,7 +45,6 @@ namespace CapStoneProject.Repositories
 
         public IEnumerable<Project> GetCurrentProjects(int clientID)
         {
-            //TODO: finish
             return context.Projects.Where(p => p.Client.ClientID == clientID
             && p.ProjectStatus != "Completed");
         }
