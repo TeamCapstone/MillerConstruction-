@@ -136,6 +136,8 @@ namespace CapStoneProject.Migrations
                     b.Property<int?>("ClientID")
                         .IsRequired();
 
+                    b.Property<DateTime>("Date");
+
                     b.Property<string>("InvoiceFilename");
 
                     b.Property<int?>("ProjectID");

@@ -17,6 +17,8 @@ namespace CapStoneProject.Models
         
         public Project Project { get; set; }
 
+        public DateTime Date { get; set; }
+
         [Required]
         [Range(typeof(Decimal), "1", "1,000,000,000")]
         public decimal TotalPrice { get; set; }

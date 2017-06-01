@@ -8,8 +8,8 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170530222101_initila")]
-    partial class initila
+    [Migration("20170601052624_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,6 +136,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<int?>("ClientID")
                         .IsRequired();
+
+                    b.Property<DateTime>("Date");
 
                     b.Property<string>("InvoiceFilename");
 

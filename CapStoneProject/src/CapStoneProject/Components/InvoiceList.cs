@@ -1,6 +1,8 @@
 ﻿using CapStoneProject.Models;
 using CapStoneProject.Models.ViewModels;
+using CapStoneProject.Repositories;
 using CapStoneProject.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,15 +13,17 @@ namespace CapStoneProject.Components
 {
     public class InvoiceList : ViewComponent
     {
-        private IInvoiceRepo repository;
+        private IInvoiceRepo invoiceRepo;
 
-        public InvoiceList(IInvoiceRepo repo)
+        public InvoiceList(IInvoiceRepo invRepo)
         {
-            repository = repo;
+            invoiceRepo = invRepo;
         }
-        public IViewComponentResult Invoke(Client c)
+        public IViewComponentResult Invoke(int i)
         {
-            return View(new VMInvoice { Invoices = repository.GetAllInvoicesByClient(c) });
+            List<Invoice> invoices = new List<Invoice>();
+            invoices = invoiceRepo.GetAllInvoicesByClientId(i);
+            return View(invoices);
         }
 
     }
