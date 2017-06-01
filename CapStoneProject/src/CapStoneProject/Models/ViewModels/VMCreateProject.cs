@@ -13,10 +13,9 @@ namespace CapStoneProject.Models.ViewModels
    
         //using client and email to search for client in db
 
-        //to link
-
         public int ProjectID { get; set; }
-
+            
+        //to link
         public int BidID { get; set; }
 
         //to link client to project
@@ -27,7 +26,7 @@ namespace CapStoneProject.Models.ViewModels
 
         public DateTime StartDate { get; set; }
 
-        public String LastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         public string ProjectName { get; set; }
