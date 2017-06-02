@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace CapStoneProject.Infrastructure
 {
-    [ViewComponent(Name = "InvoiceVC")]
-    public class UserInvoiceViewComponent : ViewComponent
+    public class UserInvoice : ViewComponent
     {
             private IInvoiceRepo repository;
 
-            public UserInvoiceViewComponent(IInvoiceRepo repo)
+            public UserInvoice(IInvoiceRepo repo)
             {
                 repository = repo;
             }
