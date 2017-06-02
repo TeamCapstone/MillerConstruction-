@@ -34,7 +34,6 @@ namespace CapStoneProject.Controllers
             bidReqRepo = repo;
             bidRepo = bRepo;
             UserManager = userMgr;
-
         }
 
         [HttpGet]
@@ -135,9 +134,6 @@ namespace CapStoneProject.Controllers
             }
             return View(vmbid);
         }
-
-
-
 
         [HttpGet]
         public ViewResult Success()

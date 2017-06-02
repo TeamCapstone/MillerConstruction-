@@ -65,13 +65,6 @@
                         {
                             <li class="nav-item"><a asp-action="LoggedInBidRequest" asp-controller="BidRequest">Request a Quote</a></li>
                         }
-
-                        @*<li class="nav-item"><a asp-action="Services" asp-controller="Services">Services</a></li>
-                        <li class="nav-item"><a asp-action="About" asp-controller="About">About</a></li>
-                        <li class="nav-item"><a asp-action="FAQ" asp-controller="FAQ">FAQ</a></li>
-                        <li class="nav-item"><a asp-action="AllApprovedReviews" asp-controller="Review">Reviews</a></li>
-                        <li class="nav-item"><a asp-action="Index" asp-controller="Gallery">Gallery</a></li>*@
-                       
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,7 +88,31 @@
                         }
                         else
                         {
-                            <li class="nav-item"><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Account
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                                    @if (User.Identity.Name != "Admin")
+                                    {
+                                    <li class="nav-item">
+                                        <a class="dropdown-item welcome" asp-action="UserPage" asp-controller="User" id="innerNavLI4">User Portal</a>
+                                    </li>
+                                    }
+                                    else
+                                    {
+                                    <li class="nav-item">
+                                        <a class="dropdown-item welcome" asp-action="AdminPage" asp-controller="Admin" id="innerNavLI4">Admin Portal</a>
+                                    </li>
+
+                                    }
+                                    <li class="nav-item"><a class="dropdown-item" asp-action="Logout" asp-controller="Account" id="innerNavLI5">Logout</a></li>
+                                </ul>
+                                
+                        
+                        
+                            </li>
                         }
 
                     </ul>
@@ -140,7 +157,7 @@
 
                     @if (User.Identity.Name == null)
                     {
-                        <h3><a asp-action="Login" asp-controller="Account">Login</a></h3>
+                        <h3><a class="welcome" asp-action="Login" asp-controller="Account">Login</a></h3>
                     }
                     else
                     {
