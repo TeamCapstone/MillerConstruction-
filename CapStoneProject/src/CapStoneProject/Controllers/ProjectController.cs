@@ -46,7 +46,7 @@ namespace CapStoneProject.Controllers
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
         }
 
-        //[Authorize(Roles = "Admin")]
+        //
         //[HttpGet]
         //public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
         //{
@@ -57,6 +57,7 @@ namespace CapStoneProject.Controllers
         //    return View(projectVM);
         //}
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateProject(int bidID)
         {
@@ -148,7 +149,7 @@ namespace CapStoneProject.Controllers
             return View(projectVM);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
