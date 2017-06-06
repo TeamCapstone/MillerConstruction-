@@ -54,6 +54,44 @@ namespace CapStoneProject.Repositories.SeedData
                 };
                 context.Clients.Add(client);
 
+                BidRequest bidRequest = new BidRequest
+                {
+                    User = user,
+                    Concrete = false,
+                    FrameWork = false,
+                    NewBuild = true,
+                    ProjectDescription = "Big deck",
+                    ProjectLocation = "Lane county",
+                    Remodel = false
+                };
+                context.BidRequests.Add(bidRequest);
+
+                Bid bid = new Bid
+                {
+                    ProposedStartDate = DateTime.Now,
+                    TotalEstimate = 6548.06M,
+                    RevisedProjectDescription = "Test bid for test project",
+                    BidReq = bidRequest
+                };
+                bid.User = user;
+              
+                context.Bids.Add(bid);
+
+                Project project1 = new Project
+                {
+                    Client = client,
+                    Bid = bid,
+                    ProjectName = "Test Project",
+                    OriginalEstimate = 6548.06M,
+                    StartDate = DateTime.Now,
+                    ProjectStatus = "Started",
+                    StatusDate = DateTime.Now,
+                    AdditionalCosts = 1.94M,
+                    TotalCost = 6550M
+                };
+                context.Projects.Add(project1);
+
+
                 Review message = new Review
                 {
                     Subject = "Loved it!",
@@ -155,7 +193,7 @@ namespace CapStoneProject.Repositories.SeedData
                 
                 
 
-                context.SaveChanges();
+                
             }
 
             /*this adds a test project to seeddata. this needs to create a 
@@ -224,6 +262,8 @@ namespace CapStoneProject.Repositories.SeedData
                     TotalCost = 6550M
                 };
                 context.Projects.Add(project);
+
+                context.SaveChanges();
             }
         }
     }

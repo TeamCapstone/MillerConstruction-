@@ -14,6 +14,7 @@ namespace CapStoneProject.Repositories.Interfaces
         Invoice GetInvoiceByClientName(string lastName);
         Invoice GetInvoiceByProjectName(string name);
         List<Invoice> GetAllInvoicesByClient(Client client);
+        List<Invoice> GetAllInvoicesByClientId(int id);
         IEnumerable<Invoice> Invoices { get; }
         int Create(Invoice invoice);
         int Update(Invoice invoice);

@@ -50,10 +50,7 @@
                            asp-route-id=@c.ClientID data-target="#modal-container" data-toggle="modal" class="btn btn-sm btn-warning">Upload Invoice</a>
                         
                         <input type="hidden" name="ClientID" value="@c.ClientID" />
-                        @*<button data-toggle="modal" data-target="#modal-container" type="submit"
-                                class="btn btn-sm btn-warning">
-                            Upload Invoice
-                        </button>*@
+                      
                     </form>
                     <form asp-action="Delete" asp-route-id=@c.ClientID method="post">
                         <a class="btn btn-sm btn-primary" asp-action="Edit"
