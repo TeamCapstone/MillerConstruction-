@@ -13,7 +13,7 @@ namespace CapStoneProject.Repositories.Interfaces
 
         Bid GetBidByID(int id);
 
-        Bid GetBidByClientName(string lastName);
+        Bid GetBidByUserEmail(string email);
 
         int Update(Bid req);
 

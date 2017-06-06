@@ -27,9 +27,9 @@ namespace CapStoneProject.Repositories
         }
 
 
-        public Bid GetBidByClientName(string name)
+        public Bid GetBidByUserEmail(string email)
         {
-            return context.Bids.First(n => n.User.LastName == name);
+            return context.Bids.First(n => n.User.Email == email);
         }
 
         public int Update(Bid bid)
