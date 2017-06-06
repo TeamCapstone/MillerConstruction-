@@ -27,5 +27,6 @@ namespace CapStoneProject.Models
         public string ProjectedTimeFrame { get; set; }
 
         public DateTime ProposedStartDate { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

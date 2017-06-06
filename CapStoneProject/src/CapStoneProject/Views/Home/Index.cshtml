@@ -17,32 +17,32 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="first-slide" src="~/images/masterBath.jpg" alt="bathroom remodel">
+                <img class="index" src="~/images/masterBath.jpg" alt="bathroom remodel">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Remodels</h1>
                         <h3>We focus on kitchen and bath remodels.</h3>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                        <p><a class="btn btn-lg btn-primary" href="@Url.Action("BidRequest", "BidRequest")" role="button">Get a Quote</a></p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img class="second-slide" src="~/images/craftsmanPorch.jpg" alt="craftsman porch">
+                <img class="index" src="~/images/craftsmanPorch.jpg" alt="craftsman porch">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Timberframe</h1>
                         <h3>Adding a custom crafted porch really ups the curb appeal.</h3>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                        <p><a class="btn btn-lg btn-primary" href="@Url.Action("Framing", "Gallery")" role="button">See more</a></p>
                     </div>
                 </div>
             </div>
             <div class="item">
-                <img class="third-slide" src="~/images/copperCon.jpg" alt="stained concrete">
+                <img class="index" src="~/images/copperCon.jpg" alt="stained concrete">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Concrete</h1>
                         <h3>Specializing in stained and stamped concrete.</h3>
-                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                        <p><a class="btn btn-lg btn-primary" href="@Url.Action("Concrete", "Gallery")" role="button">Browse gallery</a></p>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,8 @@
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-    </div><!-- /.carousel -->
+    </div>
+<!-- /.carousel -->
 
 
     <div class="container mission" id="missionDiv">

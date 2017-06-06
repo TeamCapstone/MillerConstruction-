@@ -23,6 +23,7 @@
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>Location</th>
+                                        <th>Date Created</th>
                                         <th class="text-right">Action</th>
 
                                     </tr>
@@ -41,6 +42,7 @@
                                             }
                                             <td>@br.ProjectDescription</td>
                                             <td>@br.ProjectLocation</td>
+                                            <td>@br.DateCreated.ToString("MM/dd/yyy")</td>
                                             <td>
                                                 <form asp-action="DeleteBidReq" method="post" class="">
                                                     <div class="btn-toolbar">
