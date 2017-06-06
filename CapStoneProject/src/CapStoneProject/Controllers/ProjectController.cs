@@ -88,20 +88,15 @@ namespace CapStoneProject.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateProject(VMCreateProject projectVM)
+        public IActionResult CreateProject(VMCreateProject projectVM)
         {
-            //find user in Identity based on email
-            UserIdentity user = await userManager.FindByEmailAsync(projectVM.Email);
-
             //if model requirements fulfilled
             if (ModelState.IsValid)
             {
-                //if user is found
-
                 //finds user in Clients based on Email from user
-                Client client = clientRepo.GetClientById(projectVM.ClientID);
+                Client client = clientRepo.GetClientByEmail(projectVM.Email);
 
-                if (clientRepo.ContainsClient(client) == true) //(user != null && client != null)
+                if (clientRepo.ContainsClient(client) == true) //(client != null)
                 {
                     //if client is entered and found
 
@@ -114,16 +109,23 @@ namespace CapStoneProject.Controllers
                         Project project = new Project
                         {
                             ProjectID = projectVM.ProjectID,
-                            Client = clientRepo.GetClientById(client.ClientID),
+                            Client = clientRepo.GetClientById(projectVM.ClientID),
                             ProjectName = projectVM.ProjectName,
                             StartDate = projectVM.StartDate,
                             OriginalEstimate = projectVM.Estimate,
                             Bid = bidrepo.GetBidByID(projectVM.BidID)
                         };
 
-                        projectRepo.ProjectUpdate(project);
+                        if(project.Client != null && project.Bid != null)
+                        {
+                            projectRepo.ProjectUpdate(project);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Email", "Either the attributed Client or Bid is invalid");
+                        }
 
-                        return RedirectToAction("AdminPage", "Admin"); //TODO: fill in with AdminPage and controller that holds it
+                        return RedirectToAction("AdminPage", "Admin");
                     }
                     else
                     {
@@ -134,7 +136,7 @@ namespace CapStoneProject.Controllers
                 else
                 {
                     //if user not found
-                    ModelState.AddModelError("Email", "There is no client found in the system with that e-mail");
+                    ModelState.AddModelError("LastName", "There is no client found in the system with that e-mail");
                 }
             }
             else

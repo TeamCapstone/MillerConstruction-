@@ -23,6 +23,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<int?>("BidRequestID");
 
+                    b.Property<DateTime>("DateCreated");
+
                     b.Property<decimal>("LaborCost");
 
                     b.Property<string>("MaterialsDescription");
@@ -54,6 +56,8 @@ namespace CapStoneProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Concrete");
+
+                    b.Property<DateTime>("DateCreated");
 
                     b.Property<bool>("FrameWork");
 

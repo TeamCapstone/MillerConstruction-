@@ -18,7 +18,7 @@
     padding-top: 50px;
 }
 
-#innerNavLI1, #innerNavLI2, #innerNavLI3{
+#innerNavLI1, #innerNavLI2, #innerNavLI3,#innerNavLI4,#innerNavLI5{
     color: red;
 }
 
@@ -76,7 +76,7 @@
     
 }
 
-.carousel img {
+.index{
     margin-left: auto;
     margin-right: auto;
     min-width: 70%;
@@ -135,6 +135,7 @@
     padding-left: 33%;
     padding-bottom: 50px;
     min-height: 500px;
+    
 }
 
 #interiorDiv{
@@ -153,7 +154,7 @@
 
 .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: blanchedalmond; 
+   background-color: antiquewhite; 
  }
 .table-striped>tbody>tr:nth-child(even)>td, 
 .table-striped>tbody>tr:nth-child(even)>th {
@@ -246,13 +247,27 @@ img:hover {
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
  
 }
-
+#mccCara{
+    
+}
 .galHeading{
     text-align: center;
     font-family: 'Bauhaus 93';
     color: white;
     padding: 5px;
     text-shadow: .5px .5px .5px black;
+}
+
+
+.galCaroImg{
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 550px;
+    border-radius: 7px;
+    -moz-box-shadow:10px 10px 15px grey;
+    -webkit-box-shadow: 10px 10px 15px grey;
+    box-shadow: 10px 10px 30px grey;
+    margin-bottom: 20px;
 }
 
 

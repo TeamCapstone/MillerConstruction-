@@ -1,6 +1,6 @@
-﻿@model CapStoneProject.Models.BidRequest
+﻿@model VMLoggedBR
 @{
-    ViewData["Title"] = "Bid Request 2";
+    ViewData["Title"] = "Quote Request";
     Layout = "_Layout2";
 }
 
@@ -16,18 +16,18 @@
         <form asp-controller="BidRequest" asp-action="LoggedInBidRequest" method="post" class="" id="interiorDiv">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input asp-for="BidRequestID" type="hidden" />
-
+            <input asp-for="UserID" type="hidden" />
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <input class="form-control" type="text" asp-for="User.FirstName" value="" placeholder="First Name:" id="clientFNameBR" required>
-                        <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                        <input class="form-control" type="text" asp-for="CustomerFirst"   id="clientFNameBR" required>
+                        <span asp-validation-for="CustomerFirst" class="text-danger"></span>
                     </div>
                 </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <input class="form-control" type="text" asp-for="User.LastName" value="" placeholder="Last Name:" id="clientLNameBR" required>
-                            <span asp-validation-for="User.LastName" class="text-danger"></span>
+                            <input class="form-control" type="text" asp-for="CustomerLast"  id="clientLNameBR" required>
+                            <span asp-validation-for="CustomerLast" class="text-danger"></span>
                         </div>
                     </div>
                     
