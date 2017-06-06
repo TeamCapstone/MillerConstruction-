@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CapStoneProject.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,7 @@ namespace CapStoneProject.Migrations
                     BidRequestID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Concrete = table.Column<bool>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     FrameWork = table.Column<bool>(nullable: false),
                     NewBuild = table.Column<bool>(nullable: false),
                     ProjectDescription = table.Column<string>(nullable: true),
@@ -235,6 +236,7 @@ namespace CapStoneProject.Migrations
                     BidID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BidRequestID = table.Column<int>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     LaborCost = table.Column<decimal>(nullable: false),
                     MaterialsDescription = table.Column<string>(nullable: true),
                     ProjectedTimeFrame = table.Column<string>(nullable: true),
