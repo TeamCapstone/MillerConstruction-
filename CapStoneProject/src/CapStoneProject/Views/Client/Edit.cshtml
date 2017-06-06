@@ -10,8 +10,10 @@
 
 <form asp-action="Edit" method="post" id="interiorDiv">
     <div class="form-group">
-        <label hidden asp-for="ClientID"></label>
-        <input type="hidden" asp-for="ClientID" class="form-control"  />
+        <div class="col-lg-6">
+            <label hidden asp-for="ClientID"></label>
+            <input type="hidden" asp-for="ClientID" class="form-control" />
+        </div>
     </div>
     <p>
         <label asp-for="FirstName"></label>

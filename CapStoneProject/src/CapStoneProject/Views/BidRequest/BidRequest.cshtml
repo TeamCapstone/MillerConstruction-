@@ -15,8 +15,11 @@
                 confirm = $("#brPass2").val();
 
             matched = (password == confirm && password != "") ? true : false;
-            if(matched) {
-                $("#interiorDiv").submit();
+            if (matched) {
+                $("#submitBtn").click(function () {
+                    $(this).button('loading');
+                    $("#interiorDiv").submit();
+                });
             }
             else {
                 $("#responseDiv").html("Passwords don't match.");
@@ -25,6 +28,8 @@
             }
         });
     })
+
+
 </script>
 
 
@@ -36,7 +41,7 @@
         <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="interiorDiv">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input asp-for="BidRequestID" type="hidden" />
-
+            <h4 class="text-danger">@ViewBag.Error</h4>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">   
@@ -135,7 +140,9 @@
 
                     <div class="text-center">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
+                            <button type="submit" class="btn btn-success" id="submitBtn"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending......">
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -147,6 +154,9 @@
     </div>
     <div class="col-lg-2"></div>
 </div>
+
+
+
 
 
 

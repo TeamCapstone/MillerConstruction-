@@ -4,7 +4,15 @@
 }
 
 
-@Html.Partial("AdminClientPartial")
-@Html.Partial("AdminReviewPartial")
-@Html.Partial("AdminBidRequestPartial")
-@Html.Partial("AdminProjectPartial")
+
+
+@await Component.InvokeAsync("ClientVC") 
+@await Component.InvokeAsync("BidRequestsVC") 
+@await Component.InvokeAsync("BidVC") 
+@await Component.InvokeAsync("ReviewVC") 
+@await Component.InvokeAsync("ProjectVC")
+
+@*@Html.Partial("AdminProjectPartial")*@
+@*@Html.Partial("AdminBidRequestPartial")*@
+@*@Html.Partial("AdminClientPartial")*@
+@*@Html.Partial("AdminReviewPartial")*@
