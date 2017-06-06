@@ -2,30 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace CapStoneProject.Models
+namespace CapStoneProject.Models.ViewModels
 {
-    public class BidRequest
+    public class VMLoggedBR
     {
         public int BidRequestID { get; set; }
-
-        public UserIdentity User { get; set; }//need this because we will have 2 forms one for members and other that will become members 
-
-        public string ProjectDescription { get; set; }
-
+        public int UserID { get; set; }
+        
+        public string CustomerFirst { get; set; }
+        public string CustomerLast { get; set; }
+        public string ProjectDescription { get; set; }        
         public string ProjectLocation { get; set; }
-
         public bool NewBuild { get; set; }
-
         public bool Remodel { get; set; }
-
         public bool Concrete { get; set; }
-
         public bool FrameWork { get; set; }
-
         public bool Responded { get; set; }
-
-        public DateTime DateCreated { get; set; }
     }
 }

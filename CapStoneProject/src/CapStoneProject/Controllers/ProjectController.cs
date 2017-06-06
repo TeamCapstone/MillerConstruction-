@@ -35,9 +35,9 @@ namespace CapStoneProject.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ViewResult Index(string projStatus) //This one is for admin to view currentprojects
+        public ViewResult Index() //This one is for admin to view currentprojects
         {
-            return View(projectRepo.GetAllCurrentProjects(projStatus));
+            return View(projectRepo.GetAllCurrentProjects());
         }
 
         [Authorize]
@@ -157,7 +157,7 @@ namespace CapStoneProject.Controllers
                 Email = project.Client.Email, ProjectName = project.ProjectName,
                 Estimate = project.TotalCost, StartDate = project.StartDate,
                 Status = project.ProjectStatus, StatusDate = project.StatusDate,
-                ProjectID = project.ProjectID}; //TODO: create new VM for Edit Project
+                ProjectID = project.ProjectID};
 
             return View(projectVM);
         }
@@ -170,7 +170,6 @@ namespace CapStoneProject.Controllers
             if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null
                 && projectVM.StatusDate != null)
             {
-                //TODO: Fill in
                 project.TotalCost = projectVM.Estimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
@@ -178,7 +177,7 @@ namespace CapStoneProject.Controllers
 
                 projectRepo.ProjectUpdate(project);
 
-                return RedirectToAction("AdminPage", "Admin"); //TODO: fill in with AdminPage and controller that holds it
+                return RedirectToAction("AdminPage", "Admin");
             }
             else
             {

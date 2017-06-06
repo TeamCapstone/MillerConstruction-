@@ -13,11 +13,11 @@
 
     <script type="text/javascript">
         function timeFunction() {
-            alert("Checked is Approved -- Unchecked is Not Approved</p>")
+            alert("Checked is Approved -- Unchecked is Not Approved")
         }
 
     </script>
-    <button onclick="setTimeout(timeFunction, 3000);" class="positioner btn btn-primary">How it works</button>
+    <button onclick="setTimeout(timeFunction, 1000);" class="positioner btn btn-primary">How it works</button>
 
     <form asp-action="EditReview" method="post" class="erForm">
         <input type="hidden" asp-for="ReviewID" name="ReviewID" value="@ViewBag.ReviewID" />
