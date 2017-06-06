@@ -22,9 +22,9 @@ namespace CapStoneProject.Repositories
             return context.Projects;
         }
 
-        public IEnumerable<Project> GetAllCurrentProjects(string projStatus)
+        public IEnumerable<Project> GetAllCurrentProjects()
         {
-            return context.Projects.Where(p => p.ProjectStatus == projStatus);
+            return context.Projects.Where(p => p.ProjectStatus != "Completed");
         }
 
         public Project GetProjectByID(int projectID)
