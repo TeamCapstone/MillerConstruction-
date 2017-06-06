@@ -62,8 +62,8 @@ namespace CapStoneProject.Controllers
                     {
                         //emailing the client to notify of request
                         var message = new MimeMessage();
-                        message.From.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
-                        message.To.Add(new MailboxAddress("Admin", "jocaproject6@gmail.com"));
+                        message.From.Add(new MailboxAddress("Admin", "capstonejoca@yahoo.com"));
+                        message.To.Add(new MailboxAddress("Admin", "capstonejoca@yahoo.com"));
                         message.Subject = "bid Request Requested";
 
                         message.Body = new TextPart("plain")
@@ -73,12 +73,15 @@ namespace CapStoneProject.Controllers
 
                         using (var client = new SmtpClient())
                         {
-                            client.Connect("smtp.gmail.com", 587, false);
-                            client.AuthenticationMechanisms.Remove("XOAUTH2"); // Must be removed for Gmail SMTP
-                            client.Authenticate("jocaproject6@gmail.com", "Admin1@gmail.com");
+                            client.Connect("smtp.mail.yahoo.com", 465, SecureSocketOptions.SslOnConnect);
+
+                            client.Authenticate("capstonejoca@yahoo.com", "JOCA123.");
+
                             client.Send(message);
+
                             client.Disconnect(true);
                         }
+
 
                         bidReqRepo.Update(bidreq);
                         return RedirectToAction("Success");
