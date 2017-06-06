@@ -70,10 +70,11 @@ namespace CapStoneProject.Repositories.SeedData
                 {
                     ProposedStartDate = DateTime.Now,
                     TotalEstimate = 6548.06M,
-                    RevisedProjectDescription = "Test bid for test project",
-                    BidReq = bidRequest
+                    RevisedProjectDescription = "Wood deck with railing",
+                    BidReq = bidRequest,
+                    User = user
                 };
-                bid.User = user;
+              
               
                 context.Bids.Add(bid);
 
@@ -81,10 +82,10 @@ namespace CapStoneProject.Repositories.SeedData
                 {
                     Client = client,
                     Bid = bid,
-                    ProjectName = "Test Project",
+                    ProjectName = "Wood Deck",
                     OriginalEstimate = 6548.06M,
                     StartDate = DateTime.Now,
-                    ProjectStatus = "Started",
+                    ProjectStatus = "Framing Complete",
                     StatusDate = DateTime.Now,
                     AdditionalCosts = 1.94M,
                     TotalCost = 6550M
@@ -149,6 +150,44 @@ namespace CapStoneProject.Repositories.SeedData
 
                 context.Clients.Add(client2);
 
+                BidRequest bidRequest2 = new BidRequest
+                {
+                    User = user2,
+                    Concrete = false,
+                    FrameWork = false,
+                    NewBuild = false,
+                    ProjectDescription = "Remodel Bathroom",
+                    ProjectLocation = "Linn county",
+                    Remodel = true
+                };
+                context.BidRequests.Add(bidRequest2);
+
+                Bid bid2 = new Bid
+                {
+                    ProposedStartDate = DateTime.Now,
+                    TotalEstimate = 2058.06M,
+                    RevisedProjectDescription = "Test bid for test project",
+                    BidReq = bidRequest2,
+                    User = user2
+                    
+                };
+               
+                context.Bids.Add(bid2);
+
+                Project project2 = new Project
+                {
+                    Client = client2,
+                    Bid = bid2,
+                    ProjectName = "Bathroom Remodel",
+                    OriginalEstimate = 2058.06M,
+                    StartDate = DateTime.Now,
+                    ProjectStatus = "Started",
+                    StatusDate = DateTime.Now,
+                    AdditionalCosts = 2.94M,
+                    TotalCost = 2061.00M
+                };
+                context.Projects.Add(project2);
+
                 UserIdentity user3 = new UserIdentity
                 {
                     FirstName = "John",
@@ -190,78 +229,90 @@ namespace CapStoneProject.Repositories.SeedData
 
                 context.Add(message);
 
-                
-                
 
-                
-            }
 
-            /*this adds a test project to seeddata. this needs to create a 
-            client, bid and bidrequest in order to do so*/
-            if (!context.Projects.Any())
-            {
-                //finds user
-                UserIdentity bidUser = await userManager.FindByEmailAsync("Hello1@gmail.com");
 
-                //creates bidrequest from
-                BidRequest bidReq = new BidRequest
+
+
+
+                /*this adds a test project to seeddata. this needs to create a 
+                client, bid and bidrequest in order to do so*/
+
+                UserIdentity user4 = new UserIdentity
                 {
-                    User = bidUser,
-                    Concrete = false,
-                    FrameWork = false,
-                    NewBuild = true,
-                    ProjectDescription = "Test bidrequest",
-                    ProjectLocation = "Your house",
-                    Remodel = false
+                    FirstName = "Ricky",
+                    LastName = "Bobby",
+                    Email = "bobby@gmail.com",
+                    Password = "Capstone1!",
+                    UserName = "bobby@gmail.com"
+
                 };
-                context.BidRequests.Add(bidReq);
 
-                //creates bid from user Henry Holmes
-                Bid bid = new Bid
-                {
-                    ProposedStartDate = DateTime.Now,
-                    TotalEstimate = 6548.06M,
-                    RevisedProjectDescription = "Test bid for test project",
-                    BidReq = bidReq
-                };
-                bid.User = bidUser;
-                if (bid.User != null)
-                {
-                    context.Bids.Add(bid);
-                }
+                IdentityResult result4 = await userManager.CreateAsync(user4, user4.Password);
+                await userManager.AddToRoleAsync(user4, role);
 
-                //creates client from Henry
-                Client client = new Client();
-                UserIdentity clientUser = bidUser;
-                client.UserIdentity = clientUser;
-                if (client.UserIdentity != null)
-                {
-                    client.FirstName = clientUser.FirstName;
-                    client.LastName = clientUser.LastName;
-                    client.Email = clientUser.Email;
-                }
-                else
-                {
-                    client.FirstName = "Ricky";
-                    client.LastName = "Bobby";
-                    client.Email = "TalladegaNights@gmail.com";
-                }
-                context.Clients.Add(client);
+                ////finds user
+                //UserIdentity bidUser = await userManager.FindByEmailAsync("bobby@gmail.com");
 
-                //creates project
-                Project project = new Project
-                {
-                    Client = client,
-                    Bid = bid,
-                    ProjectName = "Test Project",
-                    OriginalEstimate = 6548.06M,
-                    StartDate = DateTime.Now,
-                    ProjectStatus = "Started",
-                    StatusDate = DateTime.Now,
-                    AdditionalCosts = 1.94M,
-                    TotalCost = 6550M
-                };
-                context.Projects.Add(project);
+                ////creates bidrequest from
+                //BidRequest bidReq3 = new BidRequest
+                //{
+                //    User = bidUser,
+                //    Concrete = false,
+                //    FrameWork = false,
+                //    NewBuild = true,
+                //    ProjectDescription = "Test bidrequest",
+                //    ProjectLocation = "Your house",
+                //    Remodel = false
+                //};
+                //context.BidRequests.Add(bidReq3);
+
+                ////creates bid from user Henry Holmes
+                //Bid bid3 = new Bid
+                //{
+                //    ProposedStartDate = DateTime.Now,
+                //    TotalEstimate = 6548.06M,
+                //    RevisedProjectDescription = "Test bid for test project",
+                //    BidReq = bidReq3
+                //};
+                //bid.User = bidUser;
+                ////if (bid.User != null)
+                ////{
+                //    context.Bids.Add(bid3);
+                ////}
+
+                ////creates client from Henry
+                //Client client4 = new Client();
+                //UserIdentity clientUser = bidUser;
+                //client4.UserIdentity = clientUser;
+                ////if (client.UserIdentity != null)
+                ////{
+                //    client4.FirstName = clientUser.FirstName;
+                //    client4.LastName = clientUser.LastName;
+                //    client4.Email = clientUser.Email;
+                ////}
+                ////else
+                ////{
+                ////    client.FirstName = "Ricky";
+                ////    client.LastName = "Bobby";
+                ////    //client.Email = "TalladegaNights@gmail.com";
+                ////}
+                //context.Clients.Add(client4);
+
+                ////creates project
+                //Project project = new Project
+                //{
+                //    Client = client4,
+                //    Bid = bid3,
+                //    ProjectName = "Test Project",
+                //    OriginalEstimate = 6548.06M,
+                //    StartDate = DateTime.Now,
+                //    ProjectStatus = "Waiting for permit.",
+                //    StatusDate = DateTime.Now,
+                //    AdditionalCosts = 1.94M,
+                //    TotalCost = 6550M
+                //};
+                //context.Projects.Add(project);
 
                 context.SaveChanges();
             }

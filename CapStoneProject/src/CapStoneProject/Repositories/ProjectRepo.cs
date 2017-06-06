@@ -63,5 +63,12 @@ namespace CapStoneProject.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<Project> GetAllProjectsByClientId(int i)
+        {
+            return (from t in context.Projects
+                    where t.Client.ClientID == i
+                    select t).ToList();
+        }
     }
 }

@@ -2,6 +2,13 @@
 
 @model List<Client>
 
+<div id="modal-container" class="modal fade hidden-print" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-lg-1"></div>
@@ -19,13 +26,13 @@
                     <div class="container" id="formDiv">
                         <div class="row">
                             <br />
-                            @*<form asp-controller="Client" asp-action="AllClients" class="pull-right">
+                            <form asp-controller="Client" asp-action="AllClients" class="pull-right">
                                 <p>
                                     <input type="text" name="SearchString">
                                     <input type="submit" value="Filter" />
                                 </p>
                             </form>
-                            <h4>Create a New Client <a class="btn btn-primary" asp-action="Create">Create</a> </h4>*@
+                            @*<h4>Create a New Client <a class="btn btn-primary" asp-action="Create">Create</a> </h4>*@
                             <table class="table table-striped table-bordered table-condensed" >
                                 <tr><th>First Name</th><th>Last Name</th><th>Company Name</th><th>Street</th><th>City</th><th>State</th><th>ZipCode</th><th>Phone Number</th><th>Email</th><th>Action</th></tr>
                                 @if (Model.Count() == 0)
@@ -59,7 +66,7 @@
                                         </button>*@
                                                 </form>
                                                 <form asp-action="Delete" asp-route-id=@c.ClientID method="post">
-                                                    <a class="btn btn-sm btn-primary" asp-action="Edit"
+                                                    <a class="btn btn-sm btn-primary" asp-controller="Client" asp-action="Edit"
                                                        asp-route-id=@c.ClientID>Edit</a>
                                                     <input type="hidden" name="ClientID" value="@c.ClientID" />
                                                     <button type="submit"

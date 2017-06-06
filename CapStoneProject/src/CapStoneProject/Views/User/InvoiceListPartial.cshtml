@@ -1,6 +1,6 @@
 ﻿<div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -9,8 +9,8 @@
                     </h3>
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
-                    @await Component.InvokeAsync("InvoiceList", new { i = Model.ClientID })
-                   
+                    @await Component.InvokeAsync("UserInvoice", new { id = Model.ClientID })
+
                 </div>
             </div>
         </div>
