@@ -11,16 +11,34 @@ namespace CapStoneProject.Infrastructure
     public class ClientInfo : ViewComponent
     {
         private IClientRepo repository;
+        private IUserRepo userRepo;
 
-        public ClientInfo(IClientRepo repo)
+        public ClientInfo(IClientRepo repo, IUserRepo usrRepo)
         {
             repository = repo;
+            userRepo = usrRepo;
         }
-        public IViewComponentResult Invoke(int id)
+        public IViewComponentResult Invoke(string email)
         {
-            Client client = new Client();
-            client = repository.GetClientById(id);
-            return View(client);
+            UserIdentity user = userRepo.GetUser(email);
+            Client c = repository.GetClientByEmail(email);
+            if (c != null)
+            {
+                Client client = new Client();
+                client = repository.GetClientByEmail(email);
+                return View(client);
+            }
+            else
+            {
+                c = new Client
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email
+                };
+                repository.Create(c);
+                return View(c);
+            }
             
         }
 

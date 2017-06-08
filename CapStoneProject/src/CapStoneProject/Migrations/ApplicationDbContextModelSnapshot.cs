@@ -41,6 +41,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("UserId");
 
+                    b.Property<int>("Version");
+
                     b.HasKey("BidID");
 
                     b.HasIndex("BidRequestID");
@@ -221,6 +223,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<bool>("ClientCreated");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

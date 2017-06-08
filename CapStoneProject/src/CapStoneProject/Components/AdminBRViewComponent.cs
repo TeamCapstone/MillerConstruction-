@@ -7,7 +7,7 @@ using CapStoneProject.Models;
 using CapStoneProject.Repositories.Interfaces;
 using CapStoneProject.Repositories;
 
-namespace CapStoneProject.Infrastructure
+namespace CapStoneProject.Components
 {
     [ViewComponent(Name = "BidRequestsVC")]
     public class AdminBRViewComponent : ViewComponent

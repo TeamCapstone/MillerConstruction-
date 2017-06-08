@@ -124,7 +124,7 @@ namespace CapStoneProject.Controllers
 
         //Bid needs a UserIdentity and a BidRequest
         [HttpPost]
-        public ViewResult Bid(VMBid vmbid)
+        public IActionResult Bid(VMBid vmbid)
         {
             if (ModelState.IsValid)
             {
@@ -145,7 +145,7 @@ namespace CapStoneProject.Controllers
 
                 bidReqRepo.Update(br);
                 bidRepo.Update(bid);
-                return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());
+                return RedirectToAction("AdminPage", "Admin");
             }
             else
             {
@@ -219,10 +219,55 @@ namespace CapStoneProject.Controllers
             return View(bidRepo.GetAllBids().ToList());
         }
 
-        //TODO: finish and create html, auto pop fields and create a post that creates a new bid so all versions of bid are kept
+        //this method allows client to view the bid or create a new version of a bid
+        [HttpGet]
         public ViewResult ViewBid(int bidID)
         {
-            return View();
+            Bid bid = bidRepo.GetBidByID(bidID);
+            VMBid vmbid = new VMBid();
+            vmbid.BidID = bid.BidID;
+            vmbid.BidRequestID = bid.BidReq.BidRequestID;
+            vmbid.CustomerFirst = bid.User.FirstName;
+            vmbid.CustomerLast = bid.User.LastName;
+            vmbid.ProjectDescription = bid.BidReq.ProjectDescription;
+            vmbid.RevisedProjectDescription = bid.RevisedProjectDescription;
+            vmbid.MaterialsDescription = bid.MaterialsDescription;
+            vmbid.ProjectedTimeFrame = bid.ProjectedTimeFrame;
+            vmbid.ProposedStartDate = bid.ProposedStartDate;
+            vmbid.SupplyCost = bid.SupplyCost;
+            vmbid.TotalEstimate = bid.TotalEstimate;
+            bid.DateCreated = DateTime.Now;
+            return View(vmbid);
+        }
+
+        [HttpPost]
+        public IActionResult CreateBid(VMBid vmbid)
+        {
+           if (ModelState.IsValid)
+            {
+                var br = bidReqRepo.GetBidRequestByID(vmbid.BidRequestID);
+                Bid bid = new Models.Bid();
+                bid.BidReq = br;                              
+                bid.User = br.User;
+
+                bid.LaborCost = vmbid.LaborCost;
+                bid.MaterialsDescription = vmbid.MaterialsDescription;
+                bid.RevisedProjectDescription = vmbid.RevisedProjectDescription;
+                bid.ProjectedTimeFrame = vmbid.ProjectedTimeFrame;
+                bid.ProposedStartDate = bid.ProposedStartDate;
+                bid.SupplyCost = vmbid.SupplyCost;
+                bid.TotalEstimate = vmbid.TotalEstimate;              
+                bid.DateCreated = DateTime.Now;
+                bid.Version++;
+                
+                bidRepo.Update(bid);
+                return RedirectToAction("AdminPage", "Admin");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Please fill out all fields in the form.");
+            }
+            return View(vmbid);
         }
 
         //TODO: Delete bid and br
@@ -231,9 +276,9 @@ namespace CapStoneProject.Controllers
             BidRequest deletedBR = bidReqRepo.DeleteBR(bidrequestID);
             if (deletedBR == null)
             {
-                return View("Error");
+                return RedirectToAction("Index", "Error");
             }
-            return View("AllBidRequests", bidReqRepo.GetAllBidRequests().ToList());           
+            return RedirectToAction("AdminPage", "Admin");
         }
 
         public IActionResult DeleteBid(int bidID)
@@ -241,11 +286,12 @@ namespace CapStoneProject.Controllers
             Bid deletedB = bidRepo.DeleteBid(bidID);
             if (deletedB == null)
             {
-                return View("Error");
+                return RedirectToAction("Index", "Error");
             }
-            return View("AllBids", bidRepo.GetAllBids().ToList());
+            return RedirectToAction("AdminPage", "Admin");
         }
 
-        
+
+       
     }
 }

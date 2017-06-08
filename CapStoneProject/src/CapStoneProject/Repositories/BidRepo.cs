@@ -29,18 +29,19 @@ namespace CapStoneProject.Repositories
 
         public Bid GetBidByUserEmail(string email)
         {
-            return context.Bids.First(n => n.User.Email == email);
+            return context.Bids.FirstOrDefault(n => n.User.Email == email);
         }
 
         public int Update(Bid bid)
         {
-            if (bid.BidID == 0)
+            if (bid.BidID == 0 || bid.Version > 0)
                 context.Bids.Add(bid);
             else
                 context.Bids.Update(bid);
 
             return context.SaveChanges();
         }
+
 
         public Bid DeleteBid(int id)
         {
@@ -51,6 +52,13 @@ namespace CapStoneProject.Repositories
                 context.SaveChanges();
             }
             return dbBid;
+        }
+
+        public List<Bid> GetBidsByUserEmail(string email)
+        {
+            return (from t in context.Bids
+                    where t.User.Email == email
+                    select t).ToList();
         }
     }
 }

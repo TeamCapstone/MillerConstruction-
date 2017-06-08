@@ -26,7 +26,7 @@ namespace CapStoneProject.Components
             user = await userManager.FindByNameAsync(name);
 
             Bid bid = new Models.Bid();
-            bid = repository.GetBidByUserEmail(user.Email);
+            bid = repository.GetBidByUserEmail(user.Email);              
             return View(bid);
         }
     }

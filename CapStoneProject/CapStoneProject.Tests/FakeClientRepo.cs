@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CapStoneProject.Repositories
 {
-    public class ClientRepo : IClientRepo
+    public class FakeClientRepo : IClientRepo
     {
         private ApplicationDbContext context;
 
-        public ClientRepo (ApplicationDbContext ctx)
+        public FakeClientRepo (ApplicationDbContext ctx)
         {
             context = ctx;
         }
@@ -98,5 +98,28 @@ namespace CapStoneProject.Repositories
             }
             return false;
         }
+
+        UserIdentity user = new UserIdentity
+        {
+            FirstName = "Henry",
+            LastName = "Homes",
+            Email = "Hello1@gmail.com",
+            Password = "Capstone1!",
+            UserName = "Hello1@gmail.com"
+        };
+
+        Client client = new Client
+        {
+            FirstName = "Henry",
+            LastName = "Homes",
+            CompanyName = "Murder Company Inc.",
+            Street = "999 Elm Street",
+            City = "Eugene",
+            State = "OR",
+            Zipcode = "97405",
+            PhoneNumber = "(541) 548-9852",
+            Email = "Hello1@gmail.com",
+            UserIdentity = user
+        };
     }
 }
