@@ -26,8 +26,12 @@ namespace CapStoneProject.Components
             Client client = new Models.Client();
             client = clientRepo.GetClientByEmail(email);
             List<Invoice> invoices = new List<Invoice>();
+            if (client == null)
+                return View(invoices);
+            else { 
             invoices = repository.GetAllInvoicesByClientId(client.ClientID);
             return View(invoices);
+            }
         }
 
     }
