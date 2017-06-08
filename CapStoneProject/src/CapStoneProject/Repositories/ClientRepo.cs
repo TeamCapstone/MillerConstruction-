@@ -39,7 +39,12 @@ namespace CapStoneProject.Repositories
 
         public int Create(Client client)
         {
-            context.Clients.Add(client);
+            Client c = GetClientByEmail(client.Email);
+            if (c != null)
+                context.Clients.Update(c);
+            else
+                context.Clients.Add(client);         
+            
             return context.SaveChanges();
         }
 
@@ -78,14 +83,14 @@ namespace CapStoneProject.Repositories
 
         public Client GetClientByEmail(string email)
         {
-            return Client.FirstOrDefault(c => c.UserIdentity.Email == email);
+            return context.Clients.FirstOrDefault(c => c.Email == email);
         }
 
         public bool ContainsClient(Client client)
         {
-            Client confirm =
-                (from c in context.Clients where c.ClientID == client.ClientID select c)
-                .FirstOrDefault<Client>();
+            Client confirm = context.Clients.FirstOrDefault(c => c.Email == client.Email);
+            //(from c in context.Clients where c.Email == client.Email select c)
+            //    .FirstOrDefault<Client>();
 
             if(confirm != null)
             {

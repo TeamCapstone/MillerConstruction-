@@ -22,8 +22,10 @@ namespace CapStoneProject.Controllers
         private IClientRepo clientRepo;
         private IUserRepo userRepo;
         private IInvoiceRepo invoiceRepo;
+        private IBidRepo bidRepo;
+        private IProjectRepo projectRepo;
 
-        public UserController(IInvoiceRepo invRepo, IUserRepo usrRepo, RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
+        public UserController(IProjectRepo prRepo, IBidRepo bRepo, IInvoiceRepo invRepo, IUserRepo usrRepo, RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
         {
             userManager = usrMgr;
             signInManager = sim;
@@ -31,6 +33,8 @@ namespace CapStoneProject.Controllers
             clientRepo = clRepo;
             userRepo = usrRepo;
             invoiceRepo = invRepo;
+            bidRepo = bRepo;
+            projectRepo = prRepo;
         }
 
         // GET: /<controller>/
@@ -66,9 +70,18 @@ namespace CapStoneProject.Controllers
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
             user = await userManager.FindByNameAsync(name);
-            Client client = new Client();
-            client = clientRepo.GetClientByEmail(user.Email);
-            return View(client);
+            VMUserPage vm = new VMUserPage
+            {
+                User = user,
+            };
+            vm.Client = clientRepo.GetClientByEmail(user.Email);
+            vm.Bids = bidRepo.GetBidsByUserEmail(user.Email);
+            if (vm.Client != null)
+            {
+                vm.Projects = projectRepo.GetAllProjectsByClientId(vm.Client.ClientID);
+                vm.Invoices = invoiceRepo.GetAllInvoicesByClient(vm.Client);
+            }
+            return View(vm);
         }
 
         public IActionResult CreateClient()
