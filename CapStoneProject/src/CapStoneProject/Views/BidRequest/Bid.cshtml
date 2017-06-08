@@ -21,7 +21,11 @@
         };
 
     })
-
+    $(document).ready(function () {
+        $("#submitBtn").click(function () {
+            $(this).button('loading');
+        });
+    })
 </script>
 
 <div class="container" id="formDiv">
@@ -184,7 +188,7 @@
 
                         <div class="text-center">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" id="submitBtn"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending......">Submit</button>
                             </div>
                         </div>
                     </div>
