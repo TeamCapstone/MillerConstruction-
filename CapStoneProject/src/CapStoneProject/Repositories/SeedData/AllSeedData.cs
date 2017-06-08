@@ -251,6 +251,20 @@ namespace CapStoneProject.Repositories.SeedData
                 IdentityResult result4 = await userManager.CreateAsync(user4, user4.Password);
                 await userManager.AddToRoleAsync(user4, role);
 
+                UserIdentity user5 = new UserIdentity
+                {
+                    FirstName = "Blue",
+                    LastName = "Sue",
+                    Email = "sue@gmail.com",
+                    Password = "Capstone1!",
+                    UserName = "sue@gmail.com"
+                };
+
+                
+                await roleManager.CreateAsync(new IdentityRole(role));
+                IdentityResult result5 = await userManager.CreateAsync(user5, user5.Password);
+                await userManager.AddToRoleAsync(user5, role);
+
                 ////finds user
                 //UserIdentity bidUser = await userManager.FindByEmailAsync("bobby@gmail.com");
 

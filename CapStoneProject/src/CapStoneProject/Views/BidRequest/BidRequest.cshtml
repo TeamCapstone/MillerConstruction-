@@ -16,8 +16,7 @@
 
             matched = (password == confirm && password != "") ? true : false;
             if (matched) {
-                $("#submitBtn").click(function () {
-                    $(this).button('loading');
+                $("#submitBtn").click(function () {                  
                     $("#interiorDiv").submit();
                 });
             }
@@ -28,7 +27,11 @@
             }
         });
     })
-
+    $(document).ready(function () {
+        $("#submitBtn").click(function () {
+            $(this).button('loading');
+        });
+    })
 
 </script>
 
@@ -140,7 +143,7 @@
 
                     <div class="text-center">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success" id="submitBtn"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending......">
+                            <button type="submit" class="btn btn-primary" id="submitBtn"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending......">
                                 Submit
                             </button>
                         </div>

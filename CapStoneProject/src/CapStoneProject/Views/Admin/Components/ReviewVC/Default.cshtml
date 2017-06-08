@@ -59,6 +59,10 @@
 
                                             <form asp-action="DeleteReview" method="post">
                                                 <div class="btn-toolbar">
+                                                    <span class="btn btn-sm btn-primary">
+                                                        @Html.ActionLink("Comment", "Comment", "Review",
+                                                                new { subject = @review.Subject, Id = @review.ReviewID, body = @review.Body }, new { @style = "color:aliceblue;" })
+                                                    </span>
                                                     <a asp-action="EditReview" asp-controller="Admin" class="btn btn-sm btn-warning"
                                                        asp-route-ReviewID="@review.ReviewID">
                                                         Edit
@@ -67,10 +71,7 @@
                                                     <button type="submit" class="btn btn-danger btn-sm">
                                                         Delete
                                                     </button>
-                                                    <span class="btn btn-sm btn-success">
-                                                        @Html.ActionLink("Comment", "Comment", "Review",
-                                                                new { subject = @review.Subject, Id = @review.ReviewID, body = @review.Body }, new { @style = "color:aliceblue;" })
-                                                    </span>
+                                                   
                                                 </div>
 
                                             </form>

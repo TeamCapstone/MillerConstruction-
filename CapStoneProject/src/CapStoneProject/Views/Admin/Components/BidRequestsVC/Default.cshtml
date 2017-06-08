@@ -17,13 +17,20 @@
                         <div class="row">
                            <br />
                                 
+                            <form asp-controller="Admin" asp-action="BRFilter" class="pull-right">
+                                <p>
+                                    <input type="text" name="SearchString">
+                                    <input type="submit" value="Filter" />
+                                </p>
+                            </form>
+
                                 <table class="table table-striped table-bordered table-condensed">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
+                                        <th>Date Created</th>
+                                        <th>Last Name</th>
                                         <th>Description</th>
                                         <th>Location</th>
-                                        <th>Date Created</th>
+                                        
                                         <th class="text-right">Action</th>
 
                                     </tr>
@@ -31,7 +38,7 @@
                                     @foreach (var br in Model)
                                     {
                                         <tr>
-                                            <td>@br.BidRequestID</td>
+                                            <td>@br.DateCreated.ToString("MM/dd/yyy")</td>
                                             @if (br.User.LastName == null)
                                             {
                                                 <td>@br.User.FirstName</td>
@@ -42,15 +49,17 @@
                                             }
                                             <td>@br.ProjectDescription</td>
                                             <td>@br.ProjectLocation</td>
-                                            <td>@br.DateCreated.ToString("MM/dd/yyy")</td>
+                                            
                                             <td>
-                                                <form asp-action="DeleteBidReq" method="post" class="">
+                                                
                                                     <div class="btn-toolbar">
-                                                        <button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>
+                                                        @*<button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>*@
+                                                        <a asp-action="DeleteBidReq" asp-controller="BidRequest" class="btn btn-sm btn-danger pull-right" asp-route-bidrequestId="@br.BidRequestID">Delete</a>
                                                         <a asp-action="Bid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidrequestId="@br.BidRequestID">Respond</a>
                                                         <input class="" type="hidden" name="BidRequestID" value="@br.BidRequestID" />
+                                                        
                                                     </div>
-                                                </form>
+                                                
                                             </td>
                                         </tr>
 

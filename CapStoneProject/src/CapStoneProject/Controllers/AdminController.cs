@@ -21,6 +21,8 @@ namespace CapStoneProject.Controllers
         private UserManager<UserIdentity> userManager;
         private RoleManager<IdentityRole> roleManager;
         private IReviewRepo reviewRepo;
+        private IBidRequestRepo brRepo;
+        private IBidRepo bidRepo;
         private readonly ApplicationDbContext context;
        
 
@@ -29,11 +31,13 @@ namespace CapStoneProject.Controllers
          private IPasswordHasher<UserIdentity> passwordHasher;*/
 
 
-        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, IReviewRepo repo, ApplicationDbContext Context)
+        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, IReviewRepo repo, IBidRequestRepo brrepo, IBidRepo bidrepo, ApplicationDbContext Context)
         {
             userManager = usrMgr;
             roleManager = roleMgr;
             reviewRepo = repo;
+            brRepo = brrepo;
+            bidRepo = bidrepo;
             context = Context;
             /*userValidator = userValid;
             passwordValidator = passValid;
@@ -198,21 +202,54 @@ namespace CapStoneProject.Controllers
             {
                 TempData["review"] = $"{deletedMessage.ReviewID} was deleted";
             }
-            return RedirectToAction("ReviewPanel");
+            return RedirectToAction("AdminPage", "Admin");
         }
 
-        //here
 
        [HttpPost]
         public async Task<IActionResult> ReviewPanel(string searchString)
         {
+            
             var words = reviewRepo.GetAllReviews();
+            
             if (!string.IsNullOrEmpty(searchString))
             { 
-                words = words.Where(m => m.Subject.Contains(searchString) || m.Body.Contains(searchString) || m.From.FirstName.Contains(searchString));
+                words = words.Where(m => m.Subject.ToLower().Contains(searchString) || m.Body.ToLower().Contains(searchString) || m.From.FirstName.ToLower().Contains(searchString));
             }
-            return View(await words.ToListAsync());
+            return View("AdminPage", await words.ToListAsync());
+            
         }
+
+        //filtering
+        [HttpPost]
+        public async Task<IActionResult> BRFilter(string ss)
+        {
+
+            var words = brRepo.GetAllBidRequests();
+
+            if (!string.IsNullOrEmpty(ss))
+            {
+                words = words.Where(br => br.User.LastName.ToLower().Contains(ss) || br.User.FirstName.ToLower().Contains(ss) || br.User.Email.ToLower().Contains(ss));
+            }
+            return View("AdminPage", await words.ToListAsync());
+
+        }
+
+        //filtering
+        [HttpPost]
+        public async Task<IActionResult> BidFilter(string ss)
+        {
+            var words = bidRepo.GetAllBids();
+
+            if (!string.IsNullOrEmpty(ss))
+            {
+                words = words.Where(b => b.User.LastName.ToLower().Contains(ss) || b.User.FirstName.ToLower().Contains(ss) || b.User.Email.ToLower().Contains(ss));
+            }
+            return View("AdminPage", await words.ToListAsync());
+
+        }
+
+
 
         public ViewResult AdminPage()
         {
