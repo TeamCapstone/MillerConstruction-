@@ -9,16 +9,9 @@
                     </h3>
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
-                    @if (Model.ClientID == null)
-                    {
-                        @await Component.InvokeAsync("UserInvoice", 0)
-                    }
-                    else
-                    {
-                        @await Component.InvokeAsync("UserInvoice", new { id = Model.ClientID })
-                    }
+                   
+                    @await Component.InvokeAsync("UserInvoice", new { email = Model.User.Email })
                     
-
                 </div>
             </div>
         </div>

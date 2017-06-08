@@ -356,3 +356,8 @@ img:hover {
     top: 250px;
     font-size: x-large;
 }
+
+#UserErrorMessage{
+    font-size: x-large;
+    text-align: center;
+}

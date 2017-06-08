@@ -29,7 +29,7 @@ namespace CapStoneProject.Repositories
 
         public Bid GetBidByUserEmail(string email)
         {
-            return context.Bids.First(n => n.User.Email == email);
+            return context.Bids.FirstOrDefault(n => n.User.Email == email);
         }
 
         public int Update(Bid bid)
@@ -52,6 +52,13 @@ namespace CapStoneProject.Repositories
                 context.SaveChanges();
             }
             return dbBid;
+        }
+
+        public List<Bid> GetBidsByUserEmail(string email)
+        {
+            return (from t in context.Bids
+                    where t.User.Email == email
+                    select t).ToList();
         }
     }
 }
