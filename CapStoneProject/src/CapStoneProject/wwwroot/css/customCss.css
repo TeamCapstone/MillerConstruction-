@@ -311,26 +311,6 @@ img:hover {
 /*Joel Section :)*/
 
 
-.square{
-    width:100px;
-    height:100px;
-        align-content: center;
-    text-align: center;
-}
-
-.v{
-    border-left:1px solid #000;
-    border-right:1px solid #000;
-        align-content: center;
-    text-align: center;
-}
-
-.h{
-    border-top:1px solid #000;
-    border-bottom:1px solid #000;
-        align-content: center;
-    text-align: center;
-}
 .middle {
     border-top:1px solid #000;
     border-bottom:1px solid #000;
@@ -349,7 +329,7 @@ img:hover {
 }
 .positioner{
     position: relative;
-    left: 700px;
-    top: 250px;
+    left: 695px;
+    top: 210px;
     font-size: x-large;
 }

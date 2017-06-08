@@ -24,5 +24,7 @@ namespace CapStoneProject.Repositories.Interfaces
 
         IQueryable<Review> GetAllDisapproved();
 
+        Review GetReviewById(int id);
+
     }
 }
