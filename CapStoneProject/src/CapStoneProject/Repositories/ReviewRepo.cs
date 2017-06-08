@@ -15,6 +15,14 @@ namespace CapStoneProject.Repositories
         {
             context = ctx;
         }
+        public IEnumerable<Review> Review
+        {
+            get
+            {
+                return context.Reviews.Include(c => c.ReviewID).ToList();
+            }
+        }
+
 
         public IQueryable<Review> GetAllReviews()
         {
@@ -71,6 +79,11 @@ namespace CapStoneProject.Repositories
                 context.SaveChanges();
             }
             return dbEntry;
+        }
+
+        public Review GetReviewById(int id)
+        {
+            return Review.FirstOrDefault(c => c.ReviewID == id);
         }
         /*public IEnumerable<Review> Reviews => new List<Review>
         {

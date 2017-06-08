@@ -17,6 +17,7 @@ using System.Threading;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 
+
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CapStoneProject.Controllers
@@ -77,6 +78,7 @@ namespace CapStoneProject.Controllers
 
                         using (var client = new SmtpClient())
                         {
+                          
                             client.Connect("smtp.mail.yahoo.com", 465, SecureSocketOptions.SslOnConnect);
 
                             client.Authenticate("capstonejoca@yahoo.com", "JOCA123.");
