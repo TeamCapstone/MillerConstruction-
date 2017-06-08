@@ -8,7 +8,7 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170606053721_initial")]
+    [Migration("20170606222716_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,8 @@ namespace CapStoneProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("BidRequestID");
+
+                    b.Property<DateTime>("DateCreated");
 
                     b.Property<decimal>("LaborCost");
 
@@ -55,6 +57,8 @@ namespace CapStoneProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Concrete");
+
+                    b.Property<DateTime>("DateCreated");
 
                     b.Property<bool>("FrameWork");
 
@@ -218,6 +222,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<bool>("ClientCreated");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

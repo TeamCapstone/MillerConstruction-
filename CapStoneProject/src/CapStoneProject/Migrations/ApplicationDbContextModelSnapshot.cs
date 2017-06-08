@@ -222,6 +222,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<bool>("ClientCreated");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
