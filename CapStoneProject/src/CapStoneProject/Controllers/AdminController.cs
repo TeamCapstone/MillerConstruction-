@@ -239,7 +239,6 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public async Task<IActionResult> BidFilter(string ss)
         {
-
             var words = bidRepo.GetAllBids();
 
             if (!string.IsNullOrEmpty(ss))
@@ -249,6 +248,8 @@ namespace CapStoneProject.Controllers
             return View("AdminPage", await words.ToListAsync());
 
         }
+
+
 
         public ViewResult AdminPage()
         {

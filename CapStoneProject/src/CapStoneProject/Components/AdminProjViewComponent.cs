@@ -7,27 +7,29 @@ using CapStoneProject.Models;
 using CapStoneProject.Repositories.Interfaces;
 using CapStoneProject.Repositories;
 
-namespace CapStoneProject.Infrastructure
+
+namespace CapStoneProject.Components
 {
-    [ViewComponent(Name = "ClientVC")]
-    public class AdminClientViewComponent : ViewComponent
+    [ViewComponent(Name = "ProjectVC")]
+    public class AdminProjViewComponent : ViewComponent
     {
         private ApplicationDbContext context;
 
-        public AdminClientViewComponent(ApplicationDbContext ctx)
+        public AdminProjViewComponent(ApplicationDbContext ctx)
         {
             context = ctx;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await GetAllClientsAsync());
+            return View(await GetAllProjectsAsync());
         }
 
-        private Task<List<Client>> GetAllClientsAsync()
+        private Task<List<Project>> GetAllProjectsAsync()
         {
-            ClientRepo clientList = new ClientRepo(context);
-            return Task.FromResult(clientList.GetAllClients().ToList());
+            ProjectRepo projList = new ProjectRepo(context);
+            return Task.FromResult(projList.GetAllProjects().ToList());
         }
+
     }
 }

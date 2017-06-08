@@ -62,6 +62,10 @@
 .welcome{
     color: blanchedalmond;
 }
+.MCCTitle{
+    color: red;
+    font-size: 110%;
+}
 
 .socFtr{
     padding: 10px;
