@@ -11,7 +11,13 @@
                                     <th>Total Estimate</th>
                                 </tr>
 
-                               
+                               @if (Model == null)
+                               {
+                                   <caption id="UserErrorMessage">You have no quotes.</caption>
+
+                               }
+                               else
+                               {
                                     <tr>
                                         <td>@Model.BidID</td>
                                         @if (Model.User.LastName == null)
@@ -24,8 +30,9 @@
                                         }
                                         <td>@Model.RevisedProjectDescription</td>
                                         <td>$@Model.TotalEstimate</td>
-
+                                
                                     </tr>
+                               }
                                </table>
                             </div>
                         </div>

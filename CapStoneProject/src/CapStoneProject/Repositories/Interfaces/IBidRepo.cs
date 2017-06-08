@@ -15,6 +15,8 @@ namespace CapStoneProject.Repositories.Interfaces
 
         Bid GetBidByUserEmail(string email);
 
+        List<Bid> GetBidsByUserEmail(string email);
+
         int Update(Bid req);
 
         Bid DeleteBid(int id);

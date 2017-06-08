@@ -15,6 +15,7 @@ namespace CapStoneProject.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    ClientCreated = table.Column<bool>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
@@ -72,6 +73,7 @@ namespace CapStoneProject.Migrations
                     BidRequestID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Concrete = table.Column<bool>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     FrameWork = table.Column<bool>(nullable: false),
                     NewBuild = table.Column<bool>(nullable: false),
                     ProjectDescription = table.Column<string>(nullable: true),
@@ -235,6 +237,7 @@ namespace CapStoneProject.Migrations
                     BidID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BidRequestID = table.Column<int>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     LaborCost = table.Column<decimal>(nullable: false),
                     MaterialsDescription = table.Column<string>(nullable: true),
                     ProjectedTimeFrame = table.Column<string>(nullable: true),

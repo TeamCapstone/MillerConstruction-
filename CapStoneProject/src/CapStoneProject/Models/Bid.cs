@@ -28,5 +28,6 @@ namespace CapStoneProject.Models
 
         public DateTime ProposedStartDate { get; set; }
         public DateTime DateCreated { get; set; }
+
     }
 }

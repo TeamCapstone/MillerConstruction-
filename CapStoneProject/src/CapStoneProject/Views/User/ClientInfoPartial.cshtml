@@ -9,8 +9,9 @@
                     </h3>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
-                    @await Component.InvokeAsync("ClientInfo", new { id = Model.ClientID })
-
+                    
+                    @await Component.InvokeAsync("ClientInfo", new { email = Model.User.Email })
+                    
                 </div>
             </div>
         </div>
