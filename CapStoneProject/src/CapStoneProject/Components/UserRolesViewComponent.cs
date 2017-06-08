@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CapStoneProject.Infrastructure
+namespace CapStoneProject.Components
 {
     [ViewComponent(Name = "UserRolesVC")]
     public class UserRolesViewComponent : ViewComponent

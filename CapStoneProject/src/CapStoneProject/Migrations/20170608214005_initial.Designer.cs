@@ -8,8 +8,8 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170607230413_version")]
-    partial class version
+    [Migration("20170608214005_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,8 @@ namespace CapStoneProject.Migrations
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<bool>("ClientCreated");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
