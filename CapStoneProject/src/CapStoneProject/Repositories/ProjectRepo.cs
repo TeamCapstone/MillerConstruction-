@@ -29,7 +29,7 @@ namespace CapStoneProject.Repositories
 
         public Project GetProjectByID(int projectID)
         {
-            return context.Projects.Where(p => p.ProjectID == projectID).FirstOrDefault();
+            return context.Projects.Where(p => p.ProjectID == projectID).Include(p => p.Bid).Include(p => p.Client).FirstOrDefault();
         }
 
         public IEnumerable<Project> GetProjectsByClient(int clientID)
@@ -55,6 +55,13 @@ namespace CapStoneProject.Repositories
                 context.Projects.Add(project);
             else
                 context.Projects.Update(project);
+
+            return context.SaveChanges();
+        }
+
+        public int ProjectDelete(Project project)
+        {
+            context.Projects.Remove(project);
 
             return context.SaveChanges();
         }

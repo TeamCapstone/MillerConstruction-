@@ -16,5 +16,6 @@ namespace CapStoneProject.Repositories.Interfaces
         int ProjectUpdate(Project project); //Updates db context
         Project GetProjectByID(int projectID);
         List<Project> GetAllProjectsByClientId(int id);
+        int ProjectDelete(Project project);
     }
 }

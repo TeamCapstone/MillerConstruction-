@@ -115,7 +115,8 @@ namespace CapStoneProject.Controllers
                             ProjectName = projectVM.ProjectName,
                             StartDate = projectVM.StartDate,
                             OriginalEstimate = projectVM.Estimate,
-                            Bid = bidrepo.GetBidByID(projectVM.BidID)
+                            Bid = bidrepo.GetBidByID(projectVM.BidID),
+                            ProjectStatus = "Started"
                         };
 
                         if(project.Client != null && project.Bid != null)
@@ -152,14 +153,14 @@ namespace CapStoneProject.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public IActionResult EditProject(int projectID, DateTime date) //for when the admin edits a project
+        public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
-            var project = projectRepo.GetProjectByID(projectID);
-            var projectVM = new VMEditProject {LastName = project.Client.LastName,
-                Email = project.Client.Email, ProjectName = project.ProjectName,
-                Estimate = project.TotalCost, StartDate = project.StartDate,
-                Status = project.ProjectStatus, StatusDate = date,
-                ProjectID = project.ProjectID};
+            Project project = projectRepo.GetProjectByID(projectID);
+            VMEditProject projectVM = new VMEditProject {LastName = project.Client.LastName,
+                FirstName = project.Client.FirstName, Email = project.Client.Email,
+                ProjectName = project.ProjectName, Estimate = project.TotalCost,
+                StartDate = project.StartDate, Status = project.ProjectStatus,
+                StatusDate = DateTime.Today, ProjectID = project.ProjectID};
 
             return View(projectVM);
         }
@@ -172,6 +173,8 @@ namespace CapStoneProject.Controllers
             if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null
                 && projectVM.StatusDate != null)
             {
+                project.ProjectID = projectVM.ProjectID;
+                project.ProjectName = projectVM.ProjectName;
                 project.TotalCost = projectVM.Estimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
