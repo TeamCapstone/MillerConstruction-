@@ -41,6 +41,8 @@ namespace CapStoneProject.Migrations
 
                     b.Property<string>("UserId");
 
+                    b.Property<int>("Version");
+
                     b.HasKey("BidID");
 
                     b.HasIndex("BidRequestID");

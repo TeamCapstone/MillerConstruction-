@@ -34,13 +34,14 @@ namespace CapStoneProject.Repositories
 
         public int Update(Bid bid)
         {
-            if (bid.BidID == 0)
+            if (bid.BidID == 0 || bid.Version > 0)
                 context.Bids.Add(bid);
             else
                 context.Bids.Update(bid);
 
             return context.SaveChanges();
         }
+
 
         public Bid DeleteBid(int id)
         {

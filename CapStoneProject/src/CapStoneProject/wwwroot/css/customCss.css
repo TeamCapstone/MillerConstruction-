@@ -206,9 +206,6 @@
     font-family: Arial;
     font-size: 2em;
 }
-/*About Page Section*/
-/*Services Page Section */
-/*FAQ Page Section*/
 
 
 /*Review Page Section*/
@@ -247,9 +244,7 @@ img:hover {
   -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
  
 }
-#mccCara{
-    
-}
+
 .galHeading{
     text-align: center;
     font-family: 'Bauhaus 93';
@@ -301,10 +296,18 @@ img:hover {
     border-radius: 5px;
 }
 
+/*User Page Section*/
+#userUpdateFrm{
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
-
-
-
+/*View Bid Section*/
+.createBid{
+   
+}
 
 
 

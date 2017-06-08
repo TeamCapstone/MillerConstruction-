@@ -66,6 +66,7 @@ namespace CapStoneProject.Controllers
             if (c == null)
             {
                 Client altC = new Client();
+                
                 projectVM.ClientID = altC.ClientID;
                 projectVM.BidID = bidID;               
                 projectVM.LastName = b.User.LastName;

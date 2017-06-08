@@ -18,9 +18,17 @@ namespace CapStoneProject.Infrastructure
             }
             public IViewComponentResult Invoke(int id)
             {
+                if (id == 0)
+                {
+                    return View();
+                }
+                else
+                {
                 List<Invoice> invoices = new List<Invoice>();
                 invoices = repository.GetAllInvoicesByClientId(id);
                 return View(invoices);
+                }
+                
             }
 
     }
