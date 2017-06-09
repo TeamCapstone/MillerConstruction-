@@ -16,6 +16,9 @@ using Google.Apis.Auth.OAuth2;
 using System.Threading;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using System.Text;
+using System.IO;
+using System.Security.Cryptography;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,15 +31,18 @@ namespace CapStoneProject.Controllers
         private IBidRepo bidRepo;
         protected UserManager<UserIdentity> UserManager;
         private CancellationToken taskCancellationToken;
-
+        private string Email = "postmaster@millercustomconstructioninc.com";
+        private string Password = "Capstone132.";
+        private const string Server = "m05.internetmailserver.net";
+        private const int Port = 587;
 
         public BidRequestController(UserManager<UserIdentity> userMgr, IBidRequestRepo repo, IBidRepo bRepo)
         {
             bidReqRepo = repo;
             bidRepo = bRepo;
             UserManager = userMgr;
-        }
 
+        }
 
         //Methods for Viewing and Creating Bid Requests (quote request)
         [HttpGet]
@@ -48,6 +54,7 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public async Task<IActionResult> BidRequest(BidRequest bidreq)
         {
+
             //check to see if email is in the db
             if (!bidReqRepo.UniqueEmail(bidreq.User.Email)) //if false, its not in the database so it is a unique eamil
             {
@@ -67,8 +74,8 @@ namespace CapStoneProject.Controllers
                     {
                         //emailing the client to notify of request
                         var message = new MimeMessage();
-                        message.From.Add(new MailboxAddress("Admin", "capstonejoca@yahoo.com"));
-                        message.To.Add(new MailboxAddress("Admin", "capstonejoca@yahoo.com"));
+                        message.From.Add(new MailboxAddress("Admin", Email));
+                        message.To.Add(new MailboxAddress("Admin", Email));
                         message.Subject = "bid Request Requested";
 
                         message.Body = new TextPart("plain")
@@ -79,9 +86,10 @@ namespace CapStoneProject.Controllers
                         using (var client = new SmtpClient())
                         {
                           
-                            client.Connect("smtp.mail.yahoo.com", 465, SecureSocketOptions.SslOnConnect);
+                            client.Connect(Server, Port);
 
-                            client.Authenticate("capstonejoca@yahoo.com", "JOCA123.");
+
+                            client.Authenticate(Email, Password);
 
                             client.Send(message);
 
