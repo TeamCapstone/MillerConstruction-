@@ -16,9 +16,9 @@
                     @* Start Content *@
 
                     <div class="container" id="formDiv">
-                        <div class="row">
+                        <div class="row ">
                             <br />
-
+                            <br />
                             <form asp-controller="Admin" asp-action="ReviewPanel" class="pull-right">
                                 <p>
                                     <input type="text" name="SearchString">
@@ -29,33 +29,35 @@
                             <br />
                             <table class="table table-striped table-bordered table-condensed">
                                 <tr class="info">
-                                    <th class="text-center">ReviewID</th>
-                                    <th class="text-center">Review Name</th>
-                                    <th class="text-center">Subject</th>
-                                    <th class="text-center">Body</th>
-                                    <th class="text-center">Approved?</th>
-                                    <th class="text-center">Date</th>
-                                    <th class="text-center">Actions</th>
+                                    
+                                    <th >Review Name</th>
+                                    <th>Email</th>
+                                    <th >Subject</th>
+                                    <th>Body</th>
+                                    <th >Approved?</th>
+                                    <th >Date</th>
+                                    <th>Actions</th>
                                 </tr>
                                 @foreach (var review in Model)
                                 {
                                     <tr class="danger">
-                                        <td class="table-danger">@review.ReviewID</td>
-                                        <td class="text-left">@review.From.FirstName</td>
-                                        <td class="table-danger">@review.Subject</td>
-                                        <td class="text-left">@review.Body</td>
-                                        <td class="table-danger">@review.Approved</td>
+                                        
+                                        <td >@review.From.FirstName</td>
+                                        <td>@review.From.Email</td>
+                                        <td >@review.Subject</td>
+                                        <td >@review.Body</td>
+                                        <td>@review.Approved</td>
                                         @if (review.Date == null)
                                         {
                                             review.Date = DateTime.Now;
-                                            <td class="text-left">@review.Date.ToString("d")</td>
+                                            <td>@review.Date.ToString("d")</td>
                                         }
                                         else
                                         {
 
-                                            <td class="text-left">@review.Date.ToString("d")</td>
+                                            <td >@review.Date.ToString("d")</td>
                                         }
-                                        <td class="text-center">
+                                        <td>
 
                                             <form asp-action="DeleteReview" method="post">
                                                 <div class="btn-toolbar">

@@ -8,6 +8,21 @@ font-family: Baumans-Regular;
 src: url('/fonts/Baumans-Regular.ttf');
 }
 
+/*Admin and UserPages*/
+
+
+@media (min-width: 1200px) {
+    .container {
+    width: 980px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+}
+
+
 
 body {
      font-family: Baumans-Regular, Times, serif; 
@@ -316,6 +331,8 @@ img:hover {
     padding: 20px;
     border-radius: 5px;
 }
+
+
 
 /*User Page Section*/
 #userUpdateFrm{

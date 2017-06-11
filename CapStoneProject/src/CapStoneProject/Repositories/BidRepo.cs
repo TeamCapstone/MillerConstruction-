@@ -18,7 +18,7 @@ namespace CapStoneProject.Repositories
       
         public IQueryable<Bid> GetAllBids()
         {
-            return context.Bids.Include(r => r.BidReq).Include(u => u.User);
+            return context.Bids.Include(r => r.BidReq).Include(u => u.User).OrderBy(n => n.BidReq.User.LastName);
         }
 
         public Bid GetBidByID(int id)
