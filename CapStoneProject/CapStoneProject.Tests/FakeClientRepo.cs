@@ -119,7 +119,7 @@ namespace CapStoneProject.Repositories
             Zipcode = "97405",
             PhoneNumber = "(541) 548-9852",
             Email = "Hello1@gmail.com",
-            UserIdentity = user
+            //UserIdentity = user
         };
     }
 }

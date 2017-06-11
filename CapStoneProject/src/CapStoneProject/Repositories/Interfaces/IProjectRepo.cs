@@ -17,5 +17,6 @@ namespace CapStoneProject.Repositories.Interfaces
         Project GetProjectByID(int projectID);
         List<Project> GetAllProjectsByClientId(int id);
         int ProjectDelete(Project project);
+        bool HasClient(Client client);
     }
 }
