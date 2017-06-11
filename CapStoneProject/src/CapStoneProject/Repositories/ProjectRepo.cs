@@ -61,9 +61,25 @@ namespace CapStoneProject.Repositories
 
         public int ProjectDelete(Project project)
         {
-            context.Projects.Remove(project);
+            Project proj = context.Projects.Where(p => p.ProjectID == project.ProjectID).FirstOrDefault();
+
+            if (proj != null)
+            {
+                context.Projects.Remove(project);
+            }
 
             return context.SaveChanges();
+        }
+
+        public bool HasClient(Client client)
+        {
+            Project project = context.Projects.FirstOrDefault(p => p.Client == client);
+            if (project != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public int ProjectUpdate(Client client)
