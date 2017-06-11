@@ -171,7 +171,8 @@ namespace CapStoneProject.Controllers
                 FirstName = project.Client.FirstName, Email = project.Client.Email,
                 ProjectName = project.ProjectName, OriginalEstimate = project.OriginalEstimate,
                 StartDate = project.StartDate, Status = project.ProjectStatus,
-                ProjectID = project.ProjectID, AdditionalCost = project.AdditionalCosts};
+                ProjectID = project.ProjectID, AdditionalCost = project.AdditionalCosts,
+                CurrentTotal = project.TotalCost};
 
             return View(projectVM);
         }
@@ -185,7 +186,7 @@ namespace CapStoneProject.Controllers
             {
                 project.ProjectID = projectVM.ProjectID;
                 project.AdditionalCosts = projectVM.AdditionalCost;
-                project.TotalCost = projectVM.AdditionalCost + projectVM.OriginalEstimate;
+                project.TotalCost = projectVM.AdditionalCost + project.OriginalEstimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
                 project.StatusDate = DateTime.Today;

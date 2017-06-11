@@ -8,8 +8,8 @@ using CapStoneProject.Repositories;
 namespace CapStoneProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170610214504_ini")]
-    partial class ini
+    [Migration("20170611202306_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
