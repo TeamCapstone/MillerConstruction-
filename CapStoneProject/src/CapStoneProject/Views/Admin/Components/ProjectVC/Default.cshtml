@@ -15,7 +15,7 @@
                                 <div class="row">
                                     @* Start Content *@
                                     <br />
-                          
+                                    <br />
                                     <table class="table table-striped table-bordered table-condensed">
                                        
                                             <tr>
@@ -36,7 +36,12 @@
                                                     <td>@p.StartDate</td>
                                                     <td>@p.ProjectStatus</td>
                                                     <td>@p.StatusDate</td>
-                                                    <td><a asp-action="EditProject" asp-controller="Project" asp-route-projectid="@p.ProjectID" class="btn btn-sm btn-primary pull-right" >Edit Project</a></td>
+                                                    <td>
+                                                        <div class="btn-toolbar">
+                                                            <a asp-action="DeleteProject" asp-controller="Project" class="btn btn-sm btn-danger pull-right" asp-route-projectid="@p.ProjectID">Delete</a>
+                                                            <a asp-action="EditProject" asp-controller="Project" asp-route-projectid="@p.ProjectID" class="btn btn-sm btn-primary pull-right">Edit Project</a>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             }
                                       

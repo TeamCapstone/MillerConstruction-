@@ -216,11 +216,11 @@ namespace CapStoneProject.Controllers
             { 
                 words = words.Where(m => m.Subject.ToLower().Contains(searchString) || m.Body.ToLower().Contains(searchString) || m.From.FirstName.ToLower().Contains(searchString));
             }
-            return View("AdminPage", await words.ToListAsync());
+            return View("ReviewPanel", await words.ToListAsync());
             
         }
 
-        //filtering
+        //filtering unfortantly redirects to a different page becuase refreshing the page cuases the panel to collapse
         [HttpPost]
         public async Task<IActionResult> BRFilter(string ss)
         {
@@ -231,7 +231,7 @@ namespace CapStoneProject.Controllers
             {
                 words = words.Where(br => br.User.LastName.ToLower().Contains(ss) || br.User.FirstName.ToLower().Contains(ss) || br.User.Email.ToLower().Contains(ss));
             }
-            return View("AdminPage", await words.ToListAsync());
+            return RedirectToAction("AllBidRequests", "BidRequest", await words.ToListAsync());
 
         }
 

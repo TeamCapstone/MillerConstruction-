@@ -191,30 +191,31 @@ namespace CapStoneProject.Controllers
             return View(clientRepo.GetAllClients().ToList());
         }
 
-        //TODO: Ad Search by email, first name, last name
+        //OLD code
 
-        public ViewResult Searchby()
-        {
-            return View(new VMClientSearch());
-        }
+        //public ViewResult Searchby()
+        //{
+        //    return View(new VMClientSearch());
+        //}
 
-        [HttpPost]
-        public IActionResult SearchBy(VMClientSearch cs)
-        {
-            Client c = new Client();
-            if (cs.SearchCategory == "Email")
-                c = clientRepo.GetClientByEmail(cs.SearchValue);
-            else if (cs.SearchCategory == "FirstName")
-                c = clientRepo.GetClientByFirstName(cs.SearchValue);
-            else if (cs.SearchCategory == "LastName")
-                c = clientRepo.GetClientByLastName(cs.SearchValue);
+        //[HttpPost]
+        //public IActionResult SearchBy(VMClientSearch cs)
+        //{
+        //    Client c = new Client();
+        //    if (cs.SearchCategory == "Email")
+        //        c = clientRepo.GetClientByEmail(cs.SearchValue);
+        //    else if (cs.SearchCategory == "FirstName")
+        //        c = clientRepo.GetClientByFirstName(cs.SearchValue);
+        //    else if (cs.SearchCategory == "LastName")
+        //        c = clientRepo.GetClientByLastName(cs.SearchValue);
 
-            if (c == null)
-                return View();
-            else
-                return RedirectToAction("Edit", new { id = c.ClientID });
-        }
+        //    if (c == null)
+        //        return View();
+        //    else
+        //        return RedirectToAction("Edit", new { id = c.ClientID });
+        //}
 
+            //TODO: rename and move to admin controller
         [HttpPost]
         public async Task<IActionResult> AllClients(string searchString) //Filters the Clients
         {

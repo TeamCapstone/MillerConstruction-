@@ -10,6 +10,7 @@ namespace CapStoneProject.Models
     {
         public int BidID { get; set; }
        
+        //we shouldnt need this.....why did this get put back in?
         public UserIdentity User { get; set; }
 
         public BidRequest BidReq { get; set; }
