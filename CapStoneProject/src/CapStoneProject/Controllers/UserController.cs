@@ -136,7 +136,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditClient(Client client)
+        public async Task<IActionResult> EditClient(Client client) // Edits Client Information and Updates User email/username as well
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -157,6 +157,17 @@ namespace CapStoneProject.Controllers
                 }
             
             return RedirectToAction("UserPage", "User");
+        }
+
+        [HttpPost]
+        public IActionResult FilterUsers(string searchString)
+        {
+            var users = userRepo.GetAllUsersFilter();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(m => m.FirstName.Contains(searchString) || m.LastName.Contains(searchString) || m.Email.Contains(searchString));
+            }
+            return View(users.ToList());
         }
     }
 
