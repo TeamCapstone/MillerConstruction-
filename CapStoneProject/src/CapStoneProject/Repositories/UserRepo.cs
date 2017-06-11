@@ -51,6 +51,13 @@ namespace CapStoneProject.Repositories
             return Users.ToList(); 
         }
 
+        public IQueryable<UserIdentity> GetAllUsersFilter()
+        {
+
+            return context.Users;
+
+        }
+
         public UserIdentity GetUser(string username)
         {
             return Users.First(u => u.Email == username);

@@ -31,8 +31,9 @@ namespace CapStoneProject.Controllers
         private IClientRepo clientRepo;
         private IHostingEnvironment environment;
         private IInvoiceRepo invoiceRepo;
+        private IUserRepo userRepo;
 
-        public ClientController(IHostingEnvironment env, IInvoiceRepo invRepo,RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
+        public ClientController(IUserRepo uerRepo, IHostingEnvironment env, IInvoiceRepo invRepo, RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
         {
             userManager = usrMgr;
             signInManager = sim;
@@ -40,6 +41,52 @@ namespace CapStoneProject.Controllers
             clientRepo = clRepo;
             environment = env;
             invoiceRepo = invRepo;
+            userRepo = uerRepo;
+        }
+
+        public IActionResult AdminCreateClient(string email)
+        {
+            UserIdentity user = new UserIdentity();
+            user = userRepo.GetUser(email);
+
+            VMAdminCreateClient client = new VMAdminCreateClient
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                User = user,
+                Email = user.Email
+            };
+
+            return View(client);
+        }
+
+        [HttpPost]
+        public IActionResult AdminCreateClient(VMAdminCreateClient vm)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Client client = new Client
+                {
+                    FirstName = vm.FirstName,
+                    LastName = vm.LastName,
+                    CompanyName = vm.CompanyName,
+                    Street = vm.Street,
+                    City = vm.City,
+                    State = vm.State,
+                    Zipcode = vm.Zipcode,
+                    PhoneNumber = vm.PhoneNumber,
+                    UserIdentity = vm.User,
+                    Email = vm.Email
+                };
+
+                clientRepo.Create(client);
+                return RedirectToAction("AdminPage", "Admin");
+            }
+            else
+            {
+                return View(vm);
+            }
         }
 
         public IActionResult Create()
@@ -136,7 +183,7 @@ namespace CapStoneProject.Controllers
         {
             int id = client.ClientID;
             clientRepo.Delete(id);
-            return RedirectToAction("AllClients", "Client");
+            return RedirectToAction("AdminPage", "Admin");
         }
 
         public ViewResult AllClients()
@@ -170,7 +217,7 @@ namespace CapStoneProject.Controllers
 
             //TODO: rename and move to admin controller
         [HttpPost]
-        public async Task<IActionResult> AllClients(string searchString)
+        public async Task<IActionResult> AllClients(string searchString) //Filters the Clients
         {
             var clients = clientRepo.GetAllClients();
             if (!string.IsNullOrEmpty(searchString))

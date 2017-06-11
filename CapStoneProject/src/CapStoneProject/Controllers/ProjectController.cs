@@ -78,10 +78,10 @@ namespace CapStoneProject.Controllers
                 Client createdClient = clientRepo.GetClientByEmail(altC.Email);
 
                 b.User.ClientCreated = true;
-                projectVM.ClientID = createdClient.ClientID;
-                //projectVM.ClientID = altC.ClientID;
+                
                 projectVM.BidID = bidID;               
                 projectVM.LastName = b.User.LastName;
+                projectVM.ClientID = createdClient.ClientID;
                 projectVM.Email = b.User.Email;
 
             }
@@ -171,7 +171,8 @@ namespace CapStoneProject.Controllers
                 FirstName = project.Client.FirstName, Email = project.Client.Email,
                 ProjectName = project.ProjectName, OriginalEstimate = project.OriginalEstimate,
                 StartDate = project.StartDate, Status = project.ProjectStatus,
-                ProjectID = project.ProjectID, AdditionalCost = project.AdditionalCosts};
+                ProjectID = project.ProjectID, AdditionalCost = project.AdditionalCosts,
+                CurrentTotal = project.TotalCost};
 
             return View(projectVM);
         }
@@ -184,10 +185,8 @@ namespace CapStoneProject.Controllers
             if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null)
             {
                 project.ProjectID = projectVM.ProjectID;
-                //project.ProjectName = projectVM.ProjectName;
-                //project.OriginalEstimate = projectVM.OriginalEstimate;
                 project.AdditionalCosts = projectVM.AdditionalCost;
-                project.TotalCost = projectVM.AdditionalCost + projectVM.OriginalEstimate;
+                project.TotalCost = projectVM.AdditionalCost + project.OriginalEstimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
                 project.StatusDate = DateTime.Today;
