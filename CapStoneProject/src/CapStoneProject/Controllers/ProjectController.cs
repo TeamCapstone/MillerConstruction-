@@ -66,9 +66,20 @@ namespace CapStoneProject.Controllers
             Client c = clientRepo.GetClientByEmail(b.User.Email);
             if (c == null)
             {
+                //create client
                 Client altC = new Client();
+                altC.Email = b.User.Email;
+                altC.FirstName = b.User.FirstName;
+                altC.LastName = b.User.LastName;
+                altC.PhoneNumber = b.User.PhoneNumber;
+                altC.UserIdentity = b.User;
+                clientRepo.Create(altC);
+
+                Client createdClient = clientRepo.GetClientByEmail(altC.Email);
+
                 b.User.ClientCreated = true;
-                projectVM.ClientID = altC.ClientID;
+                projectVM.ClientID = createdClient.ClientID;
+                //projectVM.ClientID = altC.ClientID;
                 projectVM.BidID = bidID;               
                 projectVM.LastName = b.User.LastName;
                 projectVM.Email = b.User.Email;
@@ -158,9 +169,9 @@ namespace CapStoneProject.Controllers
             Project project = projectRepo.GetProjectByID(projectID);
             VMEditProject projectVM = new VMEditProject {LastName = project.Client.LastName,
                 FirstName = project.Client.FirstName, Email = project.Client.Email,
-                ProjectName = project.ProjectName, Estimate = project.TotalCost,
+                ProjectName = project.ProjectName, OriginalEstimate = project.OriginalEstimate,
                 StartDate = project.StartDate, Status = project.ProjectStatus,
-                StatusDate = DateTime.Today, ProjectID = project.ProjectID};
+                ProjectID = project.ProjectID, AdditionalCost = project.AdditionalCosts};
 
             return View(projectVM);
         }
@@ -170,15 +181,16 @@ namespace CapStoneProject.Controllers
         {
             Project project = projectRepo.GetProjectByID(projectVM.ProjectID);
 
-            if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null
-                && projectVM.StatusDate != null)
+            if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null)
             {
                 project.ProjectID = projectVM.ProjectID;
-                project.ProjectName = projectVM.ProjectName;
-                project.TotalCost = projectVM.Estimate;
+                //project.ProjectName = projectVM.ProjectName;
+                //project.OriginalEstimate = projectVM.OriginalEstimate;
+                project.AdditionalCosts = projectVM.AdditionalCost;
+                project.TotalCost = projectVM.AdditionalCost + projectVM.OriginalEstimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
-                project.StatusDate = projectVM.StatusDate;
+                project.StatusDate = DateTime.Today;
 
                 projectRepo.ProjectUpdate(project);
 

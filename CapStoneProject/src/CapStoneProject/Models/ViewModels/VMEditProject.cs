@@ -14,22 +14,19 @@ namespace CapStoneProject.Models.ViewModels
 
         public string FirstName { get; set; }
 
-        [Required]
         public string Email { get; set; }
 
-        [Required]
         public DateTime StartDate { get; set; }
 
-        [Required]
         public string ProjectName { get; set; }
 
-        [Required]
-        public decimal Estimate { get; set; }
+        public decimal OriginalEstimate { get; set; }
+
+        public decimal AdditionalCost { get; set; }
+
+        public decimal CurrentTotal { get; set; }
 
         [Required]
         public string Status { get; set; }
-
-        [Required]
-        public DateTime StatusDate { get; set; }
     }
 }
