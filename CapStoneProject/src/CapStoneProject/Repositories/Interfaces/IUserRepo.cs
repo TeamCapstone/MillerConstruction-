@@ -15,5 +15,6 @@ namespace CapStoneProject.Repositories.Interfaces
         UserIdentity GetUser(string username);
         int Create(UserIdentity user);
         int Edit(UserIdentity user);
+        IQueryable<UserIdentity> GetAllUsersFilter();
     }
 }
