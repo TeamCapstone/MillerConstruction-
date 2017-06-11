@@ -34,7 +34,7 @@ namespace CapStoneProject.Controllers
         private string Email = "postmaster@millercustomconstructioninc.com";
         private string Password = "Capstone132.";
         private const string Server = "m05.internetmailserver.net";
-        private const int Port = 587;
+        private const int Port = 465;
 
         public BidRequestController(UserManager<UserIdentity> userMgr, IBidRequestRepo repo, IBidRepo bRepo)
         {
@@ -74,8 +74,8 @@ namespace CapStoneProject.Controllers
                     {
                         //emailing the client to notify of request
                         var message = new MimeMessage();
-                        message.From.Add(new MailboxAddress("Admin", Email));
-                        message.To.Add(new MailboxAddress("Admin", Email));
+                        message.From.Add(new MailboxAddress("MCCInc", Email));
+                        message.To.Add(new MailboxAddress("MCCInc", Email));
                         message.Subject = "bid Request Requested";
 
                         message.Body = new TextPart("plain")
@@ -95,6 +95,36 @@ namespace CapStoneProject.Controllers
 
                             client.Disconnect(true);
                         }
+
+                        //Here is where I send the confirmation link
+                        /*string confirmationToken = UserManager.GenerateEmailConfirmationTokenAsync(bidreq.User).Result;
+
+                        string confirmationLink = Url.Action("ConfirmEmail", "Account", new { userid = bidreq.User.Id, token = confirmationToken }, protocol: HttpContext.Request.Scheme);
+
+
+                        var email = new MimeMessage();
+                        email.From.Add(new MailboxAddress("MCCInc", Email));
+                        email.Subject = "Confirm Email";
+                        email.Body = new TextPart("plain")
+                        {
+                            Text = "Click the link to confirm your email " + confirmationLink
+                        };
+                        email.To.Add(new MailboxAddress(bidreq.User.Email));
+
+                        using (var client_c = new SmtpClient())
+                        {
+
+                            client_c.Connect(Server, Port, SecureSocketOptions.SslOnConnect);
+
+                            client_c.AuthenticationMechanisms.Remove("XOAUTH2");
+
+                            client_c.Authenticate(Email, Password);
+
+                            client_c.Send(email);
+
+                            client_c.Disconnect(true);
+                        }*/
+                        //here
 
 
                         bidReqRepo.Update(bidreq);

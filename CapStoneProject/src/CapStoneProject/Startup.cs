@@ -31,7 +31,8 @@ namespace CapStoneProject
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration["Data:CapstoneAppItems:ConnectionString"]));
-            services.AddIdentity<UserIdentity, IdentityRole>(opts => {
+            services.AddIdentity<UserIdentity, IdentityRole>(opts =>
+            {
 
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 6;
@@ -39,7 +40,10 @@ namespace CapStoneProject
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
             services.AddTransient<IReviewRepo, ReviewRepo>();
             services.AddTransient<IClientRepo, ClientRepo>();
             services.AddTransient<IUserRepo, UserRepo>();
