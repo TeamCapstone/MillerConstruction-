@@ -2,6 +2,27 @@
 
 @model List<Client>
 
+<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var last = $.cookie('activeAccordionGroup');
+        if (last != null) {
+            //remove default collapse settings
+            $("#accordion2 .collapse").removeClass('in');
+            //show the last visible group
+            $("#" + last).collapse("show");
+        }
+    });
+
+    //when a group is shown, save it as the active accordion group
+    $("#accordion2").bind('shown', function () {
+        var active = $("#accordion2 .in").attr('id');
+        $.cookie('activeAccordionGroup', active)
+    });
+</script>
+
 <div id="modal-container" class="modal fade hidden-print" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -17,7 +38,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">
-                        <a data-toggle="collapse" href="#collapse1" id="parTitle">All Current Clients</a>
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse1" id="parTitle">All Current Clients</a>
                     </h3>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
@@ -65,7 +86,7 @@
                                             Upload Invoice
                                         </button>*@
                                                 </form>
-                                                <form asp-action="Delete" asp-route-id=@c.ClientID method="post">
+                                                <form asp-action="Delete" asp-controller="Client" asp-route-id=@c.ClientID method="post">
                                                     <a class="btn btn-sm btn-primary" asp-controller="Client" asp-action="Edit"
                                                        asp-route-id=@c.ClientID>Edit</a>
                                                     <input type="hidden" name="ClientID" value="@c.ClientID" />
