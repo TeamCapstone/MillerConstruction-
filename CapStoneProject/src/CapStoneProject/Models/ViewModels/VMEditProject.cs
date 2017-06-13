@@ -28,5 +28,6 @@ namespace CapStoneProject.Models.ViewModels
 
         [Required]
         public string Status { get; set; }
+        public DateTime StatusDate { get; set; }
     }
 }
