@@ -184,7 +184,7 @@ namespace CapStoneProject.Controllers
             {
                 reviewRepo.Update(review);
                 TempData["review"] = $"{review.ReviewID} has been saved";
-                return RedirectToAction("ReviewPanel", "Admin");
+                return RedirectToAction("AdminPage", "Admin");
             }
             else
             {

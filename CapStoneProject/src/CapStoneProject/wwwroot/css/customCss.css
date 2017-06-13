@@ -379,6 +379,20 @@ img:hover {
     font-size: x-large;
     text-align: center;
 }
+.commentS {
+  width: 300px;
+  height: 150px;
+      margin-left: auto;
+    margin-right: auto;
+}
+.padstyling {
+     padding-left: 400px;
+
+}
+.TitleCenter {
+    text-align:center;
+
+}
 
 
 /*Attributions: fonts free from http://www.1001fonts.com/google-web+bauhaus-fonts.html and http://freakfonts.com/fonts/bauhaus9357950.html */

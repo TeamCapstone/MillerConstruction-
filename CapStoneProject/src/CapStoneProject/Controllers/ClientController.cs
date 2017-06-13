@@ -14,7 +14,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 
 
@@ -32,6 +34,10 @@ namespace CapStoneProject.Controllers
         private IHostingEnvironment environment;
         private IInvoiceRepo invoiceRepo;
         private IUserRepo userRepo;
+        private string Email = "postmaster@millercustomconstructioninc.com";
+        private string Password = "Capstone132.";
+        private const string Server = "m05.internetmailserver.net";
+        private const int Port = 465;
 
         public ClientController(IUserRepo uerRepo, IHostingEnvironment env, IInvoiceRepo invRepo, RoleManager<IdentityRole> roleMgr, UserManager<UserIdentity> usrMgr, SignInManager<UserIdentity> sim, IClientRepo clRepo)
         {
@@ -264,6 +270,28 @@ namespace CapStoneProject.Controllers
                         await file.CopyToAsync(fileStream);
                     }
                 }
+            }
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("MCCInc", Email));
+            email.Subject = "Invoice Uploaded";
+            email.Body = new TextPart("plain")
+            {
+                Text = "Your Invoice has been uploaded."
+            };
+            email.To.Add(new MailboxAddress(c.Email));
+
+            using (var client_c = new SmtpClient())
+            {
+
+                client_c.Connect(Server, Port, SecureSocketOptions.SslOnConnect);
+
+                client_c.AuthenticationMechanisms.Remove("XOAUTH2");
+
+                client_c.Authenticate(Email, Password);
+
+                client_c.Send(email);
+
+                client_c.Disconnect(true);
             }
             return RedirectToAction("AdminPage", "Admin");
         }
