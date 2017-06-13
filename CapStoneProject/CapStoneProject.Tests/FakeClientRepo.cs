@@ -99,6 +99,11 @@ namespace CapStoneProject.Repositories
             return false;
         }
 
+        public bool ContainsClient(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         UserIdentity user = new UserIdentity
         {
             FirstName = "Henry",

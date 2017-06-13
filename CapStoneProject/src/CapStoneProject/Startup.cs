@@ -36,10 +36,10 @@ namespace CapStoneProject
 
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 6;
-                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireNonAlphanumeric = true;
                 opts.Password.RequireLowercase = false;
-                opts.Password.RequireUppercase = false;
-                opts.Password.RequireDigit = false;
+                opts.Password.RequireUppercase = true;
+                opts.Password.RequireDigit = true;
 
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 

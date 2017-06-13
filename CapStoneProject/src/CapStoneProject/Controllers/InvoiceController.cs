@@ -8,9 +8,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using CapStoneProject.Models;
 using CapStoneProject.Repositories.Interfaces;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using MimeKit;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,10 +19,6 @@ namespace CapStoneProject.Controllers
         private IHostingEnvironment environment;
         private IInvoiceRepo invoiceRepo;
         private IClientRepo clientRepo;
-        private string Email = "postmaster@millercustomconstructioninc.com";
-        private string Password = "Capstone132.";
-        private const string Server = "m05.internetmailserver.net";
-        private const int Port = 465;
 
         public InvoiceController(IHostingEnvironment env, IInvoiceRepo invRepo, IClientRepo clRepo)
         {
@@ -61,28 +55,6 @@ namespace CapStoneProject.Controllers
                         await file.CopyToAsync(fileStream);
                     }
                 }
-            }
-            var email = new MimeMessage();
-            email.From.Add(new MailboxAddress("MCCInc", Email));
-            email.Subject = "Invoice Uploaded";
-            email.Body = new TextPart("plain")
-            {
-                Text = "Your Invoice has been uploaded." 
-            };
-            email.To.Add(new MailboxAddress(client.Email));
-
-            using (var client_c = new SmtpClient())
-            {
-
-                client_c.Connect(Server, Port, SecureSocketOptions.SslOnConnect);
-
-                client_c.AuthenticationMechanisms.Remove("XOAUTH2");
-
-                client_c.Authenticate(Email, Password);
-
-                client_c.Send(email);
-
-                client_c.Disconnect(true);
             }
             return RedirectToAction("AllClients", "Client");
         }
