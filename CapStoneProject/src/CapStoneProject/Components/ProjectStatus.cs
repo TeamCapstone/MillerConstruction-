@@ -20,11 +20,20 @@ namespace CapStoneProject.Components
         }
         public IViewComponentResult Invoke(string email)
         {
+            List<Project> projects = new List<Project>();
             Client client = new Models.Client();
             client = clientRepo.GetClientByEmail(email);
-            List<Project> projects = new List<Project>();
-            projects = repository.GetAllProjectsByClientId(client.ClientID);
-            return View(projects);
+            if (client == null)
+            {
+                return View(projects);
+            }
+            else
+            {
+                
+                projects = repository.GetAllProjectsByClientId(client.ClientID);
+                return View(projects);
+            }
+            
         }
     }
 }

@@ -38,7 +38,7 @@
                                     @foreach (var br in Model)
                                     {
                                         <tr>
-                                            <td>@br.DateCreated.ToString("MM/dd/yyy")</td>
+                                            <td>@br.DateCreated.ToString("d")</td>
                                             @if (br.User.LastName == null)
                                             {
                                                 <td>@br.User.FirstName</td>

@@ -245,7 +245,7 @@ namespace CapStoneProject.Controllers
             {
                 words = words.Where(b => b.User.LastName.ToLower().Contains(ss) || b.User.FirstName.ToLower().Contains(ss) || b.User.Email.ToLower().Contains(ss));
             }
-            return View("AdminPage", await words.ToListAsync());
+            return RedirectToAction("AllBids", "BidRequest", await words.ToListAsync());
 
         }
 

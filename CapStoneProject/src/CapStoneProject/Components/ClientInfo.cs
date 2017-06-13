@@ -21,6 +21,7 @@ namespace CapStoneProject.Infrastructure
         public IViewComponentResult Invoke(string email)
         {
             UserIdentity user = userRepo.GetUser(email);
+            
             Client c = repository.GetClientByEmail(email);
             if (c != null)
             {
@@ -36,7 +37,7 @@ namespace CapStoneProject.Infrastructure
                     LastName = user.LastName,
                     Email = user.Email
                 };
-                repository.Create(c);
+                
                 return View(c);
             }
             

@@ -3,35 +3,31 @@
     Layout = "_Layout2";
 }
 
-<!DOCTYPE html>
+<div class="row" id="formDiv">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" id="interiorDiv">
+        <h1>Make a Review</h1>
+        <form role="form" asp-controller="Review" asp-action="MakeReview" method="post">
+            <div class="form-group center-block" id="review_form">
+                <input asp-for="ReviewID" type="hidden" />
 
-<html>
-<head>
-    <title> Make A Review</title>
-</head>
-<body>
-    <h1 class="TitleCenter">Make a Review</h1>
-    <form role="form" asp-controller="Review" asp-action="MakeReview"  class="TitleCenter" method="post">
-        <div class="form-group center-block" id="review_form">
-            <input asp-for="ReviewID" type="hidden" />
+                <label asp-for="Subject">Subject:</label>
+                <div class="form-group">
+                    <input asp-for="Subject" class="form-control" rows="3" /><br />
+                    <span id="Error" asp-validation-for="Subject"></span>@*add this*@
+                </div>
+                <label asp-for="Body">Body:</label>
+                <div class="form-group">
+                    <textarea asp-for="Body" class="form-control" rows="3"></textarea><br />
+                    <span id="Error" asp-validation-for="Body"></span>@*add this*@
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="Date" name="Date" />
+                </div>
 
-            <label asp-for="Subject">Subject:</label>
-            <div class="form-group commentS">
-                <textarea asp-for="Subject" class="form-control" rows="4" cols="50"></textarea><br />
-                <span id="Error" asp-validation-for="Subject"></span>@*add this*@
+                <button type="submit" class="btn btn-primary">Post a Review</button>
             </div>
-            <label asp-for="Body">Body:</label>
-            <div class="form-group commentS">
-                <textarea asp-for="Body" class="form-control" rows="4" cols="50"></textarea><br />
-                <span id="Error" asp-validation-for="Body"></span>@*add this*@
-            </div>
-            <div class="form-group">
-                <input type="hidden" asp-for="Date" name="Date" />
-            </div>
-
-            <button type="submit" class="btn btn-success">Post</button>
-        </div>
-    </form>
-
-</body>
-</html>
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
