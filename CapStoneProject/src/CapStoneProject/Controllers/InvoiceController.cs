@@ -42,7 +42,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(ICollection<IFormFile> files, Client client)
+        public async Task<IActionResult> Index(ICollection<IFormFile> files, Client client) // uploads an invoice and attaches it to client
         {
             Invoice invoice = new Invoice();
             Client c = clientRepo.GetClientById(client.ClientID);
@@ -87,7 +87,7 @@ namespace CapStoneProject.Controllers
             return RedirectToAction("AllClients", "Client");
         }
 
-        public FileResult Download(string fname)
+        public FileResult Download(string fname) // for user to download invoice on userPage
         {
             var filename = fname;
             var filepath = "wwwroot/invoices/" + filename;

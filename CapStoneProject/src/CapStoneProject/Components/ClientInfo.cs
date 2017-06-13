@@ -37,7 +37,7 @@ namespace CapStoneProject.Infrastructure
                     LastName = user.LastName,
                     Email = user.Email
                 };
-                repository.Create(c);
+                
                 return View(c);
             }
             

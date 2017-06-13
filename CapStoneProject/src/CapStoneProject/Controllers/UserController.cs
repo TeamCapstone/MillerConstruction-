@@ -43,7 +43,7 @@ namespace CapStoneProject.Controllers
             return View();
         }
 
-        public async Task<IActionResult> InvoiceList(int id)
+        public async Task<IActionResult> InvoiceList(int id) // Displays all invoices for user on UserPage
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -65,7 +65,7 @@ namespace CapStoneProject.Controllers
 
         
 
-        public async Task<IActionResult> UserPage()
+        public async Task<IActionResult> UserPage() // get all the data for the user
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -91,7 +91,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClient(VMRegister vm)
+        public async Task<IActionResult> CreateClient(VMRegister vm) // Gets users identity then creates a client
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +141,16 @@ namespace CapStoneProject.Controllers
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
             user = await userManager.FindByNameAsync(name);
-            clientRepo.Update(client);
+            Client c = clientRepo.GetClientByEmail(client.Email);
+            if (c == null)
+            {
+                clientRepo.Create(client);
+            }
+            else
+            {
+                clientRepo.Update(client);
+            }
+            
             user.Email = client.Email;
             user.UserName = client.Email;
             await userManager.UpdateAsync(user);
@@ -160,7 +169,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult FilterUsers(string searchString)
+        public IActionResult FilterUsers(string searchString) // for the Admin to search users
         {
             var users = userRepo.GetAllUsersFilter();
             if (!string.IsNullOrEmpty(searchString))
