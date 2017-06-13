@@ -1,60 +1,106 @@
 ﻿@model VMEditProject
 @{
-    ViewBag.Title = "Edit Project";
+    ViewData["Title"] = "Edit Project";
+    Layout = "_Layout2";
 }
 
-<h1 class="text-center">Edit Project:</h1>
-<form asp-controller="Project" asp-action="EditProject" method="post">
-    <input asp-for="ProjectID" type="hidden" />
-    <div class="form-group">
-        <h3>Project Name</h3>
-        <div><span asp-validation-for="ProjectName" class="text-danger"></span></div>
-        <input asp-for="ProjectName" class="form-control" /><br />
+<div class="container" id="formDiv">
+    <div class="row">
+        <h1 id="BRtitle">Edit Project:</h1>
+        <div class="col-lg-12">
+            <form asp-controller="Project" asp-action="EditProject" method="post" id="interiorDiv">
+                <input asp-for="ProjectID" type="hidden" />
+
+
+                <div class="col-lg-12"></div>
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <label>Project Name</label><br />
+
+                        <input asp-for="ProjectName" class="form-control" />
+                        <span asp-validation-for="ProjectName" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Client E-mail</label><br />
+
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12"><br /></div>
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <label>Client First Name</label><br />
+
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Client Last Name</label><br />
+
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12"><br /></div>
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <label>Original Estimate</label><br />
+
+                        <input asp-for="OriginalEstimate" class="form-control" />
+                        <span asp-validation-for="OriginalEstimate" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Additional Costs</label><br />
+
+                        <input asp-for="AdditionalCost" class="form-control" />
+                        <span asp-validation-for="AdditionalCost" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12"><br /></div>
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <label>Current Total</label><br />
+
+                        <input asp-for="CurrentTotal" class="form-control" />
+                        <span asp-validation-for="CurrentTotal" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Status Change Date</label><br />
+
+                        <input asp-for="StatusDate" type="date" class="form-control" />
+                        <span asp-validation-for="StatusDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12"><br /></div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <label>Status</label><br />
+                        
+                        <input asp-for="Status" class="form-control" />
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12"><br /></div>
+                <div class="row">
+                    <div class="form-group text-center">
+                        <div class="col-lg-12">
+                            <input class="btn btn-sm btn-primary" type="submit" value="Save" />
+                            <a asp-action="AdminPage" asp-controller="Admin" class="btn btn-sm btn-warning ">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+                    
+            </form>
+            <br />
+        </div>
     </div>
-    <div class="form-group">
-        <h3>Client E-mail</h3>
-        <div><span asp-validation-for="Email" class="text-danger"></span></div>
-        <input asp-for="Email" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Client Last Name</h3>
-        <div><span asp-validation-for="LastName" class="text-danger"></span></div>
-        <input asp-for="LastName" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Client First Name</h3>
-        <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
-        <input asp-for="FirstName" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Original Estimate</h3>
-        <div><span asp-validation-for="OriginalEstimate" class="text-danger"></span></div>
-        <input asp-for="OriginalEstimate" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Additional Costs</h3>
-        <div><span asp-validation-for="AdditionalCost" class="text-danger"></span></div>
-        <input asp-for="AdditionalCost" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Current Total</h3>
-        <div><span asp-validation-for="CurrentTotal" class="text-danger"></span></div>
-        <input asp-for="CurrentTotal" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Start Date</h3>
-        <div><span asp-validation-for="StartDate" class="text-danger"></span></div>
-        <input asp-for="StartDate" class="form-control" /><br />
-    </div>
-    <div class="form-group">
-        <h3>Status</h3>
-        <div><span asp-validation-for="Status" class="text-danger"></span></div>
-        <input asp-for="Status" class="form-control" /><br />
-    </div>
-    <div class="text-center">
-        <a asp-action="AdminPage" asp-controller="Admin" class="btn btn-sm btn-primary">Cancel</a>
-    </div>
-    <div class="text-center">
-        <input class="btn btn-primary" type="submit" value="Post" />
-    </div>
-</form>
+</div>

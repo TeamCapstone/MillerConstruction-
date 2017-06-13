@@ -171,6 +171,7 @@ namespace CapStoneProject.Controllers
                 FirstName = project.Client.FirstName, Email = project.Client.Email,
                 ProjectName = project.ProjectName, OriginalEstimate = project.OriginalEstimate,
                 StartDate = project.StartDate, Status = project.ProjectStatus,
+                StatusDate = project.StatusDate,
                 ProjectID = project.ProjectID, AdditionalCost = project.AdditionalCosts,
                 CurrentTotal = project.TotalCost};
 
@@ -189,7 +190,7 @@ namespace CapStoneProject.Controllers
                 project.TotalCost = projectVM.AdditionalCost + project.OriginalEstimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
-                project.StatusDate = DateTime.Today;
+                project.StatusDate = projectVM.StatusDate;
 
                 projectRepo.ProjectUpdate(project);
 
