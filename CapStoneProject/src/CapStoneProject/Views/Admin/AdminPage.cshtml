@@ -5,13 +5,13 @@
 
 
 
-
+@await Component.InvokeAsync("UserVC")
 @await Component.InvokeAsync("ClientVC") 
 @await Component.InvokeAsync("BidRequestsVC") 
 @await Component.InvokeAsync("BidVC") 
 @await Component.InvokeAsync("ReviewVC") 
 @await Component.InvokeAsync("ProjectVC")
-@await Component.InvokeAsync("UserVC")
+
 
 
 @*@Html.Partial("AdminProjectPartial")*@

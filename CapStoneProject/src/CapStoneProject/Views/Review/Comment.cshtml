@@ -3,36 +3,33 @@
     Layout = "_Layout2";
 }
 
-<!DOCTYPE html>
+<div class="row" id="formDiv">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" id="interiorDiv">
+        <h1>Commet</h1>
 
-<html>
-<head>
-    <title>Comments</title>
-</head>
-<body>
-    <h1>Commet</h1>
+        <form role="form" asp-controller="Review" asp-action="Comment" method="post">
+            <div asp-validation-summary="ModelOnly"></div>@*add this*@
+            <div class="form-group">
+                <input asp-for="ReviewID" type="hidden" />
+            </div>
+            <label asp-for="Cmmt.Subject"></label>
+            <div class="form-group">
+                @*<input class="form-control" rows="3" required asp-for="newmes.Subject" />*@
+                <textarea asp-for="Cmmt.Subject" class="form-control" rows="3"></textarea><br />
+                <span id="Error" asp-validation-for="Cmmt.Subject"></span>@*add this*@
+            </div>
+            <label asp-for="Cmmt.Body"></label>
+            <div class="form-group">
+                @*<input class="form-control" rows="3" required asp-for="newmes.Body" />*@
+                <textarea asp-for="Cmmt.Body" class="form-control" rows="3"></textarea><br />
+                <span id="Error" asp-validation-for="Cmmt.Body"></span>@*add this*@
+            </div>
 
-    <form role="form" asp-controller="Review" asp-action="Comment" method="post">
-        <div asp-validation-summary="ModelOnly"></div>@*add this*@
-        <div class="form-group">
-            <input asp-for="ReviewID" type="hidden" />
-        </div>
-        <label asp-for="Cmmt.Subject"></label>
-        <div class="form-group">
-            @*<input class="form-control" rows="3" required asp-for="newmes.Subject" />*@
-            <textarea asp-for="Cmmt.Subject" class="form-control" rows="3"></textarea><br />
-            <span id="Error" asp-validation-for="Cmmt.Subject"></span>@*add this*@
-        </div>
-        <label asp-for="Cmmt.Body"></label>
-        <div class="form-group">
-            @*<input class="form-control" rows="3" required asp-for="newmes.Body" />*@
-            <textarea asp-for="Cmmt.Body" class="form-control" rows="3"></textarea><br />
-            <span id="Error" asp-validation-for="Cmmt.Body"></span>@*add this*@
-        </div>
-
-        <button class="btn btn-success" type="submit">Post</button>
+            <button class="btn btn-success" type="submit">Post</button>
 
 
-    </form>
-</body>
-</html>
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>

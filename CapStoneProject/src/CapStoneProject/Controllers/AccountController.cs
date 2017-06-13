@@ -85,7 +85,7 @@ namespace CapStoneProject.Controllers
                     }*/
                 }
                 ModelState.AddModelError(nameof(VMLoginModel.Email),
-                    "Invalid user or password");
+                    "Username or password does not match our records.");
             }
             return View(details);
         }

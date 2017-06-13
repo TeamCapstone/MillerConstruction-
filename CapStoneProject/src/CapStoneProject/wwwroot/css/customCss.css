@@ -8,20 +8,6 @@ font-family: Baumans-Regular;
 src: url('/fonts/Baumans-Regular.ttf');
 }
 
-/*Admin and UserPages*/
-
-
-@media (min-width: 1200px) {
-    .container {
-    width: 980px;
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    }
-}
-
 
 
 body {
@@ -156,6 +142,7 @@ body {
     min-height: 500px;
 }
 
+
 #userPageDiv{
     background: url('../images/concrete1_1.jpg') no-repeat center center fixed;
     font-family: Baumans-Regular;
@@ -259,6 +246,19 @@ body {
     border-radius: 5px;
 }
 
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 
+
+.glyphicon-glyphicon-time:after {
+  margin-right: 5px;
+}
 
 /*Gallery Page Section*/
 #galIndexRow{
@@ -342,10 +342,7 @@ img:hover {
     margin-right: 10px;
 }
 
-/*View Bid Section*/
-.createBid{
-   
-}
+
 
 
 
@@ -380,5 +377,115 @@ img:hover {
     text-align: center;
 }
 
+
+
+/*Admin and UserPages*/
+
+
+@media (min-width: 1400px){
+    .container{
+        width: 1200px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+@media (min-width: 1200px){
+    .container{
+        width: 950px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+@media (max-width: 992px){
+    .container{
+        width: 900px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+@media  (max-width: 968px){
+    .container{
+        width: 700px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+@media (max-width: 750px){
+    .container{
+        width: 600px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+@media (max-width: 650px){
+    .container{
+        width: 500px;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        margin-left: auto;
+        margin-right: auto;
+     }
+}
+
+
+@media screen and (max-width: 500px) {
+    #navDiv{
+        min-width: 550px;
+    }
+
+    #myCarousel {
+        
+        min-width: 550px;
+        
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .index{ 
+        min-height: 300px;
+        max-height: 300px;
+        height: 200%; 
+        width: 100%;  
+    }
+
+    #missionDiv {
+        background: url('../images/concrete1_1.jpg') no-repeat center center fixed;
+        height:100%;
+        border-radius: 10px;
+        
+    }
+
+    #statementDiv{
+        background: rgb(255, 255, 255);
+        background: rgba(255, 255, 255, 0.50);
+        border-radius: 5px;
+        
+    }
+
+    #footDiv{
+        min-width: 550px;
+    }
+    #layoutDiv{
+         min-width: 550px;
+        height: 200%;
+    }
+    
+}
 
 /*Attributions: fonts free from http://www.1001fonts.com/google-web+bauhaus-fonts.html and http://freakfonts.com/fonts/bauhaus9357950.html */

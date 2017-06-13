@@ -8,32 +8,32 @@
 <div class="row" id="formDiv">
     <div class="col-lg-2"></div>
     <div class="col-lg-8" id="interiorDiv">
-        <h2>Reviews</h2>
+        <h2 class="text-center">Reviews</h2>
         <br />
 
         @foreach (var a in Model)
         {
-            <h4>From: @a.From.FirstName @a.From.LastName </h4>
-            <h6>
-                <span class="glyphicon glyphicon-time">@a.Date.ToString("d")</span>
+            <h3>From: @a.From.FirstName @a.From.LastName </h3>
+            <h4>
+                <span class="glyphicon glyphicon-calendar"> @a.Date.ToString("d")</span>
 
-            </h6>
-            <h5><span class="label label-primary"> @a.Subject </span></h5>
-            <p>Body: @a.Body </p>
+            </h4>
+            <h4><span class="alert-info"> @a.Subject </span></h4>
+            <h3><p>Body: @a.Body </p></h3>
 
 
-            <p><span class="badge">@a.Comments.Count()</span> Comments:</p><br>
-
-            foreach (var n in a.Comments)
+            @if (a.Comments.Count() > 0)
             {
+            <p><span class="badge">@a.Comments.Count()</span> Owners Response:</p>
 
-                <h5><span class="label label-primary"> @n.Subject </span></h5>
-                <p> @n.Body <br /> </p>
+                foreach (var n in a.Comments)
+                {
 
-
+                <h5><span class="alert-info"> @n.Subject </span></h5>
+                <p> @n.Body  </p>
+                }
             }
-
-            <hr id="hr1">
+            <hr>
         }
     </div>
     <div class="col-lg-2"></div>
