@@ -137,7 +137,7 @@ namespace CapStoneProject.Controllers
             return View(client);
         }
 
-        public async Task<IActionResult> UserEdit(int id)
+        public async Task<IActionResult> UserEdit(int id) // not in use, was used before panels were added
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -157,7 +157,7 @@ namespace CapStoneProject.Controllers
             return RedirectToAction("ClientInfo", "Client");
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id)  // The Admin uses this to edit client information
         {
             Client client = new Client();
             client = clientRepo.GetClientById(id);
@@ -165,7 +165,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Client client)
+        public IActionResult Edit(Client client) 
         {
             if (ModelState.IsValid)
             {
@@ -227,7 +227,7 @@ namespace CapStoneProject.Controllers
             return View(await clients.ToListAsync());
         }
 
-        public ActionResult ModalAction(int Id)
+        public ActionResult ModalAction(int Id) // Modal for Invoice Upload
         {
             Client client = new Client();
             client = clientRepo.GetClientById(Id);
@@ -236,7 +236,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult InvoiceUpload(int clientId)
+        public IActionResult InvoiceUpload(int clientId) // not in use, was used before modal was added
         {
             Client client = new Client();
             client = clientRepo.GetClientById(clientId);
@@ -244,7 +244,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> InvoiceUpload(ICollection<IFormFile> files, int id)
+        public async Task<IActionResult> InvoiceUpload(ICollection<IFormFile> files, int id) // Admin uploads invoice for client
         {
             Invoice invoice = new Invoice();
             Client c = new Client();
@@ -268,7 +268,7 @@ namespace CapStoneProject.Controllers
             return RedirectToAction("AdminPage", "Admin");
         }
 
-        public FileResult Download(string fname)
+        public FileResult Download(string fname) // For the user when they download their invoice
         {
             var filename = fname;
             var filepath = "wwwroot/invoices/" + filename;

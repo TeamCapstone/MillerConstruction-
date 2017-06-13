@@ -43,7 +43,7 @@ namespace CapStoneProject.Controllers
             return View();
         }
 
-        public async Task<IActionResult> InvoiceList(int id)
+        public async Task<IActionResult> InvoiceList(int id) // Displays all invoices for user on UserPage
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -141,7 +141,16 @@ namespace CapStoneProject.Controllers
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
             user = await userManager.FindByNameAsync(name);
-            clientRepo.Update(client);
+            Client c = clientRepo.GetClientByEmail(client.Email);
+            if (c == null)
+            {
+                clientRepo.Create(client);
+            }
+            else
+            {
+                clientRepo.Update(client);
+            }
+            
             user.Email = client.Email;
             user.UserName = client.Email;
             await userManager.UpdateAsync(user);
