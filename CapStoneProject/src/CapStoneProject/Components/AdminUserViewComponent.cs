@@ -24,15 +24,15 @@ namespace CapStoneProject.Components
 
         public IViewComponentResult Invoke()
         {
-            List<UserIdentity> users = userRepo.GetAllUsers();
-            VMUsersClients list = new VMUsersClients();
-            foreach (UserIdentity u in users)
-            {
-                if (clientRepo.ContainsClient(u.Email))
-                {
-                    u.ClientCreated = true;
-                }             
-            }
+            IEnumerable<UserIdentity> users = userRepo.GetAllUsers().OrderBy(o => o.ClientCreated == false);
+            //VMUsersClients list = new VMUsersClients();
+            //foreach (UserIdentity u in users)
+            //{
+            //    if (clientRepo.ContainsClient(u.Email))
+            //    {
+            //        u.ClientCreated = true;
+            //    }             
+            //}
 
             return View(users);
 

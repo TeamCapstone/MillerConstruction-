@@ -16,7 +16,8 @@
 
             matched = (password == confirm && password != "") ? true : false;
             if (matched) {
-                $("#submitBtn").click(function () {                  
+                $("#submitBtn").click(function () {
+                    $(this).button('loading');
                     $("#interiorDiv").submit();
                 });
             }
@@ -27,11 +28,11 @@
             }
         });
     })
-    $(document).ready(function () {
-        $("#submitBtn").click(function () {
-            $(this).button('loading');
-        });
-    })
+    //$(document).ready(function () {
+    //    $("#submitBtn").click(function () {
+    //        $(this).button('loading');
+    //    });
+    //})
 
 </script>
 

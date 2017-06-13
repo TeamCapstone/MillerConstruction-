@@ -15,7 +15,7 @@
                 <div id="collapse4" class="panel-collapse collapse">
                     @* Start Content *@
 
-                    <div class="container" id="formDiv">
+                    <div class="container" id="panelDiv">
                         <div class="row ">
                             <br />
                             <br />
@@ -30,13 +30,13 @@
                             <table class="table table-striped table-bordered table-condensed">
                                 <tr class="info">
                                     
-                                    <th >Review Name</th>
+                                    <th>Review Name</th>
                                     <th>Email</th>
-                                    <th >Subject</th>
+                                    <th>Subject</th>
                                     <th>Body</th>
-                                    <th >Approved?</th>
-                                    <th >Date</th>
-                                    <th>Actions</th>
+                                    <th>Approved?</th>
+                                    <th>Date</th>
+                                    <th class="text-right">Actions</th>
                                 </tr>
                                 @foreach (var review in Model)
                                 {
@@ -67,7 +67,7 @@
                                                     </span>
                                                     <a asp-action="EditReview" asp-controller="Admin" class="btn btn-sm btn-warning"
                                                        asp-route-ReviewID="@review.ReviewID">
-                                                        Edit
+                                                        Approve?
                                                     </a>
                                                     <input type="hidden" name="ReviewID" value="@review.ReviewID" />
                                                     <button type="submit" class="btn btn-danger btn-sm">

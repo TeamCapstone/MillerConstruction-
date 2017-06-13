@@ -22,7 +22,8 @@ namespace CapStoneProject.Tests
         private IProjectRepo projectRepo;
         private IClientRepo clientRepo;
         private IBidRepo bidRepo;
-        private ClientRepo cRepo;
+        private IClientRepo cRepo;
+        private FakeProjectRepo pRepo;
 
         [Fact]
         public void CreateProject() //TODO: add a moq framework
@@ -44,6 +45,19 @@ namespace CapStoneProject.Tests
             //Assert
             Assert.Equal("Cody", project.Client.FirstName);
             Assert.NotEqual(project.ProjectID, project2.ProjectID);
+        }
+
+        [Fact]
+        public void EditProject()
+        {
+            //arrange
+            var project = projectRepo.GetProjectByID(1);
+            //act
+            project.ProjectName = "waka waka";
+            projectRepo.ProjectUpdate(project);
+            var project1 = projectRepo.GetProjectByID(1);
+            //assert
+            Assert.Equal("waka waka", project1.ProjectName);
         }
     }
 }

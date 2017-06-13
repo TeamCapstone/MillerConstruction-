@@ -27,6 +27,8 @@
         });
     })
 </script>
+@* testing can call View component even on a strongly typed view!! just make sure components are in shared folder *@
+@*@await Component.InvokeAsync("BidRequestsVC")*@ 
 
 <div class="container" id="formDiv">
     <div class="row">
@@ -48,6 +50,7 @@
                             <span asp-validation-for="CustomerLast" class="text-danger"></span>
                         </div>
                     </div>
+
                     <div class="col-lg-12">
                         <div class="form-group ">
                             <label asp-for="ProjectDescription">Project Description:</label><br />
@@ -63,6 +66,8 @@
         </div>
         <div class="col-lg-1"></div>
     </div>
+
+
 
     <div class="row">
         <div class="col-lg-1"></div>
@@ -84,6 +89,7 @@
                                 <input class="form-control" asp-for="CustomerFirst" id="firstB" required>
                                 <span asp-validation-for="CustomerFirst" class="text-danger"></span>
                             </div>
+
                             <div class="col-lg-6">
                                 <input class="form-control" asp-for="CustomerLast" id="lastB" required>
                                 <span asp-validation-for="CustomerLast" class="text-danger"></span>

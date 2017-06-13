@@ -21,6 +21,7 @@ namespace CapStoneProject.Infrastructure
         public IViewComponentResult Invoke(string email)
         {
             UserIdentity user = userRepo.GetUser(email);
+            
             Client c = repository.GetClientByEmail(email);
             if (c != null)
             {
