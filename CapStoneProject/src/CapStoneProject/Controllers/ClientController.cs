@@ -83,7 +83,8 @@ namespace CapStoneProject.Controllers
                     Zipcode = vm.Zipcode,
                     PhoneNumber = vm.PhoneNumber,
                     UserIdentity = vm.User,
-                    Email = vm.Email
+                    Email = vm.Email,
+                    
                 };
 
                 clientRepo.Create(client);
