@@ -65,7 +65,7 @@ namespace CapStoneProject.Controllers
 
         
 
-        public async Task<IActionResult> UserPage()
+        public async Task<IActionResult> UserPage() // get all the data for the user
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -91,7 +91,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClient(VMRegister vm)
+        public async Task<IActionResult> CreateClient(VMRegister vm) // Gets users identity then creates a client
         {
             if (ModelState.IsValid)
             {
@@ -169,7 +169,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult FilterUsers(string searchString)
+        public IActionResult FilterUsers(string searchString) // for the Admin to search users
         {
             var users = userRepo.GetAllUsersFilter();
             if (!string.IsNullOrEmpty(searchString))

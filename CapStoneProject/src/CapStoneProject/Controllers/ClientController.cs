@@ -44,7 +44,7 @@ namespace CapStoneProject.Controllers
             userRepo = uerRepo;
         }
 
-        public IActionResult AdminCreateClient(string email)
+        public IActionResult AdminCreateClient(string email) // For the admin to create a client
         {
             UserIdentity user = new UserIdentity();
             user = userRepo.GetUser(email);
@@ -96,7 +96,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(VMRegister vm)
+        public async Task<IActionResult> Create(VMRegister vm) // for the user to create a client
         {
             if (ModelState.IsValid)
             {
@@ -127,7 +127,7 @@ namespace CapStoneProject.Controllers
             }
         }
 
-        public async Task<IActionResult> ClientInfo()
+        public async Task<IActionResult> ClientInfo() // returns current personal information of user for user
         {
             UserIdentity user = new UserIdentity();
             string name = HttpContext.User.Identity.Name;
@@ -186,7 +186,7 @@ namespace CapStoneProject.Controllers
             return RedirectToAction("AdminPage", "Admin");
         }
 
-        public ViewResult AllClients()
+        public ViewResult AllClients() // gets all the clients for filtering
         {            
             return View(clientRepo.GetAllClients().ToList());
         }
