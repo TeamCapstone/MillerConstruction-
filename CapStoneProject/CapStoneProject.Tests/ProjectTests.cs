@@ -1,4 +1,4 @@
-﻿using System;
+﻿  using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,7 @@ namespace CapStoneProject.Tests
         private IProjectRepo projectRepo;
         private IClientRepo clientRepo;
         private IBidRepo bidRepo;
+        private IReviewRepo reviewrepo;
         private ClientRepo cRepo;
 
         [Fact]
