@@ -46,25 +46,14 @@ namespace CapStoneProject.Controllers
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
         }
 
-        //
-        //[HttpGet]
-        //public IActionResult CreateProject(int bidID, int clientID) //for when the admin creates a project
-        //{
-        //    var projectVM = new VMCreateProject();
-        //    projectVM.BidID = bidID;
-        //    projectVM.ClientID = clientID;
-
-        //    return View(projectVM);
-        //}
-
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateProject(int bidID)
         {
-            VMCreateProject projectVM = new VMCreateProject();
-            Bid b = bidrepo.GetBidByID(bidID);
-            Client c = clientRepo.GetClientByEmail(b.User.Email);
-            if (c == null)
+            VMCreateProject projectVM = new VMCreateProject(); //creates vm to pass to view
+            Bid b = bidrepo.GetBidByID(bidID); //gets appropriate bid from database
+            Client c = clientRepo.GetClientByEmail(b.User.Email); //looks for client from database
+            if (c == null) //if client not found
             {
                 //create client
                 Client altC = new Client();
@@ -75,25 +64,27 @@ namespace CapStoneProject.Controllers
                 altC.UserIdentity = b.User;
                 clientRepo.Create(altC);
 
+                //finds created client, now in database
                 Client createdClient = clientRepo.GetClientByEmail(altC.Email);
 
-                b.User.ClientCreated = true;
-                
+                b.User.ClientCreated = true; //confirms client now exists
+
+                //adds bid and client info to project object
                 projectVM.BidID = bidID;               
                 projectVM.LastName = b.User.LastName;
                 projectVM.ClientID = createdClient.ClientID;
                 projectVM.Email = b.User.Email;
 
             }
-            else
+            else //if client is found
             {
+                //adds client and bid to project
                 projectVM.BidID = bidID;
                 projectVM.ClientID = c.ClientID;
                 projectVM.LastName = b.User.LastName;
                 projectVM.Email = b.User.Email;
             }
             
-
             return View(projectVM);
         }
 
@@ -130,8 +121,10 @@ namespace CapStoneProject.Controllers
                             ProjectStatus = "Started"
                         };
 
-                        if(project.Client != null && project.Bid != null)
+                        //if client and bid are valid
+                        if (project.Client != null && project.Bid != null)
                         {
+                            //add project to database
                             projectRepo.ProjectUpdate(project);
                         }
                         else
@@ -166,7 +159,9 @@ namespace CapStoneProject.Controllers
         [HttpGet]
         public IActionResult EditProject(int projectID) //for when the admin edits a project
         {
+            //pulls project from database using passed-in ProjectID
             Project project = projectRepo.GetProjectByID(projectID);
+            //posts necessary project attributes to viewmodel to pass to view
             VMEditProject projectVM = new VMEditProject {LastName = project.Client.LastName,
                 FirstName = project.Client.FirstName, Email = project.Client.Email,
                 ProjectName = project.ProjectName, OriginalEstimate = project.OriginalEstimate,
@@ -180,10 +175,13 @@ namespace CapStoneProject.Controllers
         [HttpPost]
         public IActionResult EditProject(VMEditProject projectVM)
         {
+            //double-checks database and pulls same project from database again
             Project project = projectRepo.GetProjectByID(projectVM.ProjectID);
 
-            if (ModelState.IsValid && projectVM.StartDate != null && projectVM.Status != null)
+            //if all necessary fields are filled in
+            if (ModelState.IsValid && projectVM.Status != null)
             {
+                //pass new values to appropriate fields
                 project.ProjectID = projectVM.ProjectID;
                 project.AdditionalCosts = projectVM.AdditionalCost;
                 project.TotalCost = projectVM.AdditionalCost + project.OriginalEstimate;
@@ -191,16 +189,44 @@ namespace CapStoneProject.Controllers
                 project.ProjectStatus = projectVM.Status;
                 project.StatusDate = DateTime.Today;
 
+                //update project back into database
                 projectRepo.ProjectUpdate(project);
 
                 return RedirectToAction("AdminPage", "Admin");
             }
             else
             {
-                ModelState.AddModelError("StartDate", "This field cannot be left blank");
+                ModelState.AddModelError("Status", "This field cannot be left blank");
             }
 
             return View(projectVM);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult DeleteProject(int projectID) //for when the admin edits a project
+        {
+            //creates viewmodel to hold projectid
+            VMDeleteProject deleteProjVM = new VMDeleteProject();
+            deleteProjVM.ProjectID = projectID;
+
+            return View(deleteProjVM);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProject(VMDeleteProject deleteProjVM)
+        {
+            //looks for project in db based on passed-in projectid from viewmodel
+            Project project = projectRepo.GetProjectByID(deleteProjVM.ProjectID);
+            
+            //if project found
+            if(project != null)
+            {
+                projectRepo.ProjectDelete(projectRepo.GetProjectByID(project.ProjectID));
+            }
+
+
+            return RedirectToAction("AdminPage", "Admin");
         }
     }
 }

@@ -37,7 +37,7 @@
         <input asp-for="AdditionalCost" class="form-control" /><br />
     </div>
     <div class="form-group">
-        <h3>Current Total</h3>
+        <h3>Current Total</h3><p><strong> *Will be calculated automatically on submit</strong></p>
         <div><span asp-validation-for="CurrentTotal" class="text-danger"></span></div>
         <input asp-for="CurrentTotal" class="form-control" /><br />
     </div>
@@ -55,6 +55,6 @@
         <a asp-action="AdminPage" asp-controller="Admin" class="btn btn-sm btn-primary">Cancel</a>
     </div>
     <div class="text-center">
-        <input class="btn btn-primary" type="submit" value="Post" />
+        <input class="btn btn-primary" type="submit" value="Submit" />
     </div>
 </form>
