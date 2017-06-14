@@ -24,9 +24,9 @@
                     <td>@p.ProjectName</td>
                     <td>@p.ProjectStatus</td>
                     <td>@p.StatusDate</td>
-                    <td ><span type="span" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        @Html.ActionLink("Add a Review", "MakeReview", "Review", null, new { @style = "color:black; text-algin: center; padding-left:3px;" })
-                        </span></td>
+                    <td >
+                        <a asp-action="MakeReview" asp-controller="Review" class="btn btn-sm btn-primary pull-right" asp-route-projectId="@p.ProjectID">Review Project</a>
+                    </td>
                 </tr>
                 
                 }

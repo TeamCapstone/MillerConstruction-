@@ -37,6 +37,7 @@
                                     <th>Approved?</th>
                                     <th>Date</th>
                                     <th class="text-right">Actions</th>
+                                    <th>Delete</th>
                                 </tr>
                                 @foreach (var review in Model)
                                 {
@@ -57,23 +58,30 @@
 
                                             <td >@review.Date.ToString("d")</td>
                                         }
+                                        <td style="width:16.5%;">
+                                            <div class="btn-toolbar">               
+                                                <a asp-action="EditReview" asp-controller="Admin" class="btn btn-sm btn-primary"
+                                                    asp-route-ReviewID="@review.ReviewID">
+                                                    Approve?
+                                                </a>
+                                                <span class="btn btn-sm btn-warning pull-right" >
+                                                    @Html.ActionLink("Comment", "Comment", "Review",
+                                                            new { subject = @review.Subject, Id = @review.ReviewID, body = @review.Body }, new { @style = "color:aliceblue;" })
+                                                </span>
+                                                   
+                                            </div>
+                                        </td>
                                         <td>
-
                                             <form asp-action="DeleteReview" method="post">
                                                 <div class="btn-toolbar">
-                                                    <span class="btn btn-sm btn-primary">
-                                                        @Html.ActionLink("Comment", "Comment", "Review",
-                                                                new { subject = @review.Subject, Id = @review.ReviewID, body = @review.Body }, new { @style = "color:aliceblue;" })
-                                                    </span>
-                                                    <a asp-action="EditReview" asp-controller="Admin" class="btn btn-sm btn-warning"
-                                                       asp-route-ReviewID="@review.ReviewID">
-                                                        Approve?
-                                                    </a>
+
+                                                    
+                                                   
                                                     <input type="hidden" name="ReviewID" value="@review.ReviewID" />
                                                     <button type="submit" class="btn btn-danger btn-sm">
-                                                        Delete
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                     </button>
-                                                   
+
                                                 </div>
 
                                             </form>

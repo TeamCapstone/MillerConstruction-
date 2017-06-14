@@ -8,13 +8,16 @@
     </div>
     <div class="modal-body">
         <div class="form-horizontal">
-            
-            <form method="post" asp-route-id="@ViewBag.Id"  asp-action="InvoiceUpload" asp-controller="Client" enctype="multipart/form-data">
-                <input asp-route-id="@ViewBag.Id" type="file" name="files" multiple />
-                <input type="submit" value="Upload" />
-                <input asp-route-id=@ViewBag.Id type="hidden" class="form-control" />
-            </form>
+            <div class="btn-toolbar">
+                <form method="post" asp-route-id="@ViewBag.Id" asp-action="InvoiceUpload" asp-controller="Client" enctype="multipart/form-data">
+                    <input asp-route-id="@ViewBag.Id" type="file" name="files" multiple class="btn btn-default" />
+                    <div class="btn-toolbar">
+                        <input type="submit" value="Upload" class="btn btn-primary" />
+                        <input asp-route-id=@ViewBag.Id type="hidden" class="form-control" />
+                    </div>
+                </form>
                 </div>
+            </div>
             </div>
             <div class="modal-footer">
      

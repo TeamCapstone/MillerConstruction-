@@ -220,34 +220,7 @@ namespace CapStoneProject.Controllers
             
         }
 
-        //filtering unfortantly redirects to a different page becuase refreshing the page cuases the panel to collapse
-        [HttpPost]
-        public async Task<IActionResult> BRFilter(string ss)
-        {
-
-            var words = brRepo.GetAllBidRequests();
-
-            if (!string.IsNullOrEmpty(ss))
-            {
-                words = words.Where(br => br.User.LastName.ToLower().Contains(ss) || br.User.FirstName.ToLower().Contains(ss) || br.User.Email.ToLower().Contains(ss));
-            }
-            return RedirectToAction("AllBidRequests", "BidRequest", await words.ToListAsync());
-
-        }
-
-        //filtering
-        [HttpPost]
-        public async Task<IActionResult> BidFilter(string ss)
-        {
-            var words = bidRepo.GetAllBids();
-
-            if (!string.IsNullOrEmpty(ss))
-            {
-                words = words.Where(b => b.User.LastName.ToLower().Contains(ss) || b.User.FirstName.ToLower().Contains(ss) || b.User.Email.ToLower().Contains(ss));
-            }
-            return RedirectToAction("AllBids", "BidRequest", await words.ToListAsync());
-
-        }
+       
 
 
 
