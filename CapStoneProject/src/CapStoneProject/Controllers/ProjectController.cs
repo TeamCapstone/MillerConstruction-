@@ -118,8 +118,9 @@ namespace CapStoneProject.Controllers
                             StartDate = projectVM.StartDate,
                             OriginalEstimate = projectVM.Estimate,
                             Bid = bidrepo.GetBidByID(projectVM.BidID),
-                            ProjectStatus = "Started"
+                            ProjectStatus = "Started", StatusDate = DateTime.Today
                         };
+                        project.TotalCost = project.OriginalEstimate;
 
                         //if client and bid are valid
                         if (project.Client != null && project.Bid != null)
@@ -188,7 +189,7 @@ namespace CapStoneProject.Controllers
                 project.TotalCost = projectVM.AdditionalCost + project.OriginalEstimate;
                 project.StartDate = projectVM.StartDate;
                 project.ProjectStatus = projectVM.Status;
-                project.StatusDate = projectVM.StatusDate;
+                project.StatusDate = DateTime.Today;
 
                 //update project back into database
                 projectRepo.ProjectUpdate(project);
