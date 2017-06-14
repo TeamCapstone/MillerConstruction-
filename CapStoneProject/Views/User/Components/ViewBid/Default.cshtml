@@ -1,0 +1,39 @@
+﻿@model Bid
+
+                    <div class="container" id="formDiv">
+                        <div class="row">
+                            <br />
+                            <table class="table table-striped table-bordered table-condensed">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Total Estimate</th>
+                                </tr>
+
+                               @if (Model == null)
+                               {
+                                   <caption id="UserErrorMessage">You have no quotes.</caption>
+
+                               }
+                               else
+                               {
+                                    <tr>
+                                        <td>@Model.BidID</td>
+                                        @if (Model.User.LastName == null)
+                                        {
+                                            <td>@Model.User.FirstName</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@Model.User.LastName</td>
+                                        }
+                                        <td>@Model.RevisedProjectDescription</td>
+                                        <td>$@Model.TotalEstimate</td>
+                                
+                                    </tr>
+                               }
+                               </table>
+                            </div>
+                        </div>
+

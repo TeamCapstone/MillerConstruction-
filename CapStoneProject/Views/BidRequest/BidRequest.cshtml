@@ -1,0 +1,167 @@
+﻿
+@model CapStoneProject.Models.BidRequest
+
+@{
+    ViewData["Title"] = "Bid Request";
+    Layout = "_Layout2";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#interiorDiv").on("submit", function (event) {
+
+            var matched,
+                password = $("#brPass1").val(),
+                confirm = $("#brPass2").val();
+
+            matched = (password == confirm && password != "") ? true : false;
+            if (matched) {
+                $("#submitBtn").click(function () {
+                    $(this).button('loading');
+                    $("#interiorDiv").submit();
+                });
+            }
+            else {
+                $("#responseDiv").html("Passwords don't match.");
+
+                return false;
+            }
+        });
+    })
+    //$(document).ready(function () {
+    //    $("#submitBtn").click(function () {
+    //        $(this).button('loading');
+    //    });
+    //})
+
+</script>
+
+
+<div class="container formDiv" id="">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" >
+
+        <h2 id="BRtitle">Request a Quote</h2>
+        <form asp-controller="BidRequest" asp-action="BidRequest" method="post" class="" id="interiorDiv">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="BidRequestID" type="hidden" />
+            <h4 class="text-danger">@ViewBag.Error</h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">   
+                        <input class="form-control" type="text" asp-for="User.FirstName" value="" placeholder="First Name:" id="clientNameBR" required>
+                        <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" asp-for="User.LastName" value=""  placeholder="Last Name:" id="clientNameBR" required>
+                        <span asp-validation-for="User.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6"></div>
+                
+                    <br />
+                    <div class="col-lg-10">
+                        <p>
+                            *
+                            We ask that you create an account so that you can access your bid at a later date.
+                        </p>
+                        <p>* Please enter a password with at least 6 characters, including at least one number.</p>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input class="form-control" type="email" asp-for="User.Email" value="" placeholder="Email:" id="clientEmailBR"  required>
+                            <span asp-validation-for="User.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input class="form-control" type="password" asp-for="User.Password" value="" placeholder="Password:" id="brPass1"  required>
+                            <span asp-validation-for="User.Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input class="form-control" type="password" asp-for="User.Password" value="" placeholder="Retype your password:" id="brPass2"  required>
+                            <span asp-validation-for="User.Password" class="text-danger" id="responseDiv"></span>
+                           
+                        </div>
+                    </div>
+              
+
+                <div class="col-lg-12">
+                    <div class="form-group ">
+                        <label asp-for="ProjectDescription">Please describe your project:</label><br />
+                        <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" asp-for="ProjectLocation" value="" placeholder="City:" id="clientcityBR">
+                        <span asp-validation-for="ProjectLocation" class="text-danger"></span>
+                    </div>
+                   
+                </div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-12"></div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="NewBuild">New Build?<input class="form-control" type="checkbox" asp-for="NewBuild"  id="newbuildBR"></label>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Remodel">Remodel?<input class="form-control" type="checkbox" asp-for="Remodel" id="remodelBR"></label>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="FrameWork">Timberframe?<input class="form-control" type="checkbox" asp-for="FrameWork" id="frameworkBR"></label>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="Concrete">Concrete?<input class="form-control" type="checkbox" asp-for="Concrete" id="concreteBR"></label>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+
+                    <div class="text-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="submitBtn"  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending......">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+
+        </form>
+        
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
+
+
+
+
+

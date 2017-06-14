@@ -13,6 +13,7 @@ using CapStoneProject.Models.ViewModels;
 
 namespace CapStoneProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleAdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;

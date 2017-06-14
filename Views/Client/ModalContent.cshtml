@@ -1,0 +1,23 @@
+﻿
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Upload Invoice</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+            
+            <form method="post" asp-route-id="@ViewBag.Id"  asp-action="InvoiceUpload" asp-controller="Client" enctype="multipart/form-data">
+                <input asp-route-id="@ViewBag.Id" type="file" name="files" multiple />
+                <input type="submit" value="Upload" />
+                <input asp-route-id=@ViewBag.Id type="hidden" class="form-control" />
+            </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+     
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                
+            </div>

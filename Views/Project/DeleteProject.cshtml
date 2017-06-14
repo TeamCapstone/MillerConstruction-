@@ -1,0 +1,15 @@
+﻿@model VMDeleteProject
+@{
+}
+
+<h1 class="text-center">Delete Project:</h1>
+<h3>Are you sure you wish to delete this project?</h3>
+<form asp-controller="Project" asp-action="DeleteProject" method="post">
+    <input asp-for="ProjectID" type="hidden" />
+    <div class="text-center">
+        <a asp-action="AdminPage" asp-controller="Admin" class="btn btn-sm btn-primary">Cancel</a>
+    </div>
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Delete" />
+    </div>
+</form>

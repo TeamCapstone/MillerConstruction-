@@ -1,0 +1,31 @@
+﻿@model Client
+
+@{
+    Layout = "_Layout2";
+}
+
+<div class="bg-primary panel-body"><h4>Your Info</h4></div>
+
+<div class="text-danger" asp-validation-summary="All"></div>
+
+<table class="table table-condensed table-bordered">
+    <tr><th>First Name</th><th>Last Name</th><th>Company Name</th><th>Street</th><th>City</th><th>State</th><th>Zipcode</th><th>Phone Number</th><th>Email</th></tr>   
+            <tr>
+                <td>@Model.FirstName</td>
+                <td>@Model.LastName</td>
+                <td>@Model.CompanyName</td>
+                <td>@Model.Street</td>
+                <td>@Model.City</td>
+                <td>@Model.State</td>
+                <td>@Model.Zipcode</td>
+                <td>@Model.PhoneNumber</td>
+                <td>@Model.Email</td>
+                <td>
+                    <form method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="UserEdit"
+                           asp-route-id="@Model.ClientID">Edit</a>                      
+                    </form>
+                </td>
+            </tr>   
+</table>
+

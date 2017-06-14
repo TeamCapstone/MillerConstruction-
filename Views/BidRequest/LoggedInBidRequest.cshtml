@@ -1,0 +1,103 @@
+﻿@model VMLoggedBR
+@{
+    ViewData["Title"] = "Quote Request";
+    Layout = "_Layout2";
+}
+
+
+
+
+
+
+<div class="container" id="formDiv">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <h3 id="BRtitle">Request a Quote</h3>
+        <form asp-controller="BidRequest" asp-action="LoggedInBidRequest" method="post" class="" id="interiorDiv">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="BidRequestID" type="hidden" />
+            <input asp-for="UserID" type="hidden" />
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" asp-for="CustomerFirst"   id="clientFNameBR" required>
+                        <span asp-validation-for="CustomerFirst" class="text-danger"></span>
+                    </div>
+                </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input class="form-control" type="text" asp-for="CustomerLast"  id="clientLNameBR" required>
+                            <span asp-validation-for="CustomerLast" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                <div class="col-lg-6"></div>
+
+                <br />
+         
+                <div class="col-lg-12">
+                    <div class="form-group ">
+                        <label asp-for="ProjectDescription">Please describe your project:</label><br />
+                        <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" asp-for="ProjectLocation" value="" placeholder="City:" id="clientcityBR">
+                        <span asp-validation-for="ProjectLocation" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-12"></div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="NewBuild">NewBulid?<input class="form-control" type="checkbox" asp-for="NewBuild" id="newbuildBR"></label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="Remodel">Remodel?<input class="form-control" type="checkbox" asp-for="Remodel" id="remodelBR"></label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="FrameWork">Framework?<input class="form-control" type="checkbox" asp-for="FrameWork" id="frameworkBR"></label>
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label asp-for="Concrete">Concrete?<input class="form-control" type="checkbox" asp-for="Concrete" id="concreteBR"></label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+
+                    <div class="text-center">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+
