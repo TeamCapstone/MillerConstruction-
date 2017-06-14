@@ -74,14 +74,21 @@
                             {
                                 <tr>
                                     <td>
-                                        <form asp-action="AdminCreateClient" asp-controller="Client" asp-route-id=@u.UserName method="post">
+                                        
+                                        @if (u.ClientCreated == false)
+                                        {
+                                            <form asp-action="AdminCreateClient" asp-controller="Client" asp-route-id=@u.UserName method="post">
 
-                                            <input type="hidden" name="ClientID" value="@u.UserName" />
-                                            <button type="submit"
-                                                    class="btn btn-sm btn-primary">
-                                                Create Client
-                                            </button>
-                                        </form>
+                                                <input type="hidden" name="ClientID" value="@u.UserName" />
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-primary">
+                                                    Create Client
+                                                </button>
+                                            </form>
+
+                                        }
+                                        
+                                        
                                     </td>
                                     <td>@u.Email</td>
                                 </tr>
