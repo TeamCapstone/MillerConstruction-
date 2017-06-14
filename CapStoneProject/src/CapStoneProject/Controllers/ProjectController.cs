@@ -46,8 +46,9 @@ namespace CapStoneProject.Controllers
             return View("ClientProjects", projectRepo.GetProjectsByClient(clientID));
         }
 
-        [Authorize(Roles = "Admin")]
+        
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateProject(int bidID)
         {
             VMCreateProject projectVM = new VMCreateProject(); //creates vm to pass to view
@@ -204,8 +205,9 @@ namespace CapStoneProject.Controllers
             return View(projectVM);
         }
 
-        [Authorize(Roles = "Admin")]
+      
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteProject(int projectID) //for when the admin edits a project
         {
             //creates viewmodel to hold projectid
@@ -216,6 +218,7 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteProject(VMDeleteProject deleteProjVM)
         {
             //looks for project in db based on passed-in projectid from viewmodel

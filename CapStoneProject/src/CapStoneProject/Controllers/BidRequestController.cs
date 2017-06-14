@@ -148,6 +148,7 @@ namespace CapStoneProject.Controllers
 
         //methods for viewing and creating a Bid (response to a bid request)
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ViewResult Bid(int bidrequestID)
         {
             //passing bid request info to the view
@@ -162,6 +163,7 @@ namespace CapStoneProject.Controllers
 
         //Bid needs a UserIdentity and a BidRequest
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Bid(VMBid vmbid)
         {
             if (ModelState.IsValid)
@@ -247,11 +249,13 @@ namespace CapStoneProject.Controllers
 
 
         //These have been replaced with view components 
+        [Authorize(Roles = "Admin")]
         public IActionResult AllBidRequests()
         {
             return View(bidReqRepo.GetAllBidRequests().ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult AllBids()
         {
             return View(bidRepo.GetAllBids().ToList());
@@ -259,6 +263,7 @@ namespace CapStoneProject.Controllers
 
         //this method allows client to view the bid or create a new version of a bid
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ViewResult ViewBid(int bidID)
         {
             Bid bid = bidRepo.GetBidByID(bidID);
@@ -309,6 +314,7 @@ namespace CapStoneProject.Controllers
         }
 
         //TODO: Delete bid and br
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteBidReq(int bidrequestID)
         {
             BidRequest deletedBR = bidReqRepo.DeleteBR(bidrequestID);
@@ -318,7 +324,7 @@ namespace CapStoneProject.Controllers
             }
             return RedirectToAction("AdminPage", "Admin");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteBid(int bidID)
         {
             Bid deletedB = bidRepo.DeleteBid(bidID);

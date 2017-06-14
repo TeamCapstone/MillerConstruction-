@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CapStoneProject.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class ReviewController : Controller
     {
         private IReviewRepo reviewRepo;
@@ -32,6 +32,7 @@ namespace CapStoneProject.Controllers
         //This controller will be for the admin
         
         [Route("AllReviews")]
+        [Authorize(Roles = "Admin")]
         public ViewResult AllReviews()
         { 
             return View(reviewRepo.GetAllReviews().ToList());
@@ -44,18 +45,21 @@ namespace CapStoneProject.Controllers
         }
 
         //only admin
+        [Authorize(Roles = "Admin")]
         public ViewResult AllDisapprovedReviews()
         {
             return View(reviewRepo.GetAllReviews().Where(m => m.Approved == false).ToList());
         }
 
         //admin and maybe public
+        [Authorize(Roles = "Admin")]
         public ViewResult ReviewBySubject(string subject)
         {
             return View(reviewRepo.GetAllReviews().Where(m => m.Subject == subject).ToList());
         }
 
         //only admin
+        [Authorize(Roles = "Admin")]
         public ViewResult ReviewByUser(string email)
         {
             return View(reviewRepo.GetAllReviews().Where(m => m.From.Email == email).ToList());
@@ -63,6 +67,7 @@ namespace CapStoneProject.Controllers
 
         //User and admin
         [HttpGet]
+        [Authorize(Roles = "User")]
         public ViewResult MakeReview()
         {
             return View();
@@ -70,6 +75,7 @@ namespace CapStoneProject.Controllers
 
         //User and admin
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> MakeReview(string subject, string body)
         {
             if (ModelState.IsValid)
@@ -93,6 +99,7 @@ namespace CapStoneProject.Controllers
 
         //Admin only
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ViewResult Comment(string subject, int id)
         {
             var Crev = new VMComment();
@@ -104,6 +111,7 @@ namespace CapStoneProject.Controllers
 
         //Admin only
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Comment(VMComment vmc)
         {
             Review review = (from m in reviewRepo.GetAllReviews()
@@ -114,7 +122,7 @@ namespace CapStoneProject.Controllers
             reviewRepo.Update(review);
             return RedirectToAction("AdminPage" , "Admin");
         }
-
+        [Authorize(Roles = "User")]
         public ViewResult ReviewAfterPost()
         {
             return View();
