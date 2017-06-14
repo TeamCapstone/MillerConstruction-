@@ -224,6 +224,14 @@ body {
     font-size: 2em;
 }
 
+.Afilter{
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.75); 
+    margin-top: 50px; 
+    padding: 20px;
+    border-radius: 5px;   
+}
+
 .servPnl{
     margin:0!important;
     border-radius: 0!important;
@@ -497,8 +505,9 @@ img:hover {
     }
     #layoutDiv{
          min-width: 550px;
-        height: 200%;
+       
     }
+
     
 }
 

@@ -27,7 +27,8 @@
                                                 <th>Status</th>
                                                 <th>Last Updated</th>
                                                 <th>Total</th>
-                                                <th class="text-right">Action</th>
+                                                <th class="text-right">Actions</th>
+                                                <th class="text-right">Delete</th>
                                             </tr>
                                      
                                         
@@ -42,9 +43,12 @@
                                                     <td>@p.TotalCost</td>
                                                     <td>
                                                         <div class="btn-toolbar">
-                                                            <a asp-action="DeleteProject" asp-controller="Project" class="btn btn-sm btn-danger pull-right" asp-route-projectid="@p.ProjectID">Delete</a>
+                                                            
                                                             <a asp-action="EditProject" asp-controller="Project" asp-route-projectid="@p.ProjectID" class="btn btn-sm btn-primary pull-right">Edit Project</a>
                                                         </div>
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="DeleteProject" asp-controller="Project" class="btn btn-sm btn-danger pull-right" asp-route-projectid="@p.ProjectID"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                                     </td>
                                                 </tr>
                                             }

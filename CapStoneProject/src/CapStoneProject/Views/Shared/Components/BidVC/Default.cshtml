@@ -19,7 +19,7 @@
                         <div class="row">
                            <br />
                             <br />
-                            <form asp-controller="Admin" asp-action="BidFilter" class="pull-right" id="toggleDNF">
+                            <form asp-controller="BidRequest" asp-action="BidFilter" class="pull-right" id="toggleDNF">
                                 <p>
                                     <input type="text" name="SearchString">
                                     <input type="submit" value="Filter" id="filter"/>
@@ -32,7 +32,8 @@
                                         <th>Description</th>
                                         <th>Total Estimate</th>
 
-                                        <th class="text-right">Action</th>
+                                        <th class="text-right">Actions</th>
+                                        <th class="text-right">Delete</th>
 
                                     </tr>
 
@@ -56,13 +57,15 @@
                                                     <div class="btn-toolbar">
                                                         <input type="hidden" asp-for="@b.BidID" />
                                                         @*<button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>*@
-                                                        <a asp-action="DeleteBid" asp-controller="BidRequest" class="btn btn-sm btn-danger pull-right" asp-route-bidId="@b.BidID">Delete</a>
-                                                        
+                                                     
                                                         <a asp-action="CreateProject" asp-controller="Project" class="btn btn-sm btn-warning pull-right" asp-route-bidId="@b.BidID">Create Project</a>
                                                         <a asp-action="ViewBid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidId="@b.BidID">View</a>
                                                         <input class="" type="hidden" name="BidID" value="@b.BidID" />
                                                     </div>
                                                 
+                                            </td>
+                                            <td>
+                                                <a asp-action="DeleteBid" asp-controller="BidRequest" class="btn btn-sm btn-danger pull-right" asp-route-bidId="@b.BidID"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                             </td>
                                         </tr>
 

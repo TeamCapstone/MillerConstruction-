@@ -5,7 +5,51 @@
 }
 
 
-<div class="container" id="formDiv">
+
+
+
+<div class="">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 Afilter" id="">
+            <h2>Filtered Clients</h2>
+            <table class="table table-striped table-bordered table-condensed">
+                <tr><th colspan="6">Email</th><th>Name</th><th colspan="3" class="text-right">Create Client</th></tr>
+                @if (Model.Count() == 0)
+                {
+                    <tr><td colspan="3" class="text-center">No Users</td></tr>
+                }
+                else
+                {
+                    foreach (UserIdentity u in Model)
+                    {
+                        <tr>
+                            <td colspan="6">@u.Email</td>
+                            <td>@u.LastName</td>
+                            <td>
+                                @if (u.ClientCreated == false)
+                                {
+                                    <a class="btn btn-sm btn-primary pull-right" colspan="3" asp-controller="Client" asp-action="AdminCreateClient"
+                                       asp-route-email=@u.Email>Create</a>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </table>
+
+
+
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
+
+
+
+
+@*<div class="container" id="formDiv">
     <div class="row">
         
         <div class="col-lg-12">
@@ -17,7 +61,7 @@
                             <input type="submit" value="Filter" />
                         </p>
                     </form>
-                    @*<h4>Create a New Client <a class="btn btn-primary" asp-action="Create">Create</a> </h4>*@
+                   
                     <table class="table table-striped table-bordered table-condensed">
                         <tr><th>Create Client</th><th>Email</th></tr>
                         @if (Model.Count() == 0)
@@ -56,5 +100,5 @@
         </div>
         
     </div>
-</div>
+</div>*@
 

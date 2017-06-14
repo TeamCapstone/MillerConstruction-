@@ -137,7 +137,9 @@ namespace CapStoneProject.Controllers
                         {
                             ModelState.AddModelError("", error.Description);
                         }
+                        return View(bidreq);
                     }
+                   
                 }
             }
             //if the email already exists return to view 
@@ -329,7 +331,35 @@ namespace CapStoneProject.Controllers
             return RedirectToAction("AdminPage", "Admin");
         }
 
+        //filtering unfortantly redirects to a different page becuase refreshing the page cuases the panel to collapse
+        [HttpPost]
+        public async Task<IActionResult> BRFilter(string searchString)
+        {
 
-       
+            var words = bidReqRepo.GetAllBidRequests();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                words = words.Where(br => br.User.LastName.ToLower().Contains(searchString) || br.User.FirstName.ToLower().Contains(searchString) || br.User.Email.ToLower().Contains(searchString));
+            }
+            return View("AllBidRequests", await words.ToListAsync());
+            
+
+        }
+
+        //filtering
+        [HttpPost]
+        public async Task<IActionResult> BidFilter(string searchString)
+        {
+            var words = bidRepo.GetAllBids();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                words = words.Where(b => b.User.LastName.ToLower().Contains(searchString) || b.User.FirstName.ToLower().Contains(searchString) || b.User.Email.ToLower().Contains(searchString));
+            }
+            return View("AllBids", await words.ToListAsync());
+
+        }
+
     }
 }

@@ -37,7 +37,7 @@ namespace CapStoneProject
                 opts.User.RequireUniqueEmail = true;
                 opts.Password.RequiredLength = 6;
                 opts.Password.RequireNonAlphanumeric = true;
-                opts.Password.RequireLowercase = false;
+                opts.Password.RequireLowercase = true;
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireDigit = true;
 
