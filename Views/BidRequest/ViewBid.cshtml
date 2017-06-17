@@ -1,0 +1,188 @@
+﻿@model VMBid
+@{
+    ViewData["Title"] = "Bid";
+    Layout = "_Layout2";
+}
+
+<div class="container" id="formDiv">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <h2 id="BRtitle">Customers Request</h2>
+
+            <div class="col-lg-12" id="bidCustDiv">
+                <form asp-controller="BidRequest" asp-action="CreateBid" method="post" class="">
+                    <input asp-for="BidRequestID" type="hidden" />
+                    <div class="form-group">
+                        <label>Customer Name:</label><br />
+                        <div class="col-lg-6">
+                            <input class="form-control" asp-for="CustomerFirst" id="firstB" required>
+                            <span asp-validation-for="CustomerFirst" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <input class="form-control" asp-for="CustomerLast" id="lastB" required>
+                            <span asp-validation-for="CustomerLast" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group ">
+                            <label asp-for="ProjectDescription">Project Description:</label><br />
+                            <textarea asp-for="ProjectDescription" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <span asp-validation-for="ProjectDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <br />
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+
+            <h2 id="BRtitle">Details of Bid</h2>
+            <form asp-controller="BidRequest" asp-action="CreateBid" method="post" class="" id="interiorDiv">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <input asp-for="BidID" type="hidden" />
+                <input asp-for="BidRequestID" type="hidden" />
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group">
+                            <label asp-for="CustomerFirst">Customer Name:</label><br />
+                            <div class="col-lg-6">
+                                <input class="form-control" asp-for="CustomerFirst" id="firstB" required>
+                                <span asp-validation-for="CustomerFirst" class="text-danger"></span>
+                            </div>
+                            <div class="col-lg-6">
+                                <input class="form-control" asp-for="CustomerLast" id="lastB" required>
+                                <span asp-validation-for="CustomerLast" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <div class="col-lg-12">
+                        <br />
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group ">
+                            <label asp-for="RevisedProjectDescription">Revised Project Description:</label><br />
+                            <textarea asp-for="RevisedProjectDescription" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <span asp-validation-for="RevisedProjectDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12"></div>
+                    <div class="col-lg-12">
+                        <div class="form-group ">
+                            <label asp-for="MaterialsDescription">Materials List:</label><br />
+                            <textarea asp-for="MaterialsDescription" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <span asp-validation-for="MaterialsDescription" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-12">
+                        <br />
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12"></div>
+                        <div class="col-lg-2"></div>
+                        <div class="form-group">
+                            <div class="col-lg-4">
+                                <label asp-for="SupplyCost">Material Cost:</label>
+                                <input class="form-control sum"  asp-for="SupplyCost" id="supplyVM" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-4">
+                                <label asp-for="ProjectedTimeFrame">Proposed Time Frame:</label>
+                                <input class="form-control" asp-for="ProjectedTimeFrame" id="timeframeVM">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12"><br /></div>
+
+                        <div class="col-lg-2"></div>
+                        <div class="form-group">
+                            <div class="col-lg-4">
+
+                                <label asp-for="LaborCost">Labor Cost:</label>
+                                <input class="form-control sum"  asp-for="LaborCost" id="laborVM" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-4">
+                                <label asp-for="ProposedStartDate">Proposed Start Date:</label>
+                                <input class="form-control" type="date" asp-for="ProposedStartDate"  id="startdateVM">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-12"><br /></div>
+                        <div class="col-lg-4"></div>
+                        <div class="form-group">
+                            <div class="col-lg-4">
+                                <label asp-for="TotalEstimate">Total Estimate:</label>
+                                <input class="form-control total"  asp-for="TotalEstimate" id="totalVM" >
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <br />
+                        <label>Do you wish to create a new bid?</label>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-3">
+                            <div class="text-center">
+                                <div class="form-group">
+                                    <div class="btn-toolbar createBid">
+                                        
+                                        <button type="submit" class="btn btn-primary" id="submitBtn" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Sending......">
+                                            New Bid
+                                        </button>
+                                        <a asp-action="AdminPage" asp-controller="Admin" class="btn btn-sm btn-warning ">Cancel</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+</form>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
+@* TODO: add the adding.... *@
+

@@ -1,0 +1,114 @@
+﻿@* client default panel *@
+
+@model List<Client>
+
+@*<script src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var last = $.cookie('activeAccordionGroup');
+        if (last != null) {
+            //remove default collapse settings
+            $("#accordion2 .collapse").removeClass('in');
+            //show the last visible group
+            $("#" + last).collapse("show");
+        }
+    });
+
+    //when a group is shown, save it as the active accordion group
+    $("#accordion2").bind('shown', function () {
+        var active = $("#accordion2 .in").attr('id');
+        $.cookie('activeAccordionGroup', active)
+    });
+</script>*@
+
+<div id="modal-container" class="modal fade hidden-print" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">
+                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse1" id="parTitle">All Current Clients</a>
+                    </h3>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                @* Start Content *@
+
+                    <div class="container" id="formDiv">
+                        <div class="row">
+                            <br />
+                            <br />
+                            <form asp-controller="Client" asp-action="AllClients" class="pull-right">
+                                <p>
+                                    <input type="text" name="SearchString">
+                                    <input type="submit" value="Filter" />
+                                </p>
+                            </form>
+                            @*<h4>Create a New Client <a class="btn btn-primary" asp-action="Create">Create</a> </h4>*@
+                            <table class="table table-striped table-bordered table-condensed" >
+                                <tr><th>First Name</th><th>Last Name</th><th>Company Name</th><th>Street</th><th>City</th><th>State</th><th>ZipCode</th><th>Phone Number</th><th>Email</th><th>Action</th></tr>
+                                @if (Model.Count() == 0)
+                                {
+                                    <tr><td colspan="3" class="text-center">No Clients</td></tr>
+                                }
+                                else
+                                {
+                                    foreach (Client c in Model)
+                                    {
+                                        <tr>
+                                            <td>@c.FirstName</td>
+                                            <td>@c.LastName</td>
+                                            <td>@c.CompanyName</td>
+                                            <td>@c.Street</td>
+                                            <td>@c.City</td>
+                                            <td>@c.State</td>
+                                            <td>@c.Zipcode</td>
+                                            <td>@c.PhoneNumber</td>
+                                            <td>@c.Email</td>
+                                            <td>
+                                                <form asp-action="ModalAction" asp-route-id=@c.ClientID asp-controller="Client" method="get">
+
+                                                    <a asp-action="ModalAction" asp-controller="Client"
+                                                       asp-route-id=@c.ClientID data-target="#modal-container" data-toggle="modal" class="btn btn-sm btn-warning">Upload Invoice</a>
+
+                                                    <input type="hidden" name="ClientID" value="@c.ClientID" />
+                                                    @*<button data-toggle="modal" data-target="#modal-container" type="submit"
+                                                class="btn btn-sm btn-warning">
+                                            Upload Invoice
+                                        </button>*@
+                                                </form>
+                                                <form asp-action="Delete" asp-controller="Client" asp-route-id=@c.ClientID method="post">
+                                                    <a class="btn btn-sm btn-primary" asp-controller="Client" asp-action="Edit"
+                                                       asp-route-id=@c.ClientID>Edit</a>
+                                                    <input type="hidden" name="ClientID" value="@c.ClientID" />
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-danger">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                            
+                        </div>
+                    </div>
+
+                    @* End Content *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-1"></div>
+</div>

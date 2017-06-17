@@ -17,6 +17,7 @@ using System.IO;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -25,6 +26,7 @@ using MimeKit;
 
 namespace CapStoneProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ClientController : Controller
     {
         private UserManager<UserIdentity> userManager;
@@ -296,7 +298,7 @@ namespace CapStoneProject.Controllers
             }
             return RedirectToAction("AdminPage", "Admin");
         }
-
+        [Authorize(Roles = "User")]
         public FileResult Download(string fname) // For the user when they download their invoice
         {
             var filename = fname;

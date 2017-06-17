@@ -1,0 +1,26 @@
+﻿@model VMLogin
+@{
+    ViewBag.Title = "Reset Password";
+    Layout = "_Layout2";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <h2>Reset Your Password:</h2>
+            <form asp-action="SendPasswordResetLink" asp-controller="Account" method="post">
+
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </span>
+                    <input asp-for="UserName" class="form-control" type="text" placeholder="Email address">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-danger btn-lg btn-block">Reset Password</button>
+
+            </form>
+        </div>
+    </div>
+</div>

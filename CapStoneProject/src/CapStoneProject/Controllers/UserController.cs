@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Identity;
 using CapStoneProject.Repositories;
 using CapStoneProject.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CapStoneProject.Controllers
 {
+    [Authorize(Roles = "Admin,User")]
     public class UserController : Controller
     {
         private UserManager<UserIdentity> userManager;
@@ -83,7 +85,6 @@ namespace CapStoneProject.Controllers
             }
             return View(vm);
         }
-
         public IActionResult CreateClient()
         {
 
@@ -122,6 +123,7 @@ namespace CapStoneProject.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> EditClient(int id)
         {
             UserIdentity user = new UserIdentity();

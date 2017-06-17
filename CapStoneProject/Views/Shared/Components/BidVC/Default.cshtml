@@ -1,0 +1,82 @@
+﻿@model List<Bid>
+
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">
+                        <a data-toggle="collapse" href="#collapse3" id="parTitle">All Current Bids</a>
+                    </h3>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    
+
+
+                    <div class="container" id="formDiv">
+                        <div class="row">
+                           <br />
+                            <br />
+                            <form asp-controller="Admin" asp-action="BidFilter" class="pull-right" id="toggleDNF">
+                                <p>
+                                    <input type="text" name="SearchString">
+                                    <input type="submit" value="Filter" id="filter"/>
+                                </p>
+                            </form>
+                                <table class="table table-striped table-bordered table-condensed">
+                                    <tr>
+                                        <th>Date Created</th>
+                                        <th>Last Name</th>
+                                        <th>Description</th>
+                                        <th>Total Estimate</th>
+
+                                        <th class="text-right">Action</th>
+
+                                    </tr>
+
+                                    @foreach (var b in Model)
+                                    {
+                                        <tr>
+                                            <td>@b.DateCreated.ToString("d")</td>
+                                            @if (b.User.LastName == null)
+                                            {
+                                                <td>@b.User.FirstName</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@b.User.LastName</td>
+                                            }
+                                            <td>@b.RevisedProjectDescription</td>
+                                            <td>@b.TotalEstimate</td>
+
+                                            <td>
+                                               
+                                                    <div class="btn-toolbar">
+                                                        <input type="hidden" asp-for="@b.BidID" />
+                                                        @*<button type="submit" class="btn btn-warning btn-sm pull-right">Delete</button>*@
+                                                        <a asp-action="DeleteBid" asp-controller="BidRequest" class="btn btn-sm btn-danger pull-right" asp-route-bidId="@b.BidID">Delete</a>
+                                                        
+                                                        <a asp-action="CreateProject" asp-controller="Project" class="btn btn-sm btn-warning pull-right" asp-route-bidId="@b.BidID">Create Project</a>
+                                                        <a asp-action="ViewBid" asp-controller="BidRequest" class="btn btn-sm btn-primary pull-right" asp-route-bidId="@b.BidID">View</a>
+                                                        <input class="" type="hidden" name="BidID" value="@b.BidID" />
+                                                    </div>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </table>
+                            
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>

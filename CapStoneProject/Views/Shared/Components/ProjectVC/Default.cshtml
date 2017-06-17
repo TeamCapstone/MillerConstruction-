@@ -1,0 +1,67 @@
+﻿@* project default panel *@
+@model IEnumerable<Project>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">
+                        <a data-toggle="collapse" href="#collapse5" id="parTitle">Project List</a>
+                    </h3>
+                </div>
+                        <div id="collapse5" class="panel-collapse collapse">
+                            <div class="container" id="formDiv">
+                                <div class="row">
+                                    @* Start Content *@
+                                    <br />
+                                    <br />
+                                   
+
+                                    <table class="table table-striped table-bordered table-condensed">
+                                       
+                                            <tr>
+                                                <th>Project Name</th>
+                                                <th>Client</th>
+                                                <th>Start Date</th>
+                                                <th>Status</th>
+                                                <th>Last Updated</th>
+                                                <th>Total</th>
+                                                <th class="text-right">Action</th>
+                                            </tr>
+                                     
+                                        
+                                            @foreach (var p in Model)
+            {
+                                                <tr>
+                                                    <td>@p.ProjectName</td>
+                                                    <td>@(p.Client.LastName + ", " + p.Client.FirstName) </td>
+                                                    <td>@p.StartDate.ToString("d")</td>
+                                                    <td>@p.ProjectStatus</td>
+                                                    <td>@p.StatusDate.ToString("d")</td>
+                                                    <td>@p.TotalCost</td>
+                                                    <td>
+                                                        <div class="btn-toolbar">
+                                                            <a asp-action="DeleteProject" asp-controller="Project" class="btn btn-sm btn-danger pull-right" asp-route-projectid="@p.ProjectID">Delete</a>
+                                                            <a asp-action="EditProject" asp-controller="Project" asp-route-projectid="@p.ProjectID" class="btn btn-sm btn-primary pull-right">Edit Project</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                      
+                                    </table>
+
+
+
+
+
+
+                                    @* End Content *@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>

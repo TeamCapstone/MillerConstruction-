@@ -1,0 +1,56 @@
+﻿@model CapStoneProject.Models.ViewModels.VMLoginModel
+
+@{
+    Layout = "_Layout2";
+}
+
+@* testing can call View component even on a strongly typed view!! just make sure components are in shared folder *@
+@*@await Component.InvokeAsync("BidRequestsVC")*@
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8" id="loginFrm">
+            
+            <form asp-controller="Account" asp-action="Login" method="post" class="">
+                <div class="row">
+                    <div asp-validation-summary="All" class="text-danger pull-left"></div>
+                </div>
+                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                <div class="row">
+                    <h3 id="LogTitle" class="text-center">Please sign in, or click <a href="@Url.Action("BidRequest", "BidRequest")">here</a> to make an account.</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input asp-for="Email" class="form-control" placeholder="Email:" required />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input asp-for="Password" class="form-control" placeholder="Password:" type="password" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-success" type="submit">Log In</button>
+                    </div>
+                </div>
+                <a class="btn btn-link pull-right"
+                   onclick="location.href='@Url.Action("ForgotPassword", "Account")'">
+                    <span>Forgot Password?</span>
+                </a>
+            </form>
+           
+            <br />
+            
+            <div class="row">
+                <div class="text-center">
+                    <h3></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+
+

@@ -1,0 +1,70 @@
+﻿@model Review
+@{
+    ViewBag.Title = "Edit Review";
+    Layout = "_Layout2";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        })
+    </script>
+    @*<button  onclick="setTimeout(timeFunction, 100);" class="positioner btn btn-primary">How it works</button>*@
+    <button type="button" class="positioner btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Instructions
+    </button>
+
+    <form asp-action="EditReview" method="post" class="erForm">
+        <input type="hidden" asp-for="ReviewID" name="ReviewID" value="@ViewBag.ReviewID" />
+     
+        <div class="col-md-2">
+            <div class="form-group text-center">
+                <label asp-for="Approved">Approved?:</label>
+                <div><span asp-validation-for="Approved"></span></div>
+                <input asp-for="Approved" class="form-control" id="Checkbox1" type="checkbox" />
+            </div>
+        </div>
+
+            <div><span asp-validation-for="Subject" class="text-danger"></span></div>
+            <input type="hidden" asp-for="Subject" class="form-control" />
+     
+
+            <div><span asp-validation-for="Body" class="text-danger"></span></div>
+            <input type="hidden" asp-for="Body" class="form-control" />
+   
+                <input type="hidden" asp-for="Date" name="Date" />
+           
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <a asp-action="AdminPage" asp-controller="Admin" class="btn btn-default">Cancel</a>
+            </div>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Instructions</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Check is Approved</p>
+                    <p>Uncheck is Not Approved</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

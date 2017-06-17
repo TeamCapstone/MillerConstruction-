@@ -1,0 +1,32 @@
+﻿@model CapStoneProject.Models.ViewModels.VMRegister
+@{
+    ViewBag.Title = "Register";
+    Layout = "_Layout2";
+}
+
+<h2>Register</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Register" method="post">
+    <p>
+        <label asp-for="FirstName"></label><br />
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="LastName"></label><br />
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </p>
+    <p>
+        <label asp-for="Password"></label><br />
+        <input type="password" asp-for="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </p>
+
+    <button type="submit">Register</button>
+</form>

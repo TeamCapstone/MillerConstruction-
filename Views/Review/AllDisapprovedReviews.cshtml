@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Review>
+@{
+    ViewData["Title"] = "Reviews";
+    Layout = "_Layout2";
+}
+
+
+<div class="row" id="RevDiv">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" id="reviewDiv">
+        <h2>Reviews</h2>
+        <br />
+        <span type="span" class="btn btn-danger">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+
+            @Html.ActionLink("Add a Review", "MakeReview", "Review", null, new { @style = "color:black; text-algin: center; padding-left:3px;" })
+        </span>
+        <br />
+        @foreach (var a in Model)
+        {
+            <h4>From: @a.From.FirstName @a.From.LastName </h4>
+            <h6>
+                <span class="glyphicon glyphicon-time">@a.Date.ToString("d")</span>
+
+            </h6>
+            <h5><span class="label label-primary"> @a.Subject </span></h5>
+            <p>Body: @a.Body </p>
+
+
+            <p><span class="badge">@a.Comments.Count()</span> Comments:</p><br>
+
+            foreach (var n in a.Comments)
+            {
+
+                <h5><span class="label label-primary"> @n.Subject </span></h5>
+                <p> @n.Body <br /> </p>
+
+
+            }
+
+            <hr id="hr1">
+        }
+    </div>
+    <div class="col-lg-2"></div>
+</div>

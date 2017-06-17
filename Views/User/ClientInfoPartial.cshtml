@@ -1,0 +1,21 @@
+﻿<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">
+                        <a data-toggle="collapse" href="#collapse1" id="parTitle">Your Personal Information</a>
+                    </h3>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    
+                    @await Component.InvokeAsync("ClientInfo", new { email = Model.User.Email })
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+

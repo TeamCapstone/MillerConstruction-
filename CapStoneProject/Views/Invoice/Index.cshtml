@@ -1,0 +1,9 @@
+﻿@model Client
+
+<div class="container" id="userPageDiv">
+    <form method="post" asp-action="Index" asp-controller="Invoice" enctype="multipart/form-data">
+        <input type="file" name="files" multiple />
+        <input type="submit" value="Upload" />
+        <input asp-for="ClientID" type="hidden" class="form-control" />
+    </form>
+</div>

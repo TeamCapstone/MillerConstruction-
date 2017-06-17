@@ -1,0 +1,95 @@
+﻿@* Review default panel *@
+@model IEnumerable<Review>
+
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">
+                        <a data-toggle="collapse" href="#collapse4" id="parTitle">All Reviews</a>
+                    </h3>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    @* Start Content *@
+
+                    <div class="container" id="panelDiv">
+                        <div class="row ">
+                            <br />
+                            <br />
+                            <form asp-controller="Admin" asp-action="ReviewPanel" class="pull-right">
+                                <p>
+                                    <input type="text" name="SearchString">
+                                    <input type="submit" value="Filter" />
+                                </p>
+                            </form>
+
+                            <br />
+                            <table class="table table-striped table-bordered table-condensed">
+                                <tr class="info">
+                                    
+                                    <th>Review Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Body</th>
+                                    <th>Approved?</th>
+                                    <th>Date</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                                @foreach (var review in Model)
+                                {
+                                    <tr class="danger">
+                                        
+                                        <td >@review.From.FirstName</td>
+                                        <td>@review.From.Email</td>
+                                        <td >@review.Subject</td>
+                                        <td >@review.Body</td>
+                                        <td>@review.Approved</td>
+                                        @if (review.Date == null)
+                                        {
+                                            review.Date = DateTime.Now;
+                                            <td>@review.Date.ToString("d")</td>
+                                        }
+                                        else
+                                        {
+
+                                            <td >@review.Date.ToString("d")</td>
+                                        }
+                                        <td>
+
+                                            <form asp-action="DeleteReview" method="post">
+                                                <div class="btn-toolbar">
+                                                    <span class="btn btn-sm btn-primary">
+                                                        @Html.ActionLink("Comment", "Comment", "Review",
+                                                                new { subject = @review.Subject, Id = @review.ReviewID, body = @review.Body }, new { @style = "color:aliceblue;" })
+                                                    </span>
+                                                    <a asp-action="EditReview" asp-controller="Admin" class="btn btn-sm btn-warning"
+                                                       asp-route-ReviewID="@review.ReviewID">
+                                                        Approve?
+                                                    </a>
+                                                    <input type="hidden" name="ReviewID" value="@review.ReviewID" />
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </button>
+                                                   
+                                                </div>
+
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+
+
+                        </div>
+                    </div>
+
+                    @* End Content *@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>

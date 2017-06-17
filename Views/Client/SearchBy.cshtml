@@ -1,0 +1,21 @@
+﻿@model VMClientSearch
+
+@{
+    Layout = "_Layout2";
+}
+
+<form asp-action="SearchBy" method="post">
+    <div>
+        <label>Search By: </label>
+        <select asp-for="SearchCategory" required>
+            <option value="Email">Email</option>
+            <option value="FirstName">First Name</option>
+            <option value="LastName">Last Name</option>
+
+        </select>
+    </div>
+    <input asp-for="SearchValue" class="form-control" />
+    <div>
+        <button type="submit" class="btn btn-primary">Select</button>
+    </div>
+</form>
