@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CapStoneProject.Controllers
 {
-
+    [Authorize(Roles = "Admin,User")]
     public class UserController : Controller
     {
         private UserManager<UserIdentity> userManager;
@@ -171,7 +171,6 @@ namespace CapStoneProject.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IActionResult FilterUsers(string searchString) // for the Admin to search users
         {
             var users = userRepo.GetAllUsersFilter();
